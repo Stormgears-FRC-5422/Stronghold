@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5422.DSIO;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class DSIO {
 	//This class controls the I/O of the driver station, basically the back-end of the user interface
@@ -22,7 +22,7 @@ public class DSIO {
 
 	//Check if a button is pressed; if it is, do the respective command
 	public boolean getButton(int buttonID) {
-		Button button = new Button (buttonBoard, buttonID);
+		JoystickButton button = new JoystickButton (buttonBoard, buttonID);
 
 		if (buttonBoard.getRawButton(buttonID) == true) {
 			//TODO create commands for each operation (i.e. if button id is 0, shoot the ball high; 1.. shoot the ball low, etc
@@ -106,8 +106,7 @@ public class DSIO {
 		double xFinal;
 
 		//Put the y value (fwd, back) through a curved graph (quadratic function)
-
-		xPos = xPos * xPos;
+		xFinal = xPos * xPos;
 
 		return xFinal;
 	}
@@ -118,7 +117,7 @@ public class DSIO {
 		double yFinal;
 
 		//Put the y value (fwd, back) through a curved graph (quadratic function)
-		yPos = yPos * yPos;
+		yFinal = yPos * yPos;
 
 		return yFinal;
 	}
