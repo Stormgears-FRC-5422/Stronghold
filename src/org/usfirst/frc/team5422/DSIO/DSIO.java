@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class DSIO {
-	//This class controls the I/O of the driver station, basically the back-end of the user interface
+	//This classes controls the I/O of the driver station, basically the back-end of the user interface
 	//It takes in inputs such as button presses and the x and y of the joystick
 	//Depending on the method used, it outputs either a boolean or an x and y value that should be passed on to another class
 
