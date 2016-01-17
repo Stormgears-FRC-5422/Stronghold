@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class DSIO {
-	//This classes controls the I/O of the driver station, basically the back-end of the user interface
-	//It takes in inputs such as button presses and the x and y of the joystick
+	//This class controls the I/O of the driver station, basically the back-end of the user interface
+	//It takes in inputs such as button presses and the x and y of the joystick; does not drive anything
 	//Depending on the method used, it outputs either a boolean or an x and y value that should be passed on to another class
 
 	//Constants may need to be changed
@@ -24,7 +24,7 @@ public class DSIO {
 	public boolean getButton(int buttonID) {
 		JoystickButton button = new JoystickButton (buttonBoard, buttonID);
 
-		if (buttonBoard.getRawButton(buttonID) == true) {
+		if (buttonBoard.getRawButton(buttonID)) {
 			//TODO create commands for each operation (i.e. if button id is 0, shoot the ball high; 1.. shoot the ball low, etc
 		}
 		return buttonPressed;
@@ -32,14 +32,20 @@ public class DSIO {
 
 	//Inputs: nothing
 	//Outputs: x and y of joystick (raw)
-	public double driveLinearX() {
+	public double getLinearX() {
 		double xPos = joystick.getX();
-
+		
+		//Put a nullzone on values that are between -0.2 and 0.2
+		if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
+		
 		return xPos;
 	}
 
-	public double driveLinearY() {
+	public double getLinearY() {
 		double yPos = joystick.getY();
+		
+		//Put a nullzone on values that are between -0.2 and 0.2
+		if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
 		return yPos;
 	}
@@ -48,7 +54,7 @@ public class DSIO {
 	//Inputs: nothing
 	//Outputs: averaged x and y of joystick over a period of 15 milliseconds
 	//Sample size (length of x and y arrays) may need to be changed depending on how much you want the vals to be dampened
-	public double dampenAvgX() {		
+	public double dampenWithAvgX() {		
 		double xPos[] = new double[15];
 
 		double xPosAvg = 0;
@@ -69,11 +75,14 @@ public class DSIO {
 
 		//Avg the positions from the total calculated in above for loop
 		xPosAvg /= 15;
+		
+		//Put a nullzone on values that are between -0.2 and 0.2
+		if (xPosAvg >= -0.2 & xPosAvg <= 0.2) xPosAvg = 0;
 
 		return xPosAvg;
 	}
 
-	public double dampenAvgY() {		
+	public double dampenWithAvgY() {		
 		double yPos[] = new double[15];
 
 		double yPosAvg = 0;
@@ -94,6 +103,9 @@ public class DSIO {
 
 		//Avg the positions from the total calculated in above for loop
 		yPosAvg /= 15;
+		
+		//Put a nullzone on values that are between -0.2 and 0.2
+		if (yPosAvg >= -0.2 & yPosAvg <= 0.2) yPosAvg = 0;
 
 		return yPosAvg;
 	}
@@ -109,6 +121,9 @@ public class DSIO {
 		xFinal = xPos * xPos;
 		
 		if (xPos < 0) xFinal *= -1;
+		
+		//Put a nullzone on values that are between -0.2 and 0.2
+		if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
 
 		return xFinal;
 	}
@@ -122,14 +137,17 @@ public class DSIO {
 		yFinal = yPos * yPos;
 		
 		if (yPos < 0) yFinal *= -1;
+		
+		//Put a nullzone on values that are between -0.2 and 0.2
+		if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
 		return yFinal;
 	}
 	
 	//Inputs: what to print out
 	//Outputs: nothing
-	//If the integer of the specified thing is 1, display it; otherwise, don't display it
-	public void outputToSFX(int leftSpeed, int rightSpeed, int xPosition, int yPosition, int theta, int battVoltage) {
+	//If the integer of the specified thing is true, display it; otherwise, don't display it
+	public void outputToSFX(boolean leftSpeed, boolean rightSpeed, boolean xPosition, boolean yPosition, boolean theta, boolean battVoltage) {
 		//TODO output the numbers based on which ones selected
 	}
 }
