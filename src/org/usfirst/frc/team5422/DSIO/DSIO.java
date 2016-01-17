@@ -107,6 +107,8 @@ public class DSIO {
 
 		//Put the y value (fwd, back) through a curved graph (quadratic function)
 		xFinal = xPos * xPos;
+		
+		if (xPos < 0) xFinal *= -1;
 
 		return xFinal;
 	}
@@ -118,6 +120,8 @@ public class DSIO {
 
 		//Put the y value (fwd, back) through a curved graph (quadratic function)
 		yFinal = yPos * yPos;
+		
+		if (yPos < 0) yFinal *= -1;
 
 		return yFinal;
 	}
