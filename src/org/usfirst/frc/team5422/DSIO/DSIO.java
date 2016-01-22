@@ -31,19 +31,26 @@ public class DSIO {
 	}
 
 	//Inputs: nothing
-	//Outputs: x and y of joystick (raw)
-	public double getLinearX() {
+	//Outputs: theta and y of joystick (raw) respectively
+	public double getLinearTheta() {
 		double xPos = joystick.getX();
-		
+		double yPos = joystick.getY();
+
+		double theta;
+
 		//Put a nullzone on values that are between -0.2 and 0.2
 		if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
-		
-		return xPos;
+		if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
+
+		//Calculate the theta component of polar coordinates
+		theta = Math.atan2(xPos, yPos);
+
+		return theta;
 	}
 
 	public double getLinearY() {
 		double yPos = joystick.getY();
-		
+
 		//Put a nullzone on values that are between -0.2 and 0.2
 		if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
@@ -52,17 +59,23 @@ public class DSIO {
 
 
 	//Inputs: nothing
-	//Outputs: averaged x and y of joystick over a period of 15 milliseconds
+	//Outputs: averaged theta and y of joystick over a period of 15 milliseconds respectively
 	//Sample size (length of x and y arrays) may need to be changed depending on how much you want the vals to be dampened
-	public double dampenWithAvgX() {		
+	public double dampenWithAvgTheta() {		
 		double xPos[] = new double[15];
+		double yPos[] = new double[15];
 
 		double xPosAvg = 0;
+		double yPosAvg = 0;
+		
+		double theta;
 
 		for (int c = 0; c < xPos.length; c++) {
 			xPos[c] = joystick.getX();
+			yPos[c] = joystick.getY();
 
 			xPosAvg += xPos[c];
+			yPosAvg += yPos[c];
 
 			//Wait 1 millisecond
 			try {
@@ -75,11 +88,16 @@ public class DSIO {
 
 		//Avg the positions from the total calculated in above for loop
 		xPosAvg /= 15;
-		
+		yPosAvg /= 15;
+
 		//Put a nullzone on values that are between -0.2 and 0.2
 		if (xPosAvg >= -0.2 & xPosAvg <= 0.2) xPosAvg = 0;
+		if (yPosAvg >= -0.2 & yPosAvg <= 0.2) yPosAvg = 0;
 
-		return xPosAvg;
+		//Calculate the theta component of polar coordinates
+		theta = Math.atan2(xPosAvg, yPosAvg);
+
+		return theta;
 	}
 
 	public double dampenWithAvgY() {		
@@ -103,7 +121,7 @@ public class DSIO {
 
 		//Avg the positions from the total calculated in above for loop
 		yPosAvg /= 15;
-		
+
 		//Put a nullzone on values that are between -0.2 and 0.2
 		if (yPosAvg >= -0.2 & yPosAvg <= 0.2) yPosAvg = 0;
 
@@ -111,21 +129,31 @@ public class DSIO {
 	}
 
 	//Inputs: nothing
-	//Outputs: x and y of joystick after going through a x^2 graph
-	public double dampenWithCurveX() {
+	//Outputs: theta and y of joystick after going through a x^2 graph respectively
+	public double dampenWithCurveTheta() {
 		double xPos = joystick.getX();
+		double yPos = joystick.getY();
+		
+		double xFinal, yFinal;
 
-		double xFinal;
+		double theta;
 
-		//Put the y value (fwd, back) through a curved graph (quadratic function)
+		//Put the x and y value (fwd, back) through a curved graph (quadratic function)
 		xFinal = xPos * xPos;
-		
+		yFinal = yPos * yPos;
+
+		//If either of them are negative, reverse the direction of the graph
 		if (xPos < 0) xFinal *= -1;
-		
+		if (yPos < 0) yFinal *= -1;
+
 		//Put a nullzone on values that are between -0.2 and 0.2
 		if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
+		if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
-		return xFinal;
+		//Calculate the theta component of polar coordinates
+		theta = Math.atan2(xFinal, yFinal);
+
+		return theta;
 	}
 
 	public double dampenWithCurveY() {
@@ -135,15 +163,16 @@ public class DSIO {
 
 		//Put the y value (fwd, back) through a curved graph (quadratic function)
 		yFinal = yPos * yPos;
-		
+
+		//If y is negative, reverse the direction of the graph
 		if (yPos < 0) yFinal *= -1;
-		
+
 		//Put a nullzone on values that are between -0.2 and 0.2
 		if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
 		return yFinal;
 	}
-	
+
 	//Inputs: what to print out
 	//Outputs: nothing
 	//If the integer of the specified thing is true, display it; otherwise, don't display it
@@ -151,4 +180,3 @@ public class DSIO {
 		//TODO output the numbers based on which ones selected
 	}
 }
-
