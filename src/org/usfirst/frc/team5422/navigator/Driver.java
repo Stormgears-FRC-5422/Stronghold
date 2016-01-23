@@ -39,7 +39,7 @@ public class Driver {
 		//Set PID closed loop gains
 		double F, P, I, D;
 		
-		//Change the PID values here. Keep F as it is.
+		//Change the PID values here. Keep F as it is .
 		F = 1.705;
 		P = 0.00018;
 		I = 0;
