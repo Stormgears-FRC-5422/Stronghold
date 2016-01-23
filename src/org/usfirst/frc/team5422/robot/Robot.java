@@ -51,6 +51,12 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
+		//Get rid of Thread sleep if not using PID tuning!!!
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		PIDTuner.tunePIDPosition();
 	}
 
