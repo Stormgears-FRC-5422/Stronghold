@@ -88,7 +88,7 @@ public class Driver {
 
 
 
-		//Configure talons some more
+		//Configure talons some more 
 		talon1.setEncPosition(0); 
 		talon1.changeControlMode(TalonControlMode.Speed);
 

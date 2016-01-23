@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		
-		//TODO check USB channels and talon channels
+		//TODO check USB channels and talon channels 
 		dsio = new DSIO(0, 0);
 		driver = new Driver();
 		pidTuner = new PIDTuner();

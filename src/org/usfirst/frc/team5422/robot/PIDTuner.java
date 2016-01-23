@@ -20,7 +20,7 @@ public class PIDTuner {
 
 	//Constructor
 	public PIDTuner() {
-		//Initialize talons
+		//Initialize talons 
 		talon1 = new CANTalon(1);
 		talon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon1.reverseOutput(true);
