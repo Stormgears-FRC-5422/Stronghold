@@ -129,7 +129,7 @@ public class PIDTuner {
 		runTalon2 = SmartDashboard.getNumber("Talon 2", runTalon2);
 		runTalon3 = SmartDashboard.getNumber("Talon 3", runTalon3);
 		runTalon4 = SmartDashboard.getNumber("Talon 4", runTalon4);
-		
+
 		if (run == 1 & mode == 2) {
 			if (runTalon1 == 1) {
 				talon1.setPID(P, I, D);
@@ -179,5 +179,6 @@ public class PIDTuner {
 				//Output to SmartDashboard
 				DSIO.outputToSFX("Talon 4 Position", talon4.getPosition());
 			}
+		}
 	}
 }
