@@ -103,7 +103,7 @@ public class Driver {
 
 		//Output to SmartDashboard for diagnostics
 		DSIO.outputToSFX("Left Velocity", talon1.getSpeed());
-		DSIO.outputToSFX("Right Velocity", talon3.getSpeed());
+		DSIO.outputToSFX("Right Velocity", talon4.getSpeed());
 		
 		DSIO.outputToSFX("Joystick Theta", DSIO.getLinearTheta());
 	}
