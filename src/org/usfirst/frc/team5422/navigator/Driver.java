@@ -18,19 +18,19 @@ public class Driver {
 		talon1.configEncoderCodesPerRev(2048);	
 		talon1.configNominalOutputVoltage(+0.0f, -0.0f);
 		
-		talon2 = new CANTalon(1);
+		talon2 = new CANTalon(2);
 		talon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon2.reverseOutput(true);
 		talon2.configEncoderCodesPerRev(2048);	
 		talon2.configNominalOutputVoltage(+0.0f, -0.0f);
 		
-		talon3 = new CANTalon(1);
+		talon3 = new CANTalon(3);
 		talon3.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon3.reverseOutput(true);
 		talon3.configEncoderCodesPerRev(2048);	
 		talon3.configNominalOutputVoltage(+0.0f, -0.0f);
 		
-		talon4 = new CANTalon(1);
+		talon4 = new CANTalon(4);
 		talon4.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon4.reverseOutput(true);
 		talon4.configEncoderCodesPerRev(2048);	
@@ -39,9 +39,9 @@ public class Driver {
 		//Set PID closed loop gains
 		double F, P, I, D;
 		
-		//Change the PID values here. Keep F as it is.
+		//Change the PID values here. Keep F as it is .
 		F = 1.705;
-		P = 0.00025;
+		P = 0.00018;
 		I = 0;
 		D = 0;
 		
@@ -77,8 +77,8 @@ public class Driver {
 		double velocityLeft = 0, velocityRight = 0;
 
 		//Calculate velocities
-		velocityLeft = 1.25 * (yValue * 5 + 0.2 * thetaValue);
-		velocityRight = 1.25 * (yValue * 5 - 0.2 * thetaValue);
+		velocityLeft = 0.3 * (yValue * 5 + 0.2 * thetaValue);
+		velocityRight = 0.3 * (yValue * 5 - 0.2 * thetaValue);
 
 
 
@@ -89,11 +89,11 @@ public class Driver {
 		talon2.setEncPosition(0); 
 		talon2.changeControlMode(TalonControlMode.Speed);
 		
-		talon2.setEncPosition(0); 
-		talon2.changeControlMode(TalonControlMode.Speed);
-		
 		talon3.setEncPosition(0); 
 		talon3.changeControlMode(TalonControlMode.Speed);
+		
+		talon4.setEncPosition(0); 
+		talon4.changeControlMode(TalonControlMode.Speed);
 
 		//Set the velocity of the talons
 		talon1.set(velocityLeft * 20.48);
