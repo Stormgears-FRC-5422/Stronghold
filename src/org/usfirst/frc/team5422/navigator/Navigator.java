@@ -5,7 +5,7 @@ package org.usfirst.frc.team5422.navigator;
  */
 public class Navigator {
 	/**
-	 * This function helps drive the robot to precise coordinates on the field
+	 * This function helps drive the robot to precise coordinates on the field 
 	 */
 	public void driveTo(int xOnField, int yOnField, int theta) {
 		//TODO Write this method.

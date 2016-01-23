@@ -26,7 +26,7 @@ public class Driver {
 	}
 	
 	/**
-	 * This function drives the robot around the carpet. It is not precise.
+	 * This function drives the robot around the carpet. It is not precise. 
 	 */
 	public static void openDrive(double y, double theta) {
 		//Set values

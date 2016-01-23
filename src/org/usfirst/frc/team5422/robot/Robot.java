@@ -80,7 +80,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        //Run the openDrive() method
+        //Run the openDrive() method 
         Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
     }
     

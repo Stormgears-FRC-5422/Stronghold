@@ -35,7 +35,7 @@ public class DSIO {
 	}
 
 	//Inputs: nothing
-	//Outputs: theta and y of joystick (raw) respectively
+	//Outputs: theta and y of joystick (raw) respectively 
 	public static double getLinearTheta() {
 		double xPos = joystick.getX();
 		double yPos = joystick.getY();
