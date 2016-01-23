@@ -22,6 +22,8 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static DSIO dsio;
+	public static Driver driver;
 
     Command autonomousCommand;
 
@@ -32,8 +34,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		
-		//TODO check USB channels
-		DSIO dsio = new DSIO(0, 0);
+		//TODO check USB channels and talon channels
+		dsio = new DSIO(0, 0);
+		driver = new Driver();
 		
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
@@ -61,11 +64,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        
-        //TODO temporary while loop
-        while (isEnabled() && isOperatorControl()) {
-        	Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
-        }
     }
 
     /**
@@ -81,6 +79,9 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        //Run the openDrive() method
+        Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
     }
     
     /**

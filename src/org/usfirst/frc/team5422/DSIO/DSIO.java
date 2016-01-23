@@ -71,7 +71,7 @@ public class DSIO {
 
 		double xPosAvg = 0;
 		double yPosAvg = 0;
-		
+
 		double theta;
 
 		for (int c = 0; c < xPos.length; c++) {
@@ -137,7 +137,7 @@ public class DSIO {
 	public static double dampenWithCurveTheta() {
 		double xPos = joystick.getX();
 		double yPos = joystick.getY();
-		
+
 		double xFinal, yFinal;
 
 		double theta;
@@ -179,36 +179,8 @@ public class DSIO {
 
 	//Inputs: what to print out
 	//Outputs: nothing
-	//If the integer of the specified thing is true, display it; otherwise, don't display it
-	public static void outputToSFX(boolean leftSpeed, boolean rightSpeed, boolean xPosition, boolean yPosition, boolean theta, boolean battVoltage) {
-		//TODO output the numbers based on which ones selected (finish them)
-		if (leftSpeed) {
-			//Declare and configure talon
-			CANTalon talon1 = new CANTalon(1);
-			talon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon1.reverseOutput(true);
-			talon1.configEncoderCodesPerRev(2048);	
-	    	talon1.configNominalOutputVoltage(+0.0f, -0.0f);
-	    	talon1.setEncPosition(0); 
-	    	talon1.changeControlMode(TalonControlMode.Speed);
-	    	
-	    	//Output to SFX
-			double speed1 = talon1.getSpeed();
-			SmartDashboard.putNumber("Left Speed", speed1);
-		}
-		if (rightSpeed) {
-			//Declare and configure talon
-			CANTalon talon2 = new CANTalon(2);
-			talon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon2.reverseOutput(true);
-			talon2.configEncoderCodesPerRev(2048);	
-	    	talon2.configNominalOutputVoltage(+0.0f, -0.0f);
-	    	talon2.setEncPosition(0); 
-	    	talon2.changeControlMode(TalonControlMode.Speed);
-	    	
-	    	//Output to SFX
-			double speed2 = talon2.getSpeed();
-			SmartDashboard.putNumber("Right Speed", speed2);
-		}
+	//Wrapper method for putNumber()
+	public static void outputToSFX(String label, double value) {
+		SmartDashboard.putNumber(label, value);
 	}
 }
