@@ -17,39 +17,39 @@ public class Driver {
 		talon1.reverseOutput(true);
 		talon1.configEncoderCodesPerRev(2048);	
 		talon1.configNominalOutputVoltage(+0.0f, -0.0f);
-		
+
 		talon2 = new CANTalon(2);
 		talon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		talon2.reverseOutput(true);
 		talon2.configEncoderCodesPerRev(2048);	
 		talon2.configNominalOutputVoltage(+0.0f, -0.0f);
-		
+
 		talon3 = new CANTalon(3);
 		talon3.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon3.reverseOutput(true);
+		talon3.reverseOutput(false);
 		talon3.configEncoderCodesPerRev(2048);	
 		talon3.configNominalOutputVoltage(+0.0f, -0.0f);
-		
+
 		talon4 = new CANTalon(4);
 		talon4.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon4.reverseOutput(true);
+		talon4.reverseOutput(false);
 		talon4.configEncoderCodesPerRev(2048);	
 		talon4.configNominalOutputVoltage(+0.0f, -0.0f);
-		
+
 		//Set PID closed loop gains
 		double F, P, I, D;
-		
+
 		//Change the PID values here. Keep F as it is .
 		F = 1.705;
-		P = 0.00018;
+		P = 0.000185;
 		I = 0;
 		D = 0;
-		
+
 		talon1.setF(F);
 		talon1.setP(P);
 		talon1.setI(I);
 		talon1.setD(D);
-		
+
 		talon2.setF(F);
 		talon2.setP(P);
 		talon2.setI(I);
@@ -59,13 +59,13 @@ public class Driver {
 		talon3.setP(P);
 		talon3.setI(I);
 		talon3.setD(D);
-		
+
 		talon4.setF(F);
 		talon4.setP(P);
 		talon4.setI(I);
 		talon4.setD(D);
 	}
-	
+
 	/**
 	 * This function drives the robot around the carpet. It is not precise. 
 	 */
@@ -77,21 +77,27 @@ public class Driver {
 		double velocityLeft = 0, velocityRight = 0;
 
 		//Calculate velocities
-		velocityLeft = 0.3 * (yValue * 5 + 0.2 * thetaValue);
-		velocityRight = 0.3 * (yValue * 5 - 0.2 * thetaValue);
+		if (thetaValue < 0) {
+			velocityLeft = 0.3 * (yValue * 5 + 0.2 * thetaValue);
+			velocityRight = 0.3 * (yValue * 5 - 0.2 * thetaValue);
+		}
+		else {
+			velocityLeft = 0.3 * (yValue * 5 - 0.2 * thetaValue);
+			velocityRight = 0.3 * (yValue * 5 + 0.2 * thetaValue);
+		}
 
 
 
 		//Configure talons some more
 		talon1.setEncPosition(0); 
 		talon1.changeControlMode(TalonControlMode.Speed);
-		
+
 		talon2.setEncPosition(0); 
 		talon2.changeControlMode(TalonControlMode.Speed);
-		
+
 		talon3.setEncPosition(0); 
 		talon3.changeControlMode(TalonControlMode.Speed);
-		
+
 		talon4.setEncPosition(0); 
 		talon4.changeControlMode(TalonControlMode.Speed);
 
@@ -104,7 +110,7 @@ public class Driver {
 		//Output to SmartDashboard for diagnostics
 		DSIO.outputToSFX("Left Velocity", talon1.getSpeed());
 		DSIO.outputToSFX("Right Velocity", talon4.getSpeed());
-		
+
 		DSIO.outputToSFX("Joystick Theta", DSIO.getLinearTheta());
 	}
 }
