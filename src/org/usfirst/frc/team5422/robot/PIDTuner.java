@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PIDTuner {
 	static SendableChooser chooser;
-	static double run;
+	static double run, mode;
 
 	static CANTalon talon1, talon2, talon3, talon4;
 
@@ -55,11 +55,12 @@ public class PIDTuner {
 		P = 0;
 		I = 0;
 		D = 0;
+		mode = 1;
 	}
 
-	public static void tunePID() {
+	public static void tunePIDVelocity() {
 		SmartDashboard.putString("Run?", "0 = Don't; 1 = Run");
-		
+
 		run = SmartDashboard.getNumber("Run?", run);
 
 		runTalon1 = SmartDashboard.getNumber("Talon 1", runTalon1);
@@ -67,7 +68,7 @@ public class PIDTuner {
 		runTalon3 = SmartDashboard.getNumber("Talon 3", runTalon3);
 		runTalon4 = SmartDashboard.getNumber("Talon 4", runTalon4);
 
-		if (run == 1) {
+		if (run == 1 & mode == 1) {
 			if (runTalon1 == 1) {
 				talon1.setPID(P, I, D);
 
@@ -76,7 +77,7 @@ public class PIDTuner {
 				talon1.changeControlMode(TalonControlMode.Speed);
 
 				talon1.set(0.4 * 20.48);
-				
+
 				//Output to SmartDashboard
 				DSIO.outputToSFX("Talon 1 Velocity", talon1.getSpeed());
 			}
@@ -88,7 +89,7 @@ public class PIDTuner {
 				talon2.changeControlMode(TalonControlMode.Speed);
 
 				talon2.set(0.4 * 20.48);
-				
+
 				//Output to SmartDashboard
 				DSIO.outputToSFX("Talon 2 Velocity", talon2.getSpeed());
 			}
@@ -100,7 +101,7 @@ public class PIDTuner {
 				talon3.changeControlMode(TalonControlMode.Speed);
 
 				talon3.set(0.4 * 20.48);
-				
+
 				//Output to SmartDashboard
 				DSIO.outputToSFX("Talon 3 Velocity", talon3.getSpeed());
 			}
@@ -112,10 +113,71 @@ public class PIDTuner {
 				talon4.changeControlMode(TalonControlMode.Speed);
 
 				talon4.set(0.4 * 20.48);
-				
+
 				//Output to SmartDashboard
 				DSIO.outputToSFX("Talon 4 Velocity", talon4.getSpeed());
 			}
 		}
+	}
+
+	public static void tunePIDPosition() {
+		SmartDashboard.putString("Run?", "0 = Don't; 1 = Run");
+
+		run = SmartDashboard.getNumber("Run?", run);
+
+		runTalon1 = SmartDashboard.getNumber("Talon 1", runTalon1);
+		runTalon2 = SmartDashboard.getNumber("Talon 2", runTalon2);
+		runTalon3 = SmartDashboard.getNumber("Talon 3", runTalon3);
+		runTalon4 = SmartDashboard.getNumber("Talon 4", runTalon4);
+		
+		if (run == 1 & mode == 2) {
+			if (runTalon1 == 1) {
+				talon1.setPID(P, I, D);
+
+				//Configure talons some more
+				talon1.setEncPosition(0); 
+				talon1.changeControlMode(TalonControlMode.Position);
+
+				talon1.set(30000);
+
+				//Output to SmartDashboard
+				DSIO.outputToSFX("Talon 1 Position", talon1.getPosition());
+			}
+			if (runTalon2 == 1) {
+				talon2.setPID(P, I, D);
+
+				//Configure talons some more
+				talon2.setEncPosition(0); 
+				talon2.changeControlMode(TalonControlMode.Position);
+
+				talon2.set(30000);
+
+				//Output to SmartDashboard
+				DSIO.outputToSFX("Talon 2 Position", talon2.getPosition());
+			}
+			if (runTalon3 == 1) {
+				talon3.setPID(P, I, D);
+
+				//Configure talons some more
+				talon3.setEncPosition(0); 
+				talon3.changeControlMode(TalonControlMode.Position);
+
+				talon3.set(30000);
+
+				//Output to SmartDashboard
+				DSIO.outputToSFX("Talon 3 Position", talon3.getPosition());
+			}
+			if (runTalon4 == 1) {
+				talon4.setPID(P, I, D);
+
+				//Configure talons some more
+				talon4.setEncPosition(0); 
+				talon4.changeControlMode(TalonControlMode.Position);
+
+				talon4.set(30000);
+
+				//Output to SmartDashboard
+				DSIO.outputToSFX("Talon 4 Position", talon4.getPosition());
+			}
 	}
 }
