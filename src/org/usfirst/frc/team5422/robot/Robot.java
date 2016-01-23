@@ -24,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DSIO dsio;
 	public static Driver driver;
+	public static PIDTuner pidTuner;
 
     Command autonomousCommand;
 
@@ -37,6 +38,7 @@ public class Robot extends IterativeRobot {
 		//TODO check USB channels and talon channels
 		dsio = new DSIO(0, 0);
 		driver = new Driver();
+		pidTuner = new PIDTuner();
 		
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
@@ -81,7 +83,8 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         //Run the openDrive() method 
-        Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
+//        Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
+        PIDTuner.tunePID();
     }
     
     /**
