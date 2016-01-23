@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 		driver = new Driver();
 		pidTuner = new PIDTuner();
 
-		// instantiate the command used for the autonomous period
+		// instantiate the command used for the autonomous period    
 		autonomousCommand = new ExampleCommand();
 	}
 
