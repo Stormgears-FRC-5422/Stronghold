@@ -134,7 +134,7 @@ public class PIDTuner {
 			if (runTalon1 == 1) {
 				talon1.setPID(P, I, D);
 
-				//Configure talons some more
+				//Configure talons some more 
 				talon1.setEncPosition(0); 
 				talon1.changeControlMode(TalonControlMode.Position);
 
