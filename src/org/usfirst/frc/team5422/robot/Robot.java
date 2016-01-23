@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.ExampleCommand;
+import org.usfirst.frc.team5422.navigator.Driver;
 import org.usfirst.frc.team5422.subsystems.ExampleSubsystem;
 
 /**
@@ -29,6 +31,10 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		
+		//TODO check USB channels
+		DSIO dsio = new DSIO(0, 0);
+		
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
     }
@@ -55,6 +61,11 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        //TODO temporary while loop
+        while (isEnabled() && isOperatorControl()) {
+        	Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
+        }
     }
 
     /**

@@ -7,9 +7,7 @@ public class Navigator {
 	/**
 	 * This function helps drive the robot
 	 */
-	public void openDrive() {
-		
+	public void driveTo(int xOnField, int yOnField, int theta) {
+		//TODO Write this method.
 	}
-
-
 }

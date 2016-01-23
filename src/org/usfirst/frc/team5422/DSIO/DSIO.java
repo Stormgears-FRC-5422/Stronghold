@@ -1,7 +1,11 @@
 package org.usfirst.frc.team5422.DSIO;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DSIO {
 	//This class controls the I/O of the driver station, basically the back-end of the user interface
@@ -10,9 +14,9 @@ public class DSIO {
 
 	//Constants may need to be changed
 
-	Joystick joystick;
-	Joystick buttonBoard;
-	boolean buttonPressed;
+	static Joystick joystick;
+	static Joystick buttonBoard;
+	static boolean buttonPressed;
 
 	//Constructor
 	public DSIO(int joyStickChannel, int buttonBoardChannel) {
@@ -21,7 +25,7 @@ public class DSIO {
 	}
 
 	//Check if a button is pressed; if it is, do the respective command
-	public boolean getButton(int buttonID) {
+	public static boolean getButton(int buttonID) {
 		JoystickButton button = new JoystickButton (buttonBoard, buttonID);
 
 		if (buttonBoard.getRawButton(buttonID)) {
@@ -32,7 +36,7 @@ public class DSIO {
 
 	//Inputs: nothing
 	//Outputs: theta and y of joystick (raw) respectively
-	public double getLinearTheta() {
+	public static double getLinearTheta() {
 		double xPos = joystick.getX();
 		double yPos = joystick.getY();
 
@@ -48,7 +52,7 @@ public class DSIO {
 		return theta;
 	}
 
-	public double getLinearY() {
+	public static double getLinearY() {
 		double yPos = joystick.getY();
 
 		//Put a nullzone on values that are between -0.2 and 0.2
@@ -61,7 +65,7 @@ public class DSIO {
 	//Inputs: nothing
 	//Outputs: averaged theta and y of joystick over a period of 15 milliseconds respectively
 	//Sample size (length of x and y arrays) may need to be changed depending on how much you want the vals to be dampened
-	public double dampenWithAvgTheta() {		
+	public static double dampenWithAvgTheta() {		
 		double xPos[] = new double[15];
 		double yPos[] = new double[15];
 
@@ -100,7 +104,7 @@ public class DSIO {
 		return theta;
 	}
 
-	public double dampenWithAvgY() {		
+	public static double dampenWithAvgY() {		
 		double yPos[] = new double[15];
 
 		double yPosAvg = 0;
@@ -130,7 +134,7 @@ public class DSIO {
 
 	//Inputs: nothing
 	//Outputs: theta and y of joystick after going through a x^2 graph respectively
-	public double dampenWithCurveTheta() {
+	public static double dampenWithCurveTheta() {
 		double xPos = joystick.getX();
 		double yPos = joystick.getY();
 		
@@ -156,7 +160,7 @@ public class DSIO {
 		return theta;
 	}
 
-	public double dampenWithCurveY() {
+	public static double dampenWithCurveY() {
 		double yPos = joystick.getY();
 
 		double yFinal;
@@ -176,7 +180,35 @@ public class DSIO {
 	//Inputs: what to print out
 	//Outputs: nothing
 	//If the integer of the specified thing is true, display it; otherwise, don't display it
-	public void outputToSFX(boolean leftSpeed, boolean rightSpeed, boolean xPosition, boolean yPosition, boolean theta, boolean battVoltage) {
-		//TODO output the numbers based on which ones selected
+	public static void outputToSFX(boolean leftSpeed, boolean rightSpeed, boolean xPosition, boolean yPosition, boolean theta, boolean battVoltage) {
+		//TODO output the numbers based on which ones selected (finish them)
+		if (leftSpeed) {
+			//Declare and configure talon
+			CANTalon talon1 = new CANTalon(1);
+			talon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+			talon1.reverseOutput(true);
+			talon1.configEncoderCodesPerRev(2048);	
+	    	talon1.configNominalOutputVoltage(+0.0f, -0.0f);
+	    	talon1.setEncPosition(0); 
+	    	talon1.changeControlMode(TalonControlMode.Speed);
+	    	
+	    	//Output to SFX
+			double speed1 = talon1.getSpeed();
+			SmartDashboard.putNumber("Left Speed", speed1);
+		}
+		if (rightSpeed) {
+			//Declare and configure talon
+			CANTalon talon2 = new CANTalon(2);
+			talon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+			talon2.reverseOutput(true);
+			talon2.configEncoderCodesPerRev(2048);	
+	    	talon2.configNominalOutputVoltage(+0.0f, -0.0f);
+	    	talon2.setEncPosition(0); 
+	    	talon2.changeControlMode(TalonControlMode.Speed);
+	    	
+	    	//Output to SFX
+			double speed2 = talon2.getSpeed();
+			SmartDashboard.putNumber("Right Speed", speed2);
+		}
 	}
 }
