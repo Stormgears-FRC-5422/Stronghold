@@ -13,9 +13,7 @@ public class Driver {
 	public Driver() {
 		//Declare talons
 		talon1 = new CANTalon(1);
-		talon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon1.reverseOutput(true);
-		talon1.configEncoderCodesPerRev(2048);	
+		talon1.reverseOutput(true);	
 		talon1.configNominalOutputVoltage(+0.0f, -0.0f);
 
 		talon2 = new CANTalon(2);
@@ -31,9 +29,7 @@ public class Driver {
 		talon3.configNominalOutputVoltage(+0.0f, -0.0f);
 
 		talon4 = new CANTalon(4);
-		talon4.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talon4.reverseOutput(false);
-		talon4.configEncoderCodesPerRev(2048);	
+		talon4.reverseOutput(false);	
 		talon4.configNominalOutputVoltage(+0.0f, -0.0f);
 
 		//Set PID closed loop gains
@@ -90,7 +86,7 @@ public class Driver {
 
 		//Configure talons some more 
 		talon1.setEncPosition(0); 
-		talon1.changeControlMode(TalonControlMode.Speed);
+		talon1.changeControlMode(TalonControlMode.Follower);
 
 		talon2.setEncPosition(0); 
 		talon2.changeControlMode(TalonControlMode.Speed);
@@ -99,17 +95,17 @@ public class Driver {
 		talon3.changeControlMode(TalonControlMode.Speed);
 
 		talon4.setEncPosition(0); 
-		talon4.changeControlMode(TalonControlMode.Speed);
+		talon4.changeControlMode(TalonControlMode.Follower);
 
 		//Set the velocity of the talons
-		talon1.set(velocityLeft * 20.48);
 		talon2.set(velocityLeft * 20.48);
+		talon1.set(2);
 		talon3.set(velocityRight * 20.48);
-		talon4.set(velocityRight * 20.48);
+		talon4.set(3);
 
 		//Output to SmartDashboard for diagnostics
-		DSIO.outputToSFX("Left Velocity", talon1.getSpeed());
-		DSIO.outputToSFX("Right Velocity", talon4.getSpeed());
+		DSIO.outputToSFX("Left Velocity", talon2.getSpeed());
+		DSIO.outputToSFX("Right Velocity", talon3.getSpeed());
 
 		DSIO.outputToSFX("Joystick Theta", DSIO.getLinearTheta());
 	}
