@@ -14,7 +14,7 @@ public class PIDTuner {
 
 	static double F, P, I, D;
 
-	//Constructor
+	//Constructor 
 	public PIDTuner() {
 		//Initialize talons 
 		talon1 = new CANTalon(1);
