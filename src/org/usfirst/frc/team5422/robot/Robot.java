@@ -37,7 +37,8 @@ public class Robot extends IterativeRobot {
 
 		//TODO check USB channels and talon channels 
 		dsio = new DSIO(0, 0);
-		driver = new Driver();
+//		driver = new Driver();
+		pidTuner = new PIDTuner();
 
 		// instantiate the command used for the autonomous period    
 		autonomousCommand = new ExampleCommand();
@@ -50,7 +51,9 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) autonomousCommand.start();
+		System.out.println("auto init started.");
 		PIDTuner.tunePIDPosition();
+		System.out.println("auto init ended.");
 	}
 
 	/**
@@ -81,7 +84,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		PIDTuner.tunePIDVelocity();
 		//Run the openDrive() method 
 		//        Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
 	}

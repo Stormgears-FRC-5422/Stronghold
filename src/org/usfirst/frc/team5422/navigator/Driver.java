@@ -65,24 +65,14 @@ public class Driver {
 	/**
 	 * This function drives the robot around the carpet. It is not precise.
 	 */
-	public static void openDrive(double y, double theta) {
-		//Set values
-		double yValue = y;
-		double thetaValue = theta;
-
+	public static void openDrive(double yJoystick, double xJoystick) {
+		//Declare variables
 		double velocityLeft = 0, velocityRight = 0;
-
+		
 		//Calculate velocities
-		if (thetaValue < 0) {
-			velocityLeft = 0.3 * (yValue * 5 + 0.2 * thetaValue);
-			velocityRight = 0.3 * (yValue * 5 - 0.2 * thetaValue);
-		}
-		else {
-			velocityLeft = 0.3 * (yValue * 5 - 0.2 * thetaValue);
-			velocityRight = 0.3 * (yValue * 5 + 0.2 * thetaValue);
-		}
-
-
+		ArcadeDrive.arcadeDrive(yJoystick, xJoystick, true);
+		velocityLeft = ArcadeDrive.arcadeDriveLeft();
+		velocityRight = ArcadeDrive.arcadeDriveRight();
 
 		//Configure talons some more 
 		talon1.setEncPosition(0); 
@@ -107,6 +97,6 @@ public class Driver {
 		DSIO.outputToSFX("Left Velocity", talon2.getSpeed());
 		DSIO.outputToSFX("Right Velocity", talon3.getSpeed());
 
-		DSIO.outputToSFX("Joystick Theta", DSIO.getLinearTheta());
+		DSIO.outputToSFX("Joystick Theta", DSIO.getLinearX());
 	}
 }
