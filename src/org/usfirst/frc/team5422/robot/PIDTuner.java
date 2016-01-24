@@ -59,14 +59,19 @@ public class PIDTuner {
 	}
 
 	public static void tunePIDVelocity() {
-		SmartDashboard.putString("Run?", "0 = Don't; 1 = Run");
+		SmartDashboard.putString("Run? 0 = Don't; 1 = Run", "");
 
-		run = SmartDashboard.getNumber("Run?", run);
+		run = SmartDashboard.getNumber("DB/String 0", run);
 
-		runTalon1 = SmartDashboard.getNumber("Talon 1", runTalon1);
-		runTalon2 = SmartDashboard.getNumber("Talon 2", runTalon2);
-		runTalon3 = SmartDashboard.getNumber("Talon 3", runTalon3);
-		runTalon4 = SmartDashboard.getNumber("Talon 4", runTalon4);
+		runTalon1 = SmartDashboard.getNumber("DB/String 1", runTalon1);
+		runTalon2 = SmartDashboard.getNumber("DB/String 2", runTalon2);
+		runTalon3 = SmartDashboard.getNumber("DB/String 3", runTalon3);
+		runTalon4 = SmartDashboard.getNumber("DB/String 4", runTalon4);
+		
+		F = SmartDashboard.getNumber("DB/String 5", F);
+		P = SmartDashboard.getNumber("DB/String 5", P);
+		I = SmartDashboard.getNumber("DB/String 5", I);
+		D = SmartDashboard.getNumber("DB/String 5", D);
 
 		if (run == 1 & mode == 1) {
 			if (runTalon1 == 1) {
