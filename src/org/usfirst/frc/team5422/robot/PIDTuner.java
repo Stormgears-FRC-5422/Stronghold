@@ -51,27 +51,15 @@ public class PIDTuner {
 		runTalon2 = 0;
 		runTalon3 = 0;
 		runTalon4 = 0;
-		F = 0;
-		P = 0;
+		F = 1.705;
+		P = 0.000185;
 		I = 0;
 		D = 0;
 		mode = 1;
 	}
 
 	public static void tunePIDVelocity() {
-		SmartDashboard.putString("Run? 0 = Don't; 1 = Run", "");
-
-		run = SmartDashboard.getNumber("DB/String 0", run);
-
-		runTalon1 = SmartDashboard.getNumber("DB/String 1", runTalon1);
-		runTalon2 = SmartDashboard.getNumber("DB/String 2", runTalon2);
-		runTalon3 = SmartDashboard.getNumber("DB/String 3", runTalon3);
-		runTalon4 = SmartDashboard.getNumber("DB/String 4", runTalon4);
-		
-		F = SmartDashboard.getNumber("DB/String 5", F);
-		P = SmartDashboard.getNumber("DB/String 5", P);
-		I = SmartDashboard.getNumber("DB/String 5", I);
-		D = SmartDashboard.getNumber("DB/String 5", D);
+		createUI();
 
 		if (run == 1 & mode == 1) {
 			if (runTalon1 == 1) {
@@ -126,15 +114,11 @@ public class PIDTuner {
 	}
 
 	public static void tunePIDPosition() {
-		SmartDashboard.putString("Run?", "0 = Don't; 1 = Run");
 
-		run = SmartDashboard.getNumber("Run?", run);
-
-		runTalon1 = SmartDashboard.getNumber("Talon 1", runTalon1);
-		runTalon2 = SmartDashboard.getNumber("Talon 2", runTalon2);
-		runTalon3 = SmartDashboard.getNumber("Talon 3", runTalon3);
-		runTalon4 = SmartDashboard.getNumber("Talon 4", runTalon4);
-
+		//Don't start until the correct modes are entered
+		while (run != 1 & mode != 2) {
+			createUI();
+		}
 		if (run == 1 & mode == 2) {
 			if (runTalon1 == 1) {
 				talon1.setPID(P, I, D);
@@ -143,10 +127,11 @@ public class PIDTuner {
 				talon1.setEncPosition(0); 
 				talon1.changeControlMode(TalonControlMode.Position);
 
-				talon1.set(30000);
-
-				//Output to SmartDashboard
-				DSIO.outputToSFX("Talon 1 Position", talon1.getPosition());
+				for (int counter = 0; counter <= 300; counter++) {
+					talon1.set(100);
+					//Output to SmartDashboard
+					DSIO.outputToSFX("Talon 1 Position", talon1.getPosition());
+				}
 			}
 			if (runTalon2 == 1) {
 				talon2.setPID(P, I, D);
@@ -155,10 +140,11 @@ public class PIDTuner {
 				talon2.setEncPosition(0); 
 				talon2.changeControlMode(TalonControlMode.Position);
 
-				talon2.set(30000);
-
-				//Output to SmartDashboard
-				DSIO.outputToSFX("Talon 2 Position", talon2.getPosition());
+				for (int counter = 0; counter <= 300; counter++) {
+					talon2.set(100);
+					//Output to SmartDashboard
+					DSIO.outputToSFX("Talon 2 Position", talon2.getPosition());
+				}
 			}
 			if (runTalon3 == 1) {
 				talon3.setPID(P, I, D);
@@ -167,10 +153,11 @@ public class PIDTuner {
 				talon3.setEncPosition(0); 
 				talon3.changeControlMode(TalonControlMode.Position);
 
-				talon3.set(30000);
-
-				//Output to SmartDashboard
-				DSIO.outputToSFX("Talon 3 Position", talon3.getPosition());
+				for (int counter = 0; counter <= 300; counter++) {
+					talon3.set(100);
+					//Output to SmartDashboard
+					DSIO.outputToSFX("Talon 3 Position", talon3.getPosition());
+				}
 			}
 			if (runTalon4 == 1) {
 				talon4.setPID(P, I, D);
@@ -179,11 +166,45 @@ public class PIDTuner {
 				talon4.setEncPosition(0); 
 				talon4.changeControlMode(TalonControlMode.Position);
 
-				talon4.set(30000);
-
-				//Output to SmartDashboard
-				DSIO.outputToSFX("Talon 4 Position", talon4.getPosition());
+				for (int counter = 0; counter <= 300; counter++) {
+					talon4.set(100);
+					//Output to SmartDashboard
+					DSIO.outputToSFX("Talon 4 Position", talon4.getPosition());
+				}
 			}
 		}
+	}
+
+	public static void createUI() {
+		//PID controls
+		SmartDashboard.putNumber("F", F);
+		SmartDashboard.putNumber("P", P);
+		SmartDashboard.putNumber("I", I);
+		SmartDashboard.putNumber("D", D);
+		F = SmartDashboard.getNumber("F", F);
+		P = SmartDashboard.getNumber("P", P);
+		I = SmartDashboard.getNumber("I", I);
+		D = SmartDashboard.getNumber("D", D);
+
+		//Add components to smart dash board
+		SmartDashboard.putString("Run? 0 = Don't; 1 = Run", "");
+
+		//Run all motors controls
+		SmartDashboard.putNumber("Run Motors", run);
+		run = SmartDashboard.getNumber("Run Motors", run);
+
+		//Mode: velocity or position
+		SmartDashboard.putNumber("Run Mode: 1/Velocity, 2/Position", mode);
+		mode = SmartDashboard.getNumber("Run Mode: 1/Velocity, 2/Position", mode);
+
+		//Individual talon controls
+		SmartDashboard.putNumber("Talon 1", runTalon1);
+		SmartDashboard.putNumber("Talon 2", runTalon2);
+		SmartDashboard.putNumber("Talon 3", runTalon3);
+		SmartDashboard.putNumber("Talon 4", runTalon4);
+		runTalon1 = SmartDashboard.getNumber("Talon 1", runTalon1);
+		runTalon2 = SmartDashboard.getNumber("Talon 2", runTalon2);
+		runTalon3 = SmartDashboard.getNumber("Talon 3", runTalon3);
+		runTalon4 = SmartDashboard.getNumber("Talon 4", runTalon4);
 	}
 }
