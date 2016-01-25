@@ -4,6 +4,7 @@ import org.usfirst.frc.team5422.DSIO.DSIO;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PIDTuner {
@@ -11,7 +12,7 @@ public class PIDTuner {
 
 	static double[] talonID = new double[4];
 	static double F, P, I, D, maxVel, targetPos;
-	
+
 	static double go = 0;
 
 	//Constructor 
@@ -39,10 +40,10 @@ public class PIDTuner {
 
 		//		SmartDashboard.putNumber("Max Velocity", maxVel);
 		SmartDashboard.putNumber("Target Encoder Position", targetPos);
-		
+
 		SmartDashboard.putNumber("Go? Enter 1", go);
-		
-		
+
+
 	}
 
 	public static void tunePIDPosition() {
@@ -66,7 +67,7 @@ public class PIDTuner {
 
 			//			maxVel = SmartDashboard.getNumber("Max Velocity", maxVel);
 			targetPos = SmartDashboard.getNumber("Target Encoder Position", targetPos);
-			
+
 			go = SmartDashboard.getNumber("Go? Enter 1", go);
 
 			initializeTalonsAndGo(talonID[0], talonID[1], talonID[2], talonID[3]);
@@ -130,23 +131,39 @@ public class PIDTuner {
 			if (!(talon4 == null)) {
 				DSIO.outputToSFX("Talon 4 Position", talon4.getPosition());
 			}
-			
+
 			//If they decide to stop, stop the loop and motors
 			go = SmartDashboard.getNumber("Go? Enter 1", go);
 			if (go == 0) {
 				//Stop the motors and break the loop
-				if (talon1 != null) talon1.set(0);
-				if (talon2 != null) talon2.set(0);
-				if (talon3 != null) talon3.set(0);
-				if (talon4 != null) talon4.set(0);
+				if (talon1 != null) {
+					talon1.changeControlMode(TalonControlMode.Disabled);
+					talon1.changeControlMode(TalonControlMode.Position);
+				}
+				if (talon2 != null) {
+					talon1.changeControlMode(TalonControlMode.Disabled);
+					talon1.changeControlMode(TalonControlMode.Position);
+				}
+				if (talon3 != null) {
+					talon1.changeControlMode(TalonControlMode.Disabled);
+					talon1.changeControlMode(TalonControlMode.Position);
+				}
+				if (talon4 != null) {
+					talon1.changeControlMode(TalonControlMode.Disabled);
+					talon1.changeControlMode(TalonControlMode.Position);
+				}
 				createUI();
 				break;
 			}
 			try {
-				Thread.sleep(1);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}//End for
+		while (go != 0) {
+			SmartDashboard.putNumber("Go? Enter 1", go);
+		}
+		createUI();
 	}//End makeMotorsGo()
 }//End class

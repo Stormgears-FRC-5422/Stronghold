@@ -70,7 +70,7 @@ public class Driver {
 		double velocityLeft = 0, velocityRight = 0;
 		
 		//Calculate velocities
-		ArcadeDrive.arcadeDrive(yJoystick, xJoystick, true);
+		ArcadeDrive.arcadeDrive(yJoystick, xJoystick);
 		velocityLeft = ArcadeDrive.arcadeDriveLeft();
 		velocityRight = ArcadeDrive.arcadeDriveRight();
 
@@ -96,7 +96,5 @@ public class Driver {
 		//Output to SmartDashboard for diagnostics
 		DSIO.outputToSFX("Left Velocity", talon2.getSpeed());
 		DSIO.outputToSFX("Right Velocity", talon3.getSpeed());
-
-		DSIO.outputToSFX("Joystick Theta", DSIO.getLinearX());
 	}
 }
