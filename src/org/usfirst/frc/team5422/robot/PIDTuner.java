@@ -51,6 +51,7 @@ public class PIDTuner {
 	}
 
 	public static void createUI() {
+		go = 0;
 		go = SmartDashboard.getNumber("Go? Enter 1", go);
 		while (!(go == 1)) {
 			go = SmartDashboard.getNumber("Go? Enter 1", go);
@@ -152,10 +153,8 @@ public class PIDTuner {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
 		}//End for
-		while (go != 0) {
-			SmartDashboard.putNumber("Go? Enter 1", go);
-		}
 		createUI();
 	}//End makeMotorsGo()
 }//End class
