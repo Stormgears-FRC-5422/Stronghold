@@ -129,23 +129,7 @@ public class PIDTuner {
 			go = SmartDashboard.getNumber("Go? Enter 1", go);
 			if (go == 0) {
 				//Stop the motors and break the loop
-				if (talon1 != null) {
-					talon1.changeControlMode(TalonControlMode.Disabled);
-					talon1.changeControlMode(TalonControlMode.Position);
-				}
-				if (talon2 != null) {
-					talon1.changeControlMode(TalonControlMode.Disabled);
-					talon1.changeControlMode(TalonControlMode.Position);
-				}
-				if (talon3 != null) {
-					talon1.changeControlMode(TalonControlMode.Disabled);
-					talon1.changeControlMode(TalonControlMode.Position);
-				}
-				if (talon4 != null) {
-					talon1.changeControlMode(TalonControlMode.Disabled);
-					talon1.changeControlMode(TalonControlMode.Position);
-				}
-				createUI();
+				stopMotors();
 				break;
 			}
 			try {
@@ -155,6 +139,27 @@ public class PIDTuner {
 			}
 			
 		}//End for
+		stopMotors();
 		createUI();
-	}//End makeMotorsGo()
+	}//End printValues()
+	
+	public static void stopMotors() {
+		//Stop the motors
+		if (talon1 != null) {
+			talon1.changeControlMode(TalonControlMode.Disabled);
+			talon1.changeControlMode(TalonControlMode.Position);
+		}
+		if (talon2 != null) {
+			talon1.changeControlMode(TalonControlMode.Disabled);
+			talon1.changeControlMode(TalonControlMode.Position);
+		}
+		if (talon3 != null) {
+			talon1.changeControlMode(TalonControlMode.Disabled);
+			talon1.changeControlMode(TalonControlMode.Position);
+		}
+		if (talon4 != null) {
+			talon1.changeControlMode(TalonControlMode.Disabled);
+			talon1.changeControlMode(TalonControlMode.Position);
+		}
+	}
 }//End class
