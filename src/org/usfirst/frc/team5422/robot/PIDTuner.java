@@ -140,6 +140,7 @@ public class PIDTuner {
 			
 		}//End for
 		stopMotors();
+		go = 0;
 		createUI();
 	}//End printValues()
 	
