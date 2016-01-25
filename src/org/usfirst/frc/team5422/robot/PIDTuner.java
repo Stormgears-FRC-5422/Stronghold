@@ -79,8 +79,6 @@ public class PIDTuner {
 		if (talonID[0] != -1) {
 			talon1 = new CANTalon((int) talonID[0]);
 			talon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon1.configEncoderCodesPerRev(2048);
-			talon1.configNominalOutputVoltage(+0.0f, -0.0f);
 			talon1.setEncPosition(0);
 			talon1.setPID(P, I, D);
 			talon1.set(targetPos);
@@ -88,8 +86,6 @@ public class PIDTuner {
 		if (talonID[1] != -1) {
 			talon2 = new CANTalon((int) talonID[1]);
 			talon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon2.configEncoderCodesPerRev(2048);
-			talon2.configNominalOutputVoltage(+0.0f, -0.0f);
 			talon2.setEncPosition(0);
 			talon2.setPID(P, I, D);
 			talon2.set(targetPos);
@@ -97,8 +93,6 @@ public class PIDTuner {
 		if (talonID[2] != -1) {
 			talon3 = new CANTalon((int) talonID[2]);
 			talon3.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon3.configEncoderCodesPerRev(2048);
-			talon3.configNominalOutputVoltage(+0.0f, -0.0f);
 			talon3.setEncPosition(0);
 			talon3.setPID(P, I, D);
 			talon3.set(targetPos);
@@ -106,8 +100,6 @@ public class PIDTuner {
 		if (talonID[3] != -1) {
 			talon4 = new CANTalon((int) talonID[3]);
 			talon4.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon4.configEncoderCodesPerRev(2048);
-			talon4.configNominalOutputVoltage(+0.0f, -0.0f);
 			talon4.setEncPosition(0);
 			talon4.setPID(P, I, D);
 			talon4.set(targetPos);
@@ -115,21 +107,21 @@ public class PIDTuner {
 	}
 
 	public static void printValues() {
-		//Every 20 ticks, display the values
-		for (int counter = 10; counter <= targetPos; counter += 10) {
+		//Every 10ms, display the values
+		for (int counter = 1; counter <= targetPos; counter++) {
 			if (!(talon1 == null)) {
-				DSIO.outputToSFX("Talon 1 Position", talon1.getPosition());
+				DSIO.outputToSFX("Talon 1 Position", talon1.getEncPosition());
 				System.out.println(talon1.getPosition());
 				System.out.println(counter);
 			}
 			if (!(talon2 == null)) {
-				DSIO.outputToSFX("Talon 2 Position", talon2.getPosition());
+				DSIO.outputToSFX("Talon 2 Position", talon2.getEncPosition());
 			}
 			if (!(talon3 == null)) {
-				DSIO.outputToSFX("Talon 3 Position", talon3.getPosition());
+				DSIO.outputToSFX("Talon 3 Position", talon3.getEncPosition());
 			}
 			if (!(talon4 == null)) {
-				DSIO.outputToSFX("Talon 4 Position", talon4.getPosition());
+				DSIO.outputToSFX("Talon 4 Position", talon4.getEncPosition());
 			}
 
 			//If they decide to stop, stop the loop and motors
