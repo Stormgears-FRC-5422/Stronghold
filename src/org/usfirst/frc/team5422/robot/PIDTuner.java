@@ -117,7 +117,7 @@ public class PIDTuner {
 	}
 
 	public static void printValues() {
-		//Every 10ms, display the values
+		//Every 10ms, display the values 
 		for (int counter = 1; counter <= targetPos; counter++) {
 			if (!(talon1 == null)) {
 				DSIO.outputToSFX("Talon 1 Position", talon1.getPosition());

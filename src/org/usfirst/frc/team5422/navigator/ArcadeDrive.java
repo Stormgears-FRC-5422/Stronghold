@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5422.navigator;
 
 public class ArcadeDrive {
-	//Declare variables
+	//Declare variables 
 	static double leftMotorSpeed;
     static double rightMotorSpeed;
     
