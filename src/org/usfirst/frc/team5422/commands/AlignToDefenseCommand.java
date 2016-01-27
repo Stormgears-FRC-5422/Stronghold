@@ -1,18 +1,20 @@
+package org.usfirst.frc.team5422.commands;
 
-package org.usfirst.frc.team5422.controller;
+import org.usfirst.frc.team5422.controller.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-import org.usfirst.frc.team5422.robot.Robot;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class AlignToDefenseCommand extends Command {
 
-    public ExampleCommand() {
+    public AlignToDefenseCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+        // eg. requires(chassis);
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.navigatorSubsystem);
+    	
     }
 
     // Called just before this Command runs the first time

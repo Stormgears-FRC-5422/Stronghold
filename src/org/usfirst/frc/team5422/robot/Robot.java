@@ -7,9 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.commands.ExampleCommand;
 import org.usfirst.frc.team5422.navigator.Driver;
-import org.usfirst.frc.team5422.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,8 +18,6 @@ import org.usfirst.frc.team5422.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static OI oi;
 	public static DSIO dsio;
 	public static Driver driver;
 	public static PIDTuner pidTuner;
@@ -33,15 +29,13 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code. 
 	 */
 	public void robotInit() {
-		oi = new OI();
-
 		//TODO check USB channels and talon channels 
 		dsio = new DSIO(0, 0);
-//		driver = new Driver();
+		driver = new Driver();
 		pidTuner = new PIDTuner();
 
 		// instantiate the command used for the autonomous period    
-		autonomousCommand = new ExampleCommand();
+//		autonomousCommand = new ExampleCommand();
 	}
 
 	public void disabledPeriodic() {
