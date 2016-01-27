@@ -103,7 +103,7 @@ public class PIDTuner {
 
 	public static void printValues() {
 		//Every 10ms, display the values 
-		for (int counter = 1; counter <= targetPos; counter++) {
+		while (checkSpeed() != 0) {
 			if (!(talon1 == null)) {
 				SmartDashboard.putNumber("Talon 1 Position", talon1.getPosition());
 				SmartDashboard.putNumber("Talon 1 Position Graph", talon1.getPosition());
@@ -120,6 +120,13 @@ public class PIDTuner {
 				SmartDashboard.putNumber("Talon 4 Position", talon4.getPosition());
 				SmartDashboard.putNumber("Talon 4 Position Graph", talon4.getPosition());
 			}
+			
+			//Slow down the loop
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 
 			//If they decide to enter a new value, go to that value
 			targetPosPrev = targetPos;
@@ -128,12 +135,7 @@ public class PIDTuner {
 				//Stop the motors and break the loop, then start over
 				break;
 			}
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}//End for
+		}//End while
 		stopMotors();
 		createUI();
 	}//End printValues()
@@ -156,5 +158,29 @@ public class PIDTuner {
 			talon1.changeControlMode(TalonControlMode.Disabled);
 			talon1.changeControlMode(TalonControlMode.Position);
 		}
+	}
+	
+	public static double checkSpeed() {
+		double speed = 0;
+		
+		//Check the speed of the 4 talons and output the first one that isn't 0
+		//This method should only be used to check if any of the talons are spinning a motor
+		
+		if (talon1 != null) {
+			speed = talon1.getSpeed();
+		}
+		else if (talon2 != null) {
+			speed = talon2.getSpeed();
+		}
+		else if (talon3 != null) {
+			speed = talon3.getSpeed();
+		}
+		else if (talon4 != null) {
+			speed = talon4.getSpeed();
+		}
+		else {
+			speed = 0;
+		}
+		return speed;
 	}
 }//End class
