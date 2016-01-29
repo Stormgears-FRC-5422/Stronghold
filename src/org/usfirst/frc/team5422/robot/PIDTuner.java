@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PIDTuner {
-	static CANTalon talon1 = null, talon2 = null, talon3 = null, talon4 = null;
+	static CANTalon talon[] = new CANTalon[4];
 
 	static double[] talonID = new double[4];
 	static double F, P, I, D, maxVel, targetPos, targetPosPrev;
@@ -30,17 +30,14 @@ public class PIDTuner {
 		SmartDashboard.putNumber("I", I);
 		SmartDashboard.putNumber("D", D);
 
-		SmartDashboard.putNumber("Talon ID 1", talonID[0]);
-		SmartDashboard.putNumber("Talon ID 2", talonID[1]);
-		SmartDashboard.putNumber("Talon ID 3", talonID[2]);
-		SmartDashboard.putNumber("Talon ID 4", talonID[3]);
-
-		//		SmartDashboard.putNumber("Max Velocity", maxVel);
+		for (int i = 0; i < 3; i++) {
+			SmartDashboard.putNumber("Talon ID " + (i + 1), talonID[i]);
+		}
+		
 		SmartDashboard.putNumber("Target Encoder Position", targetPos);
-
-
 	}
 
+	//Wrapper method
 	public static void tunePIDPosition() {
 		createUI();
 	}
@@ -55,10 +52,9 @@ public class PIDTuner {
 			I = SmartDashboard.getNumber("I", I);
 			D = SmartDashboard.getNumber("D", D);
 
-			talonID[0] = SmartDashboard.getNumber("Talon ID 1", talonID[0]);
-			talonID[1] = SmartDashboard.getNumber("Talon ID 2", talonID[1]);
-			talonID[2] = SmartDashboard.getNumber("Talon ID 3", talonID[2]);
-			talonID[3] = SmartDashboard.getNumber("Talon ID 4", talonID[3]);
+			for (int i = 0; i < 3; i++) {
+				talonID[i] = SmartDashboard.getNumber("Talon ID " + (i + 1), talonID[i]);
+			}
 
 			initializeTalonsAndGo(talonID[0], talonID[1], talonID[2], talonID[3]);
 			printValues();
@@ -70,57 +66,28 @@ public class PIDTuner {
 		talonID[1] = talonID2;
 		talonID[2] = talonID3;
 		talonID[3] = talonID4;
-		
-		if (talonID[0] != -1) { 
-			talon1 = new CANTalon((int) talonID[0]);
-			talon1.changeControlMode(TalonControlMode.Position);
-			talon1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon1.setPID(P, I, D);
-			talon1.set(targetPos);
-		}
-		if (talonID[1] != -1) {
-			talon2 = new CANTalon((int) talonID[1]);
-			talon2.changeControlMode(TalonControlMode.Position);
-			talon2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon2.setPID(P, I, D);
-			talon2.set(targetPos);
-		}
-		if (talonID[2] != -1) {
-			talon3 = new CANTalon((int) talonID[2]);
-			talon3.changeControlMode(TalonControlMode.Position);
-			talon3.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon3.setPID(P, I, D);
-			talon3.set(targetPos);
-		}
-		if (talonID[3] != -1) {
-			talon4 = new CANTalon((int) talonID[3]);
-			talon4.changeControlMode(TalonControlMode.Position);
-			talon4.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon4.setPID(P, I, D);
-			talon4.set(targetPos);
-		}
-	}
+
+		for (int i = 0; i < 3; i++) {
+			if (talonID[i] != -1) {
+				talon[i] = new CANTalon((int) talonID[i]);
+				talon[i].changeControlMode(TalonControlMode.Position);
+				talon[i].setFeedbackDevice(FeedbackDevice.QuadEncoder);
+				talon[i].setPID(P, I, D);
+				talon[i].set(targetPos);
+			}//End if
+		}//End for
+	}//End initializeTalonsAndGo()
 
 	public static void printValues() {
 		//Every 10ms, display the values 
 		while (checkSpeed() != 0) {
-			if (!(talon1 == null)) {
-				SmartDashboard.putNumber("Talon 1 Position", talon1.getPosition());
-				SmartDashboard.putNumber("Talon 1 Position Graph", talon1.getPosition());
-			}
-			if (!(talon2 == null)) {
-				SmartDashboard.putNumber("Talon 2 Position", talon2.getPosition());
-				SmartDashboard.putNumber("Talon 2 Position Graph", talon2.getPosition());
-			}
-			if (!(talon3 == null)) {
-				SmartDashboard.putNumber("Talon 3 Position", talon3.getPosition());
-				SmartDashboard.putNumber("Talon 3 Position Graph", talon3.getPosition());
-			}
-			if (!(talon4 == null)) {
-				SmartDashboard.putNumber("Talon 4 Position", talon4.getPosition());
-				SmartDashboard.putNumber("Talon 4 Position Graph", talon4.getPosition());
-			}
-			
+			for (int i = 0; i < 3; i++) {
+				if (talon[i] != null) {
+					SmartDashboard.putNumber("Talon " + (i + 1) + " Position", talon[i].getPosition());
+					SmartDashboard.putNumber("Talon " + (i + 1) + " Position Graph", talon[i].getPosition());
+				}//End if
+			}//End for
+
 			//Slow down the loop
 			try {
 				Thread.sleep(10);
@@ -135,30 +102,20 @@ public class PIDTuner {
 				//Stop the motors and break the loop, then start over
 				break;
 			}
-		}//End while
+		}//End while and start over
 		stopMotors();
 		createUI();
 	}//End printValues()
 	
 	public static void stopMotors() {
 		//Stop the motors
-		if (talon1 != null) {
-			talon1.changeControlMode(TalonControlMode.Disabled);
-			talon1.changeControlMode(TalonControlMode.Position);
-		}
-		if (talon2 != null) {
-			talon1.changeControlMode(TalonControlMode.Disabled);
-			talon1.changeControlMode(TalonControlMode.Position);
-		}
-		if (talon3 != null) {
-			talon1.changeControlMode(TalonControlMode.Disabled);
-			talon1.changeControlMode(TalonControlMode.Position);
-		}
-		if (talon4 != null) {
-			talon1.changeControlMode(TalonControlMode.Disabled);
-			talon1.changeControlMode(TalonControlMode.Position);
-		}
-	}
+		for (int i = 0; i < 3; i++) {
+			if (talon[i] != null) {
+				talon[i].changeControlMode(TalonControlMode.Disabled);
+				talon[i].changeControlMode(TalonControlMode.Position);
+			}//End if
+		}//End for
+	}//End stopMotors()
 	
 	public static double checkSpeed() {
 		double speed = 0;
@@ -166,17 +123,17 @@ public class PIDTuner {
 		//Check the speed of the 4 talons and output the first one that isn't 0
 		//This method should only be used to check if any of the talons are spinning a motor
 		
-		if (talon1 != null) {
-			speed = talon1.getSpeed();
+		if (talon[0] != null) {
+			speed = talon[0].getSpeed();
 		}
-		else if (talon2 != null) {
-			speed = talon2.getSpeed();
+		else if (talon[1] != null) {
+			speed = talon[1].getSpeed();
 		}
-		else if (talon3 != null) {
-			speed = talon3.getSpeed();
+		else if (talon[2] != null) {
+			speed = talon[2].getSpeed();
 		}
-		else if (talon4 != null) {
-			speed = talon4.getSpeed();
+		else if (talon[3] != null) {
+			speed = talon[3].getSpeed();
 		}
 		else {
 			speed = 0;
