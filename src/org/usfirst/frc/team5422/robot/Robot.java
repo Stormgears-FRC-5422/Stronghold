@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called periodically during autonomous 
+	 * This function is called periodically during autonomous
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
