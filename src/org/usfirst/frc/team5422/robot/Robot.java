@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 		pidTuner = new PIDTuner();
 
 		// instantiate the command used for the autonomous period    
-//		autonomousCommand = new ExampleCommand();
+		//		autonomousCommand = new ExampleCommand();
 	}
 
 	public void disabledPeriodic() {
@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		//Run the openDrive() method 
-		//        Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
+		Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX());
 	}
 
 	/**
