@@ -55,10 +55,10 @@ public class UltraSound {
 			System.out.println(sp.writeString("R123"));
 			sp.flush();
 			System.out.println(sp.getBytesReceived());
-			s = sp.readString();
-			System.out.println(s + "STRING PRINT");
 			if (sp.getBytesReceived() > 0) {
-				char rByte = sp.readString(1).charAt(0);
+				s = sp.readString(sp.getBytesReceived());
+				System.out.println(s + "STRING PRINT");
+				char rByte = s.charAt(0);
 				if (rByte == 'R') {
 					range = Integer.valueOf(s.substring(1));
 					System.out.println(s.substring(1));
