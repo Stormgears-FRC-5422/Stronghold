@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.RobotDrive;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.AlignToDefenseCommand;
+import org.usfirst.frc.team5422.navigator.Driver;
 import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
-import org.usfirst.frc.team5422.robot.PIDTuner;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.Shooter;
 
@@ -41,12 +41,16 @@ public class Robot extends SampleRobot {
 	public static final Shooter shooterSubsystem = new BallShooter();
 	public static final Opener openerSubsystem = new SallyPortOpener();
 	
+	public static DSIO dsio;
+	public static Driver driver;
+	public static PIDTuner pidTuner;
+
 	RobotDrive myRobot;
-	DSIO dsio;
     Joystick stick;
     Ultrasonic usonic;
     LiveWindow lw;
     
+	Command autonomousCommand;
     Command alignToDefense;
     
     public Robot() {
@@ -70,6 +74,8 @@ public class Robot extends SampleRobot {
 		// pointers. Bad news. Don't move it.
 		
 		dsio = new DSIO(0, 0);
+		driver = new Driver();
+		pidTuner = new PIDTuner();
 		
 		//instantiate commands used for the autonomous period
 		//for example, start with aligning the robot to the appropriate 
@@ -81,7 +87,10 @@ public class Robot extends SampleRobot {
      * Drive left & right motors for 2 seconds then stop
      */
     public void autonomous() {
-    	System.out.println("Printing in Autonomous...");
+		if (autonomousCommand != null) autonomousCommand.start();
+		System.out.println("auto init started.");
+		PIDTuner.tunePIDPosition();
+		System.out.println("auto init ended.");
     }
 
     /**
@@ -93,10 +102,8 @@ public class Robot extends SampleRobot {
         	System.out.println("Robot's Operator Control is active and the robot is enabled");
         	
     		Scheduler.getInstance().run();
-    		PIDTuner.tunePIDPosition();
     		//Run the openDrive() method 
-    		//        Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearTheta());
-        
+    		Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX());        
         }
    	
     }
