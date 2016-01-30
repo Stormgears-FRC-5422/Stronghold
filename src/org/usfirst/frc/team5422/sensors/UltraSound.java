@@ -51,6 +51,7 @@ public class UltraSound {
 		d.set(true);
 		sp.reset(); // Clear cache ready for next reading
 		while (stringComplete == false) {
+		try {
 			System.out.println("Entered while loop");
 			System.out.println(sp.writeString("R123"));
 			sp.flush();
@@ -77,8 +78,16 @@ public class UltraSound {
 				System.out.println("No bytes entered ");
 			}
 			System.out.println("left if statement");
+			}
+		
+		catch(Exception e)
+		{
+			System.out.println("error");
 		}
+	
+		
+	}
 		System.out.println("Left loop");
 		return range;
-	}
+}
 }
