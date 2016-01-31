@@ -41,7 +41,7 @@ public class Driver {
 		I = 0;
 		D = 0;
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			talon[i].setPID(P, I, D);
 			talon[i].setF(F);
 		}
