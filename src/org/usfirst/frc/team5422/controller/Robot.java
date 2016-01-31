@@ -84,7 +84,7 @@ public class Robot extends SampleRobot {
 	}    
 
 	/**
-	 * Drive left & right motors for 2 seconds then stop
+	 * Drive left & right motors for 2 seconds then stop 
 	 */
 	public void autonomous() {
 		if (autonomousCommand != null) autonomousCommand.start();

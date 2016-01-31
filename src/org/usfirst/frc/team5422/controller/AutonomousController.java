@@ -33,7 +33,7 @@ public class AutonomousController {
 			}
 		}
 		
-		//Debugging for() loop
+		//Debugging for() loop 
 		for (int i = 0; i < 9; i++) {
 			System.out.println(i + ", " + defensePositions[i]);
 		}
