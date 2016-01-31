@@ -3,7 +3,7 @@ package org.usfirst.frc.team5422.controller;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 
 public class AutonomousController {
-	public void go() {
+	public static void go() {
 		DSIO.getInputFromAutoUI();
 
 		String autoSequence;

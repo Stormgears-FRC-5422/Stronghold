@@ -14,7 +14,6 @@ import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.Shooter;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -75,7 +74,7 @@ public class Robot extends SampleRobot {
 		
 		dsio = new DSIO(0, 0);
 		driver = new Driver();
-		pidTuner = new PIDTuner();
+//		pidTuner = new PIDTuner();
 		
 		//instantiate commands used for the autonomous period
 		//for example, start with aligning the robot to the appropriate 
@@ -89,7 +88,10 @@ public class Robot extends SampleRobot {
     public void autonomous() {
 		if (autonomousCommand != null) autonomousCommand.start();
 		System.out.println("auto init started.");
-		PIDTuner.tunePIDPosition();
+		
+//		PIDTuner.tunePIDPosition();
+		
+		AutonomousController.go();
 		System.out.println("auto init ended.");
     }
 
