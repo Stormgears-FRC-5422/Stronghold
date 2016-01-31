@@ -11,13 +11,31 @@ public class AutonomousController {
 		int[] defensePositions = new int[9];
 
 		defensePositions[0] = 0;
+		
+		for (int i = 1; i < 9; i++) {
+			defensePositions[i] = -1;
+		}
 
 		for (int i = 1; i < 5; i++) {
 			for (int c = 1; c < 9; c++) {
 				if (DSIO.pos[i] == c) {
 					defensePositions[c] = DSIO.pos[i];
 				}
+			}//End inner for()
+		}//End outer for()
+		
+		
+		for (int i = 1; i < 9; i++) {
+			for (int c = 1; c < 5; c++) {
+				if (DSIO.pos[c] == i) {
+					defensePositions[i] = c;
+				}
 			}
+		}
+		
+		//Debugging for() loop
+		for (int i = 0; i < 9; i++) {
+			System.out.println(i + ", " + defensePositions[i]);
 		}
 
 		autoSequence = DSIO.autoSequence;

@@ -39,28 +39,28 @@ public class Robot extends SampleRobot {
 	public static final Navigator navigatorSubsystem = new Navigator();
 	public static final Shooter shooterSubsystem = new BallShooter();
 	public static final Opener openerSubsystem = new SallyPortOpener();
-	
+
 	public static DSIO dsio;
 	public static Driver driver;
 	public static PIDTuner pidTuner;
 
 	RobotDrive myRobot;
-    Joystick stick;
-    Ultrasonic usonic;
-    LiveWindow lw;
-    
+	Joystick stick;
+	Ultrasonic usonic;
+	LiveWindow lw;
+
 	Command autonomousCommand;
-    Command alignToDefense;
-    
-    public Robot() {
-    	lw = new LiveWindow();
-/*      
+	Command alignToDefense;
+
+	public Robot() {
+		lw = new LiveWindow();
+		/*      
  		myRobot = new RobotDrive(0, 1);
         myRobot.setExpiration(0.1);
         stick = new Joystick(0);
-*/    
-    }
-    
+		 */    
+	}
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -71,51 +71,51 @@ public class Robot extends SampleRobot {
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
-		
+
 		dsio = new DSIO(0, 0);
 		driver = new Driver();
-//		pidTuner = new PIDTuner();
-		
+		dsio.createAutonomousUI();
+		//		pidTuner = new PIDTuner();
+
 		//instantiate commands used for the autonomous period
 		//for example, start with aligning the robot to the appropriate 
 		//defense position with the required defense type
 		alignToDefense = new AlignToDefenseCommand();
 	}    
 
-    /**
-     * Drive left & right motors for 2 seconds then stop
-     */
-    public void autonomous() {
+	/**
+	 * Drive left & right motors for 2 seconds then stop
+	 */
+	public void autonomous() {
 		if (autonomousCommand != null) autonomousCommand.start();
 		System.out.println("auto init started.");
-		
-//		PIDTuner.tunePIDPosition();
-		
+
+		//		PIDTuner.tunePIDPosition();
+
 		AutonomousController.go();
 		System.out.println("auto init ended.");
-    }
+	}
 
-    /**
-     * Runs the motors with arcade steering.
-     */
-    public void operatorControl() {
-    	System.out.println("Printing in Teleop...");
-        while (isOperatorControl() && isEnabled()) {        	
-        	System.out.println("Robot's Operator Control is active and the robot is enabled");
-        	
-    		Scheduler.getInstance().run();
-    		//Run the openDrive() method 
-    		Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX());        
-        }
-   	
-    }
+	/**
+	 * Runs the motors with arcade steering.
+	 */
+	public void operatorControl() {
+		System.out.println("Printing in Teleop...");
+		while (isOperatorControl() && isEnabled()) {        	
+			Scheduler.getInstance().run();
+			
+			//Run the openDrive() method 
+			Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX());        
+		}
 
-    /**
-     * Runs during test mode
-     */
-    public void test() {
-    	System.out.println("Printing in Test Mode...");
-    	
-    }
+	}
+
+	/**
+	 * Runs during test mode
+	 */
+	public void test() {
+		System.out.println("Printing in Test Mode...");
+
+	}
 
 }
