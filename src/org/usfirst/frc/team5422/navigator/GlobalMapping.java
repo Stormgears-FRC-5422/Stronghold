@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5422.robot;
+package org.usfirst.frc.team5422;
 
 public class GlobalMapping {
 	
