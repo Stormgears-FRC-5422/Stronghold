@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DSIO {
@@ -17,6 +19,13 @@ public class DSIO {
 	static Joystick joystick;
 	static Joystick buttonBoard;
 	static boolean buttonPressed;
+	
+	public static int pos[] = new int[5];
+	public static int numMoves;
+	
+	public static String autoSequence;
+	
+	private static SendableChooser defenseChooser, shootChooser, endChooser; 
 
 	//Constructor
 	public DSIO(int joyStickChannel, int buttonBoardChannel) {
@@ -158,5 +167,86 @@ public class DSIO {
 	//Wrapper method for putNumber()
 	public static void outputToSFX(String label, double value) {
 		SmartDashboard.putNumber(label, value);
+	}
+	
+	public static void createAutonomousUI() {
+		NetworkTable.initialize();
+		autoSequence = "null";
+		
+		//Create defense chooser
+		defenseChooser = new SendableChooser();
+		defenseChooser.addDefault("Low Bar", Integer.valueOf(0));
+		defenseChooser.addObject("Portcullis", Integer.valueOf(1));
+		defenseChooser.addObject("Chival de Frise", Integer.valueOf(2));
+		defenseChooser.addObject("Moat", Integer.valueOf(3));
+		defenseChooser.addObject("Ramparts", Integer.valueOf(4));
+		defenseChooser.addObject("Drawbridge", Integer.valueOf(5));
+		defenseChooser.addObject("Sallyport", Integer.valueOf(6));
+		defenseChooser.addObject("Rock Wall", Integer.valueOf(7));
+		defenseChooser.addObject("Rough Terrain", Integer.valueOf(8));
+		defenseChooser.addObject("Do nothing in Auto.", Integer.valueOf(-1));
+		SmartDashboard.putData("Defense to cross chooser", defenseChooser);
+		
+		//Create shoot chooser
+		shootChooser = new SendableChooser();
+		shootChooser.addDefault("Shoot High Left Goal", "SHL");
+		shootChooser.addObject("Shoot High Center Goal", "SHC");
+		shootChooser.addObject("Shoot High Right Goal", "SHR");
+		shootChooser.addObject("Shoot Low Left Goal", "SLL");
+		shootChooser.addObject("Shoot Low Right Goal", "SLR");
+		shootChooser.addObject("Stay in place.", "NNN");
+		SmartDashboard.putData("Shoot chooser", shootChooser);
+		
+		//Create last move chooser
+		endChooser = new SendableChooser();
+		endChooser.addDefault("Go to teleop starting position.", "TTT");
+		endChooser.addObject("Stay in place.", "NNN");
+		SmartDashboard.putData("End chooser", endChooser);
+		
+		//Defense at position 0 is always low bar (ID 0)
+		pos[0] = 0;
+		
+		//Add other defense position text boxes
+		SmartDashboard.putNumber("Defense at Position 1", -1);
+		SmartDashboard.putNumber("Defense at Position 2", -1);
+		SmartDashboard.putNumber("Defense at Position 3", -1);
+		SmartDashboard.putNumber("Defense at Position 4", -1);
+	}
+	
+	public static void getInputFromAutoUI() {
+		System.out.println("I got the selected one." + "   " + defenseChooser.getSelected().toString());
+		
+		pos[1] = (int) SmartDashboard.getNumber("Defense at Position 1", -1);
+		pos[2] = (int) SmartDashboard.getNumber("Defense at Position 2", -1);
+		pos[3] = (int) SmartDashboard.getNumber("Defense at Position 3", -1);
+		pos[4] = (int) SmartDashboard.getNumber("Defense at Position 4", -1);
+		
+		//Parse defense chosen
+		if (defenseChooser.getSelected() != Integer.valueOf(-1)) {
+			autoSequence = "C" + defenseChooser.getSelected().toString() + ",";
+		}
+		else {
+			autoSequence = "NNN,";
+		}
+		
+		//Parse shoot strategy chosen
+		if (shootChooser.getSelected() != "NNN") {
+			autoSequence = autoSequence + shootChooser.getSelected().toString() + ",";
+		}
+		else {
+			autoSequence = autoSequence + "NNN,";
+		}
+		
+		//Parse end move chosen
+		if (endChooser.getSelected() != "NNN") {
+			autoSequence = autoSequence + endChooser.getSelected().toString();
+		}
+		else {
+			autoSequence = autoSequence + "NNN";
+		}
+		
+		System.out.println(autoSequence);
+		
+		numMoves = Character.getNumericValue(autoSequence.charAt(0));
 	}
 }
