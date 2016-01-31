@@ -60,7 +60,6 @@ public class Driver {
 		velocityRight = ArcadeDrive.arcadeDriveRight();
 
 		//Configure talons some more 
-		talon[0].setEncPosition(0); 
 		talon[0].changeControlMode(TalonControlMode.Follower);
 
 		talon[1].setEncPosition(0); 
@@ -69,12 +68,11 @@ public class Driver {
 		talon[2].setEncPosition(0); 
 		talon[2].changeControlMode(TalonControlMode.Speed);
 
-		talon[3].setEncPosition(0); 
 		talon[3].changeControlMode(TalonControlMode.Follower);
 
 		//Set the velocity of the talons
-		talon[1].set(velocityLeft * 20.48);
 		talon[0].set(2);
+		talon[1].set(velocityLeft * 20.48);
 		talon[2].set(velocityRight * 20.48);
 		talon[3].set(3);
 
