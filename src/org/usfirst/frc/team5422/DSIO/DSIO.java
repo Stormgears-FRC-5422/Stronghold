@@ -33,7 +33,7 @@ public class DSIO {
 		buttonBoard = new Joystick(buttonBoardChannel);
 	}
 
-	//Check if a button is pressed; if it is, do the respective command
+	//Check if a button is pressed; if it is, do the respective command arfarfarfarfarfarf
 	public static boolean getButton(int buttonID) {
 		JoystickButton button = new JoystickButton (buttonBoard, buttonID);
 
