@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5422.commands;
 
-import org.usfirst.frc.team5422.controller.Robot;
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,7 +13,7 @@ public class AlignToDefenseCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.navigatorSubsystem);
+        requires(StrongholdRobot.navigatorSubsystem);
     	
     }
 

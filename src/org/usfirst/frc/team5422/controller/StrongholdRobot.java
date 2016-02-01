@@ -12,7 +12,9 @@ import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.Shooter;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
@@ -35,7 +37,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * don't. Unless you know what you are doing, complex code will be much more difficult under
  * this system. Use IterativeRobot or Command-Based instead if you're new.
  */
-public class Robot extends SampleRobot {
+public class StrongholdRobot extends SampleRobot {
 	public static final Navigator navigatorSubsystem = new Navigator();
 	public static final Shooter shooterSubsystem = new BallShooter();
 	public static final Opener openerSubsystem = new SallyPortOpener();
@@ -52,7 +54,7 @@ public class Robot extends SampleRobot {
 	Command autonomousCommand;
 	Command alignToDefense;
 
-	public Robot() {
+	public StrongholdRobot() {
 		lw = new LiveWindow();
 		/*      
  		myRobot = new RobotDrive(0, 1);
@@ -73,7 +75,7 @@ public class Robot extends SampleRobot {
 		// pointers. Bad news. Don't move it.
 
 		dsio = new DSIO(0, 0);
-		driver = new Driver();
+		driver = new Driver(CANTalon.TalonControlMode.Speed);
 		dsio.createAutonomousUI();
 		//		pidTuner = new PIDTuner();
 
@@ -105,7 +107,7 @@ public class Robot extends SampleRobot {
 			Scheduler.getInstance().run();
 			
 			//Run the openDrive() method 
-			Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX());        
+			Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX(), CANTalon.TalonControlMode.Speed);        
 		}
 
 	}
