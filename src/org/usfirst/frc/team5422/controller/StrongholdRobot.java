@@ -12,7 +12,7 @@ import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.Shooter;
-import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.PIDTuner;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;

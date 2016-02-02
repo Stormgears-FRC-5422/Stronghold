@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5422.controller;
+package org.usfirst.frc.team5422.utils;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;

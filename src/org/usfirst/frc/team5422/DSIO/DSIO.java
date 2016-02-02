@@ -38,7 +38,7 @@ public class DSIO {
 		JoystickButton button = new JoystickButton (buttonBoard, buttonID);
 
 		if (buttonBoard.getRawButton(buttonID)) {
-			//TODO create commands for each operation (i.e. if button id is 0, shoot the ball high; 1.. shoot the ball low, etc
+			//TODO commands for each operation (i.e. if button id is 0, shoot the ball high; 1.. shoot the ball low, etc
 		}
 		return buttonPressed;
 	}
