@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.AlignToDefenseCommand;
+import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.navigator.Driver;
 import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.opener.Opener;
@@ -58,7 +59,6 @@ public class StrongholdRobot extends SampleRobot {
 	LiveWindow lw;
 
 	Command autonomousCommand;
-	Command alignToDefense;
 
 	public StrongholdRobot() {
 		lw = new LiveWindow();
@@ -96,8 +96,10 @@ public class StrongholdRobot extends SampleRobot {
 		//instantiate commands used for the autonomous period
 		//for example, start with aligning the robot to the appropriate 
 		//defense position with the required defense type
-		alignToDefense = new AlignToDefenseCommand();
-
+		
+//		alignToDefense = new AlignToDefenseCommand();
+		autonomousCommand = new AutonomousCommandGroup();
+		
 		usonic.setAutomaticMode(true); // turns on automatic mode
 		
 	}    
