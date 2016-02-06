@@ -1,9 +1,11 @@
 package org.usfirst.frc.team5422.shooter;
 
+import edu.wpi.first.wpilibj.command.Subsystem;
+
 /**
  * This class helps develop the methods for a generic Shooter mechanism 
  */
-public class Shooter {
+public abstract class Shooter extends Subsystem {
 	/**
 	 * This function helps shoot the ball/boulder into the low goal
 	 */

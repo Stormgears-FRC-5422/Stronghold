@@ -11,4 +11,10 @@ public class SallyPortOpener extends Opener {
 	public void openDefense() {
 		
 	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}
 }

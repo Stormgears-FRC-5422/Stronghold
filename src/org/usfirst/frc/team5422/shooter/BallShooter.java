@@ -17,5 +17,11 @@ public class BallShooter extends Shooter {
 	public void shootHigh() {
 	
 	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}
 		
 }
