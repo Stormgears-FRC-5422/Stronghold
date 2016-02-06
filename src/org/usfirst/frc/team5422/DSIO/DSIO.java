@@ -32,7 +32,7 @@ public class DSIO {
 		joystick = new Joystick(joyStickChannel);
 		buttonBoard = new Joystick(buttonBoardChannel);
 	}
-
+	
 	//Check if a button is pressed; if it is, do the respective command
 	public static boolean getButton(int buttonID) {
 		JoystickButton button = new JoystickButton (buttonBoard, buttonID);
@@ -214,7 +214,7 @@ public class DSIO {
 	}
 	
 	public static void getInputFromAutoUI() {
-		System.out.println("I got the selected one." + "   " + defenseChooser.getSelected().toString());
+		System.out.println("[DSIO] I got the selected one." + "   " + defenseChooser.getSelected().toString());
 		
 		pos[1] = (int) SmartDashboard.getNumber("Defense at Position 1", -1);
 		pos[2] = (int) SmartDashboard.getNumber("Defense at Position 2", -1);
