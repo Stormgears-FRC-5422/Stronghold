@@ -14,14 +14,12 @@ public class UltraSound {
 	public final int DPORT = 0;
 	boolean stringComplete = false;
 
-	public UltraSound(boolean sComplete) {
+	public UltraSound() {
 		d = new DigitalOutput(DPORT);
 		d.set(false);
 		sp = new SerialPort(9600, SPORT, 8, SPARITY, SBITS);
-		stringComplete = sComplete;
-		sp.setWriteBufferMode(SerialPort.WriteBufferMode.kFlushOnAccess);
 		sp.setReadBufferSize(4);
-		sp.setWriteBufferSize(4);
+		sp.enableTermination('\r');
 	}
 
 	public int isOn() {
@@ -46,61 +44,50 @@ public class UltraSound {
 
 	public int ezread() {
 		System.out.println("Started EZ READ");
-		String strReadFromPort;
+		//String s;
 		int range = 0;
-		
-		//DIGITAL IO port is set to HIGH (1)
 		d.set(true);
-		
-		//resetting the serial port to known state
 		sp.reset(); // Clear cache ready for next reading
-		
-		//initialized number of bytes received
-		int numberOfBytesReceived = -1; 
-		
 		while (stringComplete == false) {
-			try {
-				System.out.println("Entered while loop");
-				
-				//Force the output buffer to be written to the port
-				sp.flush();
+		try {
+
+			if (sp.getBytesReceived() > 0) {
+//				s = sp.readString(sp.getBytesReceived());
+//				System.out.println(s + "STRING PRINT");
+//				char rByte = s.charAt(0);
+//				if (rByte == s'R') {
+//					range = Integer.valueOf(s.substring(1));
+//					System.out.println(s.substring(1));
+//					System.out.println("R is there");
+//				}
+//				else {
+//					System.out.println("No r");
+//					range = 0;
+//				}
+//				rByte = 0; // reset the rByte ready for next reading
+//				s = "";
+				System.out.println("Bytes received: "+ sp.getBytesReceived());
+				//System.out.println("String of bytes" + sp.readString()); //+ sp.readString(sp.getBytesReceived()));
+				sp.reset();
+				stringComplete = true; // Set completion of read to true
+			}
 			
-				//gives the number of bytes received from serial port
-				numberOfBytesReceived = sp.getBytesReceived();
-				
-				System.out.println("Number Of Bytes Received " + numberOfBytesReceived);
-				
-				if (numberOfBytesReceived > 0) {
-					
-					//reading the bytes from the serial port
-					strReadFromPort = sp.readString(numberOfBytesReceived);
-					
-					System.out.println("Read string  from port: " + strReadFromPort);
-					
-					//read character, it should be "R" 
-					char rByte = strReadFromPort.charAt(0);
-					if (rByte == 'R') {
-						range = Integer.valueOf(strReadFromPort.substring(1));
-						System.out.println(strReadFromPort.substring(1));
-						System.out.println("R is there");
-					}
-					else {
-						System.out.println("No R");
-						range = 0;
-					}
-					rByte = 0; // reset the rByte ready for next reading
-					strReadFromPort = "";
-					if ((numberOfBytesReceived > 0) && (numberOfBytesReceived < 5)) {
-						stringComplete = true; // Set completion of read to true
-					}
-				} else {
-					System.out.println("No bytes to read");
-				}
-			} catch(Exception e) {
-				System.out.println("Error");
-			}		
+			else {
+				//System.out.println("No bytes entered ");
+			}
+			//System.out.println("left if statement");
+			}
+		
+		catch(Exception e)
+		{
+			System.out.println("error");
+			System.out.println(e.getCause());
+//			e.printStackTrace();
 		}
+	
+		
+	}
 		System.out.println("Left loop");
 		return range;
-	}
+}
 }
