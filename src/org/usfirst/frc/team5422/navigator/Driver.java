@@ -23,17 +23,17 @@ public class Driver {
 			talon[0].configNominalOutputVoltage(+0.0f, -0.0f);
 
 			talon[1] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_SLAVE);
-			talon[1].reverseOutput(false);	
+			talon[1].reverseOutput(true);
 			talon[1].configNominalOutputVoltage(+0.0f, -0.0f);
 
 			talon[2] = new CANTalon(StrongholdConstants.TALON_DRIVE_RIGHT_MASTER);
 			talon[2].setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon[2].reverseOutput(false);
+			talon[2].reverseOutput(true);
 			talon[2].configEncoderCodesPerRev(2048);	
 			talon[2].configNominalOutputVoltage(+0.0f, -0.0f);
 
 			talon[3] = new CANTalon(StrongholdConstants.TALON_DRIVE_RIGHT_SLAVE);
-			talon[3].reverseOutput(false);	
+			talon[3].reverseOutput(true);
 			talon[3].configNominalOutputVoltage(+0.0f, -0.0f);
 
 			//Configure talons some more
