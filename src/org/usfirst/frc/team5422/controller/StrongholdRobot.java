@@ -64,7 +64,7 @@ public class StrongholdRobot extends SampleRobot {
 		lw = new LiveWindow();
 		
 		navigatorSubsystem = new Navigator();
-		shooterSubsystem = new BallShooter();
+		shooterSubsystem = new BallShooter(11, 12, stick);
 		openerSubsystem = new SallyPortOpener();
 		
 		usonic = new Ultrasonic(StrongholdConstants.ULTRASONIC_ECHO_PULSE_OUTPUT, StrongholdConstants.ULTRASONIC_TRIGGER_PULSE_INPUT);

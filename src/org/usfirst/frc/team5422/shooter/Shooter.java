@@ -19,4 +19,7 @@ public abstract class Shooter extends Subsystem {
 	public void shootHigh() {
 		
 	}	
+	
+	public void intakeAndShoot() {
+	}
 }

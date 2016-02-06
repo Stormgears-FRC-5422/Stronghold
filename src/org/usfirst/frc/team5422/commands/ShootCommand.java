@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5422.commands;
 
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -8,8 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShootCommand extends Command {
 
     public ShootCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(StrongholdRobot.shooterSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -18,6 +19,7 @@ public class ShootCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	StrongholdRobot.shooterSubsystem.intakeAndShoot();
     }
 
     // Make this return true when this Command no longer needs to run execute()
