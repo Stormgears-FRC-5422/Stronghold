@@ -12,14 +12,16 @@ public class ShootCommand extends Command {
     public ShootCommand() {
         requires(StrongholdRobot.shooterSubsystem);
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     }
-
+    
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	StrongholdRobot.shooterSubsystem.intakeAndShoot();
+    	//StrongholdRobot.shooterSubsystem.intakeAndShoot();
+    	System.out.println("Robot shooting ball...");
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,6 +31,7 @@ public class ShootCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Robot shot ball");
     }
 
     // Called when another command which requires one or more of the same
