@@ -2,6 +2,7 @@ package org.usfirst.frc.team5422.controller;
 
 
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
@@ -13,12 +14,15 @@ import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.Shooter;
 import org.usfirst.frc.team5422.utils.PIDTuner;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -38,17 +42,19 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * this system. Use IterativeRobot or Command-Based instead if you're new.
  */
 public class StrongholdRobot extends SampleRobot {
-	public static final Navigator navigatorSubsystem = new Navigator();
-	public static final Shooter shooterSubsystem = new BallShooter();
-	public static final Opener openerSubsystem = new SallyPortOpener();
+	public static Navigator navigatorSubsystem;
+	public static Shooter shooterSubsystem;
+	public static Opener openerSubsystem;
 
 	public static DSIO dsio;
 	public static Driver driver;
 	public static PIDTuner pidTuner;
+	public static Gyro gyro;
+	public static Ultrasonic usonic;
 
 	RobotDrive myRobot;
 	Joystick stick;
-	Ultrasonic usonic;
+
 	LiveWindow lw;
 
 	Command autonomousCommand;
@@ -56,6 +62,14 @@ public class StrongholdRobot extends SampleRobot {
 
 	public StrongholdRobot() {
 		lw = new LiveWindow();
+		
+		navigatorSubsystem = new Navigator();
+		shooterSubsystem = new BallShooter();
+		openerSubsystem = new SallyPortOpener();
+		
+		usonic = new Ultrasonic(StrongholdConstants.ULTRASONIC_ECHO_PULSE_OUTPUT, StrongholdConstants.ULTRASONIC_TRIGGER_PULSE_INPUT);
+		gyro = new AnalogGyro(StrongholdConstants.ANALOG_GYRO_INPUT_CHANNEL);
+
 		/*      
  		myRobot = new RobotDrive(0, 1);
         myRobot.setExpiration(0.1);
@@ -83,6 +97,9 @@ public class StrongholdRobot extends SampleRobot {
 		//for example, start with aligning the robot to the appropriate 
 		//defense position with the required defense type
 		alignToDefense = new AlignToDefenseCommand();
+
+		usonic.setAutomaticMode(true); // turns on automatic mode
+		
 	}    
 
 	/**
@@ -93,6 +110,15 @@ public class StrongholdRobot extends SampleRobot {
 		System.out.println("auto init started.");
 
 		//		PIDTuner.tunePIDPosition();
+		
+        gyro.reset();
+        while (isAutonomous()) {
+            double angle = gyro.getAngle(); // get current heading
+//            myRobot.drive(-1.0, -angle*Kp); // drive towards heading 0
+            Timer.delay(0.004);
+        }
+        myRobot.drive(0.0, 0.0);
+
 
 		AutonomousController.go();
 		System.out.println("auto init ended.");
@@ -108,6 +134,9 @@ public class StrongholdRobot extends SampleRobot {
 			
 			//Run the openDrive() method 
 			Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX(), CANTalon.TalonControlMode.Speed);        
+
+			double range = usonic.getRangeInches(); // reads the range on the ultrasonic sensor
+			System.out.println("Ultrasonic range in inches..." + range);
 		}
 
 	}
@@ -117,7 +146,7 @@ public class StrongholdRobot extends SampleRobot {
 	 */
 	public void test() {
 		System.out.println("Printing in Test Mode...");
-
+		System.out.println("Initiate Power On Self Test Diagnostics ...");
 	}
 
 }
