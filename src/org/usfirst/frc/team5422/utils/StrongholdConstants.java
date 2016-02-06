@@ -17,4 +17,12 @@ public class StrongholdConstants {
 	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 1;
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
+	
+	public static final int GYRO = 0;
+	public static final int ULTRASONIC = 1;
+	public static final int IR = 2;
+	public static final int TALON_LEFT_MASTER = 3;
+	public static final int TALON_RIGHT_MASTER = 4;
+
+
 }

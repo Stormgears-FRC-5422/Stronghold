@@ -145,8 +145,29 @@ public class StrongholdRobot extends SampleRobot {
 	 * Runs during test mode
 	 */
 	public void test() {
-		System.out.println("Printing in Test Mode...");
-		System.out.println("Initiate Power On Self Test Diagnostics ...");
+		System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
+		
+		int key = -1;
+		switch (key) {
+		case StrongholdConstants.GYRO:
+			System.out.println("Testing Gyro");
+			break;
+		case StrongholdConstants.ULTRASONIC:
+			System.out.println("Testing Ultrasonic");
+			break;
+		case StrongholdConstants.IR:
+			System.out.println("Testing IR");
+			break;
+		case StrongholdConstants.TALON_LEFT_MASTER:
+			System.out.println("Testing Left Master Talon");
+			break;
+		case StrongholdConstants.TALON_RIGHT_MASTER:
+			System.out.println("Testing Right Master Talon");
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }
