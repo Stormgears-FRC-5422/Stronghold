@@ -23,6 +23,7 @@ public class AlignToDefenseCommand extends DefenseCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	String temp  = "[AutoComm] Robot aligning to shoot ";
+    	defense.align(defenseTypeSelected, defensePositionSelected);
     	
     	switch(defenseTypeSelected){
 	    	case CHIVAL_DE_FRISE:

@@ -9,6 +9,7 @@ import org.usfirst.frc.team5422.defense.RockWall;
 import org.usfirst.frc.team5422.defense.RoughTerrain;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DefenseCommand extends Command {
 	protected defenseTypeOptions defenseTypeSelected;
 	protected defensePositionOptions defensePositionSelected;
+	protected shootOptions shootOptionSelected;
 	protected Defense defense;
 
     public DefenseCommand() {
@@ -26,6 +28,7 @@ public class DefenseCommand extends Command {
         
         defenseTypeSelected = (defenseTypeOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
         defensePositionSelected = (defensePositionOptions) StrongholdRobot.dsio.defensePositionChooser.getSelected();
+        shootOptionSelected = (shootOptions) StrongholdRobot.dsio.shootChooser.getSelected();
         
         switch(defenseTypeSelected){
         	case CHIVAL_DE_FRISE:
