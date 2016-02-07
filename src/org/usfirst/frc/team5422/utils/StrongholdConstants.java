@@ -18,6 +18,8 @@ public class StrongholdConstants {
 	public static final double WHEEL_DIAMETER = 5;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	
+	public static final double INCHES_PER_TICK = Math.PI*WHEEL_BASE/(GEAR_RATIO*ENCODER_TICKS_RESOLUTION);
+	
 	public static final int JOYSTICK_CHANNEL = 0;
 	public static final int BUTTONBOARD_CHANNEL = 0;
 	

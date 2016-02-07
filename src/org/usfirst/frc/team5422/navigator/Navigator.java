@@ -23,13 +23,7 @@ public class Navigator extends Subsystem{
 	private CANTalon motor4;
 	
 	private Joystick joystick; 
-	
-	
-	
-	private static double inchesPerTick = Math.PI * StrongholdConstants.WHEEL_BASE /(StrongholdConstants.GEAR_RATIO * StrongholdConstants.ENCODER_TICKS_RESOLUTION );
-	
-	
-	
+
 	
 	private boolean isFinished=false;
 	
@@ -55,7 +49,7 @@ public class Navigator extends Subsystem{
 		motor4.set(3);
 	}
 	
-	public void MoveRobotStraight(double inches, Speed speed){
+	public double powerFromSpeed(Speed speed){
 		double power = 0.0;
 		
 		switch(speed){
@@ -73,8 +67,13 @@ public class Navigator extends Subsystem{
 				break;
 		}
 		
+		return power;
+	}
+	
+	public void MoveRobotStraight(double inches, Speed speed){
+		double power = powerFromSpeed(speed);
 		
-		double destinationTicks = inches/inchesPerTick;
+		double destinationTicks = inches/StrongholdConstants.INCHES_PER_TICK;
 		
 		double newTickR;
 		double newTickL;
@@ -121,7 +120,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
@@ -157,22 +156,7 @@ public class Navigator extends Subsystem{
 		//reduce theta to theta (mod Math.PI)
 		theta = GlobalMapping.reduceAngleRad(theta);
 		
-		double power = 0.0;
-		
-		switch(speed){
-			case FAST:
-				power = 0.5;
-				break;
-			case MEDIUM:
-				power = 0.3;
-				break;
-			case SLOW:
-				power = 0.1;
-				break;
-			default:
-				power = 0.3;
-				break;
-		}
+		double power = powerFromSpeed(speed);
 		
 		double newTickR;
 		double newTickL;
@@ -223,7 +207,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
@@ -303,7 +287,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
@@ -329,22 +313,7 @@ public class Navigator extends Subsystem{
 	
 	public void DiagnosticTestAuto(Speed speed){
 	
-		double power = 0.0;
-		
-		switch(speed){
-			case FAST:
-				power = 0.5;
-				break;
-			case MEDIUM:
-				power = 0.3;
-				break;
-			case SLOW:
-				power = 0.1;
-				break;
-			default:
-				power = 0.3;
-				break;
-		}
+		double power = powerFromSpeed(speed);
 		
 		double newTickR;
 		double newTickL;
@@ -390,7 +359,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
