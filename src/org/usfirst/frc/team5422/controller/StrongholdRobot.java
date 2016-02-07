@@ -122,7 +122,7 @@ public class StrongholdRobot extends SampleRobot {
         myRobot.drive(0.0, 0.0);
 
 
-		AutonomousController.go();
+		//AutonomousController.go();
 		System.out.println("auto init ended.");
 	}
 

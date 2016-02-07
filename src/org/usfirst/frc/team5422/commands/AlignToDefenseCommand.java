@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseOptions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,9 +16,24 @@ public class AlignToDefenseCommand extends Command {
         // eg. requires(chassis);
         // Use requires() here to declare subsystem dependencies
         requires(StrongholdRobot.navigatorSubsystem);
+        
+        defenseOptions defense = (defenseOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
+        
+        if(defense == defenseOptions.CHIVAL_DE_FRISE){
+        
+        }else if(defense == defenseOptions.DRAWBRIDGE){
+        	
+        }else if(defense == defenseOptions.LOW_BAR){
+        	
+        }else if(defense == defenseOptions.MOAT){
+        	
+        }else if(defense == defenseOptions.PORTCULLIS){
+        	
+        }
+        
     }
 
-    // Called just before this Command runs the first time
+	// Called just before this Command runs the first time
     protected void initialize() {
     }
 

@@ -1,5 +1,8 @@
 package org.usfirst.frc.team5422.commands;
 
+import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,9 +14,10 @@ public class AutonomousCommandGroup extends CommandGroup {
 	public CrossDefenseCommand crossDefense;
 	public PositionToShootCommand positionToShoot;
 	public ShootCommand shootCommand;
-	
-    public  AutonomousCommandGroup() {
-        // Add Commands here:
+	    
+    //overloading
+    public AutonomousCommandGroup() {
+    	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
@@ -29,13 +33,14 @@ public class AutonomousCommandGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
     	alignToDefense = new AlignToDefenseCommand();
     	crossDefense = new CrossDefenseCommand();
     	positionToShoot = new PositionToShootCommand();
     	shootCommand = new ShootCommand();
-    }
-    
-    protected void initialize() {
+	}
+
+	protected void initialize() {
     	addSequential(alignToDefense);
     	addSequential(crossDefense);
     	addSequential(positionToShoot);

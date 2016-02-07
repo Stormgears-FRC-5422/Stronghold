@@ -19,12 +19,12 @@ public class Navigator extends Subsystem{
 	private Joystick joystick; 
 	
 	private static double wheelBase = 23.5;//inches
-	private static double encoderResolution = 2048;//ticks
+	private static double encoderResolution = 8192;//ticks
 	private static double gearRatio = 8.46;
 	private static double wheelDiameter = 5;//inches
 	
 	private static double inchesPerTick = Math.PI*wheelDiameter/(gearRatio*encoderResolution);
-	
+	//TODO: PUT this in constants
 	public static enum Speed{
 		SLOW, MEDIUM, FAST
 	}
@@ -415,7 +415,8 @@ public class Navigator extends Subsystem{
 	/**
 	 * This function helps drive the robot to precise coordinates on the field 
 	 */
-	public void driveTo(int xOnField, int yOnField, int theta) {
+	//TODO: Modularization
+	public void driveTo(double xOnField, double yOnField, double theta) {
 		double turnTheta = Math.atan2(GlobalMapping.y - yOnField, GlobalMapping.x - xOnField);
 		this.MoveRobotTurnInPlace(turnTheta - GlobalMapping.theta, Speed.MEDIUM);
 		this.MoveRobotStraight(Math.sqrt(Math.pow((GlobalMapping.y-yOnField), 2) + Math.pow((GlobalMapping.x-xOnField), 2)), Speed.MEDIUM);

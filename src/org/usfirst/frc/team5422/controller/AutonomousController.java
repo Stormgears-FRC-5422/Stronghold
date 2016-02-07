@@ -3,6 +3,7 @@ package org.usfirst.frc.team5422.controller;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 
 public class AutonomousController {
+	/*
 	public static void go() {
 		DSIO.getInputFromAutoUI();
 
@@ -146,4 +147,5 @@ public class AutonomousController {
 			System.out.println("Do absolutly nothing in autonomous.");
 		}
 	}
+	*/
 }

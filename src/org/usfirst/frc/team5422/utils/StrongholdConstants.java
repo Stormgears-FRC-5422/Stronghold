@@ -23,6 +23,36 @@ public class StrongholdConstants {
 	public static final int IR = 2;
 	public static final int TALON_LEFT_MASTER = 3;
 	public static final int TALON_RIGHT_MASTER = 4;
+	
+	public static enum shootOptions{
+		HIGH_LEFT,
+		HIGH_RIGHT,
+		HIGH_CENTER,
+		LOW_LEFT,
+		LOW_RIGHT,
+		LOW_CENTER,
+		NONE
+	}
+	
+	public static enum defenseOptions{
+		LOW_BAR,
+		PORTCULLIS,
+		CHIVAL_DE_FRISE,
+		MOAT,
+		RAMPARTS,
+		DRAWBRIDGE,
+		SALLYPORT,
+		ROCK_WALL,
+		ROUGH_TERRAIN,
+		NONE
+	}
+	
+	public static enum endOptions{
+		TELEOP_STARTING_POSITION,
+		NONE
+	}
+	
+	
 
 
 }

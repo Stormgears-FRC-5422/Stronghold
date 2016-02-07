@@ -1,5 +1,9 @@
 package org.usfirst.frc.team5422.DSIO;
 
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -25,7 +29,7 @@ public class DSIO {
 	
 	public static String autoSequence;
 	
-	private static SendableChooser defenseChooser, shootChooser, endChooser; 
+	public static SendableChooser defenseChooser, shootChooser, endChooser; 
 
 	//Constructor
 	public DSIO(int joyStickChannel, int buttonBoardChannel) {
@@ -175,44 +179,47 @@ public class DSIO {
 		
 		//Create defense chooser
 		defenseChooser = new SendableChooser();
-		defenseChooser.addDefault("Low Bar", Integer.valueOf(0));
-		defenseChooser.addObject("Portcullis", Integer.valueOf(1));
-		defenseChooser.addObject("Chival de Frise", Integer.valueOf(2));
-		defenseChooser.addObject("Moat", Integer.valueOf(3));
-		defenseChooser.addObject("Ramparts", Integer.valueOf(4));
-		defenseChooser.addObject("Drawbridge", Integer.valueOf(5));
-		defenseChooser.addObject("Sallyport", Integer.valueOf(6));
-		defenseChooser.addObject("Rock Wall", Integer.valueOf(7));
-		defenseChooser.addObject("Rough Terrain", Integer.valueOf(8));
-		defenseChooser.addObject("Do nothing in Auto.", Integer.valueOf(-1));
+		defenseChooser.addDefault("Low Bar", defenseOptions.LOW_BAR);
+		defenseChooser.addObject("Portcullis", defenseOptions.PORTCULLIS);
+		defenseChooser.addObject("Chival de Frise", defenseOptions.CHIVAL_DE_FRISE);
+		defenseChooser.addObject("Moat", defenseOptions.MOAT);
+		defenseChooser.addObject("Ramparts", defenseOptions.RAMPARTS);
+		defenseChooser.addObject("Drawbridge", defenseOptions.DRAWBRIDGE);
+		defenseChooser.addObject("Sallyport", defenseOptions.SALLYPORT);
+		defenseChooser.addObject("Rock Wall", defenseOptions.ROCK_WALL);
+		defenseChooser.addObject("Rough Terrain", defenseOptions.ROUGH_TERRAIN);
+		defenseChooser.addObject("Do nothing in Auto.", defenseOptions.NONE);
 		SmartDashboard.putData("Defense to cross chooser", defenseChooser);
 		
 		//Create shoot chooser
 		shootChooser = new SendableChooser();
-		shootChooser.addDefault("Shoot High Left Goal", "SHL");
-		shootChooser.addObject("Shoot High Center Goal", "SHC");
-		shootChooser.addObject("Shoot High Right Goal", "SHR");
-		shootChooser.addObject("Shoot Low Left Goal", "SLL");
-		shootChooser.addObject("Shoot Low Right Goal", "SLR");
-		shootChooser.addObject("Stay in place.", "NNN");
+		shootChooser.addDefault("Shoot High Left Goal", shootOptions.HIGH_LEFT);
+		shootChooser.addObject("Shoot High Center Goal", shootOptions.HIGH_CENTER);
+		shootChooser.addObject("Shoot High Right Goal", shootOptions.HIGH_RIGHT);
+		shootChooser.addObject("Shoot Low Left Goal", shootOptions.LOW_LEFT);
+		shootChooser.addObject("Shoot Low Right Goal", shootOptions.LOW_RIGHT);
+		shootChooser.addObject("Stay in place.", shootOptions.NONE);
 		SmartDashboard.putData("Shoot chooser", shootChooser);
 		
 		//Create last move chooser
 		endChooser = new SendableChooser();
-		endChooser.addDefault("Go to teleop starting position.", "TTT");
-		endChooser.addObject("Stay in place.", "NNN");
+		endChooser.addDefault("Go to teleop starting position.", endOptions.TELEOP_STARTING_POSITION);
+		endChooser.addObject("Stay in place.", endOptions.NONE);
 		SmartDashboard.putData("End chooser", endChooser);
 		
 		//Defense at position 0 is always low bar (ID 0)
 		pos[0] = 0;
 		
 		//Add other defense position text boxes
+		/*
 		SmartDashboard.putNumber("Defense at Position 1", -1);
 		SmartDashboard.putNumber("Defense at Position 2", -1);
 		SmartDashboard.putNumber("Defense at Position 3", -1);
 		SmartDashboard.putNumber("Defense at Position 4", -1);
+		*/
 	}
 	
+	/*
 	public static void getInputFromAutoUI() {
 		System.out.println("[DSIO] I got the selected one." + "   " + defenseChooser.getSelected().toString());
 		
@@ -220,6 +227,7 @@ public class DSIO {
 		pos[2] = (int) SmartDashboard.getNumber("Defense at Position 2", -1);
 		pos[3] = (int) SmartDashboard.getNumber("Defense at Position 3", -1);
 		pos[4] = (int) SmartDashboard.getNumber("Defense at Position 4", -1);
+		
 		
 		//Parse defense chosen
 		if (defenseChooser.getSelected() != Integer.valueOf(-1)) {
@@ -248,5 +256,7 @@ public class DSIO {
 		System.out.println(autoSequence);
 		
 		numMoves = Character.getNumericValue(autoSequence.charAt(0));
+		
 	}
+	*/
 }
