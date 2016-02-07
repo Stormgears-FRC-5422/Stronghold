@@ -7,11 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PositionToShootCommand extends Command {
+public class PositionToShootCommand extends DefenseCommand {
 
     public PositionToShootCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	super();
     	requires(StrongholdRobot.navigatorSubsystem);
     }
 

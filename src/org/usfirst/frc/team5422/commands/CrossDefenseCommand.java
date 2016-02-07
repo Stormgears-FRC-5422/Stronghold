@@ -8,14 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CrossDefenseCommand extends Command {
+public class CrossDefenseCommand extends DefenseCommand {
 
     public CrossDefenseCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(StrongholdRobot.navigatorSubsystem);
-    	
-    	
+    	super();
+    	requires(StrongholdRobot.navigatorSubsystem);   	
     }
 
     // Called just before this Command runs the first time

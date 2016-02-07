@@ -7,9 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShootCommand extends Command {
+public class ShootCommand extends DefenseCommand {
 
     public ShootCommand() {
+    	super();
         requires(StrongholdRobot.shooterSubsystem);
     }
     
