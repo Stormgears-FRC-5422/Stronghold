@@ -70,19 +70,19 @@ public class Driver {
 
 		//Calculate velocities
 		ArcadeDrive.arcadeDrive(yJoystick, xJoystick);
-		velocityLeft = ArcadeDrive.arcadeDriveLeft() * 1.5;
-		velocityRight = ArcadeDrive.arcadeDriveRight() * 1.5;
+		velocityLeft = ArcadeDrive.arcadeDriveLeft() * 0.5;
+		velocityRight = ArcadeDrive.arcadeDriveRight() * 0.5;
 
 		//Set the velocity of the talons
 		if (controlMode == CANTalon.TalonControlMode.Speed | controlMode == CANTalon.TalonControlMode.PercentVbus) {
 			if (controlMode == CANTalon.TalonControlMode.Speed) {
-				talon[0].set(velocityLeft * 20.48);
+				talon[0].set(velocityLeft * 81.92);
 			}
 			else talon[0].set(velocityLeft);
 			talon[1].set(1);
 
 			if (controlMode == CANTalon.TalonControlMode.Speed) {
-				talon[2].set(velocityRight * 20.48);
+				talon[2].set(velocityRight * 81.92);
 			}
 			else talon[2].set(velocityRight);
 			talon[3].set(3);
