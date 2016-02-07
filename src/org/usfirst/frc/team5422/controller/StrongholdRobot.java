@@ -70,11 +70,6 @@ public class StrongholdRobot extends SampleRobot {
 		usonic = new Ultrasonic(StrongholdConstants.ULTRASONIC_ECHO_PULSE_OUTPUT, StrongholdConstants.ULTRASONIC_TRIGGER_PULSE_INPUT);
 		gyro = new AnalogGyro(StrongholdConstants.ANALOG_GYRO_INPUT_CHANNEL);
 
-		/*      
- 		myRobot = new RobotDrive(0, 1);
-        myRobot.setExpiration(0.1);
-        stick = new Joystick(0);
-		 */    
 	}
 
 	/**
@@ -97,7 +92,6 @@ public class StrongholdRobot extends SampleRobot {
 		//for example, start with aligning the robot to the appropriate 
 		//defense position with the required defense type
 		
-//		alignToDefense = new AlignToDefenseCommand();
 		autonomousCommand = new AutonomousCommandGroup();
 		
 		usonic.setAutomaticMode(true); // turns on automatic mode
