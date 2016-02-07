@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.climber.Climber;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.navigator.Driver;
 import org.usfirst.frc.team5422.navigator.Navigator;
@@ -51,6 +52,7 @@ public class StrongholdRobot extends SampleRobot {
 	public static Navigator navigatorSubsystem;
 	public static Shooter shooterSubsystem;
 	public static Opener openerSubsystem;
+	public static Climber climberSubsystem;
 
 	public static DSIO dsio;
 	public static Driver driver;
@@ -71,9 +73,10 @@ public class StrongholdRobot extends SampleRobot {
 		navigatorSubsystem = new Navigator();
 		shooterSubsystem = new BallShooter(11, 12, stick);
 		openerSubsystem = new SallyPortOpener();
+		climberSubsystem = new Climber();
 		
-		usonic = new Ultrasonic(StrongholdConstants.ULTRASONIC_ECHO_PULSE_OUTPUT, StrongholdConstants.ULTRASONIC_TRIGGER_PULSE_INPUT);
-		gyro = new AnalogGyro(StrongholdConstants.ANALOG_GYRO_INPUT_CHANNEL);
+//		usonic = new Ultrasonic(StrongholdConstants.ULTRASONIC_ECHO_PULSE_OUTPUT, StrongholdConstants.ULTRASONIC_TRIGGER_PULSE_INPUT);
+//		gyro = new AnalogGyro(StrongholdConstants.ANALOG_GYRO_INPUT_CHANNEL);
 
 	}
 
@@ -99,7 +102,7 @@ public class StrongholdRobot extends SampleRobot {
 		
 		autonomousCommand = new AutonomousCommandGroup();
 		
-		usonic.setAutomaticMode(true); // turns on automatic mode
+//		usonic.setAutomaticMode(true); // turns on automatic mode
 		
 	}    
 
@@ -112,13 +115,13 @@ public class StrongholdRobot extends SampleRobot {
 
 		//		PIDTuner.tunePIDPosition();
 		
-        gyro.reset();
-        while (isAutonomous()) {
-            //double angle = gyro.getAngle(); // get current heading
-        	//myRobot.drive(-1.0, -angle*Kp); // drive towards heading 0
-            Timer.delay(0.004);
-        }
-        myRobot.drive(0.0, 0.0);
+//        gyro.reset();
+//        while (isAutonomous()) {
+//            //double angle = gyro.getAngle(); // get current heading
+//        	//myRobot.drive(-1.0, -angle*Kp); // drive towards heading 0
+//            Timer.delay(0.004);
+//        }
+//        myRobot.drive(0.0, 0.0);
 
 
 		//AutonomousController.go();
@@ -136,8 +139,8 @@ public class StrongholdRobot extends SampleRobot {
 			//Run the openDrive() method 
 			Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX(), CANTalon.TalonControlMode.Speed);
 
-			double range = usonic.getRangeInches(); // reads the range on the ultrasonic sensor
-			System.out.println("Ultrasonic range in inches..." + range);
+//			double range = usonic.getRangeInches(); // reads the range on the ultrasonic sensor
+//			System.out.println("Ultrasonic range in inches..." + range);
 		}
 
 	}
