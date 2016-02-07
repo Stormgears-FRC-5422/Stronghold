@@ -11,7 +11,12 @@ public class StrongholdConstants {
 	public static final int TALON_DRIVE_LEFT_SLAVE = 8;
 	public static final int TALON_DRIVE_RIGHT_SLAVE= 0;
 	
-	public static final int ENCODER_TICKS_RESOLUTION = 2048;
+	//physical attributes
+	public static final double ENCODER_TICKS_RESOLUTION = 8192;//ticks
+	public static final double WHEEL_BASE = 23.5;//inches
+	public static final double GEAR_RATIO = 8.46;
+	public static final double WHEEL_DIAMETER = 5;//inches
+	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	
 	public static final int JOYSTICK_CHANNEL = 0;
 	public static final int BUTTONBOARD_CHANNEL = 0;
@@ -62,6 +67,10 @@ public class StrongholdConstants {
 	public static enum endOptions{
 		TELEOP_STARTING_POSITION,
 		NONE
+	}
+	
+	public static enum Speed{
+		SLOW, MEDIUM, FAST
 	}
 	
 	

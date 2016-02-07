@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
+
 
 public class Navigator extends Subsystem{
 	
@@ -21,16 +24,12 @@ public class Navigator extends Subsystem{
 	
 	private Joystick joystick; 
 	
-	private static double wheelBase = 23.5;//inches
-	private static double encoderResolution = 8192;//ticks
-	private static double gearRatio = 8.46;
-	private static double wheelDiameter = 5;//inches
 	
-	private static double inchesPerTick = Math.PI*wheelDiameter/(gearRatio*encoderResolution);
-	//TODO: PUT this in constants
-	public static enum Speed{
-		SLOW, MEDIUM, FAST
-	}
+	
+	private static double inchesPerTick = Math.PI * StrongholdConstants.WHEEL_BASE /(StrongholdConstants.GEAR_RATIO * StrongholdConstants.ENCODER_TICKS_RESOLUTION );
+	
+	
+	
 	
 	private boolean isFinished=false;
 	
@@ -122,7 +121,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(wheelBase/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
@@ -224,7 +223,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(wheelBase/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
@@ -304,7 +303,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(wheelBase/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
@@ -391,7 +390,7 @@ public class Navigator extends Subsystem{
 			GlobalMapping.addTotalDistance(dSigmaD);
 			
 			
-			dTheta = (dTickR - dTickL)/(wheelBase/inchesPerTick);
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/inchesPerTick);
 			SmartDashboard.putNumber("dTheta", dTheta);
 			GlobalMapping.addTotalRotation(dTheta);
 			
