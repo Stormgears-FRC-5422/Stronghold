@@ -13,7 +13,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 	public AlignToDefenseCommand alignToDefense;
 	public CrossDefenseCommand crossDefense;
 	public PositionToShootCommand positionToShoot;
-	public ShootCommand shootCommand;
+	public ShootCommand shoot;
 	    
     //overloading
     public AutonomousCommandGroup() {
@@ -37,14 +37,14 @@ public class AutonomousCommandGroup extends CommandGroup {
     	alignToDefense = new AlignToDefenseCommand();
     	crossDefense = new CrossDefenseCommand();
     	positionToShoot = new PositionToShootCommand();
-    	shootCommand = new ShootCommand();
+    	shoot = new ShootCommand();
 	}
 
 	protected void initialize() {
     	addSequential(alignToDefense);
     	addSequential(crossDefense);
     	addSequential(positionToShoot);
-    	addSequential(shootCommand);
+    	addSequential(shoot);
     	
     }
 }
