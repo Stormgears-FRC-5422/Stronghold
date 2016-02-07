@@ -3,6 +3,7 @@
  */
 package org.usfirst.frc.team5422.defense;
 
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
@@ -11,8 +12,8 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
  *
  */
 public interface Defense {
-	public void align(defenseTypeOptions defenseType);
-	public void cross(defenseTypeOptions defenseType);
-	public void positionToShoot(defenseTypeOptions defenseType, shootOptions shootOption);
+	public void align(defenseTypeOptions defenseType, defensePositionOptions defensePosition);
+	public void cross(defenseTypeOptions defenseType, defensePositionOptions defensePosition);
+	public void positionToShoot(defenseTypeOptions defenseType, defensePositionOptions defensePosition, shootOptions shootOption);
 
 }

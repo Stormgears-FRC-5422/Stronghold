@@ -1,7 +1,9 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.defense.Defense;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,7 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AlignToDefenseCommand extends Command {
 	
-	defenseTypeOptions defense;
+	protected defenseTypeOptions defenseTypeSelected;
+	protected defensePositionOptions defensePositionSelected;
+	protected Defense defense;
 
     public AlignToDefenseCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -19,9 +23,11 @@ public class AlignToDefenseCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         requires(StrongholdRobot.navigatorSubsystem);
         
-        defense = (defenseTypeOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
         
-        switch(defense){
+        defenseTypeSelected = (defenseTypeOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
+        defensePositionSelected = (defensePositionOptions) StrongholdRobot.dsio.defensePositionChooser.getSelected();
+        
+        switch(defenseTypeSelected){
         	case CHIVAL_DE_FRISE:
         		break;
         		
@@ -63,7 +69,7 @@ public class AlignToDefenseCommand extends Command {
     protected void execute() {
     	String temp  = "[AutoComm] Robot aligning to shoot ";
     	
-    	switch(defense){
+    	switch(defenseTypeSelected){
 	    	case CHIVAL_DE_FRISE:
 	    		temp += "chival de frise";
 	    		break;
