@@ -6,6 +6,10 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 public class LowBar implements Defense {
 
+	public LowBar(defenseTypeOptions defenseType, defensePositionOptions defensePosition) {
+		
+	}
+	
 	@Override
 	public void align(defenseTypeOptions defenseType, defensePositionOptions defensePosition) {
 		// TODO Auto-generated method stub

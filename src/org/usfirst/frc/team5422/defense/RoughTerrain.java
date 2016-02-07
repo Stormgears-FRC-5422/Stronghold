@@ -5,6 +5,9 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 public class RoughTerrain implements Defense {
+	public RoughTerrain(defenseTypeOptions defenseType, defensePositionOptions defensePosition) {
+		
+	}
 
 	@Override
 	public void align(defenseTypeOptions defenseType, defensePositionOptions defensePosition) {
