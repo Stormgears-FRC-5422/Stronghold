@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.commands.AlignToDefenseCommand;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.navigator.Driver;
 import org.usfirst.frc.team5422.navigator.Navigator;
@@ -42,6 +41,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * don't. Unless you know what you are doing, complex code will be much more difficult under
  * this system. Use IterativeRobot or Command-Based instead if you're new.
  */
+
+
+/*
+ * @author suren
+ */
+
 public class StrongholdRobot extends SampleRobot {
 	public static Navigator navigatorSubsystem;
 	public static Shooter shooterSubsystem;
@@ -85,7 +90,7 @@ public class StrongholdRobot extends SampleRobot {
 
 		dsio = new DSIO(0, 0);
 		driver = new Driver(CANTalon.TalonControlMode.Speed);
-		dsio.createAutonomousUI();
+		DSIO.createAutonomousUI();
 		//		pidTuner = new PIDTuner();
 
 		//instantiate commands used for the autonomous period
@@ -109,8 +114,8 @@ public class StrongholdRobot extends SampleRobot {
 		
         gyro.reset();
         while (isAutonomous()) {
-            double angle = gyro.getAngle(); // get current heading
-//            myRobot.drive(-1.0, -angle*Kp); // drive towards heading 0
+            //double angle = gyro.getAngle(); // get current heading
+        	//myRobot.drive(-1.0, -angle*Kp); // drive towards heading 0
             Timer.delay(0.004);
         }
         myRobot.drive(0.0, 0.0);

@@ -1,8 +1,15 @@
 package org.usfirst.frc.team5422.defense;
 
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions;
+
+
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+
+
+/*
+ * @author Michael
+ */
 
 public class LowBar implements Defense {
 

@@ -1,5 +1,9 @@
 package org.usfirst.frc.team5422.navigator;
 
+/*
+ * @author Mayank
+ */
+
 public class GlobalMapping {
 	
 	public static double x=0;

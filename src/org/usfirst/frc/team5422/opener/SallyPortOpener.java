@@ -3,6 +3,11 @@ package org.usfirst.frc.team5422.opener;
 /**
  * This class helps develop the methods for mechanisms that open the SallyPort defense
  */
+
+/*
+ * @author Suren
+ */
+
 public class SallyPortOpener extends Opener {
 
 	/**

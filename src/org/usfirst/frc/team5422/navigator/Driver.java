@@ -3,11 +3,13 @@ package org.usfirst.frc.team5422.navigator;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
-import com.ni.vision.NIVision.CalibrationThumbnailType;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+
+/*
+ * @author Michael
+ */
 
 public class Driver {
 	public static CANTalon talon[] = new CANTalon[4];

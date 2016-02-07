@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/*
+ *@author Michael
+ */
+
 public class PIDTuner {
 	static CANTalon talon[] = new CANTalon[4];
 

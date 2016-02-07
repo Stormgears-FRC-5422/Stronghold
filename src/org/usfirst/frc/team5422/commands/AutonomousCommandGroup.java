@@ -1,13 +1,9 @@
 package org.usfirst.frc.team5422.commands;
 
-import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.controller.StrongholdRobot;
-
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ *@author suren
  */
 public class AutonomousCommandGroup extends CommandGroup {
 	public AlignToDefenseCommand alignToDefense;

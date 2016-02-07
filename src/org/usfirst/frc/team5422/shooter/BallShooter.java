@@ -1,18 +1,19 @@
 package org.usfirst.frc.team5422.shooter;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class helps develop the methods for a boulder/ball Shooter mechanism 
  */
+
+/*
+ *@author Aditya Naik
+ */
+
+
 public class BallShooter extends Shooter {
 	/**
 	 * This function helps shoot the ball/boulder into the low goal

@@ -1,12 +1,9 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
-import org.usfirst.frc.team5422.navigator.Navigator;
-
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *@author suren
  */
 public class CrossDefenseCommand extends DefenseCommand {
 

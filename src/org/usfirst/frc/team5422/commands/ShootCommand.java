@@ -2,10 +2,8 @@ package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
- *
+ *@author suren
  */
 public class ShootCommand extends DefenseCommand {
 

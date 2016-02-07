@@ -4,6 +4,10 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
+/*
+ * @author Michael
+ */
+
 public class RockWall implements Defense {
 
 	public RockWall(defenseTypeOptions defenseType, defensePositionOptions defensePosition) {

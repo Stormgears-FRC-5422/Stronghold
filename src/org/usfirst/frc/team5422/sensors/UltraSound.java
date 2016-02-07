@@ -3,6 +3,10 @@ package org.usfirst.frc.team5422.sensors;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.SerialPort;
 
+/*
+ * @author Vatsal
+ */
+
 public class UltraSound {
 	DigitalOutput d;
 	SerialPort sp;

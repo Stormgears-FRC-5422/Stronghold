@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5422.commands;
 
-import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.defense.Defense;
 import org.usfirst.frc.team5422.defense.LowBar;
 import org.usfirst.frc.team5422.defense.Moat;
@@ -14,7 +14,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *@author suren
  */
 public class DefenseCommand extends Command {
 	protected defenseTypeOptions defenseTypeSelected;
@@ -26,9 +26,9 @@ public class DefenseCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         
-        defenseTypeSelected = (defenseTypeOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
-        defensePositionSelected = (defensePositionOptions) StrongholdRobot.dsio.defensePositionChooser.getSelected();
-        shootOptionSelected = (shootOptions) StrongholdRobot.dsio.shootChooser.getSelected();
+        defenseTypeSelected = (defenseTypeOptions) DSIO.defenseChooser.getSelected(); 
+        defensePositionSelected = (defensePositionOptions) DSIO.defensePositionChooser.getSelected();
+        shootOptionSelected = (shootOptions) DSIO.shootChooser.getSelected();
         
         switch(defenseTypeSelected){
         	case CHIVAL_DE_FRISE:

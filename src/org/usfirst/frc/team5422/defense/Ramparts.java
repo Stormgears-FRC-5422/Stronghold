@@ -4,6 +4,10 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
+/*
+ * @author Michael
+ */
+
 public class Ramparts implements Defense {
 
 	public Ramparts(defenseTypeOptions defenseType, defensePositionOptions defensePosition) {
