@@ -2,7 +2,7 @@ package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AlignToDefenseCommand extends Command {
 	
-	defenseOptions defense;
+	defenseTypeOptions defense;
 
     public AlignToDefenseCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -19,7 +19,7 @@ public class AlignToDefenseCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         requires(StrongholdRobot.navigatorSubsystem);
         
-        defense = (defenseOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
+        defense = (defenseTypeOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
         
         switch(defense){
         	case CHIVAL_DE_FRISE:

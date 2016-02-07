@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5422.DSIO;
 
-import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
@@ -29,7 +30,7 @@ public class DSIO {
 	
 	public static String autoSequence;
 	
-	public static SendableChooser defenseChooser, shootChooser, endChooser; 
+	public static SendableChooser defensePositionChooser, defenseChooser, shootChooser, endChooser; 
 
 	//Constructor
 	public DSIO(int joyStickChannel, int buttonBoardChannel) {
@@ -177,18 +178,27 @@ public class DSIO {
 		NetworkTable.initialize();
 		autoSequence = "null";
 		
+		//Create defense position chooser
+		defensePositionChooser = new SendableChooser();
+		defensePositionChooser.addDefault("1_Low Bar", defensePositionOptions.POSITION_1_LOW_BAR);
+		defensePositionChooser.addObject("2", defensePositionOptions.POSITION_2);
+		defensePositionChooser.addObject("3", defensePositionOptions.POSITION_3);
+		defensePositionChooser.addObject("4", defensePositionOptions.POSITION_4);
+		defensePositionChooser.addObject("5", defensePositionOptions.POSITION_5);
+		SmartDashboard.putData("Choose Defense Position to Cross From ", defensePositionChooser);
+
 		//Create defense chooser
 		defenseChooser = new SendableChooser();
-		defenseChooser.addDefault("Low Bar", defenseOptions.LOW_BAR);
-		defenseChooser.addObject("Portcullis", defenseOptions.PORTCULLIS);
-		defenseChooser.addObject("Chival de Frise", defenseOptions.CHIVAL_DE_FRISE);
-		defenseChooser.addObject("Moat", defenseOptions.MOAT);
-		defenseChooser.addObject("Ramparts", defenseOptions.RAMPARTS);
-		defenseChooser.addObject("Drawbridge", defenseOptions.DRAWBRIDGE);
-		defenseChooser.addObject("Sallyport", defenseOptions.SALLYPORT);
-		defenseChooser.addObject("Rock Wall", defenseOptions.ROCK_WALL);
-		defenseChooser.addObject("Rough Terrain", defenseOptions.ROUGH_TERRAIN);
-		defenseChooser.addObject("Do nothing in Auto.", defenseOptions.NONE);
+		defenseChooser.addDefault("Low Bar", defenseTypeOptions.LOW_BAR);
+		defenseChooser.addObject("Portcullis", defenseTypeOptions.PORTCULLIS);
+		defenseChooser.addObject("Chival de Frise", defenseTypeOptions.CHIVAL_DE_FRISE);
+		defenseChooser.addObject("Moat", defenseTypeOptions.MOAT);
+		defenseChooser.addObject("Ramparts", defenseTypeOptions.RAMPARTS);
+		defenseChooser.addObject("Drawbridge", defenseTypeOptions.DRAWBRIDGE);
+		defenseChooser.addObject("Sallyport", defenseTypeOptions.SALLYPORT);
+		defenseChooser.addObject("Rock Wall", defenseTypeOptions.ROCK_WALL);
+		defenseChooser.addObject("Rough Terrain", defenseTypeOptions.ROUGH_TERRAIN);
+		defenseChooser.addObject("Do nothing in Auto.", defenseTypeOptions.NONE);
 		SmartDashboard.putData("Defense to cross chooser", defenseChooser);
 		
 		//Create shoot chooser
