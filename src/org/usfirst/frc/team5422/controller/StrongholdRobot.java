@@ -129,7 +129,7 @@ public class StrongholdRobot extends SampleRobot {
 			Scheduler.getInstance().run();
 			
 			//Run the openDrive() method 
-			Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX(), CANTalon.TalonControlMode.Speed);        
+			Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX(), CANTalon.TalonControlMode.Speed);
 
 			double range = usonic.getRangeInches(); // reads the range on the ultrasonic sensor
 			System.out.println("Ultrasonic range in inches..." + range);
@@ -148,15 +148,19 @@ public class StrongholdRobot extends SampleRobot {
 		case StrongholdConstants.GYRO:
 			System.out.println("Testing Gyro");
 			break;
+
 		case StrongholdConstants.ULTRASONIC:
 			System.out.println("Testing Ultrasonic");
 			break;
+
 		case StrongholdConstants.IR:
 			System.out.println("Testing IR");
 			break;
+
 		case StrongholdConstants.TALON_LEFT_MASTER:
 			System.out.println("Testing Left Master Talon");
 			break;
+
 		case StrongholdConstants.TALON_RIGHT_MASTER:
 			System.out.println("Testing Right Master Talon");
 			break;

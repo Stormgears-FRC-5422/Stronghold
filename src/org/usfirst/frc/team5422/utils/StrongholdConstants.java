@@ -30,7 +30,6 @@ public class StrongholdConstants {
 		HIGH_CENTER,
 		LOW_LEFT,
 		LOW_RIGHT,
-		LOW_CENTER,
 		NONE
 	}
 	
