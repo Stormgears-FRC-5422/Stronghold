@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.climber.Climber;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.navigator.Driver;
 import org.usfirst.frc.team5422.navigator.Navigator;
@@ -51,6 +52,7 @@ public class StrongholdRobot extends SampleRobot {
 	public static Navigator navigatorSubsystem;
 	public static Shooter shooterSubsystem;
 	public static Opener openerSubsystem;
+	public static Climber climberSubsystem;
 
 	public static DSIO dsio;
 	public static Driver driver;
@@ -71,6 +73,7 @@ public class StrongholdRobot extends SampleRobot {
 		navigatorSubsystem = new Navigator();
 		shooterSubsystem = new BallShooter(11, 12, stick);
 		openerSubsystem = new SallyPortOpener();
+		climberSubsystem = new Climber();
 		
 //		usonic = new Ultrasonic(StrongholdConstants.ULTRASONIC_ECHO_PULSE_OUTPUT, StrongholdConstants.ULTRASONIC_TRIGGER_PULSE_INPUT);
 //		gyro = new AnalogGyro(StrongholdConstants.ANALOG_GYRO_INPUT_CHANNEL);
