@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AlignToDefenseCommand extends Command {
+	
+	defenseOptions defense;
 
     public AlignToDefenseCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -17,18 +19,38 @@ public class AlignToDefenseCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         requires(StrongholdRobot.navigatorSubsystem);
         
-        defenseOptions defense = (defenseOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
+        defense = (defenseOptions) StrongholdRobot.dsio.defenseChooser.getSelected(); 
         
-        if(defense == defenseOptions.CHIVAL_DE_FRISE){
-        
-        }else if(defense == defenseOptions.DRAWBRIDGE){
+        switch(defense){
+        	case CHIVAL_DE_FRISE:
+        		break;
+        		
+        	case LOW_BAR:
+        		break;
+        		
+        	case MOAT:
+        		break;
+        		
+        	case PORTCULLIS:
+        		break;
+        		
+        	case RAMPARTS:
+        		break;
+        		
+        	case ROCK_WALL:
+        		break;
+        		
+        	case ROUGH_TERRAIN:
+        		break;
+        		
+        	case SALLYPORT:
+        		break;
         	
-        }else if(defense == defenseOptions.LOW_BAR){
-        	
-        }else if(defense == defenseOptions.MOAT){
-        	
-        }else if(defense == defenseOptions.PORTCULLIS){
-        	
+        	case NONE:
+        		break;
+        		
+        	default:
+        		break;
         }
         
     }
@@ -39,7 +61,51 @@ public class AlignToDefenseCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("[AutoComm] Robot aligning to shoot...");
+    	String temp  = "[AutoComm] Robot aligning to shoot ";
+    	
+    	switch(defense){
+	    	case CHIVAL_DE_FRISE:
+	    		temp += "chival de frise";
+	    		break;
+	    		
+	    	case LOW_BAR:
+	    		temp += "low bar";
+	    		break;
+	    		
+	    	case MOAT:
+	    		temp += "moat";
+	    		break;
+	    		
+	    	case PORTCULLIS:
+	    		temp += "portcullis";
+	    		break;
+	    		
+	    	case RAMPARTS:
+	    		temp += "ramparts";
+	    		break;
+	    		
+	    	case ROCK_WALL:
+	    		temp += "rock wall";
+	    		break;
+	    		
+	    	case ROUGH_TERRAIN:
+	    		temp += "rough terrain";
+	    		break;
+	    		
+	    	case SALLYPORT:
+	    		temp += "sallyport";
+	    		break;
+	    	
+	    	case NONE:
+	    		temp = "[AutoComm] Robot not aligning to shoot";
+	    		break;
+	    		
+	    	default:
+	    		break;
+	    }
+    	
+    	temp += ".";
+    	System.out.println(temp);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -49,7 +115,7 @@ public class AlignToDefenseCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("[AutoComm] Robot aligned to shoot");
+    	System.out.println("[AutoComm] Robot finished aligning to shoot.");
     }
 
     // Called when another command which requires one or more of the same
