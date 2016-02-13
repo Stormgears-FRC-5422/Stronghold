@@ -42,7 +42,10 @@ public class StrongholdConstants {
 		TEST_TALON_LEFT_MASTER,
 		TEST_TALON_RIGHT_MASTER,
 		TEST_CHASSIS_DRIVE,
-		TEST_SHOOTER
+		TEST_SHOOTER,
+		TEST_GRAPPLER,
+		TEST_ALIGN_TO_CASTLE,
+		TEST_LIFTER
 	}
 		
 	public enum shootOptions {
