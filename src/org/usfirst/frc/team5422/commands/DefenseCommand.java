@@ -2,12 +2,16 @@ package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.defense.ChivalDeFrise;
 import org.usfirst.frc.team5422.defense.Defense;
+import org.usfirst.frc.team5422.defense.DrawBridge;
 import org.usfirst.frc.team5422.defense.LowBar;
 import org.usfirst.frc.team5422.defense.Moat;
+import org.usfirst.frc.team5422.defense.PortCullis;
 import org.usfirst.frc.team5422.defense.Ramparts;
 import org.usfirst.frc.team5422.defense.RockWall;
 import org.usfirst.frc.team5422.defense.RoughTerrain;
+import org.usfirst.frc.team5422.defense.SallyPort;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
@@ -38,7 +42,7 @@ public class DefenseCommand extends Command {
         
         switch(defenseTypeSelected) {
         	case CHIVAL_DE_FRISE:
-        		defense = null;
+        		defense = new ChivalDeFrise(defenseTypeSelected, defensePositionSelected); ;
         		break;
         	case LOW_BAR:
         		defense = new LowBar(defenseTypeSelected, defensePositionSelected); 
@@ -49,7 +53,7 @@ public class DefenseCommand extends Command {
         		break;
         		
         	case PORTCULLIS:
-        		defense = null;
+        		defense = new PortCullis(defenseTypeSelected, defensePositionSelected); ;
         		break;
         		
         	case RAMPARTS:
@@ -65,9 +69,13 @@ public class DefenseCommand extends Command {
         		break;
         		
         	case SALLYPORT:
-        		defense = null;
+        		defense = new SallyPort(defenseTypeSelected, defensePositionSelected); 
         		break;
         	
+        	case DRAWBRIDGE:
+        		defense =  new DrawBridge(defenseTypeSelected, defensePositionSelected); 
+        		break;
+ 
         	case NONE:
         		defense = null;
         		break;

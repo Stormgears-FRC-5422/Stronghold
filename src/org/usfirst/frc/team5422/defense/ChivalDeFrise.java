@@ -4,6 +4,9 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 public class ChivalDeFrise implements Defense {
+	public ChivalDeFrise(defenseTypeOptions defenseType, int defensePosition) {
+		
+	}
 
 	@Override
 	public void align(defenseTypeOptions defenseType, int defensePosition) {

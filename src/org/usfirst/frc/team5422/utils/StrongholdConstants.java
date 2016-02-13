@@ -40,6 +40,17 @@ public class StrongholdConstants {
 		TEST_SHOOTER
 	}
 	
+//	public static enum ShootPositions {
+//		LEFT,
+//		CENTER,
+//		RIGHT
+//	};
+//	
+//	public static enum AimPositions {
+//		HIGH,
+//		LOW
+//	};	
+		
 	public enum shootOptions{
 		HIGH_LEFT,
 		HIGH_RIGHT,
@@ -82,7 +93,5 @@ public class StrongholdConstants {
 		SLOW, MEDIUM, FAST
 	}
 	
-	
-
 
 }

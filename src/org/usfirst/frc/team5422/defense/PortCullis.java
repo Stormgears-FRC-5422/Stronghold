@@ -5,6 +5,10 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 public class PortCullis implements Defense {
 
+	public PortCullis(defenseTypeOptions defenseType, int defensePosition) {
+		
+	}
+	
 	@Override
 	public void align(defenseTypeOptions defenseType, int defensePosition) {
 		System.out.println("Aligning the Robot to the PortCullis defense at position " + defensePosition);

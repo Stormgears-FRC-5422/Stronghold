@@ -10,6 +10,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 	public ReachDefenseCommand reachDefense;
 	public CrossDefenseCommand crossDefense;
 	public PositionToShootCommand positionToShoot;
+	public AimShooterArmCommand aimShooterArm;
 	public ShootCommand shoot;
 	    
     //overloading
@@ -34,6 +35,7 @@ public class AutonomousCommandGroup extends CommandGroup {
     	alignToDefense = new AlignToDefenseCommand();
     	crossDefense = new CrossDefenseCommand();
     	positionToShoot = new PositionToShootCommand();
+    	aimShooterArm = new AimShooterArmCommand();    	
     	shoot = new ShootCommand();
     	reachDefense = new ReachDefenseCommand();
 
@@ -41,6 +43,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 		addSequential(reachDefense);
 		addSequential(crossDefense);
 		addSequential(positionToShoot);
+		addSequential(aimShooterArm);
 		addSequential(shoot);
 	}
 
