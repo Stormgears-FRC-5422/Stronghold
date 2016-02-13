@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5422.navigator;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.navigator.trapezoidal.GeneratedMotionProfile;
+import org.usfirst.frc.team5422.navigator.trapezoidal.MotionProfileExample;
+import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidControl;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -89,4 +92,79 @@ public class Driver {
 		DSIO.outputToSFX("Talon ID 3 Velocity (Right)", talon[0].getSpeed());
 		DSIO.outputToSFX("Talon ID 0 Velocity (Right)", talon[1].getSpeed());
 	}
+	
+	
+	public static void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {
+		
+		
+		talon[0] = new CANTalon(0);
+		talon[2] = new CANTalon(3);
+		talon[0].setPID(1, 0, 0);
+		talon[2].setPID(1, 0, 0);
+		talon[0].setF(0);
+		talon[1].setF(0);
+		
+		double leftRotations = leftTicks/8192.0;
+		double rightRotations = rightTicks/8192.0;
+		
+		MotionProfileExample leftProfile = new MotionProfileExample(talon[0]);
+		MotionProfileExample rightProfile = new MotionProfileExample(talon[2]);
+		
+		//config the talons as appropriate
+		talon[0].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		
+		if(leftTicks > 0) {
+			talon[0].reverseOutput(true); //may need to be changed
+			talon[0].reverseSensor(false); //may need to be changed
+		}
+		
+		else {
+			talon[0].reverseOutput(false); //may need to be changed
+			talon[0].reverseSensor(true); //may need to be changed
+		}
+		
+		talon[2].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		
+		if(rightTicks > 0) {
+			talon[2].reverseOutput(false); //may need to be changed
+			talon[2].reverseSensor(true); //may need to be changed
+		}
+		
+		else {
+			talon[2].reverseOutput(true); //may need to be changed
+			talon[2].reverseSensor(false); //may need to be changed
+		}
+	
+		//create both of the motion profiles
+		GeneratedMotionProfile.leftPoints = TrapezoidControl.motionProfileUtility(leftRotations, leftVelocity);
+		GeneratedMotionProfile.kNumLeftPoints = GeneratedMotionProfile.leftPoints.length;
+		
+		GeneratedMotionProfile.rightPoints = TrapezoidControl.motionProfileUtility(rightRotations, rightVelocity);
+		GeneratedMotionProfile.kNumRightPoints = GeneratedMotionProfile.rightPoints.length;
+		
+		//set up all the "formalities" so that the motion profiles can actually be run
+		leftProfile.control();
+    	rightProfile.control();
+		talon[0].changeControlMode(TalonControlMode.MotionProfile);
+		talon[2].changeControlMode(TalonControlMode.MotionProfile);
+		CANTalon.SetValueMotionProfile setOutputLeft = leftProfile.getSetValue();
+		CANTalon.SetValueMotionProfile setOutputRight = rightProfile.getSetValue();
+		talon[0].set(setOutputLeft.value);
+		talon[2].set(setOutputRight.value);
+		
+		//start the motion profile
+		leftProfile.startMotionProfile();
+		rightProfile.startMotionProfile();		
+	}
+	
+	public static void resetTrapezoid() {
+		talon[0].changeControlMode(TalonControlMode.PercentVbus);
+		talon[0].set(0);
+		talon[0].setEncPosition(0);
+		
+		talon[2].changeControlMode(TalonControlMode.PercentVbus);
+		talon[2].set(0);
+		talon[2].setEncPosition(0);
+	}
+	
 }

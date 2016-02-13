@@ -249,7 +249,8 @@ public class MotionProfileExample {
 	/** Start filling the MPs to all of the involved Talons. */
 	private void startFilling() {
 		/* since this example only has one talon, just update that one */
-		startFilling(GeneratedMotionProfile.Points, GeneratedMotionProfile.kNumPoints);
+		startFilling(GeneratedMotionProfile.leftPoints, GeneratedMotionProfile.kNumLeftPoints);
+		startFilling(GeneratedMotionProfile.rightPoints, GeneratedMotionProfile.kNumRightPoints);
 	}
 
 	
@@ -298,7 +299,7 @@ public class MotionProfileExample {
 	 * Called by application to signal Talon to start the buffered MP (when it's
 	 * able to).
 	 */
-	void startMotionProfile() {
+	public void startMotionProfile() {
 		_bStart = true;
 	}
 	
@@ -310,7 +311,7 @@ public class MotionProfileExample {
 	 *         motion-profile output, 1 for enable motion-profile, 2 for hold
 	 *         current motion profile trajectory point.
 	 */
-	CANTalon.SetValueMotionProfile getSetValue() {
+	public CANTalon.SetValueMotionProfile getSetValue() {
 		return _setValue;
 	}
 }

@@ -170,10 +170,28 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop ended.");
     }
 
+	/**  function is called periodically during disable */
+	public void disabledInit() {
+		
+	}
+	
+	/**  function is called periodically during disable */
+	public void disabledPeriodic() {
+		//reset all necessary things
+//		SmartDashboard.putNumber("Total Distance: ", 0);
+//		SmartDashboard.putNumber("Max Velocity: ", 0);
+		
+		Driver.resetTrapezoid();
+	}
+
+	public void testInit() {
+		
+	}
+	
     /**
      * Runs during test mode
      */
-    public void test() {
+    public void testPeriodic() {
         System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
 
         diagnosticPOSTOptions key = diagnosticPOSTOptions.TEST_CHASSIS_DRIVE;
@@ -218,6 +236,10 @@ public class StrongholdRobot extends IterativeRobot {
             case TEST_LIFTER:
                 System.out.println("Testing the lifter");
                 break;
+    		case TEST_MOTION_PROFILE:
+    			System.out.println("Testing motion profile");
+    			Driver.moveTrapezoid(8192, 8192, 0.5, 0.5);
+    			break;
 
             default:
                 break;

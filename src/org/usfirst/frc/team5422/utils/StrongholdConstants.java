@@ -45,7 +45,8 @@ public class StrongholdConstants {
 		TEST_SHOOTER,
 		TEST_GRAPPLER,
 		TEST_ALIGN_TO_CASTLE,
-		TEST_LIFTER
+		TEST_LIFTER,
+		TEST_MOTION_PROFILE
 	}
 		
 	public enum shootOptions {
