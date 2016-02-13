@@ -12,19 +12,40 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class Shooter extends Subsystem {
 	/**
-	 * This function helps shoot the ball/boulder into the low goal
+	 * This function helps shoot the ball/boulder into the low goal on the Right
 	 */
-	public void shootLow() {
+	public void shootLowRight() {
 		
 	}	
 
 	/**
-	 * This function helps shoot the ball/boulder into the high goal
+	 * This function helps shoot the ball/boulder into the low goal on the Left
 	 */
-	public void shootHigh() {
+	public void shootLowLeft() {
+		
+	}	
+
+	/**
+	 * This function helps shoot the ball/boulder into the high goal on the Right
+	 */
+	public void shootHighRight() {
 		
 	}	
 	
+	/**
+	 * This function helps shoot the ball/boulder into the high goal on the Left
+	 */
+	public void shootHighLeft() {
+		
+	}	
+
+	/**
+	 * This function helps shoot the ball/boulder into the high goal on the Center
+	 */
+	public void shootHighCenter() {
+		
+	}	
+
 	public void intakeAndShoot() {
 	}
 }

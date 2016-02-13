@@ -50,21 +50,46 @@ public class BallShooter extends Shooter {
 		}
 	}
 	
-	public void shootLow() {
-		
-	}	
-
-	/**
-	 * This function helps shoot the ball/boulder into the high goal
-	 */
-	public void shootHigh() {
-	
-	}
-
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * This function helps shoot the ball/boulder into the low goal on the Right
+	 */
+	public void shootLowRight() {
+		
+	}	
+
+	/**
+	 * This function helps shoot the ball/boulder into the low goal on the Left
+	 */
+	public void shootLowLeft() {
+		
+	}	
+
+	/**
+	 * This function helps shoot the ball/boulder into the high goal on the Right
+	 */
+	public void shootHighRight() {
+		
+	}	
+	
+	/**
+	 * This function helps shoot the ball/boulder into the high goal on the Left
+	 */
+	public void shootHighLeft() {
+		
+	}	
+
+	/**
+	 * This function helps shoot the ball/boulder into the high goal on the Center
+	 */
+	public void shootHighCenter() {
+		
+	}	
+	
 		
 }
