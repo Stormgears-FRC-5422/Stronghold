@@ -30,7 +30,7 @@ public class DefenseCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		System.out.println("Initializing DefenseCommand through AutonomousCommandGroup.");
+		//System.out.println("Initializing DefenseCommand through AutonomousCommandGroup.");
     	
         defenseTypeSelected = StrongholdRobot.defenseTypeSelected;//(defenseTypeOptions) DSIO.defenseChooser.getSelected(); 
         defensePositionSelected = StrongholdRobot.defensePositionSelected;//(defensePositionOptions) DSIO.defensePositionChooser.getSelected();
@@ -77,7 +77,7 @@ public class DefenseCommand extends Command {
         		break;
         }
     	
-		System.out.println("Completed Initialization of DefenseCommand through AutonomousCommandGroup.");
+		//System.out.println("Completed Initialization of DefenseCommand through AutonomousCommandGroup.");
     }
 
     // Called repeatedly when this Command is scheduled to run

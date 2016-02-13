@@ -21,6 +21,14 @@ public class RockWall implements Defense {
 	}
 
 	@Override
+	public void reach(defenseTypeOptions defenseType, int defensePosition) {
+		System.out.println("Robot needs the source and destination coordinates as parameters to reach Rockwall defense..." + defensePosition);
+		System.out.println("Robot Reaching the Rockwall defense at " + defensePosition);
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public void cross(defenseTypeOptions defenseType, int defensePosition) {
 		System.out.println("Robot crossing the Rockwall defense at " + defensePosition);
 		// TODO Auto-generated method stub

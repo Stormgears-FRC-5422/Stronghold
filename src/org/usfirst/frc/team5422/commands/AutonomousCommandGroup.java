@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonomousCommandGroup extends CommandGroup {
 	public AlignToDefenseCommand alignToDefense;
+	public ReachDefenseCommand reachDefense;
 	public CrossDefenseCommand crossDefense;
 	public PositionToShootCommand positionToShoot;
 	public ShootCommand shoot;
@@ -34,8 +35,10 @@ public class AutonomousCommandGroup extends CommandGroup {
     	crossDefense = new CrossDefenseCommand();
     	positionToShoot = new PositionToShootCommand();
     	shoot = new ShootCommand();
+    	reachDefense = new ReachDefenseCommand();
 
 		addSequential(alignToDefense);
+		addSequential(reachDefense);
 		addSequential(crossDefense);
 		addSequential(positionToShoot);
 		addSequential(shoot);

@@ -17,14 +17,14 @@ public class AlignToDefenseCommand extends DefenseCommand {
     }
 
 	// Called just before this Command runs the first time
-//    protected void initialize() {
-//    	super.initialize();
-//		System.out.println("initializing AlignToDefenseCommand");
-//    }
+    protected void initialize() {
+    	super.initialize();
+		System.out.println("initializing AlignToDefenseCommand");
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	String temp  = "[AutoComm] Robot aligning to shoot after crossing the ";
+    	String temp  = "[AutoComm] Robot aligning to defense for crossing the ";
     	defense.align(defenseTypeSelected, defensePositionSelected);
     	
     	switch(defenseTypeSelected){
@@ -61,7 +61,7 @@ public class AlignToDefenseCommand extends DefenseCommand {
 	    		break;
 	    	
 	    	case NONE:
-	    		temp = "[AutoComm] Robot not aligning to shoot";
+	    		temp = "[AutoComm] Robot not aligning to defense for crossing";
 	    		break;
 	    		
 	    	default:

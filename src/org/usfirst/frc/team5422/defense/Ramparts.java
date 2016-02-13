@@ -21,6 +21,13 @@ public class Ramparts implements Defense {
 	}
 
 	@Override
+	public void reach(defenseTypeOptions defenseType, int defensePosition) {
+		System.out.println("Robot needs the source and destination coordinates as parameter to reach Ramparts defense..." + defensePosition);
+		System.out.println("Robot Reaching the Ramparts defense at " + defensePosition);
+		// TODO Auto-generated method stub
+
+	}
+	@Override
 	public void cross(defenseTypeOptions defenseType, int defensePosition) {
 		System.out.println("Robot crossing the Ramparts defense at " + defensePosition);
 		// TODO Auto-generated method stub

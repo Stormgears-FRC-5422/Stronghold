@@ -20,6 +20,13 @@ public class RoughTerrain implements Defense {
 	}
 
 	@Override
+	public void reach(defenseTypeOptions defenseType, int defensePosition) {
+		System.out.println("Robot needs the source and destination coordinates as parameters to reach RoughTerrain defense..." + defensePosition);
+		System.out.println("Robot Reaching the RoughTerrain defense at " + defensePosition);
+		// TODO Auto-generated method stub
+
+	}
+	@Override
 	public void cross(defenseTypeOptions defenseType, int defensePosition) {
 		System.out.println("Robot crossing the RoughTerrain defense at " + defensePosition);
 		// TODO Auto-generated method stub
