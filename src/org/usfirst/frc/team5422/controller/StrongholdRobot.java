@@ -15,6 +15,7 @@ import org.usfirst.frc.team5422.shooter.Shooter;
 import org.usfirst.frc.team5422.utils.PIDTuner;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -159,32 +160,37 @@ public class StrongholdRobot extends IterativeRobot {
 	public void test() {
 		System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
 		
-		int key = -1;
+		diagnosticPOSTOptions key = diagnosticPOSTOptions.TEST_CHASSIS_DRIVE;
+		
 		switch (key) {
-		case StrongholdConstants.GYRO:
+		case TEST_GYRO:
 			System.out.println("Testing Gyro");
 			break;
 
-		case StrongholdConstants.ULTRASONIC:
+		case TEST_ULTRASONIC:
 			System.out.println("Testing Ultrasonic");
 			break;
 
-		case StrongholdConstants.IR:
+		case TEST_IR:
 			System.out.println("Testing IR");
 			break;
 
-		case StrongholdConstants.TALON_LEFT_MASTER:
+		case TEST_TALON_LEFT_MASTER:
 			System.out.println("Testing Left Master Talon");
 			break;
 
-		case StrongholdConstants.TALON_RIGHT_MASTER:
+		case TEST_TALON_RIGHT_MASTER:
 			System.out.println("Testing Right Master Talon");
 			break;
 
-		case StrongholdConstants.CHASSIS_DRIVE:
+		case TEST_CHASSIS_DRIVE:
 			System.out.println("Testing the chassis drive");
 			break;
-
+			
+		case TEST_SHOOTER:
+			System.out.println("Testing the shooter");
+			break;
+			
 		default:
 			break;
 		}

@@ -30,13 +30,15 @@ public class StrongholdConstants {
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
 	
-	public static final int GYRO = 0;
-	public static final int ULTRASONIC = 1;
-	public static final int IR = 2;
-	public static final int TALON_LEFT_MASTER = 3;
-	public static final int TALON_RIGHT_MASTER = 4;
-	public static final int CHASSIS_DRIVE = 5;
-	
+	public enum diagnosticPOSTOptions{
+		TEST_GYRO, 
+		TEST_ULTRASONIC, 
+		TEST_IR,
+		TEST_TALON_LEFT_MASTER,
+		TEST_TALON_RIGHT_MASTER,
+		TEST_CHASSIS_DRIVE,
+		TEST_SHOOTER
+	}
 	
 	public enum shootOptions{
 		HIGH_LEFT,
