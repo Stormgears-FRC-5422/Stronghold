@@ -28,11 +28,12 @@ public class StrongholdConstants {
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
 
-	public static final int[] POSITION_DEFENSE_0 = {24, 36};
-	public static final int[] POSITION_DEFENSE_1 = {24 + 1 * 48, 36};
-	public static final int[] POSITION_DEFENSE_2 = {24 + 2 * 48, 36};
-	public static final int[] POSITION_DEFENSE_3 = {24 + 3 * 48, 36};
-	public static final int[] POSITION_DEFENSE_4 = {24 + 4 * 48, 36};
+	public static final int[] POSITION_DEFENSE_0_REACH = {24, 36};
+	public static final int[] POSITION_DEFENSE_1_REACH = {24 + 1 * 48, 36};
+	public static final int[] POSITION_DEFENSE_2_REACH = {24 + 2 * 48, 36};
+	public static final int[] POSITION_DEFENSE_3_REACH = {24 + 3 * 48, 36};
+	public static final int[] POSITION_DEFENSE_4_REACH = {24 + 4 * 48, 36};
+	public static final int CROSS_DEFENSE_LENGTH_Y = 96;
 	
 	public enum diagnosticPOSTOptions {
 		TEST_GYRO, 

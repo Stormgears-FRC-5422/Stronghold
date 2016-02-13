@@ -30,16 +30,16 @@ public class Ramparts implements Defense {
 
 		switch (defensePosition) {
 			case 1:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1[0], StrongholdConstants.POSITION_DEFENSE_1[1], Math.PI / 2);
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1_REACH[0], StrongholdConstants.POSITION_DEFENSE_1_REACH[1], Math.PI / 2);
 				break;
 			case 2:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2[0], StrongholdConstants.POSITION_DEFENSE_2[1], Math.PI / 2);
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2_REACH[0], StrongholdConstants.POSITION_DEFENSE_2_REACH[1], Math.PI / 2);
 				break;
 			case 3:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3[0], StrongholdConstants.POSITION_DEFENSE_3[1], Math.PI / 2);
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3_REACH[0], StrongholdConstants.POSITION_DEFENSE_3_REACH[1], Math.PI / 2);
 				break;
 			case 4:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4[0], StrongholdConstants.POSITION_DEFENSE_4[1], Math.PI / 2);
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1], Math.PI / 2);
 				break;
 		}
 	}
@@ -47,6 +47,21 @@ public class Ramparts implements Defense {
 	public void cross(defenseTypeOptions defenseType, int defensePosition) {
 		System.out.println("Robot crossing the Ramparts defense at " + defensePosition);
 		// TODO Auto-generated method stub
+
+		switch (defensePosition) {
+			case 1:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1_REACH[0], StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+				break;
+			case 2:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2_REACH[0], StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+				break;
+			case 3:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3_REACH[0], StrongholdConstants.POSITION_DEFENSE_3_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+				break;
+			case 4:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+				break;
+		}
 
 	}
 
