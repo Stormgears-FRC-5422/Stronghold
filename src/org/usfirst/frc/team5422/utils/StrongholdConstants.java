@@ -35,6 +35,8 @@ public class StrongholdConstants {
 	public static final int IR = 2;
 	public static final int TALON_LEFT_MASTER = 3;
 	public static final int TALON_RIGHT_MASTER = 4;
+	public static final int CHASSIS_DRIVE = 5;
+	
 	
 	public enum shootOptions{
 		HIGH_LEFT,

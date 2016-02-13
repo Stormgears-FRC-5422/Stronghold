@@ -181,6 +181,10 @@ public class StrongholdRobot extends IterativeRobot {
 			System.out.println("Testing Right Master Talon");
 			break;
 
+		case StrongholdConstants.CHASSIS_DRIVE:
+			System.out.println("Testing the chassis drive");
+			break;
+
 		default:
 			break;
 		}
