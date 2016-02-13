@@ -312,6 +312,7 @@ public class DSIO {
             }
         }
 
+        System.out.println("Defense type " + (defenseTypeOptions) defenseChooser.getSelected() + " at position " + position);
         return position;
     }//End method
 }

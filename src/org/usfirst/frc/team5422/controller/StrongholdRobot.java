@@ -4,8 +4,12 @@ package org.usfirst.frc.team5422.controller;
 import edu.wpi.first.wpilibj.*;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.climber.Climber;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
+import org.usfirst.frc.team5422.commands.GrapplingCommand;
+import org.usfirst.frc.team5422.commands.LiftingCommand;
+import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
+import org.usfirst.frc.team5422.lifter.Grappler;
+import org.usfirst.frc.team5422.lifter.Lifter;
 import org.usfirst.frc.team5422.navigator.Driver;
 import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.opener.Opener;
@@ -13,7 +17,6 @@ import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.Shooter;
 import org.usfirst.frc.team5422.utils.PIDTuner;
-import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -49,13 +52,17 @@ public class StrongholdRobot extends IterativeRobot {
 	public static Navigator navigatorSubsystem;
 	public static Shooter shooterSubsystem;
 	public static Opener openerSubsystem;
-	public static Climber climberSubsystem;
+	public static Grappler grapplerSubsystem;
+	public static Lifter lifterSubsystem;
 
 	public static DSIO dsio;
 	public static Driver driver;
 	public static PIDTuner pidTuner;
 	public static Gyro gyro;
 	public static Ultrasonic usonic;
+
+
+
 	
 	public static defenseTypeOptions defenseTypeSelected;
 	public static int  defensePositionSelected;
@@ -69,6 +76,7 @@ public class StrongholdRobot extends IterativeRobot {
 	LiveWindow lw;
 
 	public Command autonomousCommand;
+	public Command liftingCommandGroup;
 
 	public StrongholdRobot() {
 		lw = new LiveWindow();
@@ -76,7 +84,8 @@ public class StrongholdRobot extends IterativeRobot {
 		navigatorSubsystem = new Navigator();
 		shooterSubsystem = new BallShooter(11, 12, stick);
 		openerSubsystem = new SallyPortOpener();
-		climberSubsystem = new Climber();
+		grapplerSubsystem = new Grappler();
+		lifterSubsystem = new Lifter();
 
 		teleopNotRunning = true;
 
@@ -93,6 +102,8 @@ public class StrongholdRobot extends IterativeRobot {
 
 		DSIO.createUI();
 		autonomousCommand = new AutonomousCommandGroup();
+		liftingCommandGroup = new LiftingCommandGroup();
+
 
 
 		System.out.println("robot init ended.");
@@ -111,6 +122,9 @@ public class StrongholdRobot extends IterativeRobot {
 			System.out.println("Selecting from Defense Type as " + defenseTypeSelected + " at position " + defensePositionSelected + " and Goal selected as " + shootOptionSelected);
 		       
 			autonomousCommand.start();
+
+			//Only for testing purposes
+			liftingCommandGroup.start();
 		}
 
 		teleopNotRunning = true;

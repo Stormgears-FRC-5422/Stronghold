@@ -13,7 +13,7 @@ public class AimShooterArmCommand extends Command {
 
 	private shootOptions shootOptionSelected;
 	
-	public AimShooterArmCommand(){
+	public AimShooterArmCommand() {
 		super();
 		requires(StrongholdRobot.shooterSubsystem);		
 	}
