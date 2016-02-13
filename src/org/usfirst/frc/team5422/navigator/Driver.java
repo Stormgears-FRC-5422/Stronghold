@@ -7,47 +7,17 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
+import static org.usfirst.frc.team5422.utils.StrongholdConstants.TALON_DRIVE_RIGHT_MASTER;
+
 /*
  * @author Michael
  */
 
 public class Driver {
-	public static CANTalon talon[] = new CANTalon[4];
+	public static CANTalon talon[] = new CANTalon[2];
 
 	//Constructor
 	public Driver(CANTalon.TalonControlMode controlMode) {
-		//Declare talons
-		if (controlMode == CANTalon.TalonControlMode.Speed | controlMode == CANTalon.TalonControlMode.PercentVbus) {
-			talon[0] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_MASTER);
-			talon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon[0].reverseOutput(true);
-			talon[0].configEncoderCodesPerRev(2048);	
-			talon[0].configNominalOutputVoltage(+0.0f, -0.0f);
-
-			talon[1] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_SLAVE);
-			talon[1].reverseOutput(true);
-			talon[1].configNominalOutputVoltage(+0.0f, -0.0f);
-
-			talon[2] = new CANTalon(StrongholdConstants.TALON_DRIVE_RIGHT_MASTER);
-			talon[2].setFeedbackDevice(FeedbackDevice.QuadEncoder);
-			talon[2].reverseOutput(true);
-			talon[2].configEncoderCodesPerRev(2048);	
-			talon[2].configNominalOutputVoltage(+0.0f, -0.0f);
-
-			talon[3] = new CANTalon(StrongholdConstants.TALON_DRIVE_RIGHT_SLAVE);
-			talon[3].reverseOutput(true);
-			talon[3].configNominalOutputVoltage(+0.0f, -0.0f);
-
-			//Configure talons some more
-			talon[0].changeControlMode(controlMode);
-			talon[1].changeControlMode(TalonControlMode.Follower);
-			talon[2].changeControlMode(controlMode);
-			talon[3].changeControlMode(TalonControlMode.Follower);
-		}
-		else {
-			System.out.println("Invalid Talon Control Mode, set the talon in Speed mode or PercentVbus mode");
-		}
-
 		//Set PID closed loop gains
 		double F, P, I, D;
 
@@ -57,9 +27,23 @@ public class Driver {
 		I = 0;
 		D = 0;
 
-		for (int i = 0; i < 4; i++) {
-			talon[i].setPID(P, I, D);
-			talon[i].setF(F);
+		//Declare talons
+		if (controlMode == CANTalon.TalonControlMode.Speed | controlMode == CANTalon.TalonControlMode.PercentVbus) {
+			talon[0] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_MASTER);
+			talon[1] = new CANTalon(TALON_DRIVE_RIGHT_MASTER);
+			talon[0].reverseOutput(true);
+
+			for (int i = 0; i < 2; i++) {
+				talon[i].setFeedbackDevice(FeedbackDevice.QuadEncoder);
+				talon[i].configEncoderCodesPerRev(2048);
+				talon[i].configNominalOutputVoltage(+0.0f, -0.0f);
+				talon[i].changeControlMode(controlMode);
+				talon[i].setPID(P, I, D);
+				talon[i].setF(F);
+			}
+		}
+		else {
+			System.out.println("Invalid Talon Control Mode, set the talon in Speed mode or PercentVbus mode");
 		}
 	}
 
@@ -81,13 +65,11 @@ public class Driver {
 				talon[0].set(velocityLeft * 81.92);
 			}
 			else talon[0].set(velocityLeft);
-			talon[1].set(1);
 
 			if (controlMode == CANTalon.TalonControlMode.Speed) {
-				talon[2].set(velocityRight * 81.92);
+				talon[1].set(velocityRight * 81.92);
 			}
-			else talon[2].set(velocityRight);
-			talon[3].set(3);
+			else talon[1].set(velocityRight);
 		}
 		else {
 			System.out.println("Invalid Talon Control Mode, set the talon in Speed mode or PercentVbus mode");
@@ -100,15 +82,11 @@ public class Driver {
 		DSIO.outputToSFX("velocityRight", velocityRight);
 
 		//Current being put through the talons
-		DSIO.outputToSFX("Talon ID 1 Velocity (Left)", talon[0].getOutputCurrent());
-		DSIO.outputToSFX("Talon ID 8 Velocity (Left)", talon[1].getOutputCurrent());
-		DSIO.outputToSFX("Talon ID 3 Velocity (Right)", talon[2].getOutputCurrent());
-		DSIO.outputToSFX("Talon ID 0 Velocity (Right)", talon[3].getOutputCurrent());
+		DSIO.outputToSFX("Talon ID 3 Current (Right)", talon[0].getOutputCurrent());
+		DSIO.outputToSFX("Talon ID 0 Current (Right)", talon[1].getOutputCurrent());
 
 		//Talon speeds
-		DSIO.outputToSFX("Talon ID 1 Velocity (Left)", talon[0].getSpeed());
-		DSIO.outputToSFX("Talon ID 8 Velocity (Left)", talon[0].getSpeed());
-		DSIO.outputToSFX("Talon ID 3 Velocity (Right)", talon[2].getSpeed());
-		DSIO.outputToSFX("Talon ID 0 Velocity (Right)", talon[2].getSpeed());
+		DSIO.outputToSFX("Talon ID 3 Velocity (Right)", talon[0].getSpeed());
+		DSIO.outputToSFX("Talon ID 0 Velocity (Right)", talon[1].getSpeed());
 	}
 }

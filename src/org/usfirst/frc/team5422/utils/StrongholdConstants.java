@@ -6,10 +6,8 @@ package org.usfirst.frc.team5422.utils;
 
 
 public class StrongholdConstants {
-	public static final int TALON_DRIVE_LEFT_MASTER = 1;
-	public static final int TALON_DRIVE_RIGHT_MASTER  = 3;
-	public static final int TALON_DRIVE_LEFT_SLAVE = 8;
-	public static final int TALON_DRIVE_RIGHT_SLAVE= 0;
+	public static final int TALON_DRIVE_LEFT_MASTER = 3;
+	public static final int TALON_DRIVE_RIGHT_MASTER  = 0;
 	
 	//physical attributes
 	public static final double ENCODER_TICKS_RESOLUTION = 8192;//ticks

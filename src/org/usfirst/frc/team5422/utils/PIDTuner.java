@@ -133,8 +133,8 @@ public class PIDTuner {
 		else if (talon[1] != null) {
 			speed = talon[1].getSpeed();
 		}
-		else if (talon[2] != null) {
-			speed = talon[2].getSpeed();
+		else if (talon[1] != null) {
+			speed = talon[1].getSpeed();
 		}
 		else if (talon[3] != null) {
 			speed = talon[3].getSpeed();

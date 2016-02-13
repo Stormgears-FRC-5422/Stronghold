@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj.*;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
-import org.usfirst.frc.team5422.commands.GrapplingCommand;
-import org.usfirst.frc.team5422.commands.LiftingCommand;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
