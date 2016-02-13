@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5422.defense;
 
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
@@ -26,6 +28,8 @@ public class LowBar implements Defense {
 		System.out.println("Robot needs the source and destination coordinates as parameters to reach LowBar defense..." + defensePosition);
 		System.out.println("Robot Reaching the Low Bar defense at position " + defensePosition);
 		// TODO Auto-generated method stub
+
+		StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_0[0], StrongholdConstants.POSITION_DEFENSE_0[1], Math.PI / 2 );
 
 	}
 	

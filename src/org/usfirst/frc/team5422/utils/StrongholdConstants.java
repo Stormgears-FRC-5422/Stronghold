@@ -16,7 +16,7 @@ public class StrongholdConstants {
 	public static final double WHEEL_DIAMETER = 5;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	
-	public static final double INCHES_PER_TICK = Math.PI*WHEEL_BASE/(GEAR_RATIO*ENCODER_TICKS_RESOLUTION);
+	public static final double INCHES_PER_TICK = Math.PI * WHEEL_BASE / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
 	public static final int JOYSTICK_CHANNEL = 0;
 	public static final int BUTTONBOARD_CHANNEL = 0;
@@ -27,8 +27,14 @@ public class StrongholdConstants {
 	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 1;
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
+
+	public static final int[] POSITION_DEFENSE_0 = {24, 36};
+	public static final int[] POSITION_DEFENSE_1 = {24 + 1 * 48, 36};
+	public static final int[] POSITION_DEFENSE_2 = {24 + 2 * 48, 36};
+	public static final int[] POSITION_DEFENSE_3 = {24 + 3 * 48, 36};
+	public static final int[] POSITION_DEFENSE_4 = {24 + 4 * 48, 36};
 	
-	public enum diagnosticPOSTOptions{
+	public enum diagnosticPOSTOptions {
 		TEST_GYRO, 
 		TEST_ULTRASONIC, 
 		TEST_IR,
@@ -37,19 +43,8 @@ public class StrongholdConstants {
 		TEST_CHASSIS_DRIVE,
 		TEST_SHOOTER
 	}
-	
-//	public static enum ShootPositions {
-//		LEFT,
-//		CENTER,
-//		RIGHT
-//	};
-//	
-//	public static enum AimPositions {
-//		HIGH,
-//		LOW
-//	};	
 		
-	public enum shootOptions{
+	public enum shootOptions {
 		HIGH_LEFT,
 		HIGH_RIGHT,
 		HIGH_CENTER,
@@ -58,18 +53,7 @@ public class StrongholdConstants {
 		NONE
 	}
 	
-	public static int
-			LOW_BAR_POS,
-			PORTCULLIS_POS,
-			CHIVAL_DE_FRISE_POS,
-			MOAT_POS,
-			RAMPARTS_POS,
-			DRAWBRIDGE_POS,
-			SALLYPORT_POS,
-			ROCK_WALL_POS,
-			ROUGH_TERRAIN_POS;
-	
-	public enum defenseTypeOptions{
+	public enum defenseTypeOptions {
 		LOW_BAR,
 		PORTCULLIS,
 		CHIVAL_DE_FRISE,
@@ -82,13 +66,17 @@ public class StrongholdConstants {
 		NONE
 	}
 	
-	public enum endOptions{
+	public enum endOptions {
 		TELEOP_STARTING_POSITION,
 		NONE
 	}
 	
-	public enum Speed{
+	public enum Speed {
 		SLOW, MEDIUM, FAST
+	}
+
+	public enum alliance {
+		RED, BLUE
 	}
 	
 

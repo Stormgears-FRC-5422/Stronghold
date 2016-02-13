@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5422.DSIO;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -31,7 +32,7 @@ public class DSIO {
 
     public static String autoSequence;
 
-    public static SendableChooser defenseChooser, shootChooser, endChooser;
+    public static SendableChooser defenseChooser, shootChooser, endChooser, allianceChooser;
 
     //Constructor
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
@@ -217,6 +218,12 @@ public class DSIO {
         endChooser.addDefault("Go to teleop starting position.", endOptions.TELEOP_STARTING_POSITION);
         endChooser.addObject("Stay in place.", endOptions.NONE);
         SmartDashboard.putData("End chooser", endChooser);
+
+        //Create alliance selector
+        allianceChooser = new SendableChooser();
+        allianceChooser.addDefault("Red", StrongholdConstants.alliance.RED);
+        allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
+        SmartDashboard.putData("Alliance Chooser", allianceChooser);
 
         //Defense at position 0 is always low bar (ID 0)
         pos[0] = 0;

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5422.defense;
 
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
@@ -26,6 +28,20 @@ public class Ramparts implements Defense {
 		System.out.println("Robot Reaching the Ramparts defense at " + defensePosition);
 		// TODO Auto-generated method stub
 
+		switch (defensePosition) {
+			case 1:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1[0], StrongholdConstants.POSITION_DEFENSE_1[1], Math.PI / 2);
+				break;
+			case 2:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2[0], StrongholdConstants.POSITION_DEFENSE_2[1], Math.PI / 2);
+				break;
+			case 3:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3[0], StrongholdConstants.POSITION_DEFENSE_3[1], Math.PI / 2);
+				break;
+			case 4:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4[0], StrongholdConstants.POSITION_DEFENSE_4[1], Math.PI / 2);
+				break;
+		}
 	}
 	@Override
 	public void cross(defenseTypeOptions defenseType, int defensePosition) {
