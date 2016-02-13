@@ -286,13 +286,9 @@ public class MotionProfileExample {
 			point.velocityOnly = false; /* set true to not do any position
 										 * servo, just velocity feedforward
 										 */
-			point.zeroPos = false;
-			if (i == 0)
-				point.zeroPos = true; /* set this to true on the first point */
+			point.zeroPos = i == 0;
 
-			point.isLastPoint = false;
-			if ((i + 1) == totalCnt)
-				point.isLastPoint = true; /* set this to true on the last point  */
+			point.isLastPoint = (i + 1) == totalCnt;
 
 			_talon.pushMotionProfileTrajectory(point);
 		}

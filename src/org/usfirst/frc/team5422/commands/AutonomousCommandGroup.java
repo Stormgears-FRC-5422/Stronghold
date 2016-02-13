@@ -34,13 +34,14 @@ public class AutonomousCommandGroup extends CommandGroup {
     	crossDefense = new CrossDefenseCommand();
     	positionToShoot = new PositionToShootCommand();
     	shoot = new ShootCommand();
+
+		addSequential(alignToDefense);
+		addSequential(crossDefense);
+		addSequential(positionToShoot);
+		addSequential(shoot);
 	}
 
 	protected void initialize() {
-    	addSequential(alignToDefense);
-    	addSequential(crossDefense);
-    	addSequential(positionToShoot);
-    	addSequential(shoot);
-    	
+		System.out.println("Initializing autonomous command group.");
     }
 }

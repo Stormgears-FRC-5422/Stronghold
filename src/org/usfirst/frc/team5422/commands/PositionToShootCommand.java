@@ -16,6 +16,7 @@ public class PositionToShootCommand extends DefenseCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("initializing PositionToShootCommand");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,7 +27,7 @@ public class PositionToShootCommand extends DefenseCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

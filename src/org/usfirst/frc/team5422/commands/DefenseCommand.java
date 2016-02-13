@@ -7,7 +7,6 @@ import org.usfirst.frc.team5422.defense.Moat;
 import org.usfirst.frc.team5422.defense.Ramparts;
 import org.usfirst.frc.team5422.defense.RockWall;
 import org.usfirst.frc.team5422.defense.RoughTerrain;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.defensePositionOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
@@ -18,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DefenseCommand extends Command {
 	protected defenseTypeOptions defenseTypeSelected;
-	protected defensePositionOptions defensePositionSelected;
+	protected int defensePositionSelected;
 	protected shootOptions shootOptionSelected;
 	protected Defense defense;
 
@@ -27,10 +26,11 @@ public class DefenseCommand extends Command {
         // eg. requires(chassis);
         
         defenseTypeSelected = (defenseTypeOptions) DSIO.defenseChooser.getSelected(); 
-        defensePositionSelected = (defensePositionOptions) DSIO.defensePositionChooser.getSelected();
+        defensePositionSelected = DSIO.getSelectedDefensePosition();
+		//System.out.println("Defense position selected for autonomous is " + defensePositionSelected);
         shootOptionSelected = (shootOptions) DSIO.shootChooser.getSelected();
         
-        switch(defenseTypeSelected){
+        switch(defenseTypeSelected) {
         	case CHIVAL_DE_FRISE:
         		defense = null;
         		break;

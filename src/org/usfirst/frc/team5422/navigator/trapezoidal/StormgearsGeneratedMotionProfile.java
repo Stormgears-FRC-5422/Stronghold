@@ -9,7 +9,7 @@ public class StormgearsGeneratedMotionProfile {
 	public static void setPoints(int targetTicks) {
 		int totalTimeMs = determineTime(80000, 100, 400);
 		
-		points = new double [(int)(Math.round(totalTimeMs)) + 1][3];
+		points = new double [Math.round(totalTimeMs) + 1][3];
 		kNumPoints = points.length;
 	
 		double currentTimeS = 0;

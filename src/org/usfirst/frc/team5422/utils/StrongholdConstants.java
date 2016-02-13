@@ -36,7 +36,7 @@ public class StrongholdConstants {
 	public static final int TALON_LEFT_MASTER = 3;
 	public static final int TALON_RIGHT_MASTER = 4;
 	
-	public static enum shootOptions{
+	public enum shootOptions{
 		HIGH_LEFT,
 		HIGH_RIGHT,
 		HIGH_CENTER,
@@ -45,15 +45,18 @@ public class StrongholdConstants {
 		NONE
 	}
 	
-	public static enum defensePositionOptions{
-		POSITION_1_LOW_BAR,
-		POSITION_2,
-		POSITION_3,
-		POSITION_4,
-		POSITION_5,
-	}
+	public static int
+			LOW_BAR_POS,
+			PORTCULLIS_POS,
+			CHIVAL_DE_FRISE_POS,
+			MOAT_POS,
+			RAMPARTS_POS,
+			DRAWBRIDGE_POS,
+			SALLYPORT_POS,
+			ROCK_WALL_POS,
+			ROUGH_TERRAIN_POS;
 	
-	public static enum defenseTypeOptions{
+	public enum defenseTypeOptions{
 		LOW_BAR,
 		PORTCULLIS,
 		CHIVAL_DE_FRISE,
@@ -66,12 +69,12 @@ public class StrongholdConstants {
 		NONE
 	}
 	
-	public static enum endOptions{
+	public enum endOptions{
 		TELEOP_STARTING_POSITION,
 		NONE
 	}
 	
-	public static enum Speed{
+	public enum Speed{
 		SLOW, MEDIUM, FAST
 	}
 	
