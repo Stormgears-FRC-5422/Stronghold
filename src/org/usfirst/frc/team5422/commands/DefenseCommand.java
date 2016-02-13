@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.defense.Defense;
 import org.usfirst.frc.team5422.defense.LowBar;
 import org.usfirst.frc.team5422.defense.Moat;
@@ -16,19 +17,24 @@ import edu.wpi.first.wpilibj.command.Command;
  *@author suren
  */
 public class DefenseCommand extends Command {
-	protected defenseTypeOptions defenseTypeSelected;
-	protected int defensePositionSelected;
-	protected shootOptions shootOptionSelected;
+	protected defenseTypeOptions defenseTypeSelected = defenseTypeOptions.LOW_BAR;
+	protected int defensePositionSelected = -1;
+	protected shootOptions shootOptionSelected = shootOptions.HIGH_CENTER;
 	protected Defense defense;
 
     public DefenseCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         
-        defenseTypeSelected = (defenseTypeOptions) DSIO.defenseChooser.getSelected(); 
-        defensePositionSelected = DSIO.getSelectedDefensePosition();
-		//System.out.println("Defense position selected for autonomous is " + defensePositionSelected);
-        shootOptionSelected = (shootOptions) DSIO.shootChooser.getSelected();
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+		System.out.println("Initializing DefenseCommand through AutonomousCommandGroup.");
+    	
+        defenseTypeSelected = StrongholdRobot.defenseTypeSelected;//(defenseTypeOptions) DSIO.defenseChooser.getSelected(); 
+        defensePositionSelected = StrongholdRobot.defensePositionSelected;//(defensePositionOptions) DSIO.defensePositionChooser.getSelected();
+        shootOptionSelected = StrongholdRobot.shootOptionSelected;//(shootOptions) DSIO.shootChooser.getSelected();
         
         switch(defenseTypeSelected) {
         	case CHIVAL_DE_FRISE:
@@ -71,10 +77,7 @@ public class DefenseCommand extends Command {
         		break;
         }
     	
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
+		System.out.println("Completed Initialization of DefenseCommand through AutonomousCommandGroup.");
     }
 
     // Called repeatedly when this Command is scheduled to run

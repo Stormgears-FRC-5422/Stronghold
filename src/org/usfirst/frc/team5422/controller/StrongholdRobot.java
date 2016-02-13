@@ -14,6 +14,8 @@ import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.Shooter;
 import org.usfirst.frc.team5422.utils.PIDTuner;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -53,6 +55,10 @@ public class StrongholdRobot extends IterativeRobot {
 	public static PIDTuner pidTuner;
 	public static Gyro gyro;
 	public static Ultrasonic usonic;
+	
+	public static defenseTypeOptions defenseTypeSelected;
+	public static int  defensePositionSelected;
+	public static shootOptions shootOptionSelected;
 
 	public static boolean teleopNotRunning;
 
@@ -96,7 +102,15 @@ public class StrongholdRobot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 		System.out.println("auto init started.");
-		if (autonomousCommand != null) autonomousCommand.start();
+		if (autonomousCommand != null) {
+	        defenseTypeSelected = (defenseTypeOptions) DSIO.defenseChooser.getSelected(); 
+	        defensePositionSelected = DSIO.getSelectedDefensePosition();
+	        shootOptionSelected = (shootOptions) DSIO.shootChooser.getSelected();
+	        
+			System.out.println("Selecting from Defense Type as " + defenseTypeSelected + " at position " + defensePositionSelected + " and Goal selected as " + shootOptionSelected);
+		       
+			autonomousCommand.start();
+		}
 
 		teleopNotRunning = true;
 
@@ -109,7 +123,9 @@ public class StrongholdRobot extends IterativeRobot {
 
 	public void autonomousPeriodic() {
 		System.out.println("auto periodic started.");
-		if (autonomousCommand != null) Scheduler.getInstance().run();
+		if (autonomousCommand != null) {
+			Scheduler.getInstance().run();
+		}
 
 
 		System.out.println("auto periodic ended.");
