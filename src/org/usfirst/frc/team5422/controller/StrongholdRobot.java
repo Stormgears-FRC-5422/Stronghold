@@ -115,6 +115,7 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void autonomousInit() {
         System.out.println("auto init started.");
+        
         if (autonomousCommand != null) {
             defenseTypeSelected = (defenseTypeOptions) DSIO.defenseChooser.getSelected();
             defensePositionSelected = DSIO.getSelectedDefensePosition();
@@ -128,6 +129,7 @@ public class StrongholdRobot extends IterativeRobot {
             //Only for testing purposes
             liftingCommandGroup.start();
         }
+        
 
         teleopNotRunning = true;
 

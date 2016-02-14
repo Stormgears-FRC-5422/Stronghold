@@ -1,60 +1,38 @@
 package org.usfirst.frc.team5422.navigator;
 
 
+import edu.wpi.first.wpilibj.Notifier;
+
 /*
  * @author Mayank
  */
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
 
 
 public class Navigator extends Subsystem{
-	
-	
-	//this is all going to change
-	private CANTalon motor1;
-	private CANTalon motor2;
-	private CANTalon motor3;
-	private CANTalon motor4;
 
 	private boolean isRunning;
 	
-	private double oldTickR;
-	private double oldTickL;
-	
-	
+	Notifier thread; 
 	
 	public Navigator(){
-		motor1 = new CANTalon(1);
-		motor2 = new CANTalon(2);
-		motor3 = new CANTalon(3);
-		motor4 = new CANTalon(4);
+
+		//right is Driver.talon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder); [0]
+		//left is Driver.talon[1].setFeedbackDevice(FeedbackDevice.QuadEncoder); [1]
 		
-		motor2.changeControlMode(TalonControlMode.PercentVbus);
-		motor3.changeControlMode(TalonControlMode.PercentVbus);
+		//Driver.talons[0] is right
+		//Driver.talon[1] is left
 		
-		motor2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		motor3.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		
-		motor2.setEncPosition(0);
-		motor3.setEncPosition(0);
-		
-		motor1.changeControlMode(TalonControlMode.Follower);
-		motor4.changeControlMode(TalonControlMode.Follower);
-		
-		motor1.set(2);
-		motor4.set(3);
+		thread = new Notifier(new GlobalMapping());
+		thread.startPeriodic(0.001);
 		
 		GlobalMapping.resetValues();
 		
-		updateGP(0,0);
+		
 		
 	}
 	
@@ -79,42 +57,12 @@ public class Navigator extends Subsystem{
 		return power;
 	}
 	
-	//needs to be called repeatedly
-	public void updateGP(double newTickR, double newTickL){
-		
-		double dTickR = newTickR - oldTickR;
-		double dTickL = newTickL - oldTickL;
-		
-		oldTickR = newTickR;
-		oldTickL = newTickL;
-		
-		//inches
-		double dSigmaD = (dTickR+dTickL)*StrongholdConstants.INCHES_PER_TICK/2;
-		
-		//inches
-		double dTheta = ((dTickR - dTickL)*StrongholdConstants.INCHES_PER_TICK)/(StrongholdConstants.WHEEL_BASE);
-		
-		GlobalMapping.addTotalDistance(dSigmaD);
-		
-		GlobalMapping.addTotalRotation(dTheta);
-		
-		double dX = Math.cos(GlobalMapping.theta)*dSigmaD;
-		double dY = Math.sin(GlobalMapping.theta)*dSigmaD;
-		
-		GlobalMapping.addCurrentPosition(dX, dY);
-		
-		SmartDashboard.putNumber("[GP] Total Distance(in)", GlobalMapping.sigmaD);
-		SmartDashboard.putNumber("[GP] Theta(r)", GlobalMapping.theta);
-		
-		SmartDashboard.putNumber("[GP] x-position(in)", GlobalMapping.x);
-		SmartDashboard.putNumber("[GP] y-position(in)", GlobalMapping.y);
-	}
 	
 	
 	private void StopRunning(){
 		
-		motor2.set(0.0);
-		motor3.set(-0.0);
+		Driver.talon[0].set(0.0);
+		Driver.talon[1].set(-0.0);
 		isRunning = false;
 		
 	}
@@ -126,16 +74,16 @@ public class Navigator extends Subsystem{
 	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
 		//dummy function (actually written elsewhere by aditya)
 		
-		motor2.set(Math.signum(rTicks)*0.4);
-		motor3.set(-Math.signum(lTicks)*0.4);
+		Driver.talon[0].set(Math.signum(rTicks)*0.4);
+		Driver.talon[1].set(-Math.signum(lTicks)*0.4);
 		
 	}
 	
-	public void rotateToTheta(double theta, double rpmR, double rpmL){
+	private void rotateToTheta(double theta, double rpmR, double rpmL){
 		
-		System.out.format("[rotate to] %4.3g (rad)", theta);
+		System.out.format("[rotate to] %4.3g (rad)\n", theta);
 		
-		double relInitTheta = theta - GlobalMapping.theta;
+		double relInitTheta = theta - GlobalMapping.getTheta();
 		
 		if(relInitTheta > Math.PI){
 			relInitTheta -= 2*Math.PI;
@@ -143,10 +91,10 @@ public class Navigator extends Subsystem{
 			relInitTheta += 2*Math.PI;
 		}
 		
-		System.out.format("[rotate by] %4.3g (rad)", relInitTheta );
+		System.out.format("[rotate by] %4.3g (rad)\n", relInitTheta );
 		
-		double lTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
-		double rTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
 		
 		
@@ -157,9 +105,7 @@ public class Navigator extends Subsystem{
 		
 		while(Running()){
 			
-			updateGP(motor3.getEncPosition(), -motor2.getEncPosition());
-			
-			if(Math.abs(GlobalMapping.theta - theta) <= 0.01){
+			if(Math.abs(GlobalMapping.getTheta() - theta) <= 0.01){
 				StopRunning();
 			}
 			
@@ -168,9 +114,10 @@ public class Navigator extends Subsystem{
 	
 	public void moveByDistance(double targDistance, double rpm){
 		
-		System.out.format("[translate by] %.3g (in)", targDistance );
+		System.out.format("[translate by] %.3g (in)\n", targDistance );
 		
-		GlobalMapping.sigmaD = 0;
+		
+		double startDistance = GlobalMapping.getSigmaD();
 		
 		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK; 
 		
@@ -180,9 +127,7 @@ public class Navigator extends Subsystem{
 		
 		while(Running()){
 			
-			updateGP(motor3.getEncPosition(), -motor2.getEncPosition());
-			
-			if(GlobalMapping.sigmaD >= targDistance){
+			if(GlobalMapping.getSigmaD() - startDistance >= targDistance){
 				StopRunning();
 			}
 		
@@ -197,8 +142,8 @@ public class Navigator extends Subsystem{
 	//TODO: Modularization
 	public void driveTo(double xField, double yField, double thetaField){
 		
-		double xRel = xField - GlobalMapping.x;
-		double yRel = yField - GlobalMapping.y;
+		double xRel = xField - GlobalMapping.getX();
+		double yRel = yField - GlobalMapping.getY();
 		
 		double targInitTheta = Math.atan2(yRel, xRel);
 		
