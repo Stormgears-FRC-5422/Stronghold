@@ -24,7 +24,7 @@ public class DSIO {
     //Constants may need to be changed
 
     static Joystick joystick;
-    static Joystick buttonBoard;
+    public static Joystick buttonBoard;
     static boolean buttonPressed;
 
     public static int pos[] = new int[5];
