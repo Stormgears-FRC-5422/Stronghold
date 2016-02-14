@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5422.utils;
 
 /*
+ * @author Suren Karavettil
  *@author Mayank
  */
 
@@ -10,12 +11,14 @@ public class StrongholdConstants {
 	public static final int TALON_DRIVE_RIGHT_MASTER  = 0;
 	
 	//physical attributes
-	public static final double ENCODER_TICKS_RESOLUTION = 8192;//ticks
-	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches
-	public static final double GEAR_RATIO = 1;
-	public static final double WHEEL_DIAMETER = 6;//inches
+	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
+	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
+
+	public static final double WHEEL_BASE = 23.5;//22.0 + 5.0/16;//inches
+	public static final double GEAR_RATIO = 8.46;
+	public static final double WHEEL_DIAMETER = 5;//6;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
-	
+		
 	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
 	public static final int JOYSTICK_CHANNEL = 0;
@@ -57,7 +60,20 @@ public class StrongholdConstants {
 		TEST_LIFTER,
 		TEST_MOTION_PROFILE
 	}
-		
+
+	public enum shootHeightOptions {
+		HIGH,
+		LOW,
+		NONE
+	}
+
+	public static final double SHOOT_DELAY = 1;
+	public static final double SHOOTER_HEIGHT = 10.5;
+	public static final double HEIGHT_TO_HIGH_GOAL = 97 - SHOOTER_HEIGHT;
+	public static final double HEIGHT_TO_LOW_GOAL = 18 - SHOOTER_HEIGHT;
+	public static final int POT_TURNS = 100;
+	public static final double ACTUATOR_ANGLE_RANGE = 90;
+	
 	public enum shootOptions {
 		HIGH_LEFT,
 		HIGH_RIGHT,
@@ -93,5 +109,4 @@ public class StrongholdConstants {
 		RED, BLUE
 	}
 	
-
 }

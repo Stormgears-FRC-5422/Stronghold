@@ -47,7 +47,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
 /*
- * @author suren
+ * @author Suren Karavettil
  */
 
 public class StrongholdRobot extends IterativeRobot {
@@ -84,7 +84,7 @@ public class StrongholdRobot extends IterativeRobot {
         lw = new LiveWindow();
 
         navigatorSubsystem = new Navigator();
-        shooterSubsystem = new BallShooter(11, 12, stick);
+        shooterSubsystem = new BallShooter();
         openerSubsystem = new SallyPortOpener();
         grapplerSubsystem = new Grappler();
         lifterSubsystem = new Lifter();

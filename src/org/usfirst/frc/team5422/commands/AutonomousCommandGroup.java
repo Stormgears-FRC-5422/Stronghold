@@ -3,7 +3,7 @@ package org.usfirst.frc.team5422.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *@author suren
+ *@author Suren Karavettil
  */
 public class AutonomousCommandGroup extends CommandGroup {
 	public AlignToDefenseCommand alignToDefense;
