@@ -1,9 +1,11 @@
 package org.usfirst.frc.team5422.defense;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 public class ChivalDeFrise implements Defense {
 	public ChivalDeFrise(defenseTypeOptions defenseType, int defensePosition) {
@@ -63,8 +65,17 @@ public class ChivalDeFrise implements Defense {
 	@Override
 	public void positionToShoot(defenseTypeOptions defenseType, int defensePosition, shootOptions shootOption) {
 		System.out.println("Robot positioning to shoot after crossing the Chival De Frise defense at position " + defensePosition + " shooting into " + shootOption);
-		// TODO Auto-generated method stub
 
+
+//		if (defensePosition == 0) {
+//			StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(shootOptions.HIGH_LEFT));
+//		}
+//		else {
+//			StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(shootOptions.HIGH_CENTER));
+//		}
+
+		//Change angle to match angle to best goal
+		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
 	}
 
 }

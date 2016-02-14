@@ -1,9 +1,11 @@
 package org.usfirst.frc.team5422.defense;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 /*
  * @author Michael
@@ -70,6 +72,8 @@ public class Ramparts implements Defense {
 		System.out.println("Robot positioning to shoot after crossing the Ramparts defense at " + defensePosition + " shooting into " + shootOption);
 		// TODO Auto-generated method stub
 
+		//Change angle to match angle to best goal
+		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
 	}
 
 }

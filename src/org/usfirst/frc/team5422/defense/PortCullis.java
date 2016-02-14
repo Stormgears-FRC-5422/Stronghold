@@ -1,9 +1,11 @@
 package org.usfirst.frc.team5422.defense;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 public class PortCullis implements Defense {
 
@@ -63,6 +65,8 @@ public class PortCullis implements Defense {
 		System.out.println("Robot positioning to shoot after crossing the PortCullis defense at position " + defensePosition + " shooting into " + shootOption);
 		// TODO Auto-generated method stub
 
+		//Change angle to match angle to best goal
+		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
 	}
 
 }
