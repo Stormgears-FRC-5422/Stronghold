@@ -32,7 +32,7 @@ public class DSIO {
 
     public static String autoSequence;
 
-    public static SendableChooser defenseChooser, shootChooser, endChooser, allianceChooser;
+    public static SendableChooser defenseChooser, shootChooser, endChooser, allianceChooser, testChooser;
 
     //Constructor
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
@@ -234,6 +234,20 @@ public class DSIO {
         SmartDashboard.putNumber("Defense at Position 3", -1);
         SmartDashboard.putNumber("Defense at Position 4", -1);
 
+        //Create subsystem test selector
+        testChooser = new SendableChooser();
+        testChooser.addDefault("(0) Test Gyro", StrongholdConstants.diagnosticPOSTOptions.TEST_GYRO);
+        testChooser.addDefault("(1) Test Ultrasonic", StrongholdConstants.diagnosticPOSTOptions.TEST_ULTRASONIC);
+        testChooser.addDefault("(2) Test Infrared", StrongholdConstants.diagnosticPOSTOptions.TEST_IR);
+        testChooser.addDefault("(3) Test Left Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_LEFT_MASTER);
+        testChooser.addDefault("(4) Test Right Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_RIGHT_MASTER);
+        testChooser.addDefault("(5) Test Drive", StrongholdConstants.diagnosticPOSTOptions.TEST_CHASSIS_DRIVE);
+        testChooser.addDefault("(6) Test Shooter", StrongholdConstants.diagnosticPOSTOptions.TEST_SHOOTER);
+        testChooser.addDefault("(7) Test Grappler", StrongholdConstants.diagnosticPOSTOptions.TEST_GRAPPLER);
+        testChooser.addDefault("(8) Test Alignment", StrongholdConstants.diagnosticPOSTOptions.TEST_ALIGN_TO_CASTLE);
+        testChooser.addDefault("(9) Test Lift", StrongholdConstants.diagnosticPOSTOptions.TEST_LIFTER);
+        testChooser.addDefault("(10) Test Motion Profile", StrongholdConstants.diagnosticPOSTOptions.TEST_MOTION_PROFILE);
+        
     }
 
     public static int getSelectedDefensePosition() {
