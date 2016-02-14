@@ -71,17 +71,11 @@ public class StrongholdRobot extends IterativeRobot {
 
     public static boolean teleopNotRunning;
 
-    RobotDrive myRobot;
-    Joystick stick;
-
-    LiveWindow lw;
-
     public Command autonomousCommand;
     public Command liftingCommandGroup;
 
     public StrongholdRobot() {
         NetworkTable.globalDeleteAll(); //Removes unused garbage from SmartDashboard
-        lw = new LiveWindow();
 
         navigatorSubsystem = new Navigator();
         shooterSubsystem = new BallShooter();
@@ -101,7 +95,7 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("robot init started.");
         dsio = new DSIO(0, 0);
         driver = new Driver(CANTalon.TalonControlMode.Speed);
-
+        
         DSIO.createUI();
         autonomousCommand = new AutonomousCommandGroup();
         liftingCommandGroup = new LiftingCommandGroup();
@@ -166,12 +160,12 @@ public class StrongholdRobot extends IterativeRobot {
 
         Scheduler.getInstance().run();
         
-        if (stick.getRawButton(1)) {
+        if (DSIO.buttonBoard.getRawButton(10)) {
         	System.out.println("pressed");
         	shooterSubsystem.shootHigh(60, StrongholdConstants.shootHeightOptions.HIGH);
         }
-        else if (stick.getRawButton(2)) shooterSubsystem.intake();
-        else if (stick.getRawButton(3)) shooterSubsystem.stop();
+        else if (DSIO.buttonBoard.getRawButton(9)) shooterSubsystem.intake();
+        else if (DSIO.buttonBoard.getRawButton(8)) shooterSubsystem.stop();
         
 
         //Run the openDrive() method
