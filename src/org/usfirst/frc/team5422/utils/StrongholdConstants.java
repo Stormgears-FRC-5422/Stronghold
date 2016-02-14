@@ -11,12 +11,12 @@ public class StrongholdConstants {
 	
 	//physical attributes
 	public static final double ENCODER_TICKS_RESOLUTION = 8192;//ticks
-	public static final double WHEEL_BASE = 23.5;//inches
-	public static final double GEAR_RATIO = 8.46;
-	public static final double WHEEL_DIAMETER = 5;//inches
+	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches
+	public static final double GEAR_RATIO = 1;
+	public static final double WHEEL_DIAMETER = 6;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	
-	public static final double INCHES_PER_TICK = Math.PI * WHEEL_BASE / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
+	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
 	public static final int JOYSTICK_CHANNEL = 0;
 	public static final int BUTTONBOARD_CHANNEL = 0;
@@ -34,6 +34,15 @@ public class StrongholdConstants {
 	public static final int[] POSITION_DEFENSE_3_REACH = {24 + 3 * 48, 36};
 	public static final int[] POSITION_DEFENSE_4_REACH = {24 + 4 * 48, 36};
 	public static final int CROSS_DEFENSE_LENGTH_Y = 96;
+	
+	public static final int TALON_LEFT_SHOOTER = 0;
+	public static final int TALON_RIGHT_SHOOTER = 3;
+	public static final int	TALON_ACTUATOR = 0;
+	public static final int SOLENOID_SHOOTER = 0;
+	
+	public static final double FULL_THROTTLE = 1;
+	public static final double NO_THROTTLE = 0;
+	public static final double VEL_PER_100MS = 81.92;
 	
 	public enum diagnosticPOSTOptions {
 		TEST_GYRO, 
