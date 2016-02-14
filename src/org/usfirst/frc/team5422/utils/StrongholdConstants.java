@@ -14,9 +14,9 @@ public class StrongholdConstants {
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
 
-	public static final double WHEEL_BASE = 23.5;//22.0 + 5.0/16;//inches
-	public static final double GEAR_RATIO = 8.46;
-	public static final double WHEEL_DIAMETER = 5;//6;//inches
+	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches
+	public static final double GEAR_RATIO = 1;
+	public static final double WHEEL_DIAMETER = 6;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 		
 	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
