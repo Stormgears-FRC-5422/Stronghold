@@ -28,25 +28,26 @@ public class BallShooter extends Shooter {
 	
 	CANTalon talonL;
 	CANTalon talonR;
-//	CANTalon actuator;
+	CANTalon actuator;
 	Relay relay;
-	Solenoid sol;
 	
-	public void shootLow() {
-		
+	public void shootLow(double distance, StrongholdConstants.shootHeightOptions goal) {
+		shoot(distance, goal);
 	}	
 
 	/**
 	 * This function helps shoot the ball/boulder into the high goal
 	 */
 	public void shootHigh(double distance, StrongholdConstants.shootHeightOptions goal) {
+		System.out.println("Beginning shot");
 		shoot(distance, goal);
+		System.out.println("shot ball");
 	}
 	
 	public BallShooter() {
 		talonL = new CANTalon(StrongholdConstants.TALON_LEFT_SHOOTER);
 		talonL.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonL.changeControlMode(TalonControlMode.Speed);
+		talonL.changeControlMode(TalonControlMode.PercentVbus);
 		//Reverse output may be needed
 		talonL.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonL.configNominalOutputVoltage(+0.0f, -0.0f);
@@ -55,7 +56,7 @@ public class BallShooter extends Shooter {
 		
 		talonR = new CANTalon(StrongholdConstants.TALON_RIGHT_SHOOTER);
 		talonR.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonR.changeControlMode(TalonControlMode.Speed);
+		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		//Reverse output may be needed
 		talonR.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonR.configNominalOutputVoltage(+0.0f, -0.0f);
@@ -64,14 +65,14 @@ public class BallShooter extends Shooter {
 		
 //		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
 //		actuator.setFeedbackDevice(FeedbackDevice.AnalogPot);
-//		actuator.changeControlMode(TalonControlMode.Position);
+//		actuator.changeControlMode(TalonControlMode.PercentVbus);
 //		//Reverse output may be needed
 //		actuator.configPotentiometerTurns(POT_TURNS);	
 //		actuator.configNominalOutputVoltage(+0.0f, -0.0f);
 //		actuator.setPID(0, 0, 0);
 //		actuator.setF(0);
 	
-//		relay = new Relay(StrongholdConstants.SOLENOID_SHOOTER);
+		relay = new Relay(StrongholdConstants.SOLENOID_SHOOTER);
 	}
 
 	/**
@@ -90,34 +91,32 @@ public class BallShooter extends Shooter {
 		
 //		changeAngle(calculateAngle(distance, goal)); 
 		
-		double speed = calculateSpeed(distance, calculateAngle(distance, goal));//calculateSpeed(distance, 45);
+		double speed = 1; //calculateSpeed(distance, 45);
 
 		//Direction of motor to be found out
-		talonR.set(speed * StrongholdConstants.VEL_PER_100MS );
-		talonL.set(speed * StrongholdConstants.VEL_PER_100MS);
+		talonR.set(speed); //* StrongholdConstants.VEL_PER_100MS
+		talonL.set(speed);
 
 		relay.set(Relay.Value.kForward);
-		Timer.delay(3);
+		
+		Timer.delay(StrongholdConstants.SHOOT_DELAY);
 		talonR.set(StrongholdConstants.NO_THROTTLE);
 		talonL.set(StrongholdConstants.NO_THROTTLE);
-		relay.set(Relay.Value.kReverse);
+		relay.set(Relay.Value.kOff);
 	}
 	
 	//Distance given in inches
 	private double calculateAngle(double distance, StrongholdConstants.shootHeightOptions goal) {
 		double angle;
-		if (goal == StrongholdConstants.shootHeightOptions.HIGH) {
-			angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / distance));
-		} else {
-			angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/distance);
-		}
+		if (goal == StrongholdConstants.shootHeightOptions.HIGH) angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / distance));
+		else angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/distance);
 		return angle;
 	}
 	
 	private double calculateSpeed(double distance, double angle){
 		double speed;
 		//Theta is assumed to be 45 degrees
-		speed = Math.pow(Math.sqrt(2 * Math.pow(distance, 2) - 66432), -4);
+		speed = Math.pow(Math.sqrt(2 * Math.pow(distance, 2) - 5536), -4);
 		if (speed > 1) speed = 1;
 		if (speed < 0.5) speed = 0.5;
 		return speed;
@@ -125,7 +124,23 @@ public class BallShooter extends Shooter {
 	
 	//Changes the angle of the actuator
 	private void changeAngle(double angle) {
-//		actuator.set(POT_TURNS / ACTUATOR_ANGLE_RANGE * angle);
+		actuator.set(-0.5);
+		SmartDashboard.putNumber("Pot Pos: ", actuator.getPosition());
+		Timer.delay(1);
+		actuator.set(0);
 	}
-			
+	
+	public void intake() {
+		talonR.changeControlMode(TalonControlMode.PercentVbus);
+		talonL.changeControlMode(TalonControlMode.PercentVbus);
+		talonR.set(StrongholdConstants.FULL_THROTTLE);
+		talonL.set(-StrongholdConstants.FULL_THROTTLE);
+		
+	}
+	public void stop() {
+		talonR.set(StrongholdConstants.NO_THROTTLE);
+		talonL.set(-StrongholdConstants.NO_THROTTLE);
+	}
+	
+		
 }
