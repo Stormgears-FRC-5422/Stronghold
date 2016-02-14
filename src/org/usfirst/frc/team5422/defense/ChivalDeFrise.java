@@ -74,7 +74,7 @@ public class ChivalDeFrise implements Defense {
 //			StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(shootOptions.HIGH_CENTER));
 //		}
 
-		//Change angle to match angle to best goal
+		//Change angle to match angle to best goals
 		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
 	}
 

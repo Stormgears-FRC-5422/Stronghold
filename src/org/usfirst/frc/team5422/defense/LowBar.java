@@ -62,7 +62,7 @@ public class LowBar implements Defense {
 	public void positionToShoot(defenseTypeOptions defenseType, int defensePosition, shootOptions shootOption) {
 		System.out.println("Robot positioning to shoot after crossing the Low Bar defense at position " + defensePosition + " shooting into " + shootOption);
 
-		//Change angle to match angle to best goal
+		//Change angle to match angle to best goals
 		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
 	}
 

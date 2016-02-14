@@ -71,7 +71,7 @@ public class RoughTerrain implements Defense {
 		System.out.println("Robot positioning to shoot after crossing the RoughTerrain defense at " + defensePosition + " shooting into " + shootOption);
 		// TODO Auto-generated method stub
 
-		//Change angle to match angle to best goal
+		//Change angle to match angle to best goals
 		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
 	}
 
