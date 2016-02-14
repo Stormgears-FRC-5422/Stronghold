@@ -24,7 +24,7 @@ public class StrongholdConstants {
 	public static final int JOYSTICK_CHANNEL = 0;
 	public static final int BUTTONBOARD_CHANNEL = 0;
 	
-	//DigitalOutput 1 for the echo pulse 
+	//DigitalOutput 1 for the echo pulses
 	public static final int ULTRASONIC_ECHO_PULSE_OUTPUT = 1;
 	//DigitalInput 1 for the trigger pulse	
 	public static final int ULTRASONIC_TRIGGER_PULSE_INPUT = 1;
