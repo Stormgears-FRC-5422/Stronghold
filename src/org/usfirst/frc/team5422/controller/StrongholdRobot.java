@@ -165,6 +165,14 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop started.");
 
         Scheduler.getInstance().run();
+        
+        if (stick.getRawButton(1)) {
+        	System.out.println("pressed");
+        	shooterSubsystem.shootHigh(60, StrongholdConstants.shootHeightOptions.HIGH);
+        }
+        else if (stick.getRawButton(2)) shooterSubsystem.intake();
+        else if (stick.getRawButton(3)) shooterSubsystem.stop();
+        
 
         //Run the openDrive() method
         Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX(), CANTalon.TalonControlMode.Speed);
