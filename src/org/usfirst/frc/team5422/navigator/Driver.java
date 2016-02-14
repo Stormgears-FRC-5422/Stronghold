@@ -19,6 +19,9 @@ import static org.usfirst.frc.team5422.utils.StrongholdConstants.TALON_DRIVE_RIG
 public class Driver {
 	public static CANTalon talon[] = new CANTalon[2];
 
+	MotionProfileExample leftProfile;
+	MotionProfileExample rightProfile;
+
 	//Constructor
 	public Driver(CANTalon.TalonControlMode controlMode) {
 		//Set PID closed loop gains
@@ -48,6 +51,9 @@ public class Driver {
 		else {
 			System.out.println("Invalid Talon Control Mode, set the talon in Speed mode or PercentVbus mode");
 		}
+
+		leftProfile = new MotionProfileExample(talon[0]);
+		rightProfile = new MotionProfileExample(talon[1]);
 	}
 
 	/**
@@ -98,9 +104,9 @@ public class Driver {
 		
 		
 		talon[0] = new CANTalon(0);
-		talon[2] = new CANTalon(3);
+		talon[1] = new CANTalon(3);
 		talon[0].setPID(1, 0, 0);
-		talon[2].setPID(1, 0, 0);
+		talon[1].setPID(1, 0, 0);
 		talon[0].setF(0);
 		talon[1].setF(0);
 		
@@ -108,7 +114,7 @@ public class Driver {
 		double rightRotations = rightTicks/8192.0;
 		
 		MotionProfileExample leftProfile = new MotionProfileExample(talon[0]);
-		MotionProfileExample rightProfile = new MotionProfileExample(talon[2]);
+		MotionProfileExample rightProfile = new MotionProfileExample(talon[1]);
 		
 		//config the talons as appropriate
 		talon[0].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -123,19 +129,19 @@ public class Driver {
 			talon[0].reverseSensor(true); //may need to be changed
 		}
 		
-		talon[2].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		talon[1].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
 		if(rightTicks > 0) {
-			talon[2].reverseOutput(false); //may need to be changed
-			talon[2].reverseSensor(true); //may need to be changed
+			talon[1].reverseOutput(false); //may need to be changed
+			talon[1].reverseSensor(true); //may need to be changed
 		}
 		
 		else {
-			talon[2].reverseOutput(true); //may need to be changed
-			talon[2].reverseSensor(false); //may need to be changed
+			talon[1].reverseOutput(true); //may need to be changed
+			talon[1].reverseSensor(false); //may need to be changed
 		}
 	
-		//create both of the motion profiles
+		//create both of the motion profiles (done in teleop periodic)
 		GeneratedMotionProfile.leftPoints = TrapezoidControl.motionProfileUtility(leftRotations, leftVelocity);
 		GeneratedMotionProfile.kNumLeftPoints = GeneratedMotionProfile.leftPoints.length;
 		
@@ -146,11 +152,11 @@ public class Driver {
 		leftProfile.control();
     	rightProfile.control();
 		talon[0].changeControlMode(TalonControlMode.MotionProfile);
-		talon[2].changeControlMode(TalonControlMode.MotionProfile);
+		talon[1].changeControlMode(TalonControlMode.MotionProfile);
 		CANTalon.SetValueMotionProfile setOutputLeft = leftProfile.getSetValue();
 		CANTalon.SetValueMotionProfile setOutputRight = rightProfile.getSetValue();
 		talon[0].set(setOutputLeft.value);
-		talon[2].set(setOutputRight.value);
+		talon[1].set(setOutputRight.value);
 		
 		//start the motion profile
 		leftProfile.startMotionProfile();
@@ -162,9 +168,9 @@ public class Driver {
 		talon[0].set(0);
 		talon[0].setEncPosition(0);
 		
-		talon[2].changeControlMode(TalonControlMode.PercentVbus);
-		talon[2].set(0);
-		talon[2].setEncPosition(0);
+		talon[1].changeControlMode(TalonControlMode.PercentVbus);
+		talon[1].set(0);
+		talon[1].setEncPosition(0);
 	}
 	
 }

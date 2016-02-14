@@ -12,11 +12,20 @@ public class GlobalMapping {
 	
 	public static double sigmaD=0;
 	
-	public static void resetValues(){
-		x=0;
-		y=0;
-		theta=Math.PI/2;
-	}
+	public static double reduceAngleRad(double radians){
+		//reduce theta to theta (mod Math.PI)
+		double n = radians/(2*Math.PI);
+		double remainder = n - (int)n;
+		radians = remainder*2*Math.PI;
+		
+		if(radians > Math.PI){
+			radians -= Math.PI;
+		}else if(radians < -Math.PI){
+			radians += Math.PI;
+		}
+		
+		return radians;
+	}	
 	
 	public static void addTotalDistance(double dSigmaD) {
 		sigmaD += dSigmaD;
@@ -25,11 +34,7 @@ public class GlobalMapping {
 
 	public static void addTotalRotation(double dTheta) {
 		theta += dTheta;
-		theta %=2*Math.PI;
-		if(theta < 0){
-			theta += 2*Math.PI;
-		}
-		
+		theta = reduceAngleRad(theta);
 	}
 
 	public static void addCurrentPosition(double dX, double dY) {

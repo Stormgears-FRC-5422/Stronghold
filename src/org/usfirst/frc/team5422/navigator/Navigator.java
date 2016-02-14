@@ -8,6 +8,7 @@ package org.usfirst.frc.team5422.navigator;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,10 +25,8 @@ public class Navigator extends Subsystem{
 	private CANTalon motor3;
 	private CANTalon motor4;
 
-	private boolean isRunning;
-	
-	private double oldTickR;
-	private double oldTickL;
+	private Joystick joystick; 
+	private boolean isFinished=false;
 	
 	
 	
@@ -36,25 +35,20 @@ public class Navigator extends Subsystem{
 		motor2 = new CANTalon(2);
 		motor3 = new CANTalon(3);
 		motor4 = new CANTalon(4);
+
+		joystick = new Joystick(0);
 		
-		motor2.changeControlMode(TalonControlMode.PercentVbus);
+		motor1.changeControlMode(TalonControlMode.PercentVbus);
 		motor3.changeControlMode(TalonControlMode.PercentVbus);
 		
-		motor2.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motor1.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		motor3.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		
-		motor2.setEncPosition(0);
-		motor3.setEncPosition(0);
-		
-		motor1.changeControlMode(TalonControlMode.Follower);
+		motor2.changeControlMode(TalonControlMode.Follower);
 		motor4.changeControlMode(TalonControlMode.Follower);
 		
-		motor1.set(2);
+		motor2.set(1);
 		motor4.set(3);
-		
-		GlobalMapping.resetValues();
-		
-		updateGP(0,0);
 		
 	}
 	
@@ -78,147 +72,330 @@ public class Navigator extends Subsystem{
 		
 		return power;
 	}
-	
-	//needs to be called repeatedly
-	public void updateGP(double newTickR, double newTickL){
+	public void MoveRobotStraight(double inches, Speed speed){
+		double power = powerFromSpeed(speed);
 		
-		double dTickR = newTickR - oldTickR;
-		double dTickL = newTickL - oldTickL;
+		double destinationTicks = inches/StrongholdConstants.INCHES_PER_TICK;
 		
-		oldTickR = newTickR;
-		oldTickL = newTickL;
+		double newTickR;
+		double newTickL;
 		
-		//inches
-		double dSigmaD = (dTickR+dTickL)*StrongholdConstants.INCHES_PER_TICK/2;
+		double dTickR;
+		double dTickL;
 		
-		//inches
-		double dTheta = ((dTickR - dTickL)*StrongholdConstants.INCHES_PER_TICK)/(StrongholdConstants.WHEEL_BASE);
+		double oldTickR = motor2.getEncPosition();
+		double oldTickL = motor3.getEncPosition();
 		
-		GlobalMapping.addTotalDistance(dSigmaD);
+		motor2.setEncPosition(0);
+		motor3.setEncPosition(0);
 		
-		GlobalMapping.addTotalRotation(dTheta);
+		double dSigmaD;
+		double dTheta;
 		
-		double dX = Math.cos(GlobalMapping.theta)*dSigmaD;
-		double dY = Math.sin(GlobalMapping.theta)*dSigmaD;
+		double dX;
+		double dY;
 		
-		GlobalMapping.addCurrentPosition(dX, dY);
+		this.isFinished = false;
 		
-		SmartDashboard.putNumber("[GP] Total Distance(in)", GlobalMapping.sigmaD);
-		SmartDashboard.putNumber("[GP] Theta(r)", GlobalMapping.theta);
-		
-		SmartDashboard.putNumber("[GP] x-position(in)", GlobalMapping.x);
-		SmartDashboard.putNumber("[GP] y-position(in)", GlobalMapping.y);
-	}
-	
-	
-	private void StopRunning(){
-		
-		motor2.set(0.0);
-		motor3.set(-0.0);
-		isRunning = false;
-		
-	}
-	
-	private boolean Running() {
-		return isRunning;
-	}
-
-	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
-		//dummy function (actually written elsewhere by aditya)
-		
-		motor2.set(Math.signum(rTicks)*0.4);
-		motor3.set(-Math.signum(lTicks)*0.4);
-		
-	}
-	
-	public void rotateToTheta(double theta, double rpmR, double rpmL){
-		
-		System.out.format("[rotate to] %4.3g (rad)", theta);
-		
-		double relInitTheta = theta - GlobalMapping.theta;
-		
-		if(relInitTheta > Math.PI){
-			relInitTheta -= 2*Math.PI;
-		}else if(relInitTheta < -Math.PI){
-			relInitTheta += 2*Math.PI;
+		while(!isFinished()){
+			
+			motor1.set(power);
+			motor3.set(-power);
+			
+			newTickR = -motor2.getEncPosition();
+			newTickL = motor3.getEncPosition();
+			
+			
+			
+			dTickR = newTickR - oldTickR;
+			dTickL = newTickL - oldTickL;
+			
+			oldTickR = newTickR;
+			oldTickL = newTickL;
+			
+			SmartDashboard.putNumber("dTickR", dTickR);
+			SmartDashboard.putNumber("dTickL", dTickL);
+			
+			
+			dSigmaD = (dTickR+dTickL)/2;
+			
+			GlobalMapping.addTotalDistance(dSigmaD);
+			
+			
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
+			SmartDashboard.putNumber("dTheta", dTheta);
+			GlobalMapping.addTotalRotation(dTheta);
+			
+			dX = Math.cos(GlobalMapping.theta)*dSigmaD;
+			dY = Math.sin(GlobalMapping.theta)*dSigmaD;
+			
+			GlobalMapping.addCurrentPosition(dX, dY);
+			
+			SmartDashboard.putNumber("Motor 2", newTickR);
+			SmartDashboard.putNumber("Motor 3", newTickL);
+			
+			SmartDashboard.putNumber("Total Distance", GlobalMapping.sigmaD);
+			SmartDashboard.putNumber("Theta", GlobalMapping.theta);
+			
+			SmartDashboard.putNumber("dSigmaD", dSigmaD);
+			SmartDashboard.putNumber("dTicksR", dTickR);
+			SmartDashboard.putNumber("dTicksR", dTickL);
+			SmartDashboard.putNumber("x-position", GlobalMapping.x);
+			SmartDashboard.putNumber("y-position", GlobalMapping.y);
+			
+			if(GlobalMapping.sigmaD > destinationTicks){
+				this.isFinished = true;
+			}
 		}
 		
-		System.out.format("[rotate by] %4.3g (rad)", relInitTheta );
-		
-		double lTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
-		double rTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
 		
 		
-		//substitute function
-		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL);
+	}
+	
+	public void MoveRobotTurnInPlace(double theta, Speed speed){
 		
-		isRunning = true;
+		//reduce theta to theta (mod Math.PI)
+		theta = GlobalMapping.reduceAngleRad(theta);
 		
-		while(Running()){
-			
-			updateGP(motor3.getEncPosition(), -motor2.getEncPosition());
-			
-			if(Math.abs(GlobalMapping.theta - theta) <= 0.01){
-				StopRunning();
+		double power = powerFromSpeed(speed);
+		
+		double newTickR;
+		double newTickL;
+		
+		double dTickR;
+		double dTickL;
+		
+		double oldTickR = motor2.getEncPosition();
+		double oldTickL = motor3.getEncPosition();
+		
+		motor2.setEncPosition(0);
+		motor3.setEncPosition(0);
+		
+		double dSigmaD;
+		double dTheta;
+		
+		double dX;
+		double dY;
+		
+		this.isFinished = false;
+		
+		while(!isFinished()){
+			if(theta>=0){
+				motor1.set(power);
+				motor3.set(power);
+			}else{
+				motor1.set(-power);
+				motor3.set(-power);
 			}
 			
-		}
-	}
-	
-	public void moveByDistance(double targDistance, double rpm){
-		
-		System.out.format("[translate by] %.3g (in)", targDistance );
-		
-		GlobalMapping.sigmaD = 0;
-		
-		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK; 
-		
-		trapWheelTicks(tickDist, tickDist, rpm, rpm);
-		
-		isRunning = true;
-		
-		while(Running()){
+			newTickR = -motor2.getEncPosition();
+			newTickL = motor3.getEncPosition();
 			
-			updateGP(motor3.getEncPosition(), -motor2.getEncPosition());
 			
-			if(GlobalMapping.sigmaD >= targDistance){
-				StopRunning();
+			
+			dTickR = newTickR - oldTickR;
+			dTickL = newTickL - oldTickL;
+			
+			oldTickR = newTickR;
+			oldTickL = newTickL;
+			
+			SmartDashboard.putNumber("dTickR", dTickR);
+			SmartDashboard.putNumber("dTickL", dTickL);
+			
+			
+			dSigmaD = (dTickR+dTickL)/2;
+			
+			GlobalMapping.addTotalDistance(dSigmaD);
+			
+			
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
+			SmartDashboard.putNumber("dTheta", dTheta);
+			GlobalMapping.addTotalRotation(dTheta);
+			
+			dX = Math.cos(GlobalMapping.theta)*dSigmaD;
+			dY = Math.sin(GlobalMapping.theta)*dSigmaD;
+			
+			GlobalMapping.addCurrentPosition(dX, dY);
+			
+			SmartDashboard.putNumber("Motor 2", newTickR);
+			SmartDashboard.putNumber("Motor 3", newTickL);
+			
+			SmartDashboard.putNumber("Total Distance", GlobalMapping.sigmaD);
+			SmartDashboard.putNumber("Theta", GlobalMapping.theta);
+			
+			SmartDashboard.putNumber("dSigmaD", dSigmaD);
+			SmartDashboard.putNumber("dTicksR", dTickR);
+			SmartDashboard.putNumber("dTicksR", dTickL);
+			SmartDashboard.putNumber("x-position", GlobalMapping.x);
+			SmartDashboard.putNumber("y-position", GlobalMapping.y);
+			
+			if(Math.abs(GlobalMapping.theta - theta) < Math.PI/32  ){
+				this.isFinished = true;
 			}
-		
 		}
-		
 	}
 	
+	public boolean isFinished(){
+		return this.isFinished;
+	}
+	
+	public void DiagnosticTestJoystick(){
+		
+		double newTickR;
+		double newTickL;
+		
+		double dTickR;
+		double dTickL;
+		
+		double oldTickR = motor2.getEncPosition();
+		double oldTickL = motor3.getEncPosition();
+		
+		motor2.setEncPosition(0);
+		motor3.setEncPosition(0);
+		
+		double dSigmaD;
+		double dTheta;
+		
+		double dX;
+		double dY;
+		
+		double joystickval;
+		
+		while(true){
+			
+			 joystickval = joystick.getY();
+			
+			motor1.set(joystickval);
+			motor3.set(-joystickval);
+			
+			newTickR = -motor2.getEncPosition();
+			newTickL = motor3.getEncPosition();
+			
+			
+			
+			dTickR = newTickR - oldTickR;
+			dTickL = newTickL - oldTickL;
+			
+			oldTickR = newTickR;
+			oldTickL = newTickL;
+			
+			SmartDashboard.putNumber("dTickR", dTickR);
+			SmartDashboard.putNumber("dTickL", dTickL);
+			
+			
+			dSigmaD = (dTickR+dTickL)/2;
+			
+			GlobalMapping.addTotalDistance(dSigmaD);
+			
+			
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
+			SmartDashboard.putNumber("dTheta", dTheta);
+			GlobalMapping.addTotalRotation(dTheta);
+			
+			dX = Math.cos(GlobalMapping.theta)*dSigmaD;
+			dY = Math.sin(GlobalMapping.theta)*dSigmaD;
+			
+			GlobalMapping.addCurrentPosition(dX, dY);
+			
+			SmartDashboard.putNumber("Motor 2", newTickR);
+			SmartDashboard.putNumber("Motor 3", newTickL);
+			
+			SmartDashboard.putNumber("Total Distance", GlobalMapping.sigmaD);
+			SmartDashboard.putNumber("Theta", GlobalMapping.theta);
+			
+			SmartDashboard.putNumber("dSigmaD", dSigmaD);
+			SmartDashboard.putNumber("dTicksR", dTickR);
+			SmartDashboard.putNumber("dTicksR", dTickL);
+			SmartDashboard.putNumber("x-position", GlobalMapping.x);
+			SmartDashboard.putNumber("y-position", GlobalMapping.y);
+		}
+	
+	}
+	
+	public void DiagnosticTestAuto(Speed speed){
+	
+		double power = powerFromSpeed(speed);
+		
+		double newTickR;
+		double newTickL;
+		
+		double dTickR;
+		double dTickL;
+		
+		double oldTickR = motor2.getEncPosition();
+		double oldTickL = motor3.getEncPosition();
+		
+		motor2.setEncPosition(0);
+		motor3.setEncPosition(0);
+		
+		double dSigmaD;
+		double dTheta;
+		
+		double dX;
+		double dY;
+		
+		while(true){
+			
+			
+			motor1.set(power);
+			motor3.set(-power);
+			
+			newTickR = -motor2.getEncPosition();
+			newTickL = motor3.getEncPosition();
+			
+			
+			
+			dTickR = newTickR - oldTickR;
+			dTickL = newTickL - oldTickL;
+			
+			oldTickR = newTickR;
+			oldTickL = newTickL;
+			
+			SmartDashboard.putNumber("dTickR", dTickR);
+			SmartDashboard.putNumber("dTickL", dTickL);
+			
+			
+			dSigmaD = (dTickR+dTickL)/2;
+			
+			GlobalMapping.addTotalDistance(dSigmaD);
+			
+			
+			dTheta = (dTickR - dTickL)/(StrongholdConstants.WHEEL_BASE/StrongholdConstants.INCHES_PER_TICK);
+			SmartDashboard.putNumber("dTheta", dTheta);
+			GlobalMapping.addTotalRotation(dTheta);
+			
+			dX = Math.cos(GlobalMapping.theta)*dSigmaD;
+			dY = Math.sin(GlobalMapping.theta)*dSigmaD;
+			
+			GlobalMapping.addCurrentPosition(dX, dY);
+			
+			SmartDashboard.putNumber("Motor 2", newTickR);
+			SmartDashboard.putNumber("Motor 3", newTickL);
+			
+			SmartDashboard.putNumber("Total Distance", GlobalMapping.sigmaD);
+			SmartDashboard.putNumber("Theta", GlobalMapping.theta);
+			
+			SmartDashboard.putNumber("dSigmaD", dSigmaD);
+			SmartDashboard.putNumber("dTicksR", dTickR);
+			SmartDashboard.putNumber("dTicksR", dTickL);
+			SmartDashboard.putNumber("x-position", GlobalMapping.x);
+			SmartDashboard.putNumber("y-position", GlobalMapping.y);
+		}
+	
+	}
 	
 	/**
 	 * This function helps drive the robot to precise coordinates on the field 
 	 */
 	//TODO: Modularization
-	public void driveTo(double xField, double yField, double thetaField){
-		
-		double xRel = xField - GlobalMapping.x;
-		double yRel = yField - GlobalMapping.y;
-		
-		double targInitTheta = Math.atan2(yRel, xRel);
-		
-		if(targInitTheta < 0){
-			targInitTheta+=2*Math.PI;
-		}
-		
-		double rpm = 0.2*60;
-		
-		rotateToTheta(targInitTheta, rpm, rpm);
-		
-		double targDistance = Math.sqrt(xRel*xRel + yRel*yRel);
-		
-		moveByDistance(targDistance, rpm);
-		
-		rotateToTheta(thetaField, rpm, rpm);
-		
-		System.out.println("Done.");
-		
+	public void driveTo(double xOnField, double yOnField, double theta) {
+		double turnTheta = Math.atan2(GlobalMapping.y - yOnField, GlobalMapping.x - xOnField);
+		this.MoveRobotTurnInPlace(turnTheta - GlobalMapping.theta, Speed.MEDIUM);
+		this.MoveRobotStraight(Math.sqrt(Math.pow((GlobalMapping.y-yOnField), 2) + Math.pow((GlobalMapping.x-xOnField), 2)), Speed.MEDIUM);
+		this.MoveRobotTurnInPlace(theta - GlobalMapping.theta, Speed.MEDIUM);
 	}
+
 
 	@Override
 	protected void initDefaultCommand() {
