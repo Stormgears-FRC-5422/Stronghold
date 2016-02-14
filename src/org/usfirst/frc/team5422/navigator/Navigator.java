@@ -30,8 +30,11 @@ public class Navigator extends Subsystem{
 		thread = new Notifier(new GlobalMapping());
 		thread.startPeriodic(0.001);
 		
+		System.out.println("Before resetting global positions : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
+		
 		GlobalMapping.resetValues();
 		
+		System.out.println("After resetting global positions : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
 		
 		
 	}
@@ -62,7 +65,7 @@ public class Navigator extends Subsystem{
 	private void StopRunning(){
 		
 		Driver.talon[0].set(0.0);
-		Driver.talon[1].set(-0.0);
+		Driver.talon[1].set(0.0);
 		isRunning = false;
 		
 	}
@@ -74,8 +77,8 @@ public class Navigator extends Subsystem{
 	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
 		//dummy function (actually written elsewhere by aditya)
 		
-		Driver.talon[0].set(Math.signum(rTicks)*0.4);
-		Driver.talon[1].set(-Math.signum(lTicks)*0.4);
+		Driver.talon[0].set(-Math.signum(rTicks)*0.4);
+		Driver.talon[1].set(Math.signum(lTicks)*0.4);
 		
 	}
 	
@@ -105,7 +108,8 @@ public class Navigator extends Subsystem{
 		
 		while(Running()){
 			
-			if(Math.abs(GlobalMapping.getTheta() - theta) <= 0.01){
+			if(Math.abs(GlobalMapping.getTheta() - theta) <= 0.1){
+				System.out.println("stopped turning");
 				StopRunning();
 			}
 			
@@ -142,6 +146,36 @@ public class Navigator extends Subsystem{
 	//TODO: Modularization
 	public void driveTo(double xField, double yField, double thetaField){
 		
+		System.out.println("In Drive To Current GP is : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
+
+		double xRel = xField - GlobalMapping.getX();
+		double yRel = yField - GlobalMapping.getY();
+		
+		double targInitTheta = Math.atan2(yRel, xRel);
+		
+		if(targInitTheta < 0){
+			targInitTheta+=2*Math.PI;
+		}
+		
+		double rpm = 0.2*60;
+
+		System.out.println("In Drive To New GP values are : " + " and " + targInitTheta);
+		
+		rotateToTheta(targInitTheta, rpm, rpm);
+		
+		double targDistance = Math.sqrt(xRel*xRel + yRel*yRel);
+		System.out.println("In Drive To New GP values are : " + " and " + targInitTheta);
+		
+		moveByDistance(targDistance, rpm);
+		
+		rotateToTheta(thetaField, rpm, rpm);
+		
+		System.out.println("Done.");
+		
+	}
+	
+	public void driveTo(double xField, double yField){
+		
 		double xRel = xField - GlobalMapping.getX();
 		double yRel = yField - GlobalMapping.getY();
 		
@@ -158,6 +192,14 @@ public class Navigator extends Subsystem{
 		double targDistance = Math.sqrt(xRel*xRel + yRel*yRel);
 		
 		moveByDistance(targDistance, rpm);
+		
+		System.out.println("Done.");
+		
+	}
+	
+	public void driveTo(double thetaField){
+		
+		double rpm = 0.2*60;
 		
 		rotateToTheta(thetaField, rpm, rpm);
 		

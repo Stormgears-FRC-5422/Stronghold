@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
-import org.usfirst.frc.team5422.commands.GrapplingCommand;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
@@ -26,7 +25,6 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.alliance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * This is a demo program showing the use of the RobotDrive class.
@@ -190,15 +188,9 @@ public class StrongholdRobot extends IterativeRobot {
 
 	public void testInit() {
 		
-	}
-	
-    /**
-     * Runs during test mode
-     */
-    public void testPeriodic() {
-        System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
+		System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
 
-        diagnosticPOSTOptions key = diagnosticPOSTOptions.TEST_CHASSIS_DRIVE;
+        diagnosticPOSTOptions key = diagnosticPOSTOptions.TEST_GLOBAL_POSITIONING;
 
         switch (key) {
             case TEST_GYRO:
@@ -244,10 +236,26 @@ public class StrongholdRobot extends IterativeRobot {
     			System.out.println("Testing motion profile");
     			Driver.moveTrapezoid(8192, 8192, 0.5, 0.5);
     			break;
+    		case TEST_GLOBAL_POSITIONING:
+    			System.out.println("Testing global positioning");
+    			navigatorSubsystem.driveTo(0, 60);
+    			navigatorSubsystem.driveTo(-20, 80);
+    			navigatorSubsystem.driveTo(0, 0);
+    			navigatorSubsystem.driveTo(0, 0);
+    			navigatorSubsystem.driveTo(0, 0);
+    			navigatorSubsystem.driveTo(Math.PI/2);
+    			break;
 
             default:
                 break;
         }
+	}
+	
+    /**
+     * Runs during test mode
+     */
+    public void testPeriodic() {
+        
     }
 
 }
