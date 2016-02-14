@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 /**
@@ -28,18 +29,23 @@ public class ShootCommand extends DefenseCommand {
 		switch(shootOptionSelected) {
 		case HIGH_LEFT:
 			temp += "HIGH_LEFT";
+			StrongholdRobot.shooterSubsystem.shootHigh(60, shootHeightOptions.HIGH);
 			break;
 		case HIGH_CENTER:
 			temp += "HIGH_CENTER";
+			StrongholdRobot.shooterSubsystem.shootHigh(60, shootHeightOptions.HIGH);
 			break;
 		case HIGH_RIGHT:
 			temp += "HIGH_RIGHT";
+			StrongholdRobot.shooterSubsystem.shootHigh(60, shootHeightOptions.HIGH);
 			break;
 		case LOW_LEFT:
 			temp += "LOW_LEFT";
+			StrongholdRobot.shooterSubsystem.shootLow(60, shootHeightOptions.LOW);
 			break;
 		case LOW_RIGHT:
 			temp += "LOW_RIGHT";
+			StrongholdRobot.shooterSubsystem.shootLow(60, shootHeightOptions.LOW);
 			break;
 		default:
 			break;
