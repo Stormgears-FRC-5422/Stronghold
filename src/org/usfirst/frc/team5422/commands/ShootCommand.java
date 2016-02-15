@@ -39,27 +39,27 @@ public class ShootCommand extends Command {
 		case HIGH_LEFT:
 			temp += "HIGH_LEFT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HLEFT_GOAL[0], StrongholdConstants.POSITION_HLEFT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootHigh(distance, shootHeightOptions.HIGH);
+			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
 			break;
 		case HIGH_CENTER:
 			temp += "HIGH_CENTER";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HCENTER_GOAL[0], StrongholdConstants.POSITION_HCENTER_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootHigh(distance, shootHeightOptions.HIGH);
+			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
 			break;
 		case HIGH_RIGHT:
 			temp += "HIGH_RIGHT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HRIGHT_GOAL[0], StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootHigh(distance, shootHeightOptions.HIGH);
+			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
 			break;
 		case LOW_LEFT:
 			temp += "LOW_LEFT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_LLEFT_GOAL[0], StrongholdConstants.POSITION_LLEFT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootLow(distance, shootHeightOptions.LOW);
+			StrongholdRobot.shooterSubsystem.shootLow(shootHeightOptions.LOW);
 			break;
 		case LOW_RIGHT:
 			temp += "LOW_RIGHT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_LRIGHT_GOAL[0], StrongholdConstants.POSITION_LRIGHT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootLow(distance, shootHeightOptions.LOW);
+			StrongholdRobot.shooterSubsystem.shootLow(shootHeightOptions.LOW);
 			break;
 		default:
 			break;

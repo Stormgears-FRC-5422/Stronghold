@@ -1,6 +1,11 @@
 package org.usfirst.frc.team5422.shooter;
 
+import org.usfirst.frc.team5422.navigator.GlobalMapping;
+import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -32,18 +37,18 @@ public class BallShooter extends Subsystem {
 	CANTalon actuator;
 	Relay relay;
 	
-	public void shootLow(double distance, StrongholdConstants.shootHeightOptions goal) {
+	public void shootLow(StrongholdConstants.shootHeightOptions goal) {
 		System.out.println("Shooting low...");
-		shoot(distance, goal);
+		shoot(goal);
 		System.out.println("shot ball low");
 	}	
 
 	/**
 	 * This function helps shoot the ball/boulder into the high goal
 	 */
-	public void shootHigh(double distance, StrongholdConstants.shootHeightOptions goal) {
+	public void shootHigh(StrongholdConstants.shootHeightOptions goal) {
 		System.out.println("Shooting high...");
-		shoot(distance, goal);
+		shoot(goal);
 		System.out.println("shot ball high");
 	}
 	
@@ -86,7 +91,7 @@ public class BallShooter extends Subsystem {
 	
 	//Shoots the ball
 	//Inputs: distance, low or high goal
-	public void shoot(double distance, StrongholdConstants.shootHeightOptions goal) {
+	public void shoot(StrongholdConstants.shootHeightOptions goal) {
 		
 //		changeAngle(calculateAngle(distance, goal)); 
 		
@@ -107,17 +112,17 @@ public class BallShooter extends Subsystem {
 	}
 	
 	//Distance given in inches
-	private double calculateAngle(double distance, StrongholdConstants.shootHeightOptions goal) {
+	private double calculateAngle(StrongholdConstants.shootHeightOptions goal) {
 		double angle;
-		if (goal == StrongholdConstants.shootHeightOptions.HIGH) angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / distance));
-		else angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/distance);
+		if (goal == StrongholdConstants.shootHeightOptions.HIGH) angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / getDistancetoGoal()));
+		else angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/getDistancetoGoal());
 		return angle;
 	}
 	
-	private double calculateSpeed(double distance, double angle){
+	private double calculateSpeed(double angle){
 		double speed;
 		//Theta is assumed to be 45 degrees
-		speed = Math.pow(Math.sqrt(2 * Math.pow(distance, 2) - 5536), -4);
+		speed = Math.pow(Math.sqrt(2 * Math.pow(getDistancetoGoal(), 2) - 5536), -4);
 		if (speed > 1) speed = 1;
 		if (speed < 0.5) speed = 0.5;
 		return speed;
@@ -141,6 +146,30 @@ public class BallShooter extends Subsystem {
 	public void stop() {
 		talonR.set(StrongholdConstants.NO_THROTTLE);
 		talonL.set(-StrongholdConstants.NO_THROTTLE);
+	}
+	
+	public double getDistancetoGoal() {
+		shootOptions bestGoal = StrongholdUtils.findBestGoal(shootHeightOptions.HIGH);
+		double distanceFromGoal;
+		double thetaX;
+		double thetaY;
+		
+		if (bestGoal == shootOptions.HIGH_CENTER) {
+			thetaX = Math.abs(GlobalMapping.getX() - StrongholdConstants.POSITION_HCENTER_GOAL[0]);
+			thetaY = Math.abs(GlobalMapping.getY() - StrongholdConstants.POSITION_HCENTER_GOAL[1]);
+		}
+		else if (bestGoal == shootOptions.HIGH_LEFT) {
+			thetaX = Math.abs(GlobalMapping.getX() - StrongholdConstants.POSITION_HLEFT_GOAL[0]);
+			thetaY = Math.abs(GlobalMapping.getY() - StrongholdConstants.POSITION_HLEFT_GOAL[1]);
+		}
+		else {
+			thetaX = Math.abs(GlobalMapping.getX() - StrongholdConstants.POSITION_HRIGHT_GOAL[0]);
+			thetaY = Math.abs(GlobalMapping.getY() - StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
+		}
+		
+		distanceFromGoal =  Math.pow(Math.pow(thetaX, 2) + Math.pow(thetaY, 2), -2);
+		
+		return distanceFromGoal;
 	}
 	
 		
