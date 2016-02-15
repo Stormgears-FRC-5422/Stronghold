@@ -16,7 +16,6 @@ import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
-import org.usfirst.frc.team5422.shooter.Shooter;
 import org.usfirst.frc.team5422.utils.PIDTuner;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
@@ -52,7 +51,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class StrongholdRobot extends IterativeRobot {
     public static Navigator navigatorSubsystem;
-    public static Shooter shooterSubsystem;
+    public static BallShooter shooterSubsystem;
     public static Opener openerSubsystem;
     public static Grappler grapplerSubsystem;
     public static Lifter lifterSubsystem;

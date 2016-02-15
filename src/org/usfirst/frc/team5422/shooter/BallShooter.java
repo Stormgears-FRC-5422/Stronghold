@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.CANTalon.FeedbackDeviceStatus;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 
 
-public class BallShooter extends Shooter {
+public class BallShooter extends Subsystem {
 	/**
 	 * This function helps shoot the ball/boulder into the low goal
 	 */
@@ -32,16 +33,18 @@ public class BallShooter extends Shooter {
 	Relay relay;
 	
 	public void shootLow(double distance, StrongholdConstants.shootHeightOptions goal) {
+		System.out.println("Shooting low...");
 		shoot(distance, goal);
+		System.out.println("shot ball low");
 	}	
 
 	/**
 	 * This function helps shoot the ball/boulder into the high goal
 	 */
 	public void shootHigh(double distance, StrongholdConstants.shootHeightOptions goal) {
-		System.out.println("Beginning shot");
+		System.out.println("Shooting high...");
 		shoot(distance, goal);
-		System.out.println("shot ball");
+		System.out.println("shot ball high");
 	}
 	
 	public BallShooter() {
@@ -74,10 +77,6 @@ public class BallShooter extends Shooter {
 	
 		relay = new Relay(StrongholdConstants.SOLENOID_SHOOTER);
 	}
-
-	/**
-	 * This function helps shoot the ball/boulder into the high goal
-	 */
 
 	@Override
 	protected void initDefaultCommand() {
