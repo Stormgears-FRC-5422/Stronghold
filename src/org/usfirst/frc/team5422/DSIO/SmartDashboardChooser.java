@@ -62,6 +62,8 @@ public class SmartDashboardChooser {
         allianceChooser.addDefault("Red", StrongholdConstants.alliance.RED);
         allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
         SmartDashboard.putData("Alliance Chooser", allianceChooser);
+        
+//        testInitChoosers();
 	}
 	
 	public void autoInitChoosers() {

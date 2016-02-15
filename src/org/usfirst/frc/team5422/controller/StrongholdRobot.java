@@ -68,7 +68,7 @@ public class StrongholdRobot extends IterativeRobot {
     public static int defensePositionSelected;
     public static shootOptions shootOptionSelected;
     public static alliance allianceSelected;
-    public static int diagnosticTestSelected;
+    public static diagnosticPOSTOptions diagnosticTestSelected;
 
     public static boolean teleopNotRunning;
 
@@ -202,10 +202,14 @@ public class StrongholdRobot extends IterativeRobot {
 		
 		System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
 		
-		diagnosticTestSelected = (int) SmartDashboard.getNumber("Diagnostic Test Selected", -1);
-        diagnosticPOSTOptions key = diagnosticPOSTOptions.TEST_GLOBAL_POSITIONING;
+		diagnosticTestSelected = null;
+		smartDashboardChooser.testInitChoosers();
 
-        switch (key) {
+		while (diagnosticTestSelected == null) {
+			diagnosticTestSelected = (diagnosticPOSTOptions) DSIO.choosers.testChooser.getSelected();
+		}
+		
+        switch (diagnosticTestSelected) {
             case TEST_GYRO:
                 System.out.println("Testing Gyro");
                 break;
