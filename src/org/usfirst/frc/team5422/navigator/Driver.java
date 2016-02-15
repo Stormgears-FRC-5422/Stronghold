@@ -19,8 +19,8 @@ import static org.usfirst.frc.team5422.utils.StrongholdConstants.TALON_DRIVE_RIG
 public class Driver {
 	public static CANTalon talon[] = new CANTalon[2];
 
-	MotionProfileExample leftProfile;
-	MotionProfileExample rightProfile;
+	static MotionProfileExample leftProfile;
+	static MotionProfileExample rightProfile;
 
 	//Constructor
 	public Driver(CANTalon.TalonControlMode controlMode) {
@@ -100,28 +100,43 @@ public class Driver {
 	}
 	
 	
-	public static void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {
-		
-		
+	public static void initializeTrapezoid() {
 		talon[0] = new CANTalon(0);
 		talon[1] = new CANTalon(3);
+		
+		leftProfile = new MotionProfileExample(talon[0]);
+		rightProfile = new MotionProfileExample(talon[1]);
+		
+		talon[0].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		talon[1].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	
 		talon[0].setPID(1, 0, 0);
 		talon[1].setPID(1, 0, 0);
 		talon[0].setF(0);
 		talon[1].setF(0);
 		
+	 	talon[0].changeControlMode(TalonControlMode.MotionProfile);
+	 	talon[1].changeControlMode(TalonControlMode.MotionProfile);
+	}
+	
+	public static void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {
+		
+	
+		int leftStartingTicks = talon[0].getEncPosition();
+		int rightStartingTicks = talon[1].getEncPosition();
+		
 		double leftRotations = leftTicks/8192.0;
+		double leftStartingRotations = leftStartingTicks/8192.0;
 		double rightRotations = rightTicks/8192.0;
-		
-		MotionProfileExample leftProfile = new MotionProfileExample(talon[0]);
-		MotionProfileExample rightProfile = new MotionProfileExample(talon[1]);
-		
+		double rightStartingRotations = rightStartingTicks/8192.0;
+	
 		//config the talons as appropriate
-		talon[0].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	
 		
 		if(leftTicks > 0) {
 			talon[0].reverseOutput(true); //may need to be changed
 			talon[0].reverseSensor(false); //may need to be changed
+			
 		}
 		
 		else {
@@ -129,7 +144,7 @@ public class Driver {
 			talon[0].reverseSensor(true); //may need to be changed
 		}
 		
-		talon[1].setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+
 		
 		if(rightTicks > 0) {
 			talon[1].reverseOutput(false); //may need to be changed
@@ -141,24 +156,27 @@ public class Driver {
 			talon[1].reverseSensor(false); //may need to be changed
 		}
 	
-		//create both of the motion profiles (done in teleop periodic)
-		GeneratedMotionProfile.leftPoints = TrapezoidControl.motionProfileUtility(leftRotations, leftVelocity);
-		GeneratedMotionProfile.kNumLeftPoints = GeneratedMotionProfile.leftPoints.length;
+		//create both of the motion profiles(done in teleopPeriodic)
+		leftProfile.setProfile(TrapezoidControl.motionProfileUtility(leftRotations, leftVelocity, leftStartingRotations));
 		
-		GeneratedMotionProfile.rightPoints = TrapezoidControl.motionProfileUtility(rightRotations, rightVelocity);
-		GeneratedMotionProfile.kNumRightPoints = GeneratedMotionProfile.rightPoints.length;
 		
-		//set up all the "formalities" so that the motion profiles can actually be run
+		rightProfile.setProfile(TrapezoidControl.motionProfileUtility(rightRotations, rightVelocity, rightStartingRotations));
+	
+		
+		//set up all the "formalities" so that the motion profiles can actually be run(Teleop Periodic)		
 		leftProfile.control();
-    	rightProfile.control();
-		talon[0].changeControlMode(TalonControlMode.MotionProfile);
-		talon[1].changeControlMode(TalonControlMode.MotionProfile);
-		CANTalon.SetValueMotionProfile setOutputLeft = leftProfile.getSetValue();
-		CANTalon.SetValueMotionProfile setOutputRight = rightProfile.getSetValue();
+		rightProfile.control();
+    	
+  
+		
+    	CANTalon.SetValueMotionProfile setOutputLeft = leftProfile.getSetValue();
+    	CANTalon.SetValueMotionProfile setOutputRight = rightProfile.getSetValue();
+		
 		talon[0].set(setOutputLeft.value);
 		talon[1].set(setOutputRight.value);
 		
-		//start the motion profile
+		
+		//start the motion profile(Teleop periodic)
 		leftProfile.startMotionProfile();
 		rightProfile.startMotionProfile();		
 	}
@@ -166,7 +184,7 @@ public class Driver {
 	public static void resetTrapezoid() {
 		talon[0].changeControlMode(TalonControlMode.PercentVbus);
 		talon[0].set(0);
-		talon[0].setEncPosition(0);
+		talon[0].setEncPosition(0); //will need to be commented out 
 		
 		talon[1].changeControlMode(TalonControlMode.PercentVbus);
 		talon[1].set(0);

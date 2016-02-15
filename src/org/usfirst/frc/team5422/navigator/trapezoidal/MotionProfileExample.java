@@ -46,6 +46,7 @@ public class MotionProfileExample {
 	 * motion profile.
 	 */
 	private CANTalon _talon;
+	private double [][] profilePoints;
 	/**
 	 * State machine to make sure we let enough of the motion profile stream to
 	 * talon before we fire it.
@@ -84,6 +85,7 @@ public class MotionProfileExample {
 	private static final int kNumLoopsTimeout = 10;
 	private static TrapezoidControl control = new TrapezoidControl();
 
+	private static int loopCounter = 0;
 	
 	/**
 	 * Lets create a periodic task to funnel our trajectory points into our talon.
@@ -112,6 +114,8 @@ public class MotionProfileExample {
 		_talon = talon;
 		_talon.configEncoderCodesPerRev(2048);
 		
+		profilePoints = new double[1][1];
+		profilePoints[0][0] = 0;
 		/*
 		 * since our MP is 10ms per point, set the control frame rate and the
 		 * notifer to half that
@@ -124,6 +128,10 @@ public class MotionProfileExample {
 		_talon.changeMotionControlFramePeriod(5);
 		_notifer.startPeriodic(0.005);
 		
+	}
+	
+	public void setProfile(double [][] points) {
+		profilePoints = points;
 	}
 
 	/**
@@ -154,6 +162,7 @@ public class MotionProfileExample {
 	 */
 	public void control() {
 		/* Get the motion profile status every loop */
+		System.out.println("Loop Counter = " + loopCounter ++);
 		_talon.getMotionProfileStatus(_status);
 
 		/*
@@ -190,8 +199,11 @@ public class MotionProfileExample {
 			 * do.
 			 */
 			switch (_state) {
-				case 0: /* wait for application to tell us to start an MP */
+				case 0:
+					System.out.println("bStart = " + _bStart);
+					/* wait for application to tell us to start an MP */
 					if (_bStart) {
+						System.out.println("Motion Profile Should get Enabled");
 						_bStart = false;
 	
 						_setValue = CANTalon.SetValueMotionProfile.Disable;
@@ -203,12 +215,15 @@ public class MotionProfileExample {
 						_loopTimeout = kNumLoopsTimeout;
 					}
 					break;
-				case 1: /*
+				case 1:
+					System.out.println("Case 1 Entered");	
+						/*
 						 * wait for MP to stream to Talon, really just the first few
 						 * points
 						 */
 					/* do we have a minimum numberof points in Talon */
 					if (_status.btmBufferCnt > kMinPointsInTalon) {
+						System.out.println("_status.btmBufferCnt > kMinPointsInTalon");
 						/* start (once) the motion profile */
 						_setValue = CANTalon.SetValueMotionProfile.Enable;
 						/* MP will start once the control frame gets scheduled */
@@ -216,13 +231,16 @@ public class MotionProfileExample {
 						_loopTimeout = kNumLoopsTimeout;
 					}
 					break;
-				case 2: /* check the status of the MP */
+				case 2:
+					System.out.println("case 2 activated");
+					/* check the status of the MP */
 					/*
 					 * if talon is reporting things are good, keep adding to our
 					 * timeout. Really this is so that you can unplug your talon in
 					 * the middle of an MP and react to it.
 					 */
 					if (_status.isUnderrun == false) {
+						System.out.println("isUnderrun");
 						_loopTimeout = kNumLoopsTimeout;
 					}
 					/*
@@ -231,6 +249,7 @@ public class MotionProfileExample {
 					 * position.
 					 */
 					if (_status.activePointValid && _status.activePoint.isLastPoint) {
+						System.out.println("_status.activePointValid && _status.activePoint.isLastPoint");
 						/*
 						 * because we set the last point's isLast to true, we will
 						 * get here when the MP is done
@@ -249,8 +268,8 @@ public class MotionProfileExample {
 	/** Start filling the MPs to all of the involved Talons. */
 	private void startFilling() {
 		/* since this example only has one talon, just update that one */
-		startFilling(GeneratedMotionProfile.leftPoints, GeneratedMotionProfile.kNumLeftPoints);
-		startFilling(GeneratedMotionProfile.rightPoints, GeneratedMotionProfile.kNumRightPoints);
+		startFilling(profilePoints, profilePoints.length);
+	//	startFilling(GeneratedMotionProfile.rightPoints, GeneratedMotionProfile.kNumRightPoints);
 	}
 
 	

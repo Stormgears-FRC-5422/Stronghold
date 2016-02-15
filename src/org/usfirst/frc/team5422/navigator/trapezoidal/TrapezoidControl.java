@@ -8,18 +8,20 @@ public class TrapezoidControl {
 	
 
 	
-	public static double [][] motionProfileUtility(double rotations, double maxVel) {
+	public static double [][] motionProfileUtility(double rotations, double maxVel, double startingRotations) {
+		rotations = Math.abs(rotations); //this is key, because it basically allows this: neg rotations = backwards
 		int targetTicks = (int)(rotations * 8192);
+		int startingTicks = (int)(startingRotations * 8192);
 		double velRPM = maxVel * 8192;
 		double accel = velRPM;
 		
 		System.out.println("Target ticks: " + targetTicks + "Max Accel: " + accel + "Max Vel: " + velRPM);
-		return ultimateProfileDoubleArray(targetTicks, accel, velRPM);
+		return ultimateProfileDoubleArray(targetTicks, startingTicks, accel, velRPM);
 		
 	}
 	
 	
-	public static double [][] ultimateProfileDoubleArray(int targetTicks, double maxAccel, double maxVel) {
+	public static double [][] ultimateProfileDoubleArray(int targetTicks, int startingTicks, double maxAccel, double maxVel) {
 		
 		double[][] trajectoryPointArray = new double[(int)(Math.round(determineTime(targetTicks, maxAccel, maxVel)/10.0)) + 1][3];
 		
@@ -28,7 +30,7 @@ public class TrapezoidControl {
 		for(int i = 0; i < trajectoryPointArray.length; i ++) {
 			double [] pointValues = velocityProfileArray(targetTicks, currentTime, maxAccel, maxVel);
 			
-			trajectoryPointArray[i][0] = pointValues[0]/8192.0; //in rotations now
+			trajectoryPointArray[i][0] = pointValues[0]/8192.0;// + startingTicks/8192.0; //in rotations now
 			trajectoryPointArray[i][1] = pointValues[1]/8192.0 * 60; //RPM now
 			trajectoryPointArray[i][2] = 10; //time dur in ms
 			

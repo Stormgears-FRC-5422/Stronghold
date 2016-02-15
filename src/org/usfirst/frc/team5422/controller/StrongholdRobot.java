@@ -78,6 +78,12 @@ public class StrongholdRobot extends IterativeRobot {
 
     public static SmartDashboardChooser smartDashboardChooser;
     
+    static int leftTicks = 0;
+    static int rightTicks = 0;
+     
+    static double leftVelocity = 0;
+    static double rightVelocity = 0;
+    
     public StrongholdRobot() {
         NetworkTable.globalDeleteAll(); //Removes unused garbage from SmartDashboard
 
@@ -155,7 +161,7 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop init started.");
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleopNotRunning = false;
-
+      //  Driver.initializeTrapezoid();
         System.out.println("teleop init ended.");
     }
 
@@ -166,6 +172,8 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop started.");
 
         Scheduler.getInstance().run();
+        
+       // Driver.moveTrapezoid(leftTicks, rightTicks, leftVelocity, rightVelocity);
         
         if (DSIO.buttonBoard.getRawButton(10)) {
         	System.out.println("pressed");
