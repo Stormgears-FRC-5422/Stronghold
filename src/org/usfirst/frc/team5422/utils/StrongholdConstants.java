@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5422.utils;
 
 /*
+ *@author Suren Karavettil
  *@author Mayank
  */
 
@@ -80,7 +81,8 @@ public class StrongholdConstants {
 		TEST_ALIGN_TO_CASTLE,
 		TEST_LIFTER,
 		TEST_MOTION_PROFILE, 
-		TEST_GLOBAL_POSITIONING
+		TEST_GLOBAL_POSITIONING,
+		TEST_NONE
 	}
 
 	public enum shootHeightOptions {

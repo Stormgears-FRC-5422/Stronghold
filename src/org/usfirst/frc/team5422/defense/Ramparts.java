@@ -8,8 +8,10 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 /*
+ * @author Suren Karavettil
  * @author Michael
  */
+
 
 public class Ramparts implements Defense {
 
