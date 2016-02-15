@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SmartDashboardChooser {
     public static SendableChooser defenseChooser, shootChooser, endChooser, allianceChooser, testChooser;
 
-    public void SmartDashboardChooser() {
+    public SmartDashboardChooser() {
 		//create choosers
 
     	//create defense chooser
