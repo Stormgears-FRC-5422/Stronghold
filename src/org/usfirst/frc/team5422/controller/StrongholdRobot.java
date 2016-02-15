@@ -4,6 +4,7 @@ package org.usfirst.frc.team5422.controller;
 import edu.wpi.first.wpilibj.*;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
@@ -190,7 +191,18 @@ public class StrongholdRobot extends IterativeRobot {
 		
 		System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
 
-        diagnosticPOSTOptions key = diagnosticPOSTOptions.TEST_GLOBAL_POSITIONING;
+        diagnosticPOSTOptions key;
+        SmartDashboard.putData("Test Chooser", DSIO.testChooser);
+
+        SmartDashboard.putNumber("Put '1' Here to Start Testing: ", 0);
+        int go = 0;
+
+
+        //Listen for input from smart dashboard; when the user puts '1' in the textbox, the robot will test the mode selected in testChooser
+        while (go == 0) {
+            go = (int) SmartDashboard.getNumber("Put '1' Here to Start Testing: ", go);
+        }
+        key = (diagnosticPOSTOptions) DSIO.testChooser.getSelected();
 
         switch (key) {
             case TEST_GYRO:
@@ -227,6 +239,8 @@ public class StrongholdRobot extends IterativeRobot {
                 break;
 
             case TEST_ALIGN_TO_CASTLE:
+                System.out.println("Test: aligning to castle");
+                grapplerSubsystem.alignToCastle();
                 break;
 
             case TEST_LIFTER:

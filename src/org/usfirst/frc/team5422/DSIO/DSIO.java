@@ -5,6 +5,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -41,7 +42,7 @@ public class DSIO {
     }
 
     //Check if a button is pressed; if it is, do the respective command
-    public static boolean getButton(int buttonID) {
+    public static boolean listenForButtonPresses(int buttonID) {
         JoystickButton button = new JoystickButton(buttonBoard, buttonID);
 
         if (buttonBoard.getRawButton(buttonID)) {
@@ -54,7 +55,7 @@ public class DSIO {
     public static int getDefenseButton() {
         int id = -1;
         for (int i = 1; i < 5; i++) {
-            if (DSIO.getButton(i)) {
+            if (DSIO.listenForButtonPresses(i)) {
                 id = i;
                 break;
             }
@@ -236,18 +237,17 @@ public class DSIO {
 
         //Create subsystem test selector
         testChooser = new SendableChooser();
-        testChooser.addDefault("(0) Test Gyro", StrongholdConstants.diagnosticPOSTOptions.TEST_GYRO);
-        testChooser.addDefault("(1) Test Ultrasonic", StrongholdConstants.diagnosticPOSTOptions.TEST_ULTRASONIC);
-        testChooser.addDefault("(2) Test Infrared", StrongholdConstants.diagnosticPOSTOptions.TEST_IR);
-        testChooser.addDefault("(3) Test Left Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_LEFT_MASTER);
-        testChooser.addDefault("(4) Test Right Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_RIGHT_MASTER);
-        testChooser.addDefault("(5) Test Drive", StrongholdConstants.diagnosticPOSTOptions.TEST_CHASSIS_DRIVE);
-        testChooser.addDefault("(6) Test Shooter", StrongholdConstants.diagnosticPOSTOptions.TEST_SHOOTER);
-        testChooser.addDefault("(7) Test Grappler", StrongholdConstants.diagnosticPOSTOptions.TEST_GRAPPLER);
-        testChooser.addDefault("(8) Test Alignment", StrongholdConstants.diagnosticPOSTOptions.TEST_ALIGN_TO_CASTLE);
-        testChooser.addDefault("(9) Test Lift", StrongholdConstants.diagnosticPOSTOptions.TEST_LIFTER);
-        testChooser.addDefault("(10) Test Motion Profile", StrongholdConstants.diagnosticPOSTOptions.TEST_MOTION_PROFILE);
-        
+        testChooser.addDefault("(0) Test Gyro", diagnosticPOSTOptions.TEST_GYRO);
+        testChooser.addObject("(1) Test Ultrasonic", diagnosticPOSTOptions.TEST_ULTRASONIC);
+        testChooser.addObject("(2) Test Infrared", diagnosticPOSTOptions.TEST_IR);
+        testChooser.addObject("(3) Test Left Talon", diagnosticPOSTOptions.TEST_TALON_LEFT_MASTER);
+        testChooser.addObject("(4) Test Right Talon", diagnosticPOSTOptions.TEST_TALON_RIGHT_MASTER);
+        testChooser.addObject("(5) Test Drive", diagnosticPOSTOptions.TEST_CHASSIS_DRIVE);
+        testChooser.addObject("(6) Test Shooter", diagnosticPOSTOptions.TEST_SHOOTER);
+        testChooser.addObject("(7) Test Grappler", diagnosticPOSTOptions.TEST_GRAPPLER);
+        testChooser.addObject("(8) Test Alignment", diagnosticPOSTOptions.TEST_ALIGN_TO_CASTLE);
+        testChooser.addObject("(9) Test Lift", diagnosticPOSTOptions.TEST_LIFTER);
+        testChooser.addObject("(10) Test Motion Profile", diagnosticPOSTOptions.TEST_MOTION_PROFILE);
     }
 
     public static int getSelectedDefensePosition() {
