@@ -75,9 +75,7 @@ public class StrongholdRobot extends IterativeRobot {
 
     public Command autonomousCommand;
     public Command liftingCommandGroup;
-
-    public static SmartDashboardChooser smartDashboardChooser;
-    
+   
     static int leftTicks = 0;
     static int rightTicks = 0;
      
@@ -94,8 +92,6 @@ public class StrongholdRobot extends IterativeRobot {
         lifterSubsystem = new Lifter();
 
         teleopNotRunning = true;
-
-        smartDashboardChooser = new SmartDashboardChooser();
     }
 
     /**
@@ -212,7 +208,7 @@ public class StrongholdRobot extends IterativeRobot {
 		System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
 		
 		diagnosticTestSelected = null;
-		smartDashboardChooser.testInitChoosers();
+		DSIO.choosers.testInitChoosers();
 
 		while (diagnosticTestSelected == null) {
 			diagnosticTestSelected = (diagnosticPOSTOptions) DSIO.choosers.testChooser.getSelected();
