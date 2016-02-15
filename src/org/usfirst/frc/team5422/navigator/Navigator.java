@@ -77,9 +77,6 @@ public class Navigator extends Subsystem{
 	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
 		//dummy function (actually written elsewhere by aditya)
 		
-		Driver.talon[0].setEncPosition(0);
-		Driver.talon[1].setEncPosition(0);
-		
 		Driver.talon[0].set(Math.signum(rTicks)*0.4);
 		Driver.talon[1].set(-Math.signum(lTicks)*0.4);
 		
@@ -102,17 +99,7 @@ public class Navigator extends Subsystem{
 		double lTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		double rTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
-		
-		
-		//substitute function
-		int tempTicksR = Driver.talon[0].getEncPosition();
-		int tempTicksL = Driver.talon[1].getEncPosition();
-		
 		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL);
-		//assuming trapWheelTicks resets encPosition to zero
-		Driver.talon[0].setEncPosition(tempTicksR + Driver.talon[0].getEncPosition());
-		Driver.talon[1].setEncPosition(tempTicksL + Driver.talon[1].getEncPosition());
-		
 		
 		isRunning = true;
 		
@@ -135,13 +122,7 @@ public class Navigator extends Subsystem{
 		
 		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK;
 		
-		int tempTicksR = Driver.talon[0].getEncPosition();
-		int tempTicksL = Driver.talon[1].getEncPosition();
-		
 		trapWheelTicks(tickDist, tickDist, rpm, rpm);
-		//assuming trapWheelTicks resets encPosition to zero
-		Driver.talon[0].setEncPosition(tempTicksR + Driver.talon[0].getEncPosition());
-		Driver.talon[1].setEncPosition(tempTicksL + Driver.talon[1].getEncPosition());
 		
 		isRunning = true;
 		
