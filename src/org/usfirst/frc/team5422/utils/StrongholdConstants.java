@@ -13,11 +13,19 @@ public class StrongholdConstants {
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
 
-	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches
+// Rabbot Drive specifications
+	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches	
 	public static final double GEAR_RATIO = 1;
-	public static final double WHEEL_DIAMETER = 6;//inches
+//	public static final double WHEEL_DIAMETER = 6;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
-		
+
+// Rhino Drive Specifications
+//	public static final double WHEEL_BASE = 25;//inches or 24.75 inches
+//	public static final double GEAR_RATIO = 1; //10.71 on motor gives 1 rotation of the wheel 
+	public static final double WHEEL_DIAMETER = 2.8;//inches
+//	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
+
+	
 	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
 	public static final int JOYSTICK_CHANNEL = 0;
