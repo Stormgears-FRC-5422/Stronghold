@@ -3,14 +3,13 @@ package org.usfirst.frc.team5422.commands;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 
 /**
- *@author suren
+ *@author Suren
  */
 public class CrossDefenseCommand extends DefenseCommand {
 
     public CrossDefenseCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	super();
     	requires(StrongholdRobot.navigatorSubsystem);   	
     }
 

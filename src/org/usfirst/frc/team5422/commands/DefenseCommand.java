@@ -18,7 +18,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *@author suren
+ *@author Suren
  */
 public class DefenseCommand extends Command {
 	protected defenseTypeOptions defenseTypeSelected = defenseTypeOptions.LOW_BAR;
