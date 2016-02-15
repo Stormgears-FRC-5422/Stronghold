@@ -77,8 +77,8 @@ public class Navigator extends Subsystem{
 	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
 		//dummy function (actually written elsewhere by aditya)
 		
-		Driver.talon[0].set(-Math.signum(rTicks)*0.4);
-		Driver.talon[1].set(Math.signum(lTicks)*0.4);
+		Driver.talon[0].set(Math.signum(rTicks)*0.4);
+		Driver.talon[1].set(-Math.signum(lTicks)*0.4);
 		
 	}
 	
@@ -96,8 +96,8 @@ public class Navigator extends Subsystem{
 		
 		System.out.format("[rotate by] %4.3g (rad)\n", relInitTheta );
 		
-		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
-		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double lTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double rTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
 		
 		

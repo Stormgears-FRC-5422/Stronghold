@@ -91,13 +91,10 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void robotInit() {
         System.out.println("robot init started.");
-        dsio = new DSIO(0, 0);
+        dsio = new DSIO(0, 1);
         driver = new Driver(CANTalon.TalonControlMode.Speed);
         
         DSIO.createUI();
-        autonomousCommand = new AutonomousCommandGroup();
-        liftingCommandGroup = new LiftingCommandGroup();
-
 
         System.out.println("robot init ended.");
     }
@@ -108,6 +105,9 @@ public class StrongholdRobot extends IterativeRobot {
     public void autonomousInit() {
         System.out.println("auto init started.");
         
+        autonomousCommand = new AutonomousCommandGroup();
+        liftingCommandGroup = new LiftingCommandGroup();
+
         if (autonomousCommand != null) {
             defenseTypeSelected = (defenseTypeOptions) DSIO.defenseChooser.getSelected();
             defensePositionSelected = DSIO.getSelectedDefensePosition();
@@ -167,7 +167,7 @@ public class StrongholdRobot extends IterativeRobot {
         
 
         //Run the openDrive() method
-        Driver.openDrive(DSIO.getLinearY(), DSIO.getLinearX(), CANTalon.TalonControlMode.Speed);
+        Driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
 
         System.out.println("teleop ended.");
     }

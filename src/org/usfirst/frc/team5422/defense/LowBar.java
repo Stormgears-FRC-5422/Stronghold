@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5422.defense;
 
+import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
@@ -31,7 +32,8 @@ public class LowBar implements Defense {
 		System.out.println("Robot Reaching the Low Bar defense at position " + defensePosition);
 		// TODO Auto-generated method stub
 
-		StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_0_REACH[0], StrongholdConstants.POSITION_DEFENSE_0_REACH[1], Math.PI / 2 );
+		StrongholdRobot.navigatorSubsystem.driveTo(0, 10, Math.PI / 2 );
+//		StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_0_REACH[0], StrongholdConstants.POSITION_DEFENSE_0_REACH[1], Math.PI / 2 );
 
 	}
 	
@@ -41,20 +43,20 @@ public class LowBar implements Defense {
 		System.out.println("Robot crossing the Low Bar defense at position " + defensePosition);
 		// TODO Auto-generated method stub
 
-		switch (defensePosition) {
-			case 1:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1_REACH[0], StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-			case 2:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2_REACH[0], StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-			case 3:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3_REACH[0], StrongholdConstants.POSITION_DEFENSE_3_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-			case 4:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-		}
+//		switch (defensePosition) {
+//			case 1:
+//				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1_REACH[0], StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+//				break;
+//			case 2:
+//				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2_REACH[0], StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+//				break;
+//			case 3:
+//				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3_REACH[0], StrongholdConstants.POSITION_DEFENSE_3_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+//				break;
+//			case 4:
+//				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
+//				break;
+//		}
 
 	}
 
@@ -63,7 +65,7 @@ public class LowBar implements Defense {
 		System.out.println("Robot positioning to shoot after crossing the Low Bar defense at position " + defensePosition + " shooting into " + shootOption);
 
 		//Change angle to match angle to best goals
-		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
+		//StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
 	}
 
 }

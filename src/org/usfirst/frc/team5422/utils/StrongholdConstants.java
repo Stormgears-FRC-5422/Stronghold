@@ -53,8 +53,8 @@ public class StrongholdConstants {
 	public static final double[] POSITION_LRIGHT_GOAL = {193.5, 312};
 
 	
-	public static final int TALON_LEFT_SHOOTER = 0;
-	public static final int TALON_RIGHT_SHOOTER = 3;
+	public static final int TALON_LEFT_SHOOTER = 1;
+	public static final int TALON_RIGHT_SHOOTER = 8;
 	public static final int	TALON_ACTUATOR = 0;
 	public static final int SOLENOID_SHOOTER = 0;
 	

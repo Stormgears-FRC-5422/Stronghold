@@ -95,7 +95,9 @@ public class BallShooter extends Shooter {
 
 		//Direction of motor to be found out
 		talonR.set(speed); //* StrongholdConstants.VEL_PER_100MS
-		talonL.set(speed);
+		talonL.set(-1*speed);
+		
+		Timer.delay(StrongholdConstants.SHOOT_DELAY);
 
 		relay.set(Relay.Value.kForward);
 		

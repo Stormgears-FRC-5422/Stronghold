@@ -85,7 +85,7 @@ public class GlobalMapping implements Runnable{
 		
 		while((Driver.talon[0]!=null) && (Driver.talon[1]!=null)){
 		
-			updateGP(Driver.talon[0].getEncPosition(), -Driver.talon[1].getEncPosition());
+			updateGP(-Driver.talon[0].getEncPosition(), Driver.talon[1].getEncPosition());
 		
 		}
 		
