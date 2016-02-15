@@ -68,7 +68,7 @@ public class StrongholdRobot extends IterativeRobot {
     public static shootOptions shootOptionSelected;
     public static alliance allianceSelected;
 
-    public static boolean teleopNotRunning;
+    public static boolean teleopNotRunning, useSmartDashboardForTesting;
 
     public Command autonomousCommand;
     public Command liftingCommandGroup;
@@ -188,21 +188,28 @@ public class StrongholdRobot extends IterativeRobot {
 	}
 
 	public void testInit() {
+        useSmartDashboardForTesting = false;
 		
 		System.out.println("In Roborio Test Mode...initiating Power On Self Test (POST) Diagnostics ...");
 
         diagnosticPOSTOptions key;
-        SmartDashboard.putData("Test Chooser", DSIO.testChooser);
 
-        SmartDashboard.putNumber("Put '1' Here to Start Testing: ", 0);
-        int go = 0;
+        if (useSmartDashboardForTesting) {
+            SmartDashboard.putData("Test Chooser", DSIO.testChooser);
+
+            SmartDashboard.putNumber("Put '1' Here to Start Testing: ", 0);
+            int go = 0;
 
 
-        //Listen for input from smart dashboard; when the user puts '1' in the textbox, the robot will test the mode selected in testChooser
-        while (go == 0) {
-            go = (int) SmartDashboard.getNumber("Put '1' Here to Start Testing: ", go);
+            //Listen for input from smart dashboard; when the user puts '1' in the textbox, the robot will test the mode selected in testChooser
+            while (go == 0) {
+                go = (int) SmartDashboard.getNumber("Put '1' Here to Start Testing: ", go);
+            }
+            key = (diagnosticPOSTOptions) DSIO.testChooser.getSelected();
         }
-        key = (diagnosticPOSTOptions) DSIO.testChooser.getSelected();
+        else {
+            key = diagnosticPOSTOptions.TEST_GLOBAL_POSITIONING;
+        }
 
         switch (key) {
             case TEST_GYRO:
