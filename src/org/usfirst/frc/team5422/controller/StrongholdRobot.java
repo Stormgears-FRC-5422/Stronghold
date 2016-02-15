@@ -21,6 +21,7 @@ import org.usfirst.frc.team5422.utils.PIDTuner;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.alliance;
 
@@ -236,6 +237,7 @@ public class StrongholdRobot extends IterativeRobot {
 
             case TEST_SHOOTER:
                 System.out.println("Testing the shooter");
+                shooterSubsystem.shoot(60, shootHeightOptions.HIGH);                
                 break;
 
             case TEST_GRAPPLER:
