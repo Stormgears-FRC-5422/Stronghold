@@ -64,7 +64,7 @@ public class Driver {
 		double velocityLeft = 0, velocityRight = 0;
 
 		//Calculate velocities
-		ArcadeDrive.arcadeDrive(yJoystick, xJoystick);
+		ArcadeDrive.arcadeDrive(xJoystick, yJoystick);
 		velocityLeft = ArcadeDrive.arcadeDriveLeft() * 0.5;
 		velocityRight = ArcadeDrive.arcadeDriveRight() * 0.5;
 
