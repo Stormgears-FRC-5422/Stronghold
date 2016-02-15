@@ -38,11 +38,11 @@ public class StrongholdConstants {
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
 
-	public static final int[] POSITION_DEFENSE_0_REACH = {24, 36};
-	public static final int[] POSITION_DEFENSE_1_REACH = {24 + 1 * 48, 36};
-	public static final int[] POSITION_DEFENSE_2_REACH = {24 + 2 * 48, 36};
-	public static final int[] POSITION_DEFENSE_3_REACH = {24 + 3 * 48, 36};
-	public static final int[] POSITION_DEFENSE_4_REACH = {24 + 4 * 48, 36};
+	public static final int[] POSITION_DEFENSE_0_REACH = {25, 110};
+	public static final int[] POSITION_DEFENSE_1_REACH = {25 + 1 * 50, 110};
+	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 2 * 50, 110};
+	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 3 * 50, 110};
+	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 4 * 50, 110};
 	public static final int CROSS_DEFENSE_LENGTH_Y = 96;
 
 	//H = high; L = low
@@ -52,6 +52,12 @@ public class StrongholdConstants {
 	public static final double[] POSITION_LLEFT_GOAL = {151, 312};
 	public static final double[] POSITION_LRIGHT_GOAL = {193.5, 312};
 
+	public static final double[] POSITION_BALL_1 = {45.5, 0};
+	public static final double[] POSITION_BALL_2 = {91, 0};
+	public static final double[] POSITION_BALL_3 = {130.5, 0};
+	public static final double[] POSITION_BALL_4 = {182, 0};
+	public static final double[] POSITION_BALL_5 = {227.5, 0};
+	public static final double[] POSITION_BALL_6 = {273, 0};
 	
 	public static final int TALON_LEFT_SHOOTER = 1;
 	public static final int TALON_RIGHT_SHOOTER = 8;
