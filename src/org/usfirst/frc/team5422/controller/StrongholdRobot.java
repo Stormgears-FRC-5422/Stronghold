@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
@@ -74,6 +75,8 @@ public class StrongholdRobot extends IterativeRobot {
     public Command autonomousCommand;
     public Command liftingCommandGroup;
 
+    public static SmartDashboardChooser smartDashboardChooser;
+    
     public StrongholdRobot() {
         NetworkTable.globalDeleteAll(); //Removes unused garbage from SmartDashboard
 
@@ -85,6 +88,7 @@ public class StrongholdRobot extends IterativeRobot {
 
         teleopNotRunning = true;
 
+        smartDashboardChooser = new SmartDashboardChooser();
     }
 
     /**

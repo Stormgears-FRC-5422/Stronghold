@@ -134,8 +134,8 @@ public class BallShooter extends Subsystem {
 	public void intake() {
 		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		talonL.changeControlMode(TalonControlMode.PercentVbus);
-		talonR.set(StrongholdConstants.FULL_THROTTLE);
-		talonL.set(-StrongholdConstants.FULL_THROTTLE);
+		talonR.set(-StrongholdConstants.FULL_THROTTLE);
+		talonL.set(StrongholdConstants.FULL_THROTTLE);
 		
 	}
 	public void stop() {
