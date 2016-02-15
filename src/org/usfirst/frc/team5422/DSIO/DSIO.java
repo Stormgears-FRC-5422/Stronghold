@@ -5,7 +5,6 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -33,7 +32,7 @@ public class DSIO {
 
     public static String autoSequence;
 
-    public static SendableChooser defenseChooser, shootChooser, endChooser, allianceChooser, testChooser;
+    public static SmartDashboardChooser choosers;
 
     //Constructor
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
@@ -42,7 +41,7 @@ public class DSIO {
     }
 
     //Check if a button is pressed; if it is, do the respective command
-    public static boolean listenForButtonPresses(int buttonID) {
+    public static boolean getButton(int buttonID) {
         JoystickButton button = new JoystickButton(buttonBoard, buttonID);
 
         if (buttonBoard.getRawButton(buttonID)) {
@@ -55,7 +54,7 @@ public class DSIO {
     public static int getDefenseButton() {
         int id = -1;
         for (int i = 1; i < 5; i++) {
-            if (DSIO.listenForButtonPresses(i)) {
+            if (DSIO.getButton(i)) {
                 id = i;
                 break;
             }
@@ -190,64 +189,69 @@ public class DSIO {
     public static void createUI() {
         NetworkTable.initialize();
 
-        //Create defense chooser
-        defenseChooser = new SendableChooser();
-        defenseChooser.addDefault("(0) Low Bar", defenseTypeOptions.LOW_BAR);
-        defenseChooser.addObject("(1) Portcullis", defenseTypeOptions.PORTCULLIS);
-        defenseChooser.addObject("(2) Chival de Frise", defenseTypeOptions.CHIVAL_DE_FRISE);
-        defenseChooser.addObject("(3) Moat", defenseTypeOptions.MOAT);
-        defenseChooser.addObject("(4) Ramparts", defenseTypeOptions.RAMPARTS);
-        defenseChooser.addObject("(5) Drawbridge", defenseTypeOptions.DRAWBRIDGE);
-        defenseChooser.addObject("(6) Sallyport", defenseTypeOptions.SALLYPORT);
-        defenseChooser.addObject("(7) Rock Wall", defenseTypeOptions.ROCK_WALL);
-        defenseChooser.addObject("(8) Rough Terrain", defenseTypeOptions.ROUGH_TERRAIN);
-        defenseChooser.addObject("(-1) Do nothing in Auto.", defenseTypeOptions.NONE);
-        SmartDashboard.putData("Defense to cross chooser", defenseChooser);
+      //Defense at position 0 is always low bar (ID 0)
+      pos[0] = 0;
+      
+      choosers = new SmartDashboardChooser();
+      choosers.initChoosers();
 
-        //Create shoot chooser
-        shootChooser = new SendableChooser();
-        shootChooser.addDefault("Shoot High Left Goal", shootOptions.HIGH_LEFT);
-        shootChooser.addObject("Shoot High Center Goal", shootOptions.HIGH_CENTER);
-        shootChooser.addObject("Shoot High Right Goal", shootOptions.HIGH_RIGHT);
-        shootChooser.addObject("Shoot Low Left Goal", shootOptions.LOW_LEFT);
-        shootChooser.addObject("Shoot Low Right Goal", shootOptions.LOW_RIGHT);
-        shootChooser.addObject("Stay in place.", shootOptions.NONE);
-        SmartDashboard.putData("Shoot chooser", shootChooser);
-
-        //Create last move chooser
-        endChooser = new SendableChooser();
-        endChooser.addDefault("Go to teleop starting position.", endOptions.TELEOP_STARTING_POSITION);
-        endChooser.addObject("Stay in place.", endOptions.NONE);
-        SmartDashboard.putData("End chooser", endChooser);
-
-        //Create alliance selector
-        allianceChooser = new SendableChooser();
-        allianceChooser.addDefault("Red", StrongholdConstants.alliance.RED);
-        allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
-        SmartDashboard.putData("Alliance Chooser", allianceChooser);
-
-        //Defense at position 0 is always low bar (ID 0)
-        pos[0] = 0;
-
-        //Add other defense position text boxes
-        SmartDashboard.putNumber("Defense at Position 1", -1);
-        SmartDashboard.putNumber("Defense at Position 2", -1);
-        SmartDashboard.putNumber("Defense at Position 3", -1);
-        SmartDashboard.putNumber("Defense at Position 4", -1);
-
-        //Create subsystem test selector
-        testChooser = new SendableChooser();
-        testChooser.addDefault("(0) Test Gyro", diagnosticPOSTOptions.TEST_GYRO);
-        testChooser.addObject("(1) Test Ultrasonic", diagnosticPOSTOptions.TEST_ULTRASONIC);
-        testChooser.addObject("(2) Test Infrared", diagnosticPOSTOptions.TEST_IR);
-        testChooser.addObject("(3) Test Left Talon", diagnosticPOSTOptions.TEST_TALON_LEFT_MASTER);
-        testChooser.addObject("(4) Test Right Talon", diagnosticPOSTOptions.TEST_TALON_RIGHT_MASTER);
-        testChooser.addObject("(5) Test Drive", diagnosticPOSTOptions.TEST_CHASSIS_DRIVE);
-        testChooser.addObject("(6) Test Shooter", diagnosticPOSTOptions.TEST_SHOOTER);
-        testChooser.addObject("(7) Test Grappler", diagnosticPOSTOptions.TEST_GRAPPLER);
-        testChooser.addObject("(8) Test Alignment", diagnosticPOSTOptions.TEST_ALIGN_TO_CASTLE);
-        testChooser.addObject("(9) Test Lift", diagnosticPOSTOptions.TEST_LIFTER);
-        testChooser.addObject("(10) Test Motion Profile", diagnosticPOSTOptions.TEST_MOTION_PROFILE);
+//		  moved this code below to SmartDashboardChooser      
+//        //Create defense chooser
+//        defenseChooser = new SendableChooser();
+//        defenseChooser.addDefault("(0) Low Bar", defenseTypeOptions.LOW_BAR);
+//        defenseChooser.addObject("(1) Portcullis", defenseTypeOptions.PORTCULLIS);
+//        defenseChooser.addObject("(2) Chival de Frise", defenseTypeOptions.CHIVAL_DE_FRISE);
+//        defenseChooser.addObject("(3) Moat", defenseTypeOptions.MOAT);
+//        defenseChooser.addObject("(4) Ramparts", defenseTypeOptions.RAMPARTS);
+//        defenseChooser.addObject("(5) Drawbridge", defenseTypeOptions.DRAWBRIDGE);
+//        defenseChooser.addObject("(6) Sallyport", defenseTypeOptions.SALLYPORT);
+//        defenseChooser.addObject("(7) Rock Wall", defenseTypeOptions.ROCK_WALL);
+//        defenseChooser.addObject("(8) Rough Terrain", defenseTypeOptions.ROUGH_TERRAIN);
+//        defenseChooser.addObject("(-1) Do nothing in Auto.", defenseTypeOptions.NONE);
+//        SmartDashboard.putData("Defense to cross chooser", defenseChooser);
+//
+//        //Create shoot chooser
+//        shootChooser = new SendableChooser();
+//        shootChooser.addDefault("Shoot High Left Goal", shootOptions.HIGH_LEFT);
+//        shootChooser.addObject("Shoot High Center Goal", shootOptions.HIGH_CENTER);
+//        shootChooser.addObject("Shoot High Right Goal", shootOptions.HIGH_RIGHT);
+//        shootChooser.addObject("Shoot Low Left Goal", shootOptions.LOW_LEFT);
+//        shootChooser.addObject("Shoot Low Right Goal", shootOptions.LOW_RIGHT);
+//        shootChooser.addObject("Stay in place.", shootOptions.NONE);
+//        SmartDashboard.putData("Shoot chooser", shootChooser);
+//
+//        //Create last move chooser
+//        endChooser = new SendableChooser();
+//        endChooser.addDefault("Go to teleop starting position.", endOptions.TELEOP_STARTING_POSITION);
+//        endChooser.addObject("Stay in place.", endOptions.NONE);
+//        SmartDashboard.putData("End chooser", endChooser);
+//
+//        //Create alliance selector
+//        allianceChooser = new SendableChooser();
+//        allianceChooser.addDefault("Red", StrongholdConstants.alliance.RED);
+//        allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
+//        SmartDashboard.putData("Alliance Chooser", allianceChooser);
+//
+//        //Add other defense position text boxes
+//        SmartDashboard.putNumber("Defense at Position 1", -1);
+//        SmartDashboard.putNumber("Defense at Position 2", -1);
+//        SmartDashboard.putNumber("Defense at Position 3", -1);
+//        SmartDashboard.putNumber("Defense at Position 4", -1);
+//
+//        //Create subsystem test selector
+//        testChooser = new SendableChooser();
+//        testChooser.addDefault("(0) Test Gyro", StrongholdConstants.diagnosticPOSTOptions.TEST_GYRO);
+//        testChooser.addDefault("(1) Test Ultrasonic", StrongholdConstants.diagnosticPOSTOptions.TEST_ULTRASONIC);
+//        testChooser.addDefault("(2) Test Infrared", StrongholdConstants.diagnosticPOSTOptions.TEST_IR);
+//        testChooser.addDefault("(3) Test Left Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_LEFT_MASTER);
+//        testChooser.addDefault("(4) Test Right Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_RIGHT_MASTER);
+//        testChooser.addDefault("(5) Test Drive", StrongholdConstants.diagnosticPOSTOptions.TEST_CHASSIS_DRIVE);
+//        testChooser.addDefault("(6) Test Shooter", StrongholdConstants.diagnosticPOSTOptions.TEST_SHOOTER);
+//        testChooser.addDefault("(7) Test Grappler", StrongholdConstants.diagnosticPOSTOptions.TEST_GRAPPLER);
+//        testChooser.addDefault("(8) Test Alignment", StrongholdConstants.diagnosticPOSTOptions.TEST_ALIGN_TO_CASTLE);
+//        testChooser.addDefault("(9) Test Lift", StrongholdConstants.diagnosticPOSTOptions.TEST_LIFTER);
+//        testChooser.addDefault("(10) Test Motion Profile", StrongholdConstants.diagnosticPOSTOptions.TEST_MOTION_PROFILE);
+        
     }
 
     public static int getSelectedDefensePosition() {
@@ -274,7 +278,7 @@ public class DSIO {
 
         //If auto is running, get position from SmartDashboard
         if (StrongholdRobot.teleopNotRunning) {
-            switch ((defenseTypeOptions) defenseChooser.getSelected()) {
+            switch ((defenseTypeOptions) choosers.defenseChooser.getSelected()) {
                 case LOW_BAR:
                     position = 0; //Position of low bar is always 0
                     break;
@@ -333,7 +337,7 @@ public class DSIO {
             }
         }
 
-        System.out.println("Defense type " + (defenseTypeOptions) defenseChooser.getSelected() + " at position " + position);
+        System.out.println("Defense type " + (defenseTypeOptions) choosers.defenseChooser.getSelected() + " at position " + position);
         return position;
     }//End method
 }

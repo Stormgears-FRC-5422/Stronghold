@@ -1,20 +1,19 @@
-//VINAY CHANGES
-//Entire Command Class
-
 package org.usfirst.frc.team5422.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
-
+/**
+ *@author Vinay
+ *@author Suren
+ */
 
 public class AimShooterArmCommand extends Command {
 
 	private shootOptions shootOptionSelected;
 	
 	public AimShooterArmCommand() {
-		super();
 		requires(StrongholdRobot.shooterSubsystem);		
 	}
 	

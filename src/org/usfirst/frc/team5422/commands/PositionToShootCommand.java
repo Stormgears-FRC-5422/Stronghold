@@ -10,7 +10,6 @@ public class PositionToShootCommand extends DefenseCommand {
     public PositionToShootCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	super();
     	requires(StrongholdRobot.navigatorSubsystem);
     }
 

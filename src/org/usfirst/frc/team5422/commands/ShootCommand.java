@@ -4,24 +4,27 @@ import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdUtils;
+
+import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 /**
- *@author suren
+ *@author Suren
  */
-public class ShootCommand extends DefenseCommand {
+public class ShootCommand extends Command {
 	private shootOptions shootOptionSelected;
 
     public ShootCommand() {
-    	super();
         requires(StrongholdRobot.shooterSubsystem);
     }
     
     // Called just before this Command runs the first time
-//    protected void initialize() {
-//        System.out.println("initializing ShootCommand");
-//    }
+	@Override
+    protected void initialize() {
+        System.out.println("initializing ShootCommand");
+    }
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -36,27 +39,27 @@ public class ShootCommand extends DefenseCommand {
 		case HIGH_LEFT:
 			temp += "HIGH_LEFT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HLEFT_GOAL[0], StrongholdConstants.POSITION_HLEFT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootHigh(60, shootHeightOptions.HIGH);
+			StrongholdRobot.shooterSubsystem.shootHigh(distance, shootHeightOptions.HIGH);
 			break;
 		case HIGH_CENTER:
 			temp += "HIGH_CENTER";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HCENTER_GOAL[0], StrongholdConstants.POSITION_HCENTER_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootHigh(60, shootHeightOptions.HIGH);
+			StrongholdRobot.shooterSubsystem.shootHigh(distance, shootHeightOptions.HIGH);
 			break;
 		case HIGH_RIGHT:
 			temp += "HIGH_RIGHT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HRIGHT_GOAL[0], StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootHigh(60, shootHeightOptions.HIGH);
+			StrongholdRobot.shooterSubsystem.shootHigh(distance, shootHeightOptions.HIGH);
 			break;
 		case LOW_LEFT:
 			temp += "LOW_LEFT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_LLEFT_GOAL[0], StrongholdConstants.POSITION_LLEFT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootLow(60, shootHeightOptions.LOW);
+			StrongholdRobot.shooterSubsystem.shootLow(distance, shootHeightOptions.LOW);
 			break;
 		case LOW_RIGHT:
 			temp += "LOW_RIGHT";
 			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_LRIGHT_GOAL[0], StrongholdConstants.POSITION_LRIGHT_GOAL[1]);
-			StrongholdRobot.shooterSubsystem.shootLow(60, shootHeightOptions.LOW);
+			StrongholdRobot.shooterSubsystem.shootLow(distance, shootHeightOptions.LOW);
 			break;
 		default:
 			break;
@@ -81,4 +84,5 @@ public class ShootCommand extends DefenseCommand {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+
 }

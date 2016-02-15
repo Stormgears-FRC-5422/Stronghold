@@ -9,8 +9,7 @@ import org.usfirst.frc.team5422.controller.StrongholdRobot;
  */
 public class GrapplingCommand extends Command {
     public GrapplingCommand() {
-        super();
-        requires(StrongholdRobot.grapplerSubsystem);
+         requires(StrongholdRobot.grapplerSubsystem);
     }
 
     @Override

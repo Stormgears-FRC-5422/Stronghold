@@ -3,7 +3,7 @@ package org.usfirst.frc.team5422.commands;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 
 /**
- *@author suren
+ *@author Suren
  */
 public class AlignToDefenseCommand extends DefenseCommand {
 	
@@ -11,7 +11,6 @@ public class AlignToDefenseCommand extends DefenseCommand {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         // Use requires() here to declare subsystem dependencies
-        super();
         requires(StrongholdRobot.navigatorSubsystem);
                 
     }

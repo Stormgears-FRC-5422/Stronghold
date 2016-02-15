@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5422.commands;
 
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
+
 /**
  *
  */
@@ -8,6 +10,7 @@ public class ReachDefenseCommand extends DefenseCommand {
     public ReachDefenseCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(StrongholdRobot.navigatorSubsystem);   	
     }
 
     // Called just before this Command runs the first time
