@@ -189,69 +189,12 @@ public class DSIO {
     public static void createUI() {
         NetworkTable.initialize();
 
-      //Defense at position 0 is always low bar (ID 0)
-      pos[0] = 0;
-      
-      choosers = new SmartDashboardChooser();
-      choosers.initChoosers();
+        //Defense at position 0 is always low bar (ID 0)
+        pos[0] = 0;
 
-//		  moved this code below to SmartDashboardChooser      
-//        //Create defense chooser
-//        defenseChooser = new SendableChooser();
-//        defenseChooser.addDefault("(0) Low Bar", defenseTypeOptions.LOW_BAR);
-//        defenseChooser.addObject("(1) Portcullis", defenseTypeOptions.PORTCULLIS);
-//        defenseChooser.addObject("(2) Chival de Frise", defenseTypeOptions.CHIVAL_DE_FRISE);
-//        defenseChooser.addObject("(3) Moat", defenseTypeOptions.MOAT);
-//        defenseChooser.addObject("(4) Ramparts", defenseTypeOptions.RAMPARTS);
-//        defenseChooser.addObject("(5) Drawbridge", defenseTypeOptions.DRAWBRIDGE);
-//        defenseChooser.addObject("(6) Sallyport", defenseTypeOptions.SALLYPORT);
-//        defenseChooser.addObject("(7) Rock Wall", defenseTypeOptions.ROCK_WALL);
-//        defenseChooser.addObject("(8) Rough Terrain", defenseTypeOptions.ROUGH_TERRAIN);
-//        defenseChooser.addObject("(-1) Do nothing in Auto.", defenseTypeOptions.NONE);
-//        SmartDashboard.putData("Defense to cross chooser", defenseChooser);
-//
-//        //Create shoot chooser
-//        shootChooser = new SendableChooser();
-//        shootChooser.addDefault("Shoot High Left Goal", shootOptions.HIGH_LEFT);
-//        shootChooser.addObject("Shoot High Center Goal", shootOptions.HIGH_CENTER);
-//        shootChooser.addObject("Shoot High Right Goal", shootOptions.HIGH_RIGHT);
-//        shootChooser.addObject("Shoot Low Left Goal", shootOptions.LOW_LEFT);
-//        shootChooser.addObject("Shoot Low Right Goal", shootOptions.LOW_RIGHT);
-//        shootChooser.addObject("Stay in place.", shootOptions.NONE);
-//        SmartDashboard.putData("Shoot chooser", shootChooser);
-//
-//        //Create last move chooser
-//        endChooser = new SendableChooser();
-//        endChooser.addDefault("Go to teleop starting position.", endOptions.TELEOP_STARTING_POSITION);
-//        endChooser.addObject("Stay in place.", endOptions.NONE);
-//        SmartDashboard.putData("End chooser", endChooser);
-//
-//        //Create alliance selector
-//        allianceChooser = new SendableChooser();
-//        allianceChooser.addDefault("Red", StrongholdConstants.alliance.RED);
-//        allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
-//        SmartDashboard.putData("Alliance Chooser", allianceChooser);
-//
-//        //Add other defense position text boxes
-//        SmartDashboard.putNumber("Defense at Position 1", -1);
-//        SmartDashboard.putNumber("Defense at Position 2", -1);
-//        SmartDashboard.putNumber("Defense at Position 3", -1);
-//        SmartDashboard.putNumber("Defense at Position 4", -1);
-//
-//        //Create subsystem test selector
-//        testChooser = new SendableChooser();
-//        testChooser.addDefault("(0) Test Gyro", StrongholdConstants.diagnosticPOSTOptions.TEST_GYRO);
-//        testChooser.addDefault("(1) Test Ultrasonic", StrongholdConstants.diagnosticPOSTOptions.TEST_ULTRASONIC);
-//        testChooser.addDefault("(2) Test Infrared", StrongholdConstants.diagnosticPOSTOptions.TEST_IR);
-//        testChooser.addDefault("(3) Test Left Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_LEFT_MASTER);
-//        testChooser.addDefault("(4) Test Right Talon", StrongholdConstants.diagnosticPOSTOptions.TEST_TALON_RIGHT_MASTER);
-//        testChooser.addDefault("(5) Test Drive", StrongholdConstants.diagnosticPOSTOptions.TEST_CHASSIS_DRIVE);
-//        testChooser.addDefault("(6) Test Shooter", StrongholdConstants.diagnosticPOSTOptions.TEST_SHOOTER);
-//        testChooser.addDefault("(7) Test Grappler", StrongholdConstants.diagnosticPOSTOptions.TEST_GRAPPLER);
-//        testChooser.addDefault("(8) Test Alignment", StrongholdConstants.diagnosticPOSTOptions.TEST_ALIGN_TO_CASTLE);
-//        testChooser.addDefault("(9) Test Lift", StrongholdConstants.diagnosticPOSTOptions.TEST_LIFTER);
-//        testChooser.addDefault("(10) Test Motion Profile", StrongholdConstants.diagnosticPOSTOptions.TEST_MOTION_PROFILE);
-        
+        choosers = new SmartDashboardChooser();
+        choosers.initChoosers();
+        choosers.autoInitChoosers();
     }
 
     public static int getSelectedDefensePosition() {
@@ -310,8 +253,7 @@ public class DSIO {
                     position = -1;
                     break;
             }//End switch
-        }
-        else if (!StrongholdRobot.teleopNotRunning) {
+        } else if (!StrongholdRobot.teleopNotRunning) {
             switch (DSIO.getDefenseButton()) {
                 //5 buttons referring to the 5 defenses we can cross
                 case 1:

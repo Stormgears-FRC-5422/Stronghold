@@ -8,7 +8,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /*
- * 
+ * @author Michael
  * @author Suren Karavettil
  * 
  */
@@ -62,24 +62,18 @@ public class SmartDashboardChooser {
         allianceChooser.addDefault("Red", StrongholdConstants.alliance.RED);
         allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
         SmartDashboard.putData("Alliance Chooser", allianceChooser);
-
+	}
+	
+	public void autoInitChoosers() {
         //Add other defense position text boxes
         SmartDashboard.putNumber("Defense at Position 1", -1);
         SmartDashboard.putNumber("Defense at Position 2", -1);
         SmartDashboard.putNumber("Defense at Position 3", -1);
         SmartDashboard.putNumber("Defense at Position 4", -1);
-
-	}
-	
-	public void autoInitChoosers() {
-        //Add other defense position text boxes
-        SmartDashboard.putNumber("Defense at Position 1", 0);
-        SmartDashboard.putNumber("Defense at Position 2", 3);
-        SmartDashboard.putNumber("Defense at Position 3", 4);
-        SmartDashboard.putNumber("Defense at Position 4", 7);
 	}	
 
 	public void teleopInitChoosers() {
+
 	}	
 
 	public void testInitChoosers() {
@@ -96,6 +90,6 @@ public class SmartDashboardChooser {
         testChooser.addObject("(10) Test Motion Profile", StrongholdConstants.diagnosticPOSTOptions.TEST_MOTION_PROFILE);
         testChooser.addObject("(11) Test Global Positioning", StrongholdConstants.diagnosticPOSTOptions.TEST_GLOBAL_POSITIONING);
         testChooser.addObject("(-1) Do Nothing", StrongholdConstants.diagnosticPOSTOptions.TEST_NONE);
-        
+        SmartDashboard.putData("Test Init Chooser", testChooser);
 	}	
 }
