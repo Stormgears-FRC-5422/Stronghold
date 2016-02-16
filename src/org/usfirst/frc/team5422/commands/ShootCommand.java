@@ -28,30 +28,7 @@ public class ShootCommand extends Command {
     	String temp  = "[AutoComm] Robot shooting ball... ";
 		shootOptionSelected = StrongholdRobot.shootOptionSelected;
 		
-		switch(shootOptionSelected) {
-		case HIGH_LEFT:
-			temp += "HIGH_LEFT";
-			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
-			break;
-		case HIGH_CENTER:
-			temp += "HIGH_CENTER";
-			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
-			break;
-		case HIGH_RIGHT:
-			temp += "HIGH_RIGHT";
-			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
-			break;
-		case LOW_LEFT:
-			temp += "LOW_LEFT";
-			StrongholdRobot.shooterSubsystem.shootLow(shootHeightOptions.LOW);
-			break;
-		case LOW_RIGHT:
-			temp += "LOW_RIGHT";
-			StrongholdRobot.shooterSubsystem.shootLow(shootHeightOptions.LOW);
-			break;
-		default:
-			break;
-		}
+		StrongholdRobot.shooterSubsystem.shoot(shootOptionSelected);
 
 		temp += ".";
 		System.out.println(temp);
