@@ -96,12 +96,9 @@ public class Navigator extends Subsystem{
 		
 		System.out.format("[rotate by] %4.3g (rad)\n", relInitTheta );
 		
-		double lTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
-		double rTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
-		
-		
-		//substitute function
 		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL);
 		
 		isRunning = true;
@@ -123,7 +120,7 @@ public class Navigator extends Subsystem{
 		
 		double startDistance = GlobalMapping.getSigmaD();
 		
-		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK; 
+		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK;
 		
 		trapWheelTicks(tickDist, tickDist, rpm, rpm);
 		
