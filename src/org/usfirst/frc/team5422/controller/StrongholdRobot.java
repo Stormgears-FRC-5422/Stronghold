@@ -155,7 +155,7 @@ public class StrongholdRobot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleopNotRunning = false;
 
-        //  Driver.initializeTrapezoid();
+//        Driver.initializeTrapezoid();
         System.out.println("teleop init ended.");
     }
 
@@ -167,7 +167,7 @@ public class StrongholdRobot extends IterativeRobot {
 
         Scheduler.getInstance().run();
         
-       // Driver.moveTrapezoid(leftTicks, rightTicks, leftVelocity, rightVelocity);
+//        Driver.moveTrapezoid(leftTicks, rightTicks, leftVelocity, rightVelocity);
         
         if (DSIO.buttonBoard.getRawButton(10)) {
         	System.out.println("pressed");
