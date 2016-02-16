@@ -29,7 +29,7 @@ public class Navigator extends Subsystem{
 		
 		thread = new Notifier(new GlobalMapping());
 		thread.startPeriodic(0.001);
-		
+
 		System.out.println("Before resetting global positions : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
 		
 		GlobalMapping.resetValues();

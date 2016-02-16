@@ -35,6 +35,7 @@ public class SmartDashboardChooser {
 	
 	public void initChoosers() {
 
+		if (defenseChooser == null) System.out.println("say error in initializing choosers");
         defenseChooser.addDefault("(0) Low Bar", defenseTypeOptions.LOW_BAR);
         defenseChooser.addObject("(1) Portcullis", defenseTypeOptions.PORTCULLIS);
         defenseChooser.addObject("(2) Chival de Frise", defenseTypeOptions.CHIVAL_DE_FRISE);

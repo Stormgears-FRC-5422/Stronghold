@@ -173,7 +173,7 @@ public class StrongholdRobot extends IterativeRobot {
         
         if (DSIO.buttonBoard.getRawButton(10)) {
         	System.out.println("pressed");
-        	shooterSubsystem.shootHigh(StrongholdConstants.shootHeightOptions.HIGH);
+        	shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
         } else if (DSIO.buttonBoard.getRawButton(9)) {
         	shooterSubsystem.intake();
         } else if (DSIO.buttonBoard.getRawButton(8)) {
@@ -241,7 +241,7 @@ public class StrongholdRobot extends IterativeRobot {
 
             case TEST_SHOOTER:
                 System.out.println("Testing the shooter");
-                shooterSubsystem.shoot(shootHeightOptions.HIGH);                
+                shooterSubsystem.shoot(shootOptions.HIGH_CENTER);                
                 break;
 
             case TEST_GRAPPLER:
