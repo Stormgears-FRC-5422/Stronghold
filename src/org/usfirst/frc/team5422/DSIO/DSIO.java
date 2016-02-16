@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5422.DSIO;
 
+import org.usfirst.frc.team5422.commands.buttonCommands.Button10;
 import org.usfirst.frc.team5422.commands.buttonCommands.Button15;
+import org.usfirst.frc.team5422.commands.buttonCommands.Button8;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
@@ -40,8 +42,14 @@ public class DSIO {
 
     //Check if a button is pressed; if it is, do the respective command
     public static void getButtons() {
-        JoystickButton redButton = new JoystickButton(joystick, 7);
+        JoystickButton redButton = new JoystickButton(buttonBoard, StrongholdConstants.RED_BUTTON_ID);
         redButton.whenPressed(new Button15());
+
+        JoystickButton bigBlueButton = new JoystickButton(buttonBoard, StrongholdConstants.BIG_BLUE_BUTTON_ID);
+        bigBlueButton.whenPressed(new Button10());
+
+        JoystickButton whiteButton = new JoystickButton(buttonBoard, StrongholdConstants.WHITE_BUTTON_ID);
+        whiteButton.whenPressed(new Button8());
     }
 
     //Inputs: nothing
