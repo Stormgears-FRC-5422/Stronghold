@@ -49,7 +49,7 @@ public class DSIO {
         bigBlueButton.whenPressed(new Button10());
 
         JoystickButton whiteButton = new JoystickButton(buttonBoard, StrongholdConstants.WHITE_BUTTON_ID);
-        whiteButton.whenPressed(new Button8());
+        whiteButton.whileHeld(new Button8());
     }
 
     //Inputs: nothing
