@@ -27,7 +27,7 @@ public class Driver {
 		//Set PID closed loop gains
 
 
-		//Change the PID values here. Keep F as it is .
+		//Change the PID values here. Keep F as it is.
 		F = 1.705;
 		P = 0.000185;
 		I = 0;
