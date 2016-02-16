@@ -1,10 +1,6 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
-import org.usfirst.frc.team5422.navigator.GlobalMapping;
-import org.usfirst.frc.team5422.utils.StrongholdConstants;
-import org.usfirst.frc.team5422.utils.StrongholdUtils;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
@@ -32,33 +28,25 @@ public class ShootCommand extends Command {
     	String temp  = "[AutoComm] Robot shooting ball... ";
 		shootOptionSelected = StrongholdRobot.shootOptionSelected;
 		
-		double xSrc = GlobalMapping.getX();
-		double ySrc = GlobalMapping.getY();
-		double distance = 0;
 		switch(shootOptionSelected) {
 		case HIGH_LEFT:
 			temp += "HIGH_LEFT";
-			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HLEFT_GOAL[0], StrongholdConstants.POSITION_HLEFT_GOAL[1]);
 			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
 			break;
 		case HIGH_CENTER:
 			temp += "HIGH_CENTER";
-			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HCENTER_GOAL[0], StrongholdConstants.POSITION_HCENTER_GOAL[1]);
 			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
 			break;
 		case HIGH_RIGHT:
 			temp += "HIGH_RIGHT";
-			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_HRIGHT_GOAL[0], StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
 			StrongholdRobot.shooterSubsystem.shootHigh(shootHeightOptions.HIGH);
 			break;
 		case LOW_LEFT:
 			temp += "LOW_LEFT";
-			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_LLEFT_GOAL[0], StrongholdConstants.POSITION_LLEFT_GOAL[1]);
 			StrongholdRobot.shooterSubsystem.shootLow(shootHeightOptions.LOW);
 			break;
 		case LOW_RIGHT:
 			temp += "LOW_RIGHT";
-			distance = StrongholdUtils.getDistance(xSrc, ySrc, StrongholdConstants.POSITION_LRIGHT_GOAL[0], StrongholdConstants.POSITION_LRIGHT_GOAL[1]);
 			StrongholdRobot.shooterSubsystem.shootLow(shootHeightOptions.LOW);
 			break;
 		default:
