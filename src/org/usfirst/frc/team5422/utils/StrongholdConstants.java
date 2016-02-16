@@ -77,6 +77,8 @@ public class StrongholdConstants {
 	public static final int BLACK_BUTTON_ID = 9;
 	public static final int WHITE_BUTTON_ID = 8;
 	public static final int GREEN_SWITCH_ID = 5;
+	public static final int ORANGE_SWITCH_ID = 4;
+	public static final int RED_SWITCH_ID = 3;
 	
 	public enum diagnosticPOSTOptions {
 		TEST_GYRO, 
