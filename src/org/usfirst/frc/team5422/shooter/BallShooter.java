@@ -91,8 +91,7 @@ public class BallShooter extends Subsystem {
 		relay.set(Relay.Value.kForward);
 		
 		Timer.delay(StrongholdConstants.SHOOT_DELAY);
-		talonR.set(StrongholdConstants.NO_THROTTLE);
-		talonL.set(StrongholdConstants.NO_THROTTLE);
+		stop();
 		relay.set(Relay.Value.kOff);
 	}
 	
@@ -132,7 +131,7 @@ public class BallShooter extends Subsystem {
 	}
 	public void stop() {
 		talonR.set(StrongholdConstants.NO_THROTTLE);
-		talonL.set(-StrongholdConstants.NO_THROTTLE);
+		talonL.set(StrongholdConstants.NO_THROTTLE);
 	}
 	
 	public double getDistancetoGoal(StrongholdConstants.shootOptions option) {

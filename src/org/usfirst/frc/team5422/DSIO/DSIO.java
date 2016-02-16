@@ -42,14 +42,9 @@ public class DSIO {
 
     //Check if a button is pressed; if it is, do the respective command
     public static void getButtons() {
-        JoystickButton redButton = new JoystickButton(buttonBoard, StrongholdConstants.RED_BUTTON_ID);
-        redButton.whenPressed(new Button15());
-
-        JoystickButton bigBlueButton = new JoystickButton(buttonBoard, StrongholdConstants.BIG_BLUE_BUTTON_ID);
-        bigBlueButton.whenPressed(new Button10());
-
-        JoystickButton whiteButton = new JoystickButton(buttonBoard, StrongholdConstants.WHITE_BUTTON_ID);
-        whiteButton.whileHeld(new Button8());
+        if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) {
+        	StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
+        }
     }
 
     //Inputs: nothing

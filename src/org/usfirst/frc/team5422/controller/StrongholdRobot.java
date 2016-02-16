@@ -168,17 +168,6 @@ public class StrongholdRobot extends IterativeRobot {
         Scheduler.getInstance().run();
         
 //        Driver.moveTrapezoid(leftTicks, rightTicks, leftVelocity, rightVelocity);
-        
-        if (DSIO.buttonBoard.getRawButton(10)) {
-        	System.out.println("pressed");
-        	shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
-        } else if (DSIO.buttonBoard.getRawButton(9)) {
-        	shooterSubsystem.intake();
-        } else if (DSIO.buttonBoard.getRawButton(8)) {
-        	shooterSubsystem.stop();
-        } else {
-        	//do nothing
-        }
 
         DSIO.getButtons();
         
