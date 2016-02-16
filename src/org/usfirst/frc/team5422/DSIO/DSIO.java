@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5422.DSIO;
 
+import org.usfirst.frc.team5422.commands.buttonCommands.Button15;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
@@ -28,9 +29,6 @@ public class DSIO {
     static boolean buttonPressed;
 
     public static int pos[] = new int[5];
-    public static int numMoves;
-
-    public static String autoSequence;
 
     public static SmartDashboardChooser choosers;
 
@@ -41,25 +39,9 @@ public class DSIO {
     }
 
     //Check if a button is pressed; if it is, do the respective command
-    public static boolean getButton(int buttonID) {
-        JoystickButton button = new JoystickButton(buttonBoard, buttonID);
-
-        if (buttonBoard.getRawButton(buttonID)) {
-            //TODO commands for each operation (i.e. if button id is 0, shoot the ball high; 1.. shoot the ball low, etc
-        }
-        return buttonPressed;
-    }
-
-    //Check which defense button is pressed (to cross)
-    public static int getDefenseButton() {
-        int id = -1;
-        for (int i = 1; i < 5; i++) {
-            if (DSIO.getButton(i)) {
-                id = i;
-                break;
-            }
-        }
-        return id;
+    public static void getButtons() {
+        JoystickButton redButton = new JoystickButton(joystick, 7);
+        redButton.whenPressed(new Button15());
     }
 
     //Inputs: nothing
@@ -253,32 +235,7 @@ public class DSIO {
                     position = -1;
                     break;
             }//End switch
-        } else if (!StrongholdRobot.teleopNotRunning) {
-            switch (DSIO.getDefenseButton()) {
-                //5 buttons referring to the 5 defenses we can cross
-                case 1:
-                    //Low bar
-                    position = 0; //Low bar is always at position 0
-                    break;
-                case 2:
-                    //Moat
-                    position = defensePositions[3];
-                    break;
-                case 3:
-                    //Ramparts
-                    position = defensePositions[4];
-                    break;
-                case 4:
-                    //Rock Wall
-                    position = defensePositions[7];
-                    break;
-                case 5:
-                    //Rough Terrain
-                    position = defensePositions[8];
-                    break;
-            }
         }
-
         System.out.println("Defense type " + (defenseTypeOptions) choosers.defenseChooser.getSelected() + " at position " + position);
         return position;
     }//End method

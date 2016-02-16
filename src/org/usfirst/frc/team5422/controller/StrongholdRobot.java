@@ -4,10 +4,8 @@ package org.usfirst.frc.team5422.controller;
 import edu.wpi.first.wpilibj.*;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
@@ -21,7 +19,6 @@ import org.usfirst.frc.team5422.utils.PIDTuner;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.alliance;
 
@@ -157,7 +154,8 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop init started.");
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleopNotRunning = false;
-      //  Driver.initializeTrapezoid();
+
+        //  Driver.initializeTrapezoid();
         System.out.println("teleop init ended.");
     }
 
@@ -181,6 +179,8 @@ public class StrongholdRobot extends IterativeRobot {
         } else {
         	//do nothing
         }
+
+        DSIO.getButtons();
         
 
         //Run the openDrive() method

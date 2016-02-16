@@ -22,16 +22,14 @@ public class Driver {
 	static MotionProfileExample leftProfile;
 	static MotionProfileExample rightProfile;
 
+	//Set PID closed loop gains
+	static double F, P, I, D;
+
+	//Change the PID values here. Keep F as it is .
+
+
 	//Constructor
 	public Driver(CANTalon.TalonControlMode controlMode) {
-		//Set PID closed loop gains
-		double F, P, I, D;
-
-		//Change the PID values here. Keep F as it is .
-		F = 1.705;
-		P = 0.000185;
-		I = 0;
-		D = 0;
 
 		//Declare talons
 		if (controlMode == CANTalon.TalonControlMode.Speed | controlMode == CANTalon.TalonControlMode.PercentVbus) {
@@ -62,6 +60,17 @@ public class Driver {
 	public static void openDrive(double yJoystick, double xJoystick, CANTalon.TalonControlMode controlMode) {
 		//Declare variables
 		double velocityLeft = 0, velocityRight = 0;
+
+		F = 1.705;
+		P = 0.000185;
+		I = 0;
+		D = 0;
+
+		//Set PID of talons
+		for (int i = 0; i < 2; i++) {
+			talon[i].setPID(P, I, D);
+			talon[i].setF(F);
+		}
 
 		//Calculate velocities
 		ArcadeDrive.arcadeDrive(xJoystick, yJoystick);

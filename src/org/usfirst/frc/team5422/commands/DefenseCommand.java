@@ -24,7 +24,7 @@ public class DefenseCommand extends Command {
 	protected defenseTypeOptions defenseTypeSelected = defenseTypeOptions.LOW_BAR;
 	protected int defensePositionSelected = -1;
 	protected shootOptions shootOptionSelected = shootOptions.HIGH_CENTER;
-	protected Defense defense;
+	Defense defense;
 
     public DefenseCommand() {
         // Use requires() here to declare subsystem dependencies
