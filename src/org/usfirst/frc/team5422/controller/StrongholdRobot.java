@@ -99,7 +99,7 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void robotInit() {
         System.out.println("robot init started.");
-        dsio = new DSIO(0, 1);
+        dsio = new DSIO(1, 0);
         driver = new Driver(CANTalon.TalonControlMode.Speed);
         
         DSIO.createUI();

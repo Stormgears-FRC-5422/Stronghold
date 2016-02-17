@@ -30,7 +30,7 @@ public class DSIO {
     //Constructor
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
         joystick = new Joystick(joyStickChannel);
-        buttonBoard = new Joystick(0);
+        buttonBoard = new Joystick(buttonBoardChannel);
     }
 
     //Check if a button is pressed; if it is, do the respective command
