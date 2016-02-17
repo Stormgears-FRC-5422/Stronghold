@@ -3,6 +3,8 @@ package org.usfirst.frc.team5422.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -20,7 +22,7 @@ public class DSIO {
     //Constants may need to be changed
 
     static Joystick joystick;
-    static StrongholdConstants.shootHeightOptions teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
+    static shootOptions teleopShootHeightOption;
     public static Joystick buttonBoard;
     public static boolean buttonPressed;
     public static boolean[] running = new boolean[16];
@@ -49,7 +51,7 @@ public class DSIO {
                 StrongholdRobot.shooterSubsystem.stop();
             }
             else {
-                StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
+                StrongholdRobot.shooterSubsystem.shoot(teleopShootHeightOption);
             }
         }
 
@@ -64,10 +66,10 @@ public class DSIO {
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.GREEN_SWITCH_ID)) {
-            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
+            teleopShootHeightOption = StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH);
         }
         else {
-            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
+            teleopShootHeightOption = StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.LOW);
         }
 
         //5 defense buttons
