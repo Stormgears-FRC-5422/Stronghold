@@ -163,16 +163,13 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop init started.");
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleopNotRunning = false;
-
-//        Driver.initializeTrapezoid();
         System.out.println("teleop init ended.");
     }
 
     /**
      * Runs the motors with arcade steering.
      */
-
-    static int i = 0;
+    
     public void teleopPeriodic() {
         System.out.println("teleop started.");
 
@@ -197,7 +194,6 @@ public class StrongholdRobot extends IterativeRobot {
 		//reset all necessary things
 //		SmartDashboard.putNumber("Total Distance: ", 0);
 //		SmartDashboard.putNumber("Max Velocity: ", 0);
-		Driver.resetTrapezoid();
 	}
 
 	public void testInit() {
@@ -254,7 +250,6 @@ public class StrongholdRobot extends IterativeRobot {
                 break;
     		case TEST_MOTION_PROFILE:
     			System.out.println("Testing motion profile");
-    			Driver.moveTrapezoid(8192, 8192, 0.5, 0.5);
     			break;
     		case TEST_GLOBAL_POSITIONING:
     			System.out.println("Testing global positioning");
