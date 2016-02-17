@@ -23,7 +23,7 @@ public class GlobalMapping implements Runnable{
 	 * returns an equivalent theta between 0 and 2*Math.PI 
 	 */
 	public static double reduceRadiansUtil(double theta){
-		return (theta + 2*Math.PI) % 2*Math.PI;
+		return (theta + 2*Math.PI) % (2*Math.PI);
 	}
 	
 	public static void resetValues(double xField, double yField, double thetaField){
