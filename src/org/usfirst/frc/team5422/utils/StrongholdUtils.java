@@ -97,7 +97,7 @@ public class StrongholdUtils {
                 angleToGoal = -1;
                 break;
         }
-        return angleToGoal;
+        return Math.toRadians(angleToGoal);
     }
 
     public static double getDistance(double xSource, double ySource, double xDestination, double yDestination) {

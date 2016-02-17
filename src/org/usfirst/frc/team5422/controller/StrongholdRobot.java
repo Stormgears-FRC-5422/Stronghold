@@ -113,7 +113,7 @@ public class StrongholdRobot extends IterativeRobot {
     public void autonomousInit() {
         System.out.println("auto init started.");
         
-        DSIO.choosers.autoInitChoosers();
+        //DSIO.choosers.autoInitChoosers();
         
         autonomousCommand = new AutonomousCommandGroup();
         liftingCommandGroup = new LiftingCommandGroup();

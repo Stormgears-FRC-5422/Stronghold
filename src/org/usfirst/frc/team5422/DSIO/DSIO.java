@@ -177,7 +177,7 @@ public class DSIO {
 
         choosers = new SmartDashboardChooser();
         choosers.initChoosers();
-        choosers.autoInitChoosers();
+        //choosers.autoInitChoosers();
     }
 
     public static int getSelectedDefensePosition() {
