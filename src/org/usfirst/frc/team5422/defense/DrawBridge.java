@@ -73,8 +73,7 @@ public class DrawBridge implements Defense {
 		// TODO Auto-generated method stub
 
 		//Change angle to match angle to best goals
-		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findHorizontalAngleToGoal(StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH)));
-
+		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));
 	}
 
 }
