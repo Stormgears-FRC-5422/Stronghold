@@ -84,7 +84,7 @@ public class Navigator extends Subsystem{
 	
 	private void rotateToTheta(double theta, double rpmR, double rpmL){
 		
-		System.out.format("[rotate to] %4.3g (rad)\n", theta);
+		theta = GlobalMapping.reduceRadiansUtil(theta);
 		
 		double relInitTheta = theta - GlobalMapping.getTheta();
 		
@@ -94,7 +94,7 @@ public class Navigator extends Subsystem{
 			relInitTheta += 2*Math.PI;
 		}
 		
-		System.out.format("[rotate by] %4.3g (rad)\n", relInitTheta );
+		System.out.format("[GP][rotate to] %4.3g [rotate by] %4.3g (rad)\n", theta, relInitTheta );
 		
 		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
@@ -115,7 +115,7 @@ public class Navigator extends Subsystem{
 	
 	public void moveByDistance(double targDistance, double rpm){
 		
-		System.out.format("[translate by] %.3g (in)\n", targDistance );
+		System.out.format("[GP][translate by] %.3g (in)\n", targDistance );
 		
 		
 		double startDistance = GlobalMapping.getSigmaD();
@@ -143,8 +143,6 @@ public class Navigator extends Subsystem{
 	//TODO: Modularization
 	public void driveTo(double xField, double yField, double thetaField){
 		
-		System.out.println("In Drive To Current GP is : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
-
 		double xRel = xField - GlobalMapping.getX();
 		double yRel = yField - GlobalMapping.getY();
 		
@@ -155,19 +153,18 @@ public class Navigator extends Subsystem{
 		}
 		
 		double rpm = 0.2*60;
-
-		System.out.println("In Drive To New GP values are : " + " and " + targInitTheta);
 		
 		rotateToTheta(targInitTheta, rpm, rpm);
 		
 		double targDistance = Math.sqrt(xRel*xRel + yRel*yRel);
-		System.out.println("In Drive To New GP values are : " + " and " + targInitTheta);
 		
 		moveByDistance(targDistance, rpm);
 		
+		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
+		
 		rotateToTheta(thetaField, rpm, rpm);
 		
-		System.out.println("Done.");
+		System.out.println("[GP] one driveTo sequence done.");
 		
 	}
 	
@@ -190,7 +187,7 @@ public class Navigator extends Subsystem{
 		
 		moveByDistance(targDistance, rpm);
 		
-		System.out.println("Done.");
+		System.out.println("[GP] one driveTo sequence done.");
 		
 	}
 	
@@ -198,9 +195,11 @@ public class Navigator extends Subsystem{
 		
 		double rpm = 0.2*60;
 		
+		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
+		
 		rotateToTheta(thetaField, rpm, rpm);
 		
-		System.out.println("Done.");
+		System.out.println("[GP] one driveTo sequence done.");
 		
 	}
 

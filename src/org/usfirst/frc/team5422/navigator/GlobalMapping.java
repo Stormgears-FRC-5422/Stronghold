@@ -19,10 +19,21 @@ public class GlobalMapping implements Runnable{
 	private static double oldTickR;
 	private static double oldTickL;
 	
+	/*
+	 * returns an equivalent theta between 0 and 2*Math.PI 
+	 */
+	public static double reduceRadiansUtil(double theta){
+		return ((theta % 2*Math.PI) + 2*Math.PI) % 2*Math.PI;
+	}
+	
 	public static void resetValues(double xField, double yField, double thetaField){
 		x=xField;
 		y=yField;
-		theta=thetaField;
+		theta = reduceRadiansUtil(thetaField);
+		
+		
+		
+		System.out.format("[GP] Robot reset values to (%.3g, %.3g) @ %.3g\n", x, y, theta);
 	}
 	
 	public static void addTotalDistance(double dSigmaD) {
@@ -31,12 +42,7 @@ public class GlobalMapping implements Runnable{
 	}
 
 	public static void addTotalRotation(double dTheta) {
-		theta += dTheta;
-		theta %=2*Math.PI;
-		if(theta < 0){
-			theta += 2*Math.PI;
-		}
-		
+		theta = reduceRadiansUtil(theta + dTheta);
 	}
 
 	public static void addCurrentPosition(double dX, double dY) {
@@ -100,7 +106,7 @@ public class GlobalMapping implements Runnable{
 	}
 	
 	public static double getTheta(){
-		return theta;
+		return reduceRadiansUtil(theta);
 	}
 	
 	public static double getSigmaD(){
