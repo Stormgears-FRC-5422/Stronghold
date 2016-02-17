@@ -72,6 +72,7 @@ public class SmartDashboardChooser {
         startPositionChooser.addObject("Position 4", StrongholdConstants.START_POSITION_4);
         startPositionChooser.addObject("Position 5", StrongholdConstants.START_POSITION_5);
         startPositionChooser.addObject("Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
+        SmartDashboard.putData("Start Position Chooser", startPositionChooser);
         
 //        testInitChoosers();
 	}
