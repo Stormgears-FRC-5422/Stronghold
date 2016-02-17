@@ -20,8 +20,10 @@ public class DSIO {
     //Constants may need to be changed
 
     static Joystick joystick;
+    static StrongholdConstants.shootHeightOptions teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
     public static Joystick buttonBoard;
-    static boolean buttonPressed;
+    public static boolean buttonPressed;
+    public static boolean[] running = new boolean[16];
 
     public static int pos[] = new int[5];
 
@@ -31,18 +33,88 @@ public class DSIO {
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
         joystick = new Joystick(joyStickChannel);
         buttonBoard = new Joystick(buttonBoardChannel);
+
+        for (int i = 0; i < 16; i++) {
+            running[i] = false;
+        }
     }
 
     //Check if a button is pressed; if it is, do the respective command
     public static void getButtons() {
+        //Shooter operation buttons
         if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) {
-        	StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
+            running[StrongholdConstants.BIG_BLUE_BUTTON_ID] = !running[StrongholdConstants.BIG_BLUE_BUTTON_ID];
+            //If the action is already running, stop it; otherwise, run the action intended
+            if (running[StrongholdConstants.BIG_BLUE_BUTTON_ID]) {
+                StrongholdRobot.shooterSubsystem.stop();
+            }
+            else {
+                StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
+            }
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID)) {
-            StrongholdRobot.shooterSubsystem.intake();
+            running[StrongholdConstants.ORANGE_SWITCH_ID] = !running[StrongholdConstants.ORANGE_SWITCH_ID];
+            if (running[StrongholdConstants.ORANGE_SWITCH_ID]) {
+                StrongholdRobot.shooterSubsystem.stop();
+            }
+            else {
+                StrongholdRobot.shooterSubsystem.intake();
+            }
         }
 
+        if (buttonBoard.getRawButton(StrongholdConstants.GREEN_SWITCH_ID)) {
+            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
+        }
+        else {
+            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
+        }
+
+        //5 defense buttons
+        if (buttonBoard.getRawButton(StrongholdConstants.RED_BUTTON_ID)) {
+            running[StrongholdConstants.RED_BUTTON_ID] = !running[StrongholdConstants.RED_BUTTON_ID];
+            if (!running[StrongholdConstants.RED_BUTTON_ID]) {
+                //Cross defense 0
+
+
+            }
+        }
+
+        if (buttonBoard.getRawButton(StrongholdConstants.YELLOW_BUTTON_ID)) {
+            running[StrongholdConstants.YELLOW_BUTTON_ID] = !running[StrongholdConstants.YELLOW_BUTTON_ID];
+            if (!running[StrongholdConstants.YELLOW_BUTTON_ID]) {
+                //Cross defense 1
+
+
+            }
+        }
+
+        if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID)) {
+            running[StrongholdConstants.GREEN_BUTTON_ID] = !running[StrongholdConstants.GREEN_BUTTON_ID];
+            if (!running[StrongholdConstants.GREEN_BUTTON_ID]) {
+                //Cross defense 2
+
+
+            }
+        }
+
+        if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
+            running[StrongholdConstants.BLUE_BUTTON_ID] = !running[StrongholdConstants.BLUE_BUTTON_ID];
+            if (!running[StrongholdConstants.BLUE_BUTTON_ID]) {
+                //Cross defense 3
+
+
+            }
+        }
+
+        if (buttonBoard.getRawButton(StrongholdConstants.BLACK_BUTTON_ID)) {
+            running[StrongholdConstants.BLACK_BUTTON_ID] = !running[StrongholdConstants.BLACK_BUTTON_ID];
+            if (!running[StrongholdConstants.BLACK_BUTTON_ID]) {
+                //Cross defense 4
+
+
+            }
+        }
     }
 
     //Inputs: nothing

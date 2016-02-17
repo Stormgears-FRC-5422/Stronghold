@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.*;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
@@ -99,8 +100,8 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void robotInit() {
         System.out.println("robot init started.");
-        dsio = new DSIO(1, 0);
-        driver = new Driver(CANTalon.TalonControlMode.Speed);
+        dsio = new DSIO(0, 0);
+        driver = new Driver();
         
         DSIO.createUI();
 
@@ -170,15 +171,15 @@ public class StrongholdRobot extends IterativeRobot {
     /**
      * Runs the motors with arcade steering.
      */
+
+    static int i = 0;
     public void teleopPeriodic() {
         System.out.println("teleop started.");
 
         Scheduler.getInstance().run();
-        
-//        Driver.moveTrapezoid(leftTicks, rightTicks, leftVelocity, rightVelocity);
 
+        //Run actions based on input from button board
         DSIO.getButtons();
-        
 
         //Run the openDrive() method
         Driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
@@ -196,7 +197,6 @@ public class StrongholdRobot extends IterativeRobot {
 		//reset all necessary things
 //		SmartDashboard.putNumber("Total Distance: ", 0);
 //		SmartDashboard.putNumber("Max Velocity: ", 0);
-		
 		Driver.resetTrapezoid();
 	}
 

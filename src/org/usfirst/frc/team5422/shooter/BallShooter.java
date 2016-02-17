@@ -1,20 +1,14 @@
 package org.usfirst.frc.team5422.shooter;
 
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
-import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
-import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDeviceStatus;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -127,7 +121,6 @@ public class BallShooter extends Subsystem {
 		talonL.changeControlMode(TalonControlMode.PercentVbus);
 		talonR.set(-StrongholdConstants.FULL_THROTTLE);
 		talonL.set(StrongholdConstants.FULL_THROTTLE);
-		
 	}
 	public void stop() {
 		talonR.set(StrongholdConstants.NO_THROTTLE);
