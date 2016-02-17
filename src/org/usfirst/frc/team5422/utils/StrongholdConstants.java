@@ -25,6 +25,7 @@ public class StrongholdConstants {
 //	public static final double GEAR_RATIO = 1; //10.71 on motor gives 1 rotation of the wheel 
 	public static final double WHEEL_DIAMETER = 2.8;//inches
 //	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
+	public static final int ROBOT_MIDDLE_TO_BACK = 12; //inches
 
 	
 	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
@@ -39,11 +40,11 @@ public class StrongholdConstants {
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
 
-	public static final int[] POSITION_DEFENSE_0_REACH = {25, 110};
-	public static final int[] POSITION_DEFENSE_1_REACH = {25 + 1 * 50, 110};
-	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 2 * 50, 110};
-	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 3 * 50, 110};
-	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 4 * 50, 110};
+	public static final int[] POSITION_DEFENSE_0_REACH = {25, 90};
+	public static final int[] POSITION_DEFENSE_1_REACH = {25 + 1 * 50, 90};
+	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 2 * 50, 90};
+	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 3 * 50, 90};
+	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 4 * 50, 90};
 	public static final int CROSS_DEFENSE_LENGTH_Y = 96;
 
 	//H = high; L = low
@@ -59,7 +60,14 @@ public class StrongholdConstants {
 	public static final double[] POSITION_BALL_4 = {182, 0};
 	public static final double[] POSITION_BALL_5 = {227.5, 0};
 	public static final double[] POSITION_BALL_6 = {273, 0};
-	
+
+	public static final Double[] START_POSITION_1 = {45.5, 24.0};
+	public static final Double[] START_POSITION_2 = {91.0, 24.0};
+	public static final Double[] START_POSITION_3 = {130.5, 24.0};
+	public static final Double[] START_POSITION_4 = {182.0, 24.0};
+	public static final Double[] START_POSITION_5 = {227.5, 24.0};
+	public static final Double[] START_POSITION_6 = {273.0, 24.0};
+
 	public static final int TALON_LEFT_SHOOTER = 1;
 	public static final int TALON_RIGHT_SHOOTER = 8;
 	public static final int	TALON_ACTUATOR = 0;

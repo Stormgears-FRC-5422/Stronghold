@@ -11,6 +11,7 @@ import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
 import org.usfirst.frc.team5422.navigator.Driver;
+import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
@@ -67,6 +68,7 @@ public class StrongholdRobot extends IterativeRobot {
     public static shootOptions shootOptionSelected;
     public static alliance allianceSelected;
     public static diagnosticPOSTOptions diagnosticTestSelected;
+    public static Double initialX = 0.0, initialY = 0.0;
 
     public static boolean teleopNotRunning;
 
@@ -121,6 +123,12 @@ public class StrongholdRobot extends IterativeRobot {
             defensePositionSelected = DSIO.getSelectedDefensePosition();
             shootOptionSelected = (shootOptions) DSIO.choosers.shootChooser.getSelected();
             allianceSelected = (alliance) DSIO.choosers.allianceChooser.getSelected();
+            initialX = ((Double[]) DSIO.choosers.startPositionChooser.getSelected())[0];
+            initialY = ((Double[]) DSIO.choosers.startPositionChooser.getSelected())[1];
+            System.out.println("Initializaiton paramaters have been recieved.");
+            System.out.println("Robot Start Position: (" + initialX + ", " + initialY + ")");
+
+            GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
 
             System.out.println("Selecting from Defense Type as " + defenseTypeSelected + " at position " + defensePositionSelected + " and Goal selected as " + shootOptionSelected);
 

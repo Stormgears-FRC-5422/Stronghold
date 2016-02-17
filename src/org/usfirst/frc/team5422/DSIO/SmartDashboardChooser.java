@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class SmartDashboardChooser {
-    public static SendableChooser defenseChooser, shootChooser, endChooser, allianceChooser, testChooser;
+    public static SendableChooser defenseChooser, shootChooser, endChooser, allianceChooser, testChooser, startPositionChooser;
 
     public SmartDashboardChooser() {
 		//create choosers
@@ -30,6 +30,8 @@ public class SmartDashboardChooser {
         allianceChooser = new SendableChooser();
         //Create subsystem test selector
         testChooser = new SendableChooser();
+        //Create start position chooser
+        startPositionChooser = new SendableChooser();
         
 	}
 	
@@ -63,6 +65,13 @@ public class SmartDashboardChooser {
         allianceChooser.addDefault("Red", StrongholdConstants.alliance.RED);
         allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
         SmartDashboard.putData("Alliance Chooser", allianceChooser);
+
+        startPositionChooser.addDefault("Position 1 (Left Most, Near Low Bar)", StrongholdConstants.START_POSITION_1);
+        startPositionChooser.addObject("Position 2", StrongholdConstants.START_POSITION_2);
+        startPositionChooser.addObject("Position 3", StrongholdConstants.START_POSITION_3);
+        startPositionChooser.addObject("Position 4", StrongholdConstants.START_POSITION_4);
+        startPositionChooser.addObject("Position 5", StrongholdConstants.START_POSITION_5);
+        startPositionChooser.addObject("Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
         
 //        testInitChoosers();
 	}

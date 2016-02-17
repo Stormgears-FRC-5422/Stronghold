@@ -1,18 +1,11 @@
 package org.usfirst.frc.team5422.DSIO;
 
-import org.usfirst.frc.team5422.commands.buttonCommands.Button10;
-import org.usfirst.frc.team5422.commands.buttonCommands.Button15;
-import org.usfirst.frc.team5422.commands.buttonCommands.Button8;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /*
@@ -37,7 +30,7 @@ public class DSIO {
     //Constructor
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
         joystick = new Joystick(joyStickChannel);
-        buttonBoard = new Joystick(buttonBoardChannel);
+        buttonBoard = new Joystick(0);
     }
 
     //Check if a button is pressed; if it is, do the respective command
@@ -45,6 +38,11 @@ public class DSIO {
         if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) {
         	StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
         }
+
+        if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID)) {
+            StrongholdRobot.shooterSubsystem.intake();
+        }
+
     }
 
     //Inputs: nothing
