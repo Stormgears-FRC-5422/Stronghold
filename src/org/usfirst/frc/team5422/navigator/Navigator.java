@@ -32,7 +32,7 @@ public class Navigator extends Subsystem{
 
 		System.out.println("Before resetting global positions : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
 		
-		GlobalMapping.resetValues();
+		GlobalMapping.resetValues(0,0,Math.PI/2);
 		
 		System.out.println("After resetting global positions : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
 		

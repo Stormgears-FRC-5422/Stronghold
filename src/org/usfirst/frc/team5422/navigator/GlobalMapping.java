@@ -19,10 +19,10 @@ public class GlobalMapping implements Runnable{
 	private static double oldTickR;
 	private static double oldTickL;
 	
-	public static void resetValues(){
-		x=0;
-		y=0;
-		theta=Math.PI/2;
+	public static void resetValues(double xField, double yField, double thetaField){
+		x=xField;
+		y=yField;
+		theta=thetaField;
 	}
 	
 	public static void addTotalDistance(double dSigmaD) {
