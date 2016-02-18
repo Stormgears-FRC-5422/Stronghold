@@ -86,19 +86,19 @@ public class StrongholdUtils {
 
         switch (shootOption) {
             case HIGH_LEFT:
-                angleToGoal = 90 - Math.toDegrees(Math.atan2(deltaYHL, deltaXHL));
+                angleToGoal = Math.toDegrees(Math.atan2(deltaYHL, deltaXHL));
                 break;
             case HIGH_RIGHT:
-                angleToGoal = 90 - Math.toDegrees(Math.atan2(deltaYHR, deltaXHR));
+                angleToGoal = Math.toDegrees(Math.atan2(deltaYHR, deltaXHR));
                 break;
             case HIGH_CENTER:
-                angleToGoal = 90 - Math.toDegrees(Math.atan2(deltaYHC, deltaXHC));
+                angleToGoal = Math.toDegrees(Math.atan2(deltaYHC, deltaXHC));
                 break;
             case LOW_LEFT:
-                angleToGoal = 90 - Math.toDegrees(Math.atan2(deltaYLL, deltaXLL));
+                angleToGoal = Math.toDegrees(Math.atan2(deltaYLL, deltaXLL));
                 break;
             case LOW_RIGHT:
-                angleToGoal = 90 - Math.toDegrees(Math.atan2(deltaYLR, deltaXLR));
+                angleToGoal = Math.toDegrees(Math.atan2(deltaYLR, deltaXLR));
                 break;
             case NONE:
                 angleToGoal = -1;
