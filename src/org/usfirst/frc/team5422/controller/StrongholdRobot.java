@@ -163,17 +163,15 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop init started.");
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleopNotRunning = false;
-
-//        Driver.initializeTrapezoid();
         System.out.println("teleop init ended.");
     }
 
     /**
      * Runs the motors with arcade steering.
      */
-
+    
     public void teleopPeriodic() {
-        System.out.println("teleop periodic started.");
+        System.out.println("teleop started.");
 
         Scheduler.getInstance().run();
 
@@ -181,9 +179,9 @@ public class StrongholdRobot extends IterativeRobot {
         DSIO.getButtons();
 
         //Run the openDrive() method
-        Driver.openDrive(DSIO.dampenWithCurveX(), DSIO.dampenWithCurveY(), CANTalon.TalonControlMode.Speed);
+        Driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
 
-        System.out.println("teleop periodic ended.");
+        System.out.println("teleop ended.");
     }
 
 	/**  function is called periodically during disable */
@@ -196,7 +194,6 @@ public class StrongholdRobot extends IterativeRobot {
 		//reset all necessary things
 //		SmartDashboard.putNumber("Total Distance: ", 0);
 //		SmartDashboard.putNumber("Max Velocity: ", 0);
-		Driver.resetTrapezoid();
 	}
 
 	public void testInit() {
@@ -253,7 +250,6 @@ public class StrongholdRobot extends IterativeRobot {
                 break;
     		case TEST_MOTION_PROFILE:
     			System.out.println("Testing motion profile");
-    			Driver.moveTrapezoid(8192, 8192, 0.5, 0.5);
     			break;
     		case TEST_GLOBAL_POSITIONING:
     			System.out.println("Testing global positioning");

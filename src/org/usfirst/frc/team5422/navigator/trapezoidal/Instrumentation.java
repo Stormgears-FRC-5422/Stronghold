@@ -25,7 +25,7 @@
 package org.usfirst.frc.team5422.navigator.trapezoidal;
 import edu.wpi.first.wpilibj.CANTalon;
 
-public class instrumentation {
+public class Instrumentation {
 
 	static double timeout = 0;
 	static int count = 0;
