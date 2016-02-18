@@ -3,7 +3,7 @@ package org.usfirst.frc.team5422.sensors;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.SerialPort;
 
-public class Ultrasonic_Sensor {
+public class UltrasonicSensor {
 	DigitalOutput d;
 	SerialPort sp;
 	public int DPORT;
@@ -12,7 +12,7 @@ public class Ultrasonic_Sensor {
 	public final SerialPort.StopBits SBITS = SerialPort.StopBits.kOne;
 	boolean status; // if its false, then the u.s. is busy, otherwise its free
 
-	public Ultrasonic_Sensor(int port) {
+	public UltrasonicSensor(int port) {
 		DPORT = port;
 		d = new DigitalOutput(DPORT);
 		d.set(false);
