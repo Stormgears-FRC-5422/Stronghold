@@ -81,14 +81,14 @@ public class StrongholdConstants {
 
 	public static final double[] POSITION_BALL_1 = {45.5, 0};
 	public static final double[] POSITION_BALL_2 = {91, 0};
-	public static final double[] POSITION_BALL_3 = {130.5, 0};
+	public static final double[] POSITION_BALL_3 = {136.5, 0};
 	public static final double[] POSITION_BALL_4 = {182, 0};
 	public static final double[] POSITION_BALL_5 = {227.5, 0};
 	public static final double[] POSITION_BALL_6 = {273, 0};
 
 	public static final Double[] START_POSITION_1 = {45.5, 24.0};
 	public static final Double[] START_POSITION_2 = {91.0, 24.0};
-	public static final Double[] START_POSITION_3 = {130.5, 24.0};
+	public static final Double[] START_POSITION_3 = {136.5, 24.0};
 	public static final Double[] START_POSITION_4 = {182.0, 24.0};
 	public static final Double[] START_POSITION_5 = {227.5, 24.0};
 	public static final Double[] START_POSITION_6 = {273.0, 24.0};
