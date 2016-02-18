@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 public class TrapezoidThread implements Runnable{
 
@@ -111,11 +112,11 @@ public class TrapezoidThread implements Runnable{
 	
 	private void initializeTalons() {
 		
-		leftTalon.setPID(1, 0, 0);
-		leftTalon.setF(0);
-		
-		rightTalon.setPID(1, 0, 0);
-		rightTalon.setF(0);
+		leftTalon.setPID(StrongholdConstants.TRAP_P, StrongholdConstants.TRAP_I, StrongholdConstants.TRAP_D);
+		leftTalon.setF(StrongholdConstants.TRAP_F);
+
+		rightTalon.setPID(StrongholdConstants.TRAP_P, StrongholdConstants.TRAP_I, StrongholdConstants.TRAP_D);
+		rightTalon.setF(StrongholdConstants.TRAP_F);
 		
 	 	leftTalon.changeControlMode(TalonControlMode.MotionProfile);
 	 	rightTalon.changeControlMode(TalonControlMode.MotionProfile);

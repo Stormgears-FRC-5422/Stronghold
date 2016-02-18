@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5422.shooter;
 
+import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -38,8 +39,8 @@ public class BallShooter extends Subsystem {
 		//Reverse output may be needed
 		talonL.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonL.configNominalOutputVoltage(+0.0f, -0.0f);
-		talonL.setPID(0, 0, 0);
-		talonL.setF(0);
+		talonL.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
+		talonL.setF(StrongholdConstants.SHOOTER_F);
 		
 		talonR = new CANTalon(StrongholdConstants.TALON_RIGHT_SHOOTER);
 		talonR.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -47,8 +48,8 @@ public class BallShooter extends Subsystem {
 		//Reverse output may be needed
 		talonR.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonR.configNominalOutputVoltage(+0.0f, -0.0f);
-		talonR.setPID(0, 0, 0);
-		talonR.setF(0);
+		talonR.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
+		talonR.setF(StrongholdConstants.SHOOTER_F);
 		
 //		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
 //		actuator.setFeedbackDevice(FeedbackDevice.AnalogPot);
@@ -87,6 +88,7 @@ public class BallShooter extends Subsystem {
 		Timer.delay(StrongholdConstants.SHOOT_DELAY);
 		stop();
 		relay.set(Relay.Value.kOff);
+		DSIO.shooterRunning = false;
 	}
 	
 	//Distance given in inches

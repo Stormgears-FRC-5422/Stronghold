@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5422.DSIO;
 
+import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
@@ -24,8 +25,7 @@ public class DSIO {
     static Joystick joystick;
     static shootOptions teleopShootHeightOption;
     public static Joystick buttonBoard;
-    public static boolean buttonPressed;
-    public static boolean[] running = new boolean[16];
+    public static boolean shooterRunning;
 
     public static int pos[] = new int[5];
 
@@ -35,34 +35,24 @@ public class DSIO {
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
         joystick = new Joystick(joyStickChannel);
         buttonBoard = new Joystick(buttonBoardChannel);
-
-        for (int i = 0; i < 16; i++) {
-            running[i] = false;
-        }
     }
 
     //Check if a button is pressed; if it is, do the respective command
     public static void getButtons() {
         //Shooter operation buttons
         if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) {
-            running[StrongholdConstants.BIG_BLUE_BUTTON_ID] = !running[StrongholdConstants.BIG_BLUE_BUTTON_ID];
-            //If the action is already running, stop it; otherwise, run the action intended
-            if (running[StrongholdConstants.BIG_BLUE_BUTTON_ID]) {
-                StrongholdRobot.shooterSubsystem.stop();
-            }
-            else {
-                StrongholdRobot.shooterSubsystem.shoot(teleopShootHeightOption);
-            }
+            StrongholdRobot.shooterSubsystem.shoot(shootOptions.HIGH_CENTER);
+            shooterRunning = true;
+        }
+        else {
+            //Do nothing
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID)) {
-            running[StrongholdConstants.ORANGE_SWITCH_ID] = !running[StrongholdConstants.ORANGE_SWITCH_ID];
-            if (running[StrongholdConstants.ORANGE_SWITCH_ID]) {
-                StrongholdRobot.shooterSubsystem.stop();
-            }
-            else {
-                StrongholdRobot.shooterSubsystem.intake();
-            }
+            StrongholdRobot.shooterSubsystem.intake();
+        }
+        else if (!shooterRunning) {
+            StrongholdRobot.shooterSubsystem.stop();
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.GREEN_SWITCH_ID)) {
@@ -74,48 +64,28 @@ public class DSIO {
 
         //5 defense buttons
         if (buttonBoard.getRawButton(StrongholdConstants.RED_BUTTON_ID)) {
-            running[StrongholdConstants.RED_BUTTON_ID] = !running[StrongholdConstants.RED_BUTTON_ID];
-            if (!running[StrongholdConstants.RED_BUTTON_ID]) {
-                //Cross defense 1
-            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_1);
-
-            }
+            //Cross defense 1
+            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_1);
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.YELLOW_BUTTON_ID)) {
-            running[StrongholdConstants.YELLOW_BUTTON_ID] = !running[StrongholdConstants.YELLOW_BUTTON_ID];
-            if (!running[StrongholdConstants.YELLOW_BUTTON_ID]) {
-                //Cross defense 2
-            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_2);
-
-            }
+            //Cross defense 2
+            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_2);
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID)) {
-            running[StrongholdConstants.GREEN_BUTTON_ID] = !running[StrongholdConstants.GREEN_BUTTON_ID];
-            if (!running[StrongholdConstants.GREEN_BUTTON_ID]) {
-                //Cross defense 3
-            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_3);
-
-            }
+            //Cross defense 3
+            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_3);
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
-            running[StrongholdConstants.BLUE_BUTTON_ID] = !running[StrongholdConstants.BLUE_BUTTON_ID];
-            if (!running[StrongholdConstants.BLUE_BUTTON_ID]) {
-                //Cross defense 4
-            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_4);
-
-            }
+            //Cross defense 4
+            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_4);
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.BLACK_BUTTON_ID)) {
-            running[StrongholdConstants.BLACK_BUTTON_ID] = !running[StrongholdConstants.BLACK_BUTTON_ID];
-            if (!running[StrongholdConstants.BLACK_BUTTON_ID]) {
-                //Cross defense 0
-            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_LOW_BAR);
-                
-            }
+            //Cross defense 0
+            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_LOW_BAR);
         }
     }
 
@@ -156,7 +126,7 @@ public class DSIO {
 
             //Wait 1 millisecond
             try {
-                Thread.sleep(1);
+                Timer.delay(0.001);
             } catch (Exception e) {
                 System.out.println("Couldn't sleep the thread.");
             }
@@ -183,7 +153,7 @@ public class DSIO {
 
             //Wait 1 millisecond
             try {
-                Thread.sleep(1);
+                Timer.delay(0.001);
             } catch (Exception e) {
                 System.out.println("Couldn't sleep the thread.");
             }

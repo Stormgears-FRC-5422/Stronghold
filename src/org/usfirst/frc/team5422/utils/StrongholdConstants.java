@@ -10,10 +10,11 @@ public class StrongholdConstants {
 	public static final int TALON_DRIVE_LEFT_MASTER = 3;
 	public static final int TALON_DRIVE_RIGHT_MASTER  = 0;
 	
-	//physical attribute
+	//Physical attributes
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
-	// Rabbot Drive specifications
+
+	//Rabbot Drive specifications
 	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches	
 	public static final double GEAR_RATIO = 1;
 //	public static final double WHEEL_DIAMETER = 6;//inches
@@ -24,11 +25,14 @@ public class StrongholdConstants {
 //	public static final double GEAR_RATIO = 1; //10.71 on motor gives 1 rotation of the wheel 
 	public static final double WHEEL_DIAMETER = 2.8;//inches
 //	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
-	public static final int ROBOT_MIDDLE_TO_BACK = 12; //inches
+	public static final double ROBOT_MIDDLE_TO_BACK = 12; //inches
+
+	//Stormgears 2016 Robot Drive Specifications
+
 
 	//PIDs
-	public static final double TRAP_F = 1.705;
-	public static final double TRAP_P = 0.000185;
+	public static final double TRAP_F = 0;
+	public static final double TRAP_P = 1;
 	public static final double TRAP_I = 0;
 	public static final double TRAP_D = 0;
 
@@ -37,8 +41,8 @@ public class StrongholdConstants {
 	public static final double OPEN_DRIVE_I = 0;
 	public static final double OPEN_DRIVE_D = 0;
 
-	public static final double SHOOTER_F = 1.705;
-	public static final double SHOOTER_P = 0.000185;
+	public static final double SHOOTER_F = 0;
+	public static final double SHOOTER_P = 0;
 	public static final double SHOOTER_I = 0;
 	public static final double SHOOTER_D = 0;
 
@@ -46,11 +50,12 @@ public class StrongholdConstants {
 	public static final double ACTUATOR_P = 0.000185;
 	public static final double ACTUATOR_I = 0;
 	public static final double ACTUATOR_D = 0;
-	
+
+	//Inches per tick
 	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
 	public static final int JOYSTICK_CHANNEL = 0;
-	public static final int BUTTONBOARD_CHANNEL = 0;
+	public static final int BUTTONBOARD_CHANNEL = 1;
 	
 	//DigitalOutput 1 for the echo pulses
 	public static final int ULTRASONIC_ECHO_PULSE_OUTPUT = 1;
@@ -59,6 +64,7 @@ public class StrongholdConstants {
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
 
+	//Positions
 	public static final int[] POSITION_DEFENSE_0_REACH = {25, 90};
 	public static final int[] POSITION_DEFENSE_1_REACH = {25 + 1 * 50, 90};
 	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 2 * 50, 90};
