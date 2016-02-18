@@ -10,7 +10,7 @@ public class StrongholdConstants {
 	public static final int TALON_DRIVE_LEFT_MASTER = 3;
 	public static final int TALON_DRIVE_RIGHT_MASTER  = 0;
 	
-	//physical attributes
+	//physical attribute
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
 	// Rabbot Drive specifications
