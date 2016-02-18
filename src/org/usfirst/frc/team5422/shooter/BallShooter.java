@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 
 
-public class BallShooter extends Subsystem {
+public class BallShooter extends Subsystem implements Runnable {
 	/**
 	 * This function helps shoot the ball/boulder into the low goal
 	 */
@@ -72,23 +72,9 @@ public class BallShooter extends Subsystem {
 	//Shoots the ball
 	//Inputs: distance, low or high goal
 	public void shoot(StrongholdConstants.shootOptions goal) {
-		
-//		changeAngle(calculateAngle(distance, goal)); 
-		
-		double speed = 1; //calculateSpeed();
-
-		//Direction of motor to be found out
-		talonR.set(speed); //* StrongholdConstants.VEL_PER_100MS
-		talonL.set(-1*speed);
-		
-		Timer.delay(StrongholdConstants.SHOOT_DELAY);
-
-		relay.set(Relay.Value.kForward);
-		
-		Timer.delay(StrongholdConstants.SHOOT_DELAY);
-		stop();
-		relay.set(Relay.Value.kOff);
-		DSIO.shooterRunning = false;
+		BallShooter shooter = new BallShooter();
+		Thread shooterThread = new Thread(shooter);
+		shooterThread.start();
 	}
 	
 	//Distance given in inches
@@ -151,6 +137,27 @@ public class BallShooter extends Subsystem {
 		distanceFromGoal =  Math.pow(Math.pow(thetaX, 2) + Math.pow(thetaY, 2), -2);
 		
 		return distanceFromGoal;
+	}
+
+	public void run() {
+		
+//		changeAngle(calculateAngle(distance, goal)); 
+		
+		double speed = 1; //calculateSpeed();
+
+		//Direction of motor to be found out
+		talonR.set(speed); //* StrongholdConstants.VEL_PER_100MS
+		talonL.set(-1*speed);
+		
+		Timer.delay(StrongholdConstants.SHOOT_DELAY);
+
+		relay.set(Relay.Value.kForward);
+		
+		Timer.delay(StrongholdConstants.SHOOT_DELAY);
+		stop();
+		relay.set(Relay.Value.kOff);
+		DSIO.shooterRunning = false;
+		
 	}
 	
 		
