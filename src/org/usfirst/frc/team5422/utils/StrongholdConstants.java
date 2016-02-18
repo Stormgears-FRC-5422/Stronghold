@@ -64,7 +64,7 @@ public class StrongholdConstants {
 	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 2 * 50, 90};
 	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 3 * 50, 90};
 	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 4 * 50, 90};
-	public static final int CROSS_DEFENSE_LENGTH_Y = 96;
+	public static final int CROSS_DEFENSE_LENGTH_Y = 60;
 
 	//H = high; L = low
 	public static final double[] POSITION_HLEFT_GOAL = {151, 312};
