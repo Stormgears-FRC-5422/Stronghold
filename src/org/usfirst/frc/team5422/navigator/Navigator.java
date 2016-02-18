@@ -30,11 +30,7 @@ public class Navigator extends Subsystem{
 		thread = new Notifier(new GlobalMapping());
 		thread.startPeriodic(0.001);
 
-		System.out.println("Before resetting global positions : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
-		
 		GlobalMapping.resetValues(0,0,Math.PI/2);
-		
-		System.out.println("After resetting global positions : " + GlobalMapping.getX() + " and " + GlobalMapping.getY() + " and " + GlobalMapping.getTheta());
 		
 		
 	}
@@ -94,10 +90,12 @@ public class Navigator extends Subsystem{
 			relInitTheta += 2*Math.PI;
 		}
 		
+		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
 		System.out.format("[GP][rotate to] %4.3g [rotate by] %4.3g (rad)\n", theta, relInitTheta );
 		
-		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
-		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		
+		double lTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double rTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
 		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL);
 		
@@ -106,7 +104,6 @@ public class Navigator extends Subsystem{
 		while(Running()){
 			
 			if(Math.abs(GlobalMapping.getTheta() - theta) <= 0.1){
-				System.out.println("stopped turning");
 				StopRunning();
 			}
 			
@@ -115,6 +112,7 @@ public class Navigator extends Subsystem{
 	
 	public void moveByDistance(double targDistance, double rpm){
 		
+		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
 		System.out.format("[GP][translate by] %.3g (in)\n", targDistance );
 		
 		
@@ -164,8 +162,6 @@ public class Navigator extends Subsystem{
 		
 		rotateToTheta(thetaField, rpm, rpm);
 		
-		System.out.println("[GP] one driveTo sequence done.");
-		
 	}
 	
 	public void driveTo(double xField, double yField){
@@ -187,8 +183,6 @@ public class Navigator extends Subsystem{
 		
 		moveByDistance(targDistance, rpm);
 		
-		System.out.println("[GP] one driveTo sequence done.");
-		
 	}
 	
 	public void driveTo(double thetaField){
@@ -198,8 +192,6 @@ public class Navigator extends Subsystem{
 		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
 		
 		rotateToTheta(thetaField, rpm, rpm);
-		
-		System.out.println("[GP] one driveTo sequence done.");
 		
 	}
 

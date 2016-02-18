@@ -38,10 +38,10 @@ public class SmartDashboardChooser {
 	public void initChoosers() {
 
 		if (defenseChooser == null) System.out.println("say error in initializing choosers");
-        defenseChooser.addDefault("(0) Low Bar", defenseTypeOptions.LOW_BAR);
+        defenseChooser.addObject("(0) Low Bar", defenseTypeOptions.LOW_BAR);
         defenseChooser.addObject("(1) Portcullis", defenseTypeOptions.PORTCULLIS);
         defenseChooser.addObject("(2) Chival de Frise", defenseTypeOptions.CHIVAL_DE_FRISE);
-        defenseChooser.addObject("(3) Moat", defenseTypeOptions.MOAT);
+        defenseChooser.addDefault("(3) Moat", defenseTypeOptions.MOAT);
         defenseChooser.addObject("(4) Ramparts", defenseTypeOptions.RAMPARTS);
         defenseChooser.addObject("(5) Drawbridge", defenseTypeOptions.DRAWBRIDGE);
         defenseChooser.addObject("(6) Sallyport", defenseTypeOptions.SALLYPORT);
@@ -73,17 +73,22 @@ public class SmartDashboardChooser {
         startPositionChooser.addObject("Position 5", StrongholdConstants.START_POSITION_5);
         startPositionChooser.addObject("Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
         SmartDashboard.putData("Start Position Chooser", startPositionChooser);
-        
-        autoInitChoosers();
-//        testInitChoosers();
-	}
-	
-	public void autoInitChoosers() {
+
         //Add other defense position text boxes
         SmartDashboard.putNumber("Defense at Position 1", -1);
         SmartDashboard.putNumber("Defense at Position 2", -1);
         SmartDashboard.putNumber("Defense at Position 3", -1);
         SmartDashboard.putNumber("Defense at Position 4", -1);
+
+//        testInitChoosers();
+	}
+	
+	public void autoInitChoosers() {
+        //Add other defense position text boxes
+        SmartDashboard.putNumber("Defense at Position 1", 3);
+        SmartDashboard.putNumber("Defense at Position 2", 4);
+        SmartDashboard.putNumber("Defense at Position 3", 7);
+        SmartDashboard.putNumber("Defense at Position 4", 8);
 	}	
 
 	public void teleopInitChoosers() {

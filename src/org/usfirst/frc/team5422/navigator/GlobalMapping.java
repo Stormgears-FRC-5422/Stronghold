@@ -23,15 +23,15 @@ public class GlobalMapping implements Runnable{
 	 * returns an equivalent theta between 0 and 2*Math.PI 
 	 */
 	public static double reduceRadiansUtil(double theta){
-		return (theta + 2*Math.PI) % (2*Math.PI);
+		theta = (theta + 2*Math.PI) % (2*Math.PI); 
+		return theta;
+		
 	}
 	
 	public static void resetValues(double xField, double yField, double thetaField){
 		x=xField;
 		y=yField;
 		theta = reduceRadiansUtil(thetaField);
-		
-		
 		
 		System.out.format("[GP] Robot reset values to (%.3g, %.3g) @ %.3g\n", x, y, theta);
 	}
@@ -55,7 +55,7 @@ public class GlobalMapping implements Runnable{
 	synchronized private static void updateGP(double newTickR, double newTickL){
 		SmartDashboard.putNumber("[GP] Motor (R) Encoder Ticks", newTickR);
 		SmartDashboard.putNumber("[GP] Motor (L) Encoder Ticks", newTickL);
-		System.out.format("[GP] Motor Old (L,R) Encoder Ticks (%.3g, %.3g) AND New (L, R) Encoder Ticks (%.3g, %.3g) \n", oldTickL, oldTickR, newTickL, newTickR);
+		//System.out.format("[GP] Motor Old (L,R) Encoder Ticks (%.3g, %.3g) AND New (L, R) Encoder Ticks (%.3g, %.3g) \n", oldTickL, oldTickR, newTickL, newTickR);
 		
 		double dTickR = newTickR - oldTickR;
 		double dTickL = newTickL - oldTickL;
@@ -80,7 +80,7 @@ public class GlobalMapping implements Runnable{
 		
 		SmartDashboard.putNumber("[GP] Total Distance(in)", GlobalMapping.sigmaD);
 		SmartDashboard.putNumber("[GP] Theta(r)", GlobalMapping.theta);
-		System.out.format("[GP] Total Distance(in) (%.3g) , [GP] dTheta(r) (%.3g), [GP] Theta(r) (%.3g) \n", GlobalMapping.sigmaD, dTheta, GlobalMapping.theta);
+		//System.out.format("[GP] Total Distance(in) (%.3g) , [GP] dTheta(r) (%.3g), [GP] Theta(r) (%.3g) \n", GlobalMapping.sigmaD, dTheta, GlobalMapping.theta);
 		
 		SmartDashboard.putNumber("[GP] x-position(in)", GlobalMapping.x);
 		SmartDashboard.putNumber("[GP] y-position(in)", GlobalMapping.y);
@@ -93,7 +93,7 @@ public class GlobalMapping implements Runnable{
 		
 		while((Driver.talon[0]!=null) && (Driver.talon[1]!=null)){
 		
-			updateGP(-Driver.talon[0].getEncPosition(), Driver.talon[1].getEncPosition());
+			updateGP(Driver.talon[1].getEncPosition(), -Driver.talon[0].getEncPosition());
 		
 		}
 		
