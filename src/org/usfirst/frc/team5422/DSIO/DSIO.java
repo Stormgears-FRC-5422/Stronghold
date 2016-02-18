@@ -114,7 +114,7 @@ public class DSIO {
             if (!running[StrongholdConstants.BLACK_BUTTON_ID]) {
                 //Cross defense 0
             	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_LOW_BAR);
-
+                
             }
         }
     }
