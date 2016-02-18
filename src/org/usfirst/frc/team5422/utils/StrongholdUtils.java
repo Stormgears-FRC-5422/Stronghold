@@ -13,6 +13,7 @@ import java.util.Arrays;
  */
 public class StrongholdUtils {
 
+    private static boolean inBounds;
     /**
      * This function determines the best goal to shoot into, with the input of whether the goal should be high or low
      */
@@ -51,7 +52,13 @@ public class StrongholdUtils {
             }
             else bestGoal = shootOptions.LOW_LEFT;
         }
+        else inBounds = false;
         return bestGoal;
+    }
+
+    public static boolean isInBounds() {
+        findBestGoal(shootHeightOptions.LOW);
+        return inBounds;
     }
 
     /**
@@ -98,6 +105,38 @@ public class StrongholdUtils {
                 break;
         }
         return Math.toRadians(angleToGoal);
+    }
+
+    public static double findClosestFallbackPointX() {
+        double x = 0;
+        if (!isInBounds()) {
+            double distToLeft, distToCenter;
+            distToLeft = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_LEFT[0], StrongholdConstants.FALLBACK_LEFT[1]);
+            distToCenter = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_CENTER[0], StrongholdConstants.FALLBACK_CENTER[1]);
+            if (distToLeft < distToCenter) x = StrongholdConstants.FALLBACK_LEFT[0];
+            else x = StrongholdConstants.FALLBACK_CENTER[0];
+        }
+        else {
+            x = GlobalMapping.getX();
+        }
+
+        return x;
+    }
+
+    public static double findClosestFallbackPointY() {
+        double y = 0;
+        if (!isInBounds()) {
+            double distToLeft, distToCenter;
+            distToLeft = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_LEFT[0], StrongholdConstants.FALLBACK_LEFT[1]);
+            distToCenter = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_CENTER[0], StrongholdConstants.FALLBACK_CENTER[1]);
+            if (distToLeft < distToCenter) y = StrongholdConstants.FALLBACK_LEFT[1];
+            else y = StrongholdConstants.FALLBACK_CENTER[1];
+        }
+        else {
+            y = GlobalMapping.getX();
+        }
+
+        return y;
     }
 
     public static double getDistance(double xSource, double ySource, double xDestination, double yDestination) {

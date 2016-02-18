@@ -172,9 +172,8 @@ public class StrongholdRobot extends IterativeRobot {
      * Runs the motors with arcade steering.
      */
 
-    static int i = 0;
     public void teleopPeriodic() {
-        System.out.println("teleop started.");
+        System.out.println("teleop periodic started.");
 
         Scheduler.getInstance().run();
 
@@ -182,9 +181,9 @@ public class StrongholdRobot extends IterativeRobot {
         DSIO.getButtons();
 
         //Run the openDrive() method
-        Driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
+        Driver.openDrive(DSIO.dampenWithCurveX(), DSIO.dampenWithCurveY(), CANTalon.TalonControlMode.Speed);
 
-        System.out.println("teleop ended.");
+        System.out.println("teleop periodic ended.");
     }
 
 	/**  function is called periodically during disable */

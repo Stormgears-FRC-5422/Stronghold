@@ -20,19 +20,9 @@ public class Driver {
 
     static MotionProfileExample leftProfile;
     static MotionProfileExample rightProfile;
-    static double F, P, I, D;
 
     //Constructor
     public Driver() {
-        //Set PID closed loop gains
-
-
-        //Change the PID values here. Keep F as it is.
-        F = 1.705;
-        P = 0.000185;
-        I = 0;
-        D = 0;
-
         //Declare talons
         talon[0] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_MASTER);
         talon[1] = new CANTalon(TALON_DRIVE_RIGHT_MASTER);
@@ -42,8 +32,8 @@ public class Driver {
             talon[i].setFeedbackDevice(FeedbackDevice.QuadEncoder);
             talon[i].configEncoderCodesPerRev(2048);
             talon[i].configNominalOutputVoltage(+0.0f, -0.0f);
-            talon[i].setPID(P, I, D);
-            talon[i].setF(F);
+            talon[i].setPID(StrongholdConstants.OPEN_DRIVE_P, StrongholdConstants.OPEN_DRIVE_I, StrongholdConstants.OPEN_DRIVE_D);
+            talon[i].setF(StrongholdConstants.OPEN_DRIVE_F);
         }
 
         leftProfile = new MotionProfileExample(talon[0]);
@@ -62,8 +52,8 @@ public class Driver {
             talon[0].reverseOutput(true);
             for (int i = 0; i < 2; i++) {
                 talon[i].changeControlMode(controlMode);
-                talon[i].setPID(P, I, D);
-                talon[i].setF(F);
+                talon[i].setPID(StrongholdConstants.OPEN_DRIVE_P, StrongholdConstants.OPEN_DRIVE_I, StrongholdConstants.OPEN_DRIVE_D);
+                talon[i].setF(StrongholdConstants.OPEN_DRIVE_F);
             }
         } else {
             System.out.println("Invalid Talon Control Mode, set the talon in Speed mode or PercentVbus mode");

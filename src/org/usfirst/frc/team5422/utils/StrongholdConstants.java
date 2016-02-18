@@ -13,20 +13,39 @@ public class StrongholdConstants {
 	//physical attributes
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
-
-// Rabbot Drive specifications
+	// Rabbot Drive specifications
 	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches	
 	public static final double GEAR_RATIO = 1;
 //	public static final double WHEEL_DIAMETER = 6;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 
-// Rhino Drive Specifications
+    //Rhino Drive Specifications
 //	public static final double WHEEL_BASE = 25;//inches or 24.75 inches
 //	public static final double GEAR_RATIO = 1; //10.71 on motor gives 1 rotation of the wheel 
 	public static final double WHEEL_DIAMETER = 2.8;//inches
 //	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	public static final int ROBOT_MIDDLE_TO_BACK = 12; //inches
 
+	//PIDs
+	public static final double TRAP_F = 1.705;
+	public static final double TRAP_P = 0.000185;
+	public static final double TRAP_I = 0;
+	public static final double TRAP_D = 0;
+
+	public static final double OPEN_DRIVE_F = 1.705;
+	public static final double OPEN_DRIVE_P = 0.000185;
+	public static final double OPEN_DRIVE_I = 0;
+	public static final double OPEN_DRIVE_D = 0;
+
+	public static final double SHOOTER_F = 1.705;
+	public static final double SHOOTER_P = 0.000185;
+	public static final double SHOOTER_I = 0;
+	public static final double SHOOTER_D = 0;
+
+	public static final double ACTUATOR_F = 1.705;
+	public static final double ACTUATOR_P = 0.000185;
+	public static final double ACTUATOR_I = 0;
+	public static final double ACTUATOR_D = 0;
 	
 	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
@@ -54,6 +73,12 @@ public class StrongholdConstants {
 	public static final double[] POSITION_LLEFT_GOAL = {151, 312};
 	public static final double[] POSITION_LRIGHT_GOAL = {193.5, 312};
 
+	public static final int DEFENSE_POSITION_LOW_BAR = 0;
+	public static final int DEFENSE_POSITION_1 = 1;
+	public static final int DEFENSE_POSITION_2 = 2;
+	public static final int DEFENSE_POSITION_3 = 3;
+	public static final int DEFENSE_POSITION_4 = 4;
+
 	public static final double[] POSITION_BALL_1 = {45.5, 0};
 	public static final double[] POSITION_BALL_2 = {91, 0};
 	public static final double[] POSITION_BALL_3 = {130.5, 0};
@@ -67,6 +92,9 @@ public class StrongholdConstants {
 	public static final Double[] START_POSITION_4 = {182.0, 24.0};
 	public static final Double[] START_POSITION_5 = {227.5, 24.0};
 	public static final Double[] START_POSITION_6 = {273.0, 24.0};
+
+	public static final double[] FALLBACK_LEFT = {70, 260};
+	public static final double[] FALLBACK_CENTER = {175, 200};
 
 	public static final int TALON_LEFT_SHOOTER = 1;
 	public static final int TALON_RIGHT_SHOOTER = 8;
