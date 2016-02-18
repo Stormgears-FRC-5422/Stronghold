@@ -107,6 +107,9 @@ public class StrongholdUtils {
         return Math.toRadians(angleToGoal);
     }
 
+    /**
+     *These functions return the x and y of the closest fallback point respectively
+     */
     public static double findClosestFallbackPointX() {
         double x = 0;
         if (!isInBounds()) {
