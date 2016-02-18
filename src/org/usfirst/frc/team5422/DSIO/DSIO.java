@@ -76,8 +76,8 @@ public class DSIO {
         if (buttonBoard.getRawButton(StrongholdConstants.RED_BUTTON_ID)) {
             running[StrongholdConstants.RED_BUTTON_ID] = !running[StrongholdConstants.RED_BUTTON_ID];
             if (!running[StrongholdConstants.RED_BUTTON_ID]) {
-                //Cross defense 0
-
+                //Cross defense 1
+            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_1);
 
             }
         }
@@ -85,8 +85,8 @@ public class DSIO {
         if (buttonBoard.getRawButton(StrongholdConstants.YELLOW_BUTTON_ID)) {
             running[StrongholdConstants.YELLOW_BUTTON_ID] = !running[StrongholdConstants.YELLOW_BUTTON_ID];
             if (!running[StrongholdConstants.YELLOW_BUTTON_ID]) {
-                //Cross defense 1
-
+                //Cross defense 2
+            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_2);
 
             }
         }
@@ -94,8 +94,8 @@ public class DSIO {
         if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID)) {
             running[StrongholdConstants.GREEN_BUTTON_ID] = !running[StrongholdConstants.GREEN_BUTTON_ID];
             if (!running[StrongholdConstants.GREEN_BUTTON_ID]) {
-                //Cross defense 2
-
+                //Cross defense 3
+            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_3);
 
             }
         }
@@ -103,8 +103,8 @@ public class DSIO {
         if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
             running[StrongholdConstants.BLUE_BUTTON_ID] = !running[StrongholdConstants.BLUE_BUTTON_ID];
             if (!running[StrongholdConstants.BLUE_BUTTON_ID]) {
-                //Cross defense 3
-
+                //Cross defense 4
+            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_4);
 
             }
         }
@@ -112,8 +112,8 @@ public class DSIO {
         if (buttonBoard.getRawButton(StrongholdConstants.BLACK_BUTTON_ID)) {
             running[StrongholdConstants.BLACK_BUTTON_ID] = !running[StrongholdConstants.BLACK_BUTTON_ID];
             if (!running[StrongholdConstants.BLACK_BUTTON_ID]) {
-                //Cross defense 4
-
+                //Cross defense 0
+            	StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_LOW_BAR);
 
             }
         }
