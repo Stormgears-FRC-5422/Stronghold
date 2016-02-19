@@ -41,6 +41,8 @@ public class Driver {
             talon[i].setF(StrongholdConstants.OPEN_DRIVE_F);
         }
 
+        talon[0].setEncPosition(0);
+        talon[1].setEncPosition(0);
     }
 
     /**
@@ -98,7 +100,7 @@ public class Driver {
    
     public void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {
 		
-		trapThread.activateTrap(leftTicks, rightTicks, leftVelocity, rightVelocity);
+		trapThread.activateTrap(-1 * leftTicks, -1 * rightTicks, leftVelocity, rightVelocity);
 		
 	}
 

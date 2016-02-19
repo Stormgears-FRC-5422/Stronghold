@@ -1,12 +1,9 @@
 package org.usfirst.frc.team5422.navigator.trapezoidal;
 
-import org.usfirst.frc.team5422.controller.StrongholdRobot;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.Timer;
-import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class TrapezoidThread implements Runnable{
 
@@ -34,9 +31,6 @@ public class TrapezoidThread implements Runnable{
 		leftExample = new MotionProfileExample(this.leftTalon);
 		rightExample = new MotionProfileExample(this.rightTalon);
 		
-		leftExample.setType("Left");
-		rightExample.setType("Right");
-		
 		trapLoop = new Notifier(this);
 		trapLoop.startPeriodic(0.01);
 	}
@@ -61,24 +55,17 @@ public class TrapezoidThread implements Runnable{
 			
 				CANTalon.SetValueMotionProfile setOutputLeft = leftExample.getSetValue();
 				CANTalon.SetValueMotionProfile setOutputRight = rightExample.getSetValue();
-			
-				int currentLeftTicks = leftTalon.getEncPosition();
-				int currentRightTicks = rightTalon.getEncPosition();
-				
+							
 				leftTalon.set(setOutputLeft.value);
 				rightTalon.set(setOutputRight.value);
-			
-				if(leftExample.getSetValue() != CANTalon.SetValueMotionProfile.Enable)
-					leftTalon.setEncPosition(currentLeftTicks);
-			
-				if(rightExample.getSetValue() != CANTalon.SetValueMotionProfile.Enable)
-					rightTalon.setEncPosition(currentRightTicks);
+		
 				
 			if((leftExample.getSetValue() == CANTalon.SetValueMotionProfile.Hold) && (rightExample.getSetValue() == CANTalon.SetValueMotionProfile.Hold)) {
 					hasTrapTask = false;
 					leftExample.stopMotionProfile();
 					rightExample.stopMotionProfile();
 					resetTrapezoid();
+					//Add NetworkTable stuff
 				}
 		}
 	}
@@ -95,7 +82,6 @@ public class TrapezoidThread implements Runnable{
 		calcRotations();
 		generateProfiles();
 	
-		System.out.println(Timer.getFPGATimestamp());		
 		hasTrapTask = true;
 	}
 	
@@ -111,57 +97,23 @@ public class TrapezoidThread implements Runnable{
 	}
 	
 	private void initializeTalons() {
+		leftTalon.setPID(1, 0, 0);
+		leftTalon.setF(0);
 		
-		leftTalon.setPID(StrongholdConstants.TRAP_P, StrongholdConstants.TRAP_I, StrongholdConstants.TRAP_D);
-		leftTalon.setF(StrongholdConstants.TRAP_F);
-
-		rightTalon.setPID(StrongholdConstants.TRAP_P, StrongholdConstants.TRAP_I, StrongholdConstants.TRAP_D);
-		rightTalon.setF(StrongholdConstants.TRAP_F);
+		rightTalon.setPID(1, 0, 0);
+		rightTalon.setF(0);
 		
 	 	leftTalon.changeControlMode(TalonControlMode.MotionProfile);
 	 	rightTalon.changeControlMode(TalonControlMode.MotionProfile);
 	}
 	
 	private void resetTrapezoid() {
-			
 		leftTalon.clearMotionProfileTrajectories();
-	//	leftTalon.changeControlMode(TalonControlMode.PercentVbus);
-	//	leftTalon.set(0);
-//		leftTalon.setEncPosition(0); //will need to be commented out 
-		
 		rightTalon.clearMotionProfileTrajectories();
-	//	rightTalon.changeControlMode(TalonControlMode.PercentVbus);
-	//	rightTalon.set(0);
-//		rightTalon.setEncPosition(0);
-	
 	}
 	
 	private void primeTalons() {
-		if(leftTicks < 0) {
-			leftTalon.reverseOutput(true); //may need to be changed
-			leftTalon.reverseSensor(false); //may need to be changed
-			//talon[0].reverseSensor(true); //rabbot		
-		}
-		
-		else {
-			leftTalon.reverseOutput(false); //may need to be changed
-			leftTalon.reverseSensor(true); //may need to be changed
-		//	talon[0].reverseSensor(false); //rabbot
-		}
-		
-
-		
-		if(rightTicks < 0) {
-			rightTalon.reverseOutput(false); //may need to be changed
-			rightTalon.reverseSensor(true); //may need to be changed
-			//talon[1].reverseSensor(false); //rabbot
-		}
-		
-		else {
-			rightTalon.reverseOutput(true); //may need to be changed
-			rightTalon.reverseSensor(false); //may need to be changed
-		//	talon[1].reverseSensor(true); //rabbot
-		}
+		rightTalon.reverseSensor(true);
 	}
 	
 
