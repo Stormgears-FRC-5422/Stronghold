@@ -61,9 +61,6 @@ public class Navigator extends Subsystem{
 	
 	
 	private void StopRunning(){
-		
-		Driver.talon[0].set(0.0);
-		Driver.talon[1].set(0.0);
 		isRunning = false;
 		
 	}
@@ -102,44 +99,54 @@ public class Navigator extends Subsystem{
 		System.out.format("[GP][rotate to] %4.3g [rotate by] %4.3g (rad)\n", theta, relInitTheta );
 		
 		
-		double lTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
-		double rTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		
+		
 		
 		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL);
+		
+		
+		double start = System.currentTimeMillis(); 
 		
 		isRunning = true;
 		
 		while(Running()){
 			
-			if(Math.abs(GlobalMapping.getTheta() - theta) <= 0.1){
+			if(System.currentTimeMillis() - start > 6000){
+				StrongholdRobot.driver.stopTrapezoid();
 				StopRunning();
 			}
 			
 		}
 	}
 	
-	public void moveByDistance(double targDistance, double rpm){
+	public void moveByDistance(double targDistance, double rps){
 		
 		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
 		System.out.format("[GP][translate by] %.3g (in)\n", targDistance );
 		
-		
-		double startDistance = GlobalMapping.getSigmaD();
-		
 		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK;
 		
-		trapWheelTicks(tickDist, tickDist, rpm, rpm);
+		
+		trapWheelTicks(tickDist, tickDist, rps, rps);
+		
+		
+		double start = System.currentTimeMillis(); 
 		
 		isRunning = true;
 		
 		while(Running()){
 			
-			if(GlobalMapping.getSigmaD() - startDistance >= targDistance){
+			if(System.currentTimeMillis() - start > 6000){
+				StrongholdRobot.driver.stopTrapezoid();
 				StopRunning();
+				
 			}
+			
+			
 		
 		}
-		
 	}
 	
 	
@@ -154,17 +161,17 @@ public class Navigator extends Subsystem{
 		
 		double targInitTheta = GlobalMapping.reduceRadiansUtil(Math.atan2(yRel, xRel));
 		
-		double rpm = 0.2*60;
+		double rps = 3;
 		
-		rotateToTheta(targInitTheta, rpm, rpm);
+		rotateToTheta(targInitTheta, rps, rps);
 		
 		double targDistance = Math.sqrt(xRel*xRel + yRel*yRel);
 		
-		moveByDistance(targDistance, rpm);
+		moveByDistance(targDistance, rps);
 		
 		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
 		
-		rotateToTheta(thetaField, rpm, rpm);
+		rotateToTheta(thetaField, rps, rps);
 		
 	}
 	
