@@ -28,7 +28,7 @@ public class Driver {
         talon[0] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_MASTER);
         talon[1] = new CANTalon(TALON_DRIVE_RIGHT_MASTER);
         talon[0].reverseOutput(true);
-
+        talon[1].reverseOutput(true);
         /**create the trap thread**/
         
         trapThread = new TrapezoidThread(talon[0], talon[1]);
@@ -54,7 +54,7 @@ public class Driver {
 
         //Declare talons
         if (controlMode == CANTalon.TalonControlMode.Speed | controlMode == CANTalon.TalonControlMode.PercentVbus) {
-            talon[0].reverseOutput(true);
+           // talon[0].reverseOutput(true);
             for (int i = 0; i < 2; i++) {
                 talon[i].changeControlMode(controlMode);
                 talon[i].setPID(StrongholdConstants.OPEN_DRIVE_P, StrongholdConstants.OPEN_DRIVE_I, StrongholdConstants.OPEN_DRIVE_D);
@@ -66,8 +66,12 @@ public class Driver {
 
         //Calculate velocities
         ArcadeDrive.arcadeDrive(xJoystick, yJoystick);
+        
+        /**MAKE ONE OF These 2 negative, LEFT I think**/
+        
+        //OLD LINE: velocityRight = ArcadeDrive.arcadeDriveRight() * 0.5; 
         velocityLeft = ArcadeDrive.arcadeDriveLeft() * 0.5;
-        velocityRight = ArcadeDrive.arcadeDriveRight() * 0.5;
+        velocityRight = ArcadeDrive.arcadeDriveRight() * 0.5 * -1;
 
         //Set the velocity of the talons
         if (controlMode == CANTalon.TalonControlMode.Speed | controlMode == CANTalon.TalonControlMode.PercentVbus) {
@@ -81,8 +85,7 @@ public class Driver {
         } else {
             System.out.println("Invalid Talon Control Mode, set the talon in Speed mode or PercentVbus mode");
         }
-
-
+       
         //Output to SmartDashboard for diagnostics
 
         DSIO.outputToSFX("velocityLeft", velocityLeft);
@@ -97,9 +100,8 @@ public class Driver {
         DSIO.outputToSFX("Talon ID 0 Velocity (Right)", talon[1].getSpeed());
     }
 
-   
     public void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {	
-		trapThread.activateTrap(-1 * leftTicks, -1 * rightTicks, leftVelocity, rightVelocity);
+		trapThread.activateTrap(-1 * leftTicks, rightTicks, leftVelocity, rightVelocity);
 	}
 
     public void stopTrapezoid() {

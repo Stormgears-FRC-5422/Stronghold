@@ -19,10 +19,13 @@ public class TrapezoidThread implements Runnable{
 	
 	
 	private boolean hasTrapTask = false;
+	
 	private Notifier trapLoop;
 	
 	private MotionProfileExample leftExample;
 	private MotionProfileExample rightExample;
+	
+	private NetworkTable trapDoneTable = NetworkTable.getTable("Trapezoid");
 	
 	public TrapezoidThread(CANTalon leftTalon, CANTalon rightTalon) {
 		this.leftTalon = leftTalon;
@@ -65,7 +68,9 @@ public class TrapezoidThread implements Runnable{
 					leftExample.stopMotionProfile();
 					rightExample.stopMotionProfile();
 					resetTrapezoid();
-					//Add NetworkTable stuff
+					
+					System.out.println("Trap Done");
+					trapDoneTable.putBoolean("Trap Done: ", true);
 				}
 		}
 	}
@@ -83,9 +88,9 @@ public class TrapezoidThread implements Runnable{
 		generateProfiles();
 	
 		hasTrapTask = true;
+		System.out.println("Trap task activated.");
 	}
-	
-	
+
 	private void generateProfiles() {
 		leftExample.setProfile(TrapezoidControl.motionProfileUtility(leftRotations, leftVel, leftTalon.getEncPosition()));
 		rightExample.setProfile(TrapezoidControl.motionProfileUtility(rightRotations, rightVel, rightTalon.getEncPosition()));
@@ -107,14 +112,18 @@ public class TrapezoidThread implements Runnable{
 	 	rightTalon.changeControlMode(TalonControlMode.MotionProfile);
 	}
 	
+	private void primeTalons() {
+
+	}
 	public void resetTrapezoid() {
 		leftTalon.clearMotionProfileTrajectories();
 		rightTalon.clearMotionProfileTrajectories();
+		
+		leftExample.reset();
+		rightExample.reset();
 	}
 	
-	private void primeTalons() {
-		rightTalon.reverseSensor(true);
-	}
+	
 	
 
 }
