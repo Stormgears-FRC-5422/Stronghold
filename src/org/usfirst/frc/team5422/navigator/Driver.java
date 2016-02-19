@@ -98,11 +98,12 @@ public class Driver {
     }
 
    
-    public void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {
-		
+    public void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {	
 		trapThread.activateTrap(-1 * leftTicks, -1 * rightTicks, leftVelocity, rightVelocity);
-		
 	}
 
+    public void stopTrapezoid() {
+    	trapThread.resetTrapezoid();
+    }
    
 }
