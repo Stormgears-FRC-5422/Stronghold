@@ -64,9 +64,9 @@ public class MotionProfileExample {
 		 
 		else {
 		
-			if (_loopTimeout == 0) 
-				Instrumentation.OnNoProgress();
-			else 
+		//	if (_loopTimeout == 0) 
+				//Instrumentation.OnNoProgress();
+			if(_loopTimeout != 0) 
 				--_loopTimeout;	
 		}
 		
@@ -108,8 +108,7 @@ public class MotionProfileExample {
 					break;
 			}
 		}
-		
-		Instrumentation.process(_status);
+
 	}
 	
 	private void startFilling() {
@@ -120,7 +119,6 @@ public class MotionProfileExample {
 		CANTalon.TrajectoryPoint point = new CANTalon.TrajectoryPoint();
 	
 		if (_status.hasUnderrun) {
-			Instrumentation.OnUnderrun();
 			_talon.clearMotionProfileHasUnderrun();
 		}
 	
