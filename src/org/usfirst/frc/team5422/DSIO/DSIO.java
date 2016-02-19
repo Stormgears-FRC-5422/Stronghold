@@ -2,6 +2,7 @@ package org.usfirst.frc.team5422.DSIO;
 
 import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -23,9 +24,9 @@ public class DSIO {
     //Constants may need to be changed
 
     static Joystick joystick;
-    static shootOptions teleopShootHeightOption;
+    static StrongholdConstants.shootHeightOptions teleopShootHeightOption;
     public static Joystick buttonBoard;
-    public static boolean shooterRunning;
+    public static boolean shooterRunning, ignoreJoystick = false;
 
     public static int pos[] = new int[5];
 
@@ -43,6 +44,7 @@ public class DSIO {
         if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) {
             StrongholdRobot.shooterSubsystem.shoot(shootOptions.HIGH_CENTER);
             shooterRunning = true;
+            ignoreJoystick = false;
         }
         else {
             //Do nothing
@@ -56,10 +58,35 @@ public class DSIO {
         }
 
         if (buttonBoard.getRawButton(StrongholdConstants.GREEN_SWITCH_ID)) {
-            teleopShootHeightOption = StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.HIGH);
+            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
         }
         else {
-            teleopShootHeightOption = StrongholdUtils.findBestGoal(StrongholdConstants.shootHeightOptions.LOW);
+            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
+        }
+
+        //Tell the driver what goal is best for them, and whether they are within range
+        if (StrongholdUtils.isInBounds()) {
+            SmartDashboard.putString("You are", " within bounds, for goal: " + StrongholdUtils.findBestGoal(teleopShootHeightOption).toString() + ".");
+        }
+        else {
+            SmartDashboard.putString("You are", " out of bounds.");
+        }
+
+        //Lock button
+        if (buttonBoard.getRawButton(StrongholdConstants.WHITE_BUTTON_ID)) {
+            ignoreJoystick = !ignoreJoystick;
+
+            if (ignoreJoystick) {
+                //Lock onto nearest goal
+                double x = GlobalMapping.getX();
+                double y = GlobalMapping.getY();
+
+                StrongholdConstants.shootOptions bestShootOption = StrongholdUtils.findBestGoal(teleopShootHeightOption);
+
+                double theta = StrongholdUtils.findHorizontalAngleToGoal(bestShootOption);
+
+                StrongholdRobot.navigatorSubsystem.driveTo(x, y, theta);
+            }
         }
 
         //5 defense buttons
