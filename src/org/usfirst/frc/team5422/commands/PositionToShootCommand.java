@@ -21,7 +21,9 @@ public class PositionToShootCommand extends DefenseCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.println("[AutoComm] Robot moving to position to shoot...");
-    	defense.positionToShoot(defenseTypeSelected, defensePositionSelected, shootOptionSelected);
+    	if (defense != null) {
+    		defense.positionToShoot(defenseTypeSelected, defensePositionSelected, shootOptionSelected);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

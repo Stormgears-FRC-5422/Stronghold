@@ -24,8 +24,9 @@ public class AlignToDefenseCommand extends DefenseCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	String temp  = "[AutoComm] Robot aligning to defense for crossing the ";
-    	defense.align(defenseTypeSelected, defensePositionSelected);
-    	
+    	if (defense != null) {
+    		defense.align(defenseTypeSelected, defensePositionSelected);
+    	}
     	switch(defenseTypeSelected){
 	    	case CHIVAL_DE_FRISE:
 	    		temp += "chival de frise";

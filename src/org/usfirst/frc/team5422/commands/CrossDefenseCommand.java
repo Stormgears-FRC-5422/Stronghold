@@ -21,8 +21,10 @@ public class CrossDefenseCommand extends DefenseCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.println("[AutoComm] Robot crossing defense...");
-    	defense.cross(defenseTypeSelected, defensePositionSelected);
-   }
+    	if (defense != null) {
+    		defense.cross(defenseTypeSelected, defensePositionSelected);
+    	}
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

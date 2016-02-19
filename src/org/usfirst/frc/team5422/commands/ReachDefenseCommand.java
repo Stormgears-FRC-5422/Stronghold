@@ -22,7 +22,9 @@ public class ReachDefenseCommand extends DefenseCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.println("[AutoComm] Robot reaching defense...");
-    	defense.reach(defenseTypeSelected, defensePositionSelected);
+    	if (defense != null) {
+    		defense.reach(defenseTypeSelected, defensePositionSelected);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
