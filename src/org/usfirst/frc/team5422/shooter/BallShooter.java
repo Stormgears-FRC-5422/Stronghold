@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5422.shooter;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -72,8 +73,7 @@ public class BallShooter extends Subsystem implements Runnable {
 	//Shoots the ball
 	//Inputs: distance, low or high goal
 	public void shoot(StrongholdConstants.shootOptions goal) {
-		BallShooter shooter = new BallShooter();
-		Thread shooterThread = new Thread(shooter);
+		Thread shooterThread = new Thread(StrongholdRobot.shooterSubsystem);
 		shooterThread.start();
 	}
 	
