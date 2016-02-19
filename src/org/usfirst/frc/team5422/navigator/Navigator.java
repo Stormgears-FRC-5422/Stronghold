@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.Notifier;
  */
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
 
@@ -72,6 +74,12 @@ public class Navigator extends Subsystem{
 
 	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
 		//dummy function (actually written elsewhere by aditya)
+		
+		StrongholdRobot.driver.moveTrapezoid((int)lTicks, (int)rTicks, lVelRPM, rVelRPM);
+		
+	}
+	
+	public void speedWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
 		
 		Driver.talon[0].set(Math.signum(rTicks)*0.4);
 		Driver.talon[1].set(-Math.signum(lTicks)*0.4);
@@ -144,11 +152,7 @@ public class Navigator extends Subsystem{
 		double xRel = xField - GlobalMapping.getX();
 		double yRel = yField - GlobalMapping.getY();
 		
-		double targInitTheta = Math.atan2(yRel, xRel);
-		
-		if(targInitTheta < 0){
-			targInitTheta+=2*Math.PI;
-		}
+		double targInitTheta = GlobalMapping.reduceRadiansUtil(Math.atan2(yRel, xRel));
 		
 		double rpm = 0.2*60;
 		
@@ -175,24 +179,35 @@ public class Navigator extends Subsystem{
 			targInitTheta+=2*Math.PI;
 		}
 		
-		double rpm = 0.2*60;
+		double rps = 3;
 		
-		rotateToTheta(targInitTheta, rpm, rpm);
+		rotateToTheta(targInitTheta, rps, rps);
 		
 		double targDistance = Math.sqrt(xRel*xRel + yRel*yRel);
 		
-		moveByDistance(targDistance, rpm);
+		moveByDistance(targDistance, rps);
 		
 	}
 	
-	public void driveTo(double thetaField){
+	public void turnTo(double thetaField){
 		
-		double rpm = 0.2*60;
+		double rps = 3;
 		
 		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
 		
-		rotateToTheta(thetaField, rpm, rpm);
+		rotateToTheta(thetaField, rps, rps);
 		
+	}
+	
+	public void turnTo(double xField, double yField){
+		double xRel = xField - GlobalMapping.getX();
+		double yRel = yField - GlobalMapping.getY();
+		
+		double targInitTheta = GlobalMapping.reduceRadiansUtil(Math.atan2(yRel, xRel));
+		
+		double rps = 3;
+		
+		rotateToTheta(targInitTheta, rps, rps);
 	}
 
 	@Override
