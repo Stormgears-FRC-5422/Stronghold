@@ -107,7 +107,7 @@ public class TrapezoidThread implements Runnable{
 	 	rightTalon.changeControlMode(TalonControlMode.MotionProfile);
 	}
 	
-	private void resetTrapezoid() {
+	public void resetTrapezoid() {
 		leftTalon.clearMotionProfileTrajectories();
 		rightTalon.clearMotionProfileTrajectories();
 	}

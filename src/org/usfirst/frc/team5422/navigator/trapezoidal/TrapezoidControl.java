@@ -12,7 +12,6 @@ public class TrapezoidControl {
 		return ultimateProfileDoubleArray(targetTicks, startingTicks, accel, velRPM);
 		
 	}
-
 	
 	private static double [][] ultimateProfileDoubleArray(int targetTicks, int startingTicks, double maxAccel, double maxVel) {
 	

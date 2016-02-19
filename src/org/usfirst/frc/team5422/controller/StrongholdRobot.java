@@ -261,7 +261,7 @@ public class StrongholdRobot extends IterativeRobot {
     			navigatorSubsystem.driveTo(0, 0);
     			navigatorSubsystem.driveTo(0, 0);
     			navigatorSubsystem.driveTo(0, 0);
-    			navigatorSubsystem.driveTo(Math.PI/2);
+    	//		navigatorSubsystem.driveTo(Math.PI/2);
     			break;
 
             default:
