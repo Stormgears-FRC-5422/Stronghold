@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5422.sensors;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.ADXL345_SPI;
 import edu.wpi.first.wpilibj.ADXL345_SPI.Axes;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -31,46 +33,41 @@ public class GyroAccel
     	return x;
     }
     
-	public double getRotationRate()
+    public double getAngle()
+    {
+    	return positive(rounding(gyro.getAngle()));
+    }
+    
+    public double getRate()
+    {
+    	return rounding(gyro.getRate());
+    }
+    
+	public ArrayList<Double> getGyroList()
 	{
 		gyroStatus = false;
-		double x = gyro.getRate();
+		ArrayList<Double> gyroStuff = new ArrayList<Double>();
+		gyroStuff.add(getRate());
+		gyroStuff.add(getAngle());	
 		gyroStatus = true;
-		return rounding(x);
+		return gyroStuff;
 	}
 	
-	public double getAngle()
+	public void reset()
 	{
-		gyroStatus = false;
-		double x = positive(rounding(gyro.getAngle()));
-		gyroStatus = true;
-		return x;
+		gyro.reset();
 	}
 	
-	public double getAccelerationX()
+	public ArrayList<Double> getAccelerationList()
 	{
 		accelStatus = false;
-		double x = accel.getAcceleration(Axes.kX);
+		ArrayList<Double> accelList = new ArrayList<Double>();
+		accelList.add(accel.getAcceleration(Axes.kX));
+		accelList.add(accel.getAcceleration(Axes.kY));
+		accelList.add(accel.getAcceleration(Axes.kZ));
 		accelStatus = true;
-		return x;
+		return accelList;
 	}
-	
-	public double getAccelerationY()
-	{
-		accelStatus = false;
-		double x = accel.getAcceleration(Axes.kY);
-		accelStatus = true;
-		return x;
-	}
-	
-	public double getAccelerationZ()
-	{
-		accelStatus = false;
-		double x = accel.getAcceleration(Axes.kZ);
-		accelStatus = true;
-		return x;
-	}
-	
 	public boolean getAccelStatus()
 	{
 		return accelStatus;
