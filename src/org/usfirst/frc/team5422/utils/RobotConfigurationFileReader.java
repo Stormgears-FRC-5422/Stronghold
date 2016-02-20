@@ -29,7 +29,7 @@ public class RobotConfigurationFileReader {
     }
 
     public String getRobotInUse() {
-        String robot = "stronghold"; //Default
+        String robot = "stronghold"; //Default ("rhino" for old rhino drive, "stronghold" for new official 2016 robot)
         //robot = properties.getProperty("robotInUse");
 
         return robot;
