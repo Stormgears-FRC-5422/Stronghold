@@ -2,6 +2,7 @@ package org.usfirst.frc.team5422.defense;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
+import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -76,7 +77,7 @@ public class Moat implements Defense {
 		// TODO Auto-generated method stub
 
 		//Change angle to match angle to best goals
-		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdUtils.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));
+		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), ShooterHelper.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));
 
 		System.out.format("Robot Positioned to Shoot for the Moat defense at " + defensePosition + " and GP (%.3g,%.3g,%.3g): \n",GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
 	}
