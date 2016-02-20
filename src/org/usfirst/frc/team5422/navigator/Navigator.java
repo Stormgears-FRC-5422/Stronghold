@@ -23,7 +23,7 @@ public class Navigator extends Subsystem{
 	
 	private int currentProfileID = 0;
 	
-	public boolean moveTrapezoidal = false;
+	public boolean moveTrapezoidal = true;
 	
 	private NetworkTable netTable = NetworkTable.getTable("Trapezoid");
 	
