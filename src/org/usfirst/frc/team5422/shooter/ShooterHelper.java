@@ -2,15 +2,46 @@ package org.usfirst.frc.team5422.shooter;
 
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 /**
  * @author Michael
  */
-public class ShooterHelper {
+public class ShooterHelper extends StrongholdUtils{
     private static boolean inBounds = false;
     /**
      * This function determines the best goal to shoot into, with the input of whether the goal should be high or low
      */
+	
+	public static double getDistanceToGoal(StrongholdConstants.shootOptions option) {
+		shootOptions bestGoal = option;
+		double distanceFromGoal;
+		
+		if (bestGoal == shootOptions.HIGH_CENTER) {
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
+					StrongholdConstants.POSITION_HCENTER_GOAL[0], StrongholdConstants.POSITION_HCENTER_GOAL[1]);
+		}
+		else if (bestGoal == shootOptions.HIGH_LEFT) {
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
+					StrongholdConstants.POSITION_HLEFT_GOAL[0], StrongholdConstants.POSITION_HLEFT_GOAL[1]);
+		}
+		else if (bestGoal == shootOptions.HIGH_RIGHT){
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
+					StrongholdConstants.POSITION_HRIGHT_GOAL[0], StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
+		}
+		else if (bestGoal == shootOptions.LOW_LEFT) {
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
+					StrongholdConstants.POSITION_LLEFT_GOAL[0], StrongholdConstants.POSITION_LLEFT_GOAL[1]);
+		}
+		else {
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
+					StrongholdConstants.POSITION_LRIGHT_GOAL[0], StrongholdConstants.POSITION_LRIGHT_GOAL[1]);
+		}
+		
+		return distanceFromGoal;
+	}
+    
     public static StrongholdConstants.shootOptions findBestGoal(StrongholdConstants.shootHeightOptions highOrLow) {
         StrongholdConstants.shootOptions bestGoal = StrongholdConstants.shootOptions.HIGH_CENTER;
         double x = GlobalMapping.getInstance().getX(), y = GlobalMapping.getInstance().getY();

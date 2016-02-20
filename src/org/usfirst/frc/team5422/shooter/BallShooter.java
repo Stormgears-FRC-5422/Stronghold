@@ -83,17 +83,17 @@ public class BallShooter extends Subsystem implements Runnable {
 		double angle;
 		if (goal == StrongholdConstants.shootOptions.HIGH_CENTER ||
 				goal == StrongholdConstants.shootOptions.HIGH_RIGHT ||
-				goal == StrongholdConstants.shootOptions.HIGH_LEFT) angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / getDistancetoGoal(goal)));
-		else angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/getDistancetoGoal(goal));
+				goal == StrongholdConstants.shootOptions.HIGH_LEFT) angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / ShooterHelper.getDistanceToGoal(goal)));
+		else angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/ShooterHelper.getDistanceToGoal(goal));
 		return angle;
 	}
 	
 	private double calculateSpeed(double angle, StrongholdConstants.shootOptions goal){
 		double speed;
 		//Theta is assumed to be 45 degrees
-		speed = Math.pow(Math.sqrt(2 * Math.pow(getDistancetoGoal(goal), 2) - 5536), -4);
+		speed = Math.pow(Math.sqrt(2 * Math.pow(ShooterHelper.getDistanceToGoal(goal), 2) - 5536), -4);
 		if (speed > 1) speed = 1;
-		if (speed < 0.5) speed = 0.5;
+		else if (speed < 0.5) speed = 0.5;
 		return speed;
 	}
 	
@@ -111,37 +111,10 @@ public class BallShooter extends Subsystem implements Runnable {
 		talonR.set(-StrongholdConstants.FULL_THROTTLE);
 		talonL.set(StrongholdConstants.FULL_THROTTLE);
 	}
+	
 	public void stop() {
 		talonR.set(StrongholdConstants.NO_THROTTLE);
 		talonL.set(StrongholdConstants.NO_THROTTLE);
-	}
-	
-	public double getDistancetoGoal(StrongholdConstants.shootOptions option) {
-		shootOptions bestGoal = option;
-		double distanceFromGoal;
-		
-		if (bestGoal == shootOptions.HIGH_CENTER) {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
-					StrongholdConstants.POSITION_HCENTER_GOAL[0], StrongholdConstants.POSITION_HCENTER_GOAL[1]);
-		}
-		else if (bestGoal == shootOptions.HIGH_LEFT) {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
-					StrongholdConstants.POSITION_HLEFT_GOAL[0], StrongholdConstants.POSITION_HLEFT_GOAL[1]);
-		}
-		else if (bestGoal == shootOptions.HIGH_RIGHT){
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
-					StrongholdConstants.POSITION_HRIGHT_GOAL[0], StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
-		}
-		else if (bestGoal == shootOptions.LOW_LEFT) {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
-					StrongholdConstants.POSITION_LLEFT_GOAL[0], StrongholdConstants.POSITION_LLEFT_GOAL[1]);
-		}
-		else {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
-					StrongholdConstants.POSITION_LRIGHT_GOAL[0], StrongholdConstants.POSITION_LRIGHT_GOAL[1]);
-		}
-		
-		return distanceFromGoal;
 	}
 
 	public void run() {
