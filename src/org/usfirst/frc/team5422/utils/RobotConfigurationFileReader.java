@@ -17,15 +17,15 @@ public class RobotConfigurationFileReader {
 
 
         //Load the properties file
-        try {
-            fis = new FileInputStream("config.properties");
-            properties = new Properties();
-            properties.load(fis);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            fis = new FileInputStream("config.properties");
+//            properties = new Properties();
+//            properties.load(fis);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public String getRobotInUse() {
