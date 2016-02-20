@@ -11,27 +11,29 @@ import java.util.Properties;
  */
 public class RobotConfigurationFileReader {
     Properties properties = null;
+    FileInputStream fis = null;
+    String robot = "stronghold"; //default
 
     public RobotConfigurationFileReader() {
-        FileInputStream fis = null;
-
 
         //Load the properties file
-//        try {
-//            fis = new FileInputStream("config.properties");
-//            properties = new Properties();
-//            properties.load(fis);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            fis = new FileInputStream("config.properties");
+            properties = new Properties();
+            properties.load(fis);
+            robot = properties.getProperty("robotInUse");
+            fis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //If you want to ignore the file, comment this back in.
+        //robot = "stronghold"; //Default ("rhino" for old rhino drive, "stronghold" for new official 2016 robot)
     }
 
     public String getRobotInUse() {
-        String robot = "stronghold"; //Default ("rhino" for old rhino drive, "stronghold" for new official 2016 robot)
-        //robot = properties.getProperty("robotInUse");
-
         return robot;
     }
 }
