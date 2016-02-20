@@ -67,20 +67,18 @@ public class Driver {
         //Calculate velocities
         ArcadeDrive.arcadeDrive(xJoystick, yJoystick);
         
-        /**MAKE ONE OF These 2 negative, LEFT I think**/
-        
         //OLD LINE: velocityRight = ArcadeDrive.arcadeDriveRight() * 0.5; 
-        velocityLeft = ArcadeDrive.arcadeDriveLeft() * 0.5;
-        velocityRight = ArcadeDrive.arcadeDriveRight() * 0.5 * -1;
+        velocityLeft = ArcadeDrive.arcadeDriveLeft();
+        velocityRight = ArcadeDrive.arcadeDriveRight() * -1;
 
         //Set the velocity of the talons
         if (controlMode == CANTalon.TalonControlMode.Speed | controlMode == CANTalon.TalonControlMode.PercentVbus) {
             if (controlMode == CANTalon.TalonControlMode.Speed) {
-                talon[0].set(velocityLeft * 81.92);
+                talon[0].set(velocityLeft * 81.92 * 2);
             } else talon[0].set(velocityLeft);
 
             if (controlMode == CANTalon.TalonControlMode.Speed) {
-                talon[1].set(velocityRight * 81.92);
+                talon[1].set(velocityRight * 81.92 * 2);
             } else talon[1].set(velocityRight);
         } else {
             System.out.println("Invalid Talon Control Mode, set the talon in Speed mode or PercentVbus mode");

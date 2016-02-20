@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class StrongholdUtils {
 
-    private static boolean inBounds;
+    private static boolean inBounds = false;
     /**
      * This function determines the best goal to shoot into, with the input of whether the goal should be high or low
      */
@@ -27,8 +27,9 @@ public class StrongholdUtils {
                 x >= 0 &&
                 y >= 40.0 / -90.0 * x + 202.22222222222223 &&
                 y >= -90.0 / -70.0 * x + 98.57142857142856) {
+            inBounds = true;
             if (highOrLow == shootHeightOptions.HIGH) {
-                bestGoal = shootOptions.HIGH_RIGHT;
+                bestGoal = shootOptions.HIGH_LEFT;
             }
             else bestGoal = shootOptions.LOW_LEFT;
         }
@@ -38,19 +39,21 @@ public class StrongholdUtils {
                 y >= 140 &&
                 y >= -40.0 / -70.0 * x + 25.714285714285722 &&
                 y <= -160.0 / 60.0 * x + 793.3333333333333) {
+            inBounds = true;
             if (highOrLow == shootHeightOptions.HIGH) {
-                bestGoal = shootOptions.HIGH_RIGHT;
+                bestGoal = shootOptions.HIGH_CENTER;
             }
-            else bestGoal = shootOptions.LOW_LEFT;
+            else bestGoal = shootOptions.NONE;
         }
         //Bounds for high right goal and low right
         else if (y >= -130.0 / 100.0 * x + 543.0 &&
                 x <= 270 &&
                 y <= -20.0 / 40.0 * x + 415.0) {
+            inBounds = true;
             if (highOrLow == shootHeightOptions.HIGH) {
                 bestGoal = shootOptions.HIGH_RIGHT;
             }
-            else bestGoal = shootOptions.LOW_LEFT;
+            else bestGoal = shootOptions.LOW_RIGHT;
         }
         else inBounds = false;
         return bestGoal;

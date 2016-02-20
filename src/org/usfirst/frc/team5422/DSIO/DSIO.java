@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5422.DSIO;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team5422.commands.buttonCommands.BigBlueCommand;
+import org.usfirst.frc.team5422.commands.buttonCommands.OrangeSwitchCommand;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
@@ -24,7 +27,7 @@ public class DSIO {
     //Constants may need to be changed
 
     static Joystick joystick;
-    static StrongholdConstants.shootHeightOptions teleopShootHeightOption;
+    public static StrongholdConstants.shootHeightOptions teleopShootHeightOption;
     public static Joystick buttonBoard;
     public static boolean shooterRunning, ignoreJoystick = false;
 
@@ -39,24 +42,15 @@ public class DSIO {
     }
 
     //Check if a button is pressed; if it is, do the respective command
-    public static void getButtons() {
+    public static int getButtons() {
+        int button = -1;
         //Shooter operation buttons
         if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) {
-            StrongholdRobot.shooterSubsystem.shoot(shootOptions.HIGH_CENTER);
-            shooterRunning = true;
-            ignoreJoystick = false;
-        }
-        else {
-            //Do nothing
+            button = StrongholdConstants.BIG_BLUE_BUTTON_ID;
         }
 
-        if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID)) {
-            StrongholdRobot.shooterSubsystem.intake();
-        }
-        else if (!shooterRunning) {
-            StrongholdRobot.shooterSubsystem.stop();
-        }
-
+        //Get the position of the green switch; if it's up, set the shoot height to high
+        //This does not require a command
         if (buttonBoard.getRawButton(StrongholdConstants.GREEN_SWITCH_ID)) {
             teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
         }
@@ -64,56 +58,35 @@ public class DSIO {
             teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
         }
 
-        //Tell the driver what goal is best for them, and whether they are within range
-        if (StrongholdUtils.isInBounds()) {
-            SmartDashboard.putString("You are", " within bounds, for goal: " + StrongholdUtils.findBestGoal(teleopShootHeightOption).toString() + ".");
-        }
-        else {
-            SmartDashboard.putString("You are", " out of bounds.");
+        if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID)) {
+            button = StrongholdConstants.ORANGE_SWITCH_ID;
+        } else if (!shooterRunning) {
+            StrongholdRobot.shooterSubsystem.stop();
         }
 
         //Lock button
         if (buttonBoard.getRawButton(StrongholdConstants.WHITE_BUTTON_ID)) {
-            ignoreJoystick = !ignoreJoystick;
-
-            if (ignoreJoystick) {
-                //Lock onto nearest goal
-                double x = GlobalMapping.getX();
-                double y = GlobalMapping.getY();
-
-                StrongholdConstants.shootOptions bestShootOption = StrongholdUtils.findBestGoal(teleopShootHeightOption);
-
-                double theta = StrongholdUtils.findHorizontalAngleToGoal(bestShootOption);
-
-                StrongholdRobot.navigatorSubsystem.driveTo(x, y, theta);
-            }
+           button = StrongholdConstants.WHITE_BUTTON_ID;
         }
 
         //5 defense buttons
-        if (buttonBoard.getRawButton(StrongholdConstants.RED_BUTTON_ID)) {
-            //Cross defense 1
-            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_1);
+        else if (buttonBoard.getRawButton(StrongholdConstants.RED_BUTTON_ID)) {
+            button = StrongholdConstants.RED_BUTTON_ID;
+        }
+        else if (buttonBoard.getRawButton(StrongholdConstants.YELLOW_BUTTON_ID)) {
+            button = StrongholdConstants.YELLOW_BUTTON_ID;
+        }
+        else if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID)) {
+            button = StrongholdConstants.GREEN_BUTTON_ID;
+        }
+        else if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
+            button = StrongholdConstants.BLUE_BUTTON_ID;
+        }
+        else if (buttonBoard.getRawButton(StrongholdConstants.BLACK_BUTTON_ID)) {
+            button = StrongholdConstants.BLACK_BUTTON_ID;
         }
 
-        if (buttonBoard.getRawButton(StrongholdConstants.YELLOW_BUTTON_ID)) {
-            //Cross defense 2
-            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_2);
-        }
-
-        if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID)) {
-            //Cross defense 3
-            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_3);
-        }
-
-        if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
-            //Cross defense 4
-            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_4);
-        }
-
-        if (buttonBoard.getRawButton(StrongholdConstants.BLACK_BUTTON_ID)) {
-            //Cross defense 0
-            StrongholdUtils.getDefenseFromPosition(StrongholdConstants.DEFENSE_POSITION_LOW_BAR);
-        }
+        return button;
     }
 
     //Inputs: nothing
