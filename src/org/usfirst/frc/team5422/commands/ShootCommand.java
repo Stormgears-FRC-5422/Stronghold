@@ -3,7 +3,6 @@ package org.usfirst.frc.team5422.commands;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 /**

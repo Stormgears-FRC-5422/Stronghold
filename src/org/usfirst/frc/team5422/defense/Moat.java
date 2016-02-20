@@ -6,7 +6,6 @@ import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
-import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 /*
  * @author Suren Karavettil
@@ -46,7 +45,7 @@ public class Moat implements Defense {
 				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1], Math.PI / 2);
 				break;
 		}
-		System.out.format("Robot Reached the Moat defense at " + defensePosition + " and GP (%.3g,%.3g,%.3g): \n",GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
+		System.out.format("Robot Reached the Moat defense at " + defensePosition + " and GP (%.3g,%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class Moat implements Defense {
 				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
 				break;
 		}
-		System.out.format("Robot Crossed the Moat defense at " + defensePosition + " and GP (%.3g,%.3g,%.3g): \n",GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
+		System.out.format("Robot Crossed the Moat defense at " + defensePosition + " and GP (%.3g,%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 	}
 
 	@Override
@@ -77,9 +76,9 @@ public class Moat implements Defense {
 		// TODO Auto-generated method stub
 
 		//Change angle to match angle to best goals
-		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), ShooterHelper.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));
+		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), ShooterHelper.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));
 
-		System.out.format("Robot Positioned to Shoot for the Moat defense at " + defensePosition + " and GP (%.3g,%.3g,%.3g): \n",GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
+		System.out.format("Robot Positioned to Shoot for the Moat defense at " + defensePosition + " and GP (%.3g,%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 	}
 
 }

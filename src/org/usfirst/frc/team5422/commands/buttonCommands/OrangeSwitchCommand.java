@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5422.commands.buttonCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 
 /**

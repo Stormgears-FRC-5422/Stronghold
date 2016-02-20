@@ -2,6 +2,7 @@ package org.usfirst.frc.team5422.navigator;
 
 
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.Timer;
 
 /*
  * @author Mayank
@@ -11,18 +12,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
-import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
 
 
 public class Navigator extends Subsystem{
 
-	private boolean isRunning;
 	
 	Notifier thread; 
 	
 	private int currentProfileID = 0;
+	
+	public boolean moveTrapezoidal = true;
 	
 	private NetworkTable netTable = NetworkTable.getTable("Trapezoid");
 	
@@ -63,26 +64,15 @@ public class Navigator extends Subsystem{
 		
 		return power;
 	}
-	
-	
-	
-	private void StopRunning(){
-		isRunning = false;
-		
-	}
-	
-	private boolean Running() {
-		return isRunning;
-	}
 
-	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM, int tableID){
+	private void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM, int tableID){
 		//dummy function (actually written elsewhere by aditya)
 		
 		StrongholdRobot.driver.moveTrapezoid((int)lTicks, (int)rTicks, lVelRPM, rVelRPM, tableID);
 		
 	}
 	
-	public void speedWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
+	private void speedWheelTicks(double rTicks, double lTicks){
 		
 		Driver.talon[0].set(Math.signum(rTicks)*0.4);
 		Driver.talon[1].set(-Math.signum(lTicks)*0.4);
@@ -90,10 +80,9 @@ public class Navigator extends Subsystem{
 	}
 	
 	private void rotateToTheta(double theta, double rpmR, double rpmL){
-		
+		System.out.println("rotateToTheta Entered " + Timer.getFPGATimestamp());
 		theta = GlobalMapping.reduceRadiansUtil(theta);
-		
-		double relInitTheta = theta - GlobalMapping.getTheta();
+		double relInitTheta = theta - GlobalMapping.getInstance().getTheta();
 		
 		if(relInitTheta > Math.PI){
 			relInitTheta -= 2*Math.PI;
@@ -101,7 +90,7 @@ public class Navigator extends Subsystem{
 			relInitTheta += 2*Math.PI;
 		}
 		
-		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
+		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 		System.out.format("[GP][rotate to] %4.3g [rotate by] %4.3g (rad)\n", theta, relInitTheta );
 		
 		
@@ -109,45 +98,76 @@ public class Navigator extends Subsystem{
 		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
 		
+		if(moveTrapezoidal){
+			trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
+			waitForTrapezoidalFinish();
 		
-		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
+			System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
+		}else{
+			lTicksDest*=-1;
+			rTicksDest*=-1;
+			speedWheelTicks(rTicksDest, lTicksDest);
+			waitForSpeedRotationalFinish(relInitTheta);
+			speedWheelTicks(0, 0);
+		}
 		
-		
-		isRunning = true;
-		
-		while(Running()){
-			
-			if(netTable.getString("Trap Status", "running").equals("finished")){
-				currentProfileID+=1;
-				StrongholdRobot.driver.stopTrapezoid();
-				StopRunning();
+		System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
+	}
+	
+	private void waitForTrapezoidalFinish() {
+		while(true){
+			if(netTable.getString("Trap Status", "running").equals("finished") && (netTable.getNumber("Trap ID", -1) == currentProfileID)){
+				currentProfileID++;
+				break;
 			}
-			
+		}
+		
+	}
+	
+	private void waitForSpeedLinearFinish(double distance){
+		double start = GlobalMapping.getInstance().getSigmaD();
+		while(GlobalMapping.getInstance().getSigmaD() - start < distance){
+			if(Math.abs(GlobalMapping.getInstance().getSigmaD() - start) > Math.abs(distance)){
+				System.out.println("relDist = " + (GlobalMapping.getInstance().getTheta() - start));
+				System.out.println("targRelDist = " + Math.abs(distance));
+			}
 		}
 	}
 	
-	public void moveByDistance(double targDistance, double rps){
+	private void waitForSpeedRotationalFinish(double relTheta){
+		double start = GlobalMapping.getInstance().getTheta();
 		
-		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getX(), GlobalMapping.getY(), GlobalMapping.getTheta());
+		//System.out.println("BEFORE loop Current Theta is " + GlobalMapping.getTheta());
+		while(Math.abs(GlobalMapping.getInstance().getTheta() - start) < Math.abs(relTheta)){
+			
+			if(Math.abs(GlobalMapping.getInstance().getTheta() - start) > Math.abs(relTheta)){
+				System.out.println("relTheta = " + (GlobalMapping.getInstance().getTheta() - start));
+				System.out.println("targRelTheta = " + Math.abs(relTheta));
+			}
+			
+			
+			
+		}
+	}
+
+	private void moveByDistance(double targDistance, double rps){
+		System.out.println("moveByDistance Entered " + Timer.getFPGATimestamp());
+		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 		System.out.format("[GP][translate by] %.3g (in)\n", targDistance );
 		
 		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK;
 		
-		
-		trapWheelTicks(tickDist, tickDist, rps, rps, currentProfileID);
-		 
-		
-		isRunning = true;
-		
-		while(Running()){
-			
-			if(netTable.getString("Trap Status", "running").equals("finished")){
-				currentProfileID+=1;
-				StrongholdRobot.driver.stopTrapezoid();
-				StopRunning();
-			}
-			
+		if(moveTrapezoidal){
+			trapWheelTicks(tickDist, tickDist, rps, rps, currentProfileID);
+			waitForTrapezoidalFinish();
+		}else{
+			speedWheelTicks(tickDist, tickDist);
+			waitForSpeedLinearFinish(targDistance);
+			speedWheelTicks(0, 0);
 		}
+		
+		System.out.println("moveByDistance Done " + Timer.getFPGATimestamp());
+		
 	}
 	
 	
@@ -157,8 +177,8 @@ public class Navigator extends Subsystem{
 	//TODO: Modularization
 	public void driveTo(double xField, double yField, double thetaField){
 		
-		double xRel = xField - GlobalMapping.getX();
-		double yRel = yField - GlobalMapping.getY();
+		double xRel = xField - GlobalMapping.getInstance().getX();
+		double yRel = yField - GlobalMapping.getInstance().getY();
 		
 		double targInitTheta = GlobalMapping.reduceRadiansUtil(Math.atan2(yRel, xRel));
 		
@@ -178,8 +198,8 @@ public class Navigator extends Subsystem{
 	
 	public void driveTo(double xField, double yField){
 		
-		double xRel = xField - GlobalMapping.getX();
-		double yRel = yField - GlobalMapping.getY();
+		double xRel = xField - GlobalMapping.getInstance().getX();
+		double yRel = yField - GlobalMapping.getInstance().getY();
 		
 		double targInitTheta = Math.atan2(yRel, xRel);
 		
@@ -198,18 +218,20 @@ public class Navigator extends Subsystem{
 	}
 	
 	public void turnTo(double thetaField){
+		System.out.println("turnTo Entered " + Timer.getFPGATimestamp());
 		
 		double rps = 3;
 		
 		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
 		
 		rotateToTheta(thetaField, rps, rps);
+		System.out.println("turnTo Done " + Timer.getFPGATimestamp());
 		
 	}
 	
 	public void turnTo(double xField, double yField){
-		double xRel = xField - GlobalMapping.getX();
-		double yRel = yField - GlobalMapping.getY();
+		double xRel = xField - GlobalMapping.getInstance().getX();
+		double yRel = yField - GlobalMapping.getInstance().getY();
 		
 		double targInitTheta = GlobalMapping.reduceRadiansUtil(Math.atan2(yRel, xRel));
 		

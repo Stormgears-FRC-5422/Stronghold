@@ -6,11 +6,6 @@ import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
-import org.usfirst.frc.team5422.utils.StrongholdUtils;
-/*
- * @author Suren Karavettil
- * @author Michael
- */
 
 public class ChivalDeFrise implements Defense {
 	public ChivalDeFrise(defenseTypeOptions defenseType, int defensePosition) {
@@ -80,6 +75,6 @@ public class ChivalDeFrise implements Defense {
 //		}
 
 		//Change angle to match angle to best goals
-		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getX(), GlobalMapping.getY(), ShooterHelper.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));	}
+		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), ShooterHelper.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));	}
 
 }

@@ -1,12 +1,7 @@
 package org.usfirst.frc.team5422.utils;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.navigator.GlobalMapping;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootHeightOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
-
-import java.util.Arrays;
 
 /**
  * @author Michael

@@ -1,16 +1,12 @@
 package org.usfirst.frc.team5422.navigator;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.navigator.trapezoidal.MotionProfileExample;
-import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidControl;
 import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-
-import static org.usfirst.frc.team5422.utils.StrongholdConstants.TALON_DRIVE_RIGHT_MASTER;
 
 /*
  * @author Michael
