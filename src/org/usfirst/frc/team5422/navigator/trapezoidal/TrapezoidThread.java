@@ -25,8 +25,11 @@ public class TrapezoidThread implements Runnable{
 	private MotionProfileExample leftExample;
 	private MotionProfileExample rightExample;
 	
-	private NetworkTable trapDoneTable = NetworkTable.getTable("Trapezoid");
-	
+	//network table stuff
+	public NetworkTable trapTable = NetworkTable.getTable("Trapezoid");
+	private int id;
+	private String status = "";
+
 	public TrapezoidThread(CANTalon leftTalon, CANTalon rightTalon) {
 		this.leftTalon = leftTalon;
 		this.rightTalon = rightTalon;
@@ -67,17 +70,26 @@ public class TrapezoidThread implements Runnable{
 					rightExample.stopMotionProfile();
 					resetTrapezoid();
 					
-					System.out.println("Trap Done");
-					trapDoneTable.putBoolean("Trap Done: ", true);
-				}
+					status = "success!";
+			}
+			
+			else {
+				status = "still running";
+			}
+			
+			trapTable.putString("Trap Status: ", status);
+			trapTable.putValue("Trap ID: ", id);
 		}
 	}
 	
-	public void activateTrap(int leftTicks, int rightTicks, double leftVel, double rightVel) {
+	public void activateTrap(int leftTicks, int rightTicks, double leftVel, double rightVel, int id) {
 		this.leftTicks = leftTicks;
 		this.rightTicks = rightTicks;
 		this.leftVel = leftVel;
 		this.rightVel = rightVel;
+		
+		//use this for trap network table
+		this.id = id;
 		
 		resetTrapezoid();
 		initializeTalons();
@@ -86,7 +98,6 @@ public class TrapezoidThread implements Runnable{
 		generateProfiles();
 	
 		hasTrapTask = true;
-		System.out.println("Trap task activated.");
 	}
 
 	private void generateProfiles() {
@@ -120,8 +131,5 @@ public class TrapezoidThread implements Runnable{
 		leftExample.reset();
 		rightExample.reset();
 	}
-	
-	
-	
 
 }

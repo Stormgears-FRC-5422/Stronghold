@@ -69,10 +69,10 @@ public class Navigator extends Subsystem{
 		return isRunning;
 	}
 
-	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM){
+	public void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM, int tableID){
 		//dummy function (actually written elsewhere by aditya)
 		
-		StrongholdRobot.driver.moveTrapezoid((int)lTicks, (int)rTicks, lVelRPM, rVelRPM);
+		StrongholdRobot.driver.moveTrapezoid((int)lTicks, (int)rTicks, lVelRPM, rVelRPM, tableID);
 		
 	}
 	
