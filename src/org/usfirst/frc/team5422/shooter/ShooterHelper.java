@@ -8,7 +8,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 /**
  * @author Michael
  */
-public class ShooterHelper extends StrongholdUtils{
+public class ShooterHelper extends StrongholdUtils {
     private static boolean inBounds = false;
     /**
      * This function determines the best goal to shoot into, with the input of whether the goal should be high or low
@@ -168,11 +168,5 @@ public class ShooterHelper extends StrongholdUtils{
         }
 
         return y;
-    }
-
-    public static double getDistance(double xSource, double ySource, double xDestination, double yDestination) {
-        //Returns direct distance given source x/y and destination x/y
-        double distance = Math.sqrt((xSource - xDestination) * (xSource - xDestination) + (ySource - yDestination) * (ySource - yDestination));
-        return distance;
     }
 }
