@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
+import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
@@ -18,16 +19,15 @@ public class WhiteCommand extends Command {
 
     @Override
     protected void execute() {
-        DSIO.ignoreJoystick = !DSIO.ignoreJoystick;
 
         if (DSIO.ignoreJoystick) {
             //Lock onto nearest goal
             double x = GlobalMapping.getX();
             double y = GlobalMapping.getY();
 
-            StrongholdConstants.shootOptions bestShootOption = StrongholdUtils.findBestGoal(DSIO.teleopShootHeightOption);
+            StrongholdConstants.shootOptions bestShootOption =ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption);
 
-            double theta = StrongholdUtils.findHorizontalAngleToGoal(bestShootOption);
+            double theta = ShooterHelper.findHorizontalAngleToGoal(bestShootOption);
 
             StrongholdRobot.navigatorSubsystem.driveTo(x, y, theta);
         }

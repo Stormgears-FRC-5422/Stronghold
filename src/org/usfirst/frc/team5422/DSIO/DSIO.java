@@ -1,15 +1,9 @@
 package org.usfirst.frc.team5422.DSIO;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team5422.commands.buttonCommands.BigBlueCommand;
-import org.usfirst.frc.team5422.commands.buttonCommands.OrangeSwitchCommand;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
-import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
-import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -29,7 +23,7 @@ public class DSIO {
     static Joystick joystick;
     public static StrongholdConstants.shootHeightOptions teleopShootHeightOption;
     public static Joystick buttonBoard;
-    public static boolean shooterRunning, ignoreJoystick = false;
+    public static boolean shooterRunning = false, ignoreJoystick = false;
 
     public static int pos[] = new int[5];
 
@@ -63,6 +57,12 @@ public class DSIO {
         } else if (!shooterRunning) {
             StrongholdRobot.shooterSubsystem.stop();
         }
+
+        //Red switch (enables/disables joystick depending on position
+        if (buttonBoard.getRawButton(StrongholdConstants.RED_SWITCH_ID)) {
+            ignoreJoystick = true;
+        }
+        else ignoreJoystick = false;
 
         //Lock button
         if (buttonBoard.getRawButton(StrongholdConstants.WHITE_BUTTON_ID)) {
