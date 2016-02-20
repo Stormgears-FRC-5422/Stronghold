@@ -35,7 +35,7 @@ public class GyroAccel
     
     public double getAngle()
     {
-    	return positive(rounding(gyro.getAngle()));
+    	return (positive(rounding(gyro.getAngle())) / 360.0) * (2 *Math.PI);
     }
     
     public double getRate()
