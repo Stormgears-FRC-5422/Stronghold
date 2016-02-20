@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5422.commands;
 
-import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.defense.ChivalDeFrise;
 import org.usfirst.frc.team5422.defense.Defense;

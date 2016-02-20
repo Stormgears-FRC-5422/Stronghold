@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
+import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
@@ -122,12 +123,12 @@ public class StrongholdRobot extends IterativeRobot {
         liftingCommandGroup = new LiftingCommandGroup();
 
         if (autonomousCommand != null) {
-            defenseTypeSelected = (defenseTypeOptions) DSIO.choosers.defenseChooser.getSelected();
+            defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
             defensePositionSelected = DSIO.getSelectedDefensePosition();
-            shootOptionSelected = (shootOptions) DSIO.choosers.shootChooser.getSelected();
-            allianceSelected = (alliance) DSIO.choosers.allianceChooser.getSelected();
-            initialX = ((Double[]) DSIO.choosers.startPositionChooser.getSelected())[0];
-            initialY = ((Double[]) DSIO.choosers.startPositionChooser.getSelected())[1];
+            shootOptionSelected = (shootOptions) SmartDashboardChooser.shootChooser.getSelected();
+            allianceSelected = (alliance) SmartDashboardChooser.allianceChooser.getSelected();
+            initialX = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[0];
+            initialY = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[1];
 
             GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
 
@@ -212,7 +213,7 @@ public class StrongholdRobot extends IterativeRobot {
 		DSIO.choosers.testInitChoosers();
 
 		while (diagnosticTestSelected == null) {
-			diagnosticTestSelected = (diagnosticPOSTOptions) DSIO.choosers.testChooser.getSelected();
+			diagnosticTestSelected = (diagnosticPOSTOptions) SmartDashboardChooser.testChooser.getSelected();
 		}
 		
         switch (diagnosticTestSelected) {

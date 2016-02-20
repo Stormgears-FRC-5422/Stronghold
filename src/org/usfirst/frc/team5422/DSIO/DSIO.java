@@ -248,7 +248,7 @@ public class DSIO {
 
         //If auto is running, get position from SmartDashboard
         if (StrongholdRobot.teleopNotRunning) {
-            switch ((defenseTypeOptions) choosers.defenseChooser.getSelected()) {
+            switch ((defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected()) {
                 case LOW_BAR:
                     position = 0; //Position of low bar is always 0
                     break;
@@ -281,7 +281,7 @@ public class DSIO {
                     break;
             }//End switch
         }
-        System.out.println("Defense type " + (defenseTypeOptions) choosers.defenseChooser.getSelected() + " at position " + position);
+        System.out.println("Defense type " + (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected() + " at position " + position);
         return position;
     }//End method
 }
