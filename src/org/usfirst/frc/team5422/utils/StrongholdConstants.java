@@ -13,6 +13,8 @@ public class StrongholdConstants {
 	public static final String RHINO = "rhino";
 	public static final String STRONGHOLD = "stronghold";
 
+	public static double WHEEL_BASE = 23.0;//inches	
+	
 	public static int TALON_DRIVE_LEFT_MASTER = 2;
 	public static int TALON_DRIVE_RIGHT_MASTER  = 1;
 	public static int TALON_DRIVE_LEFT_SLAVE = 0;
@@ -28,21 +30,24 @@ public class StrongholdConstants {
 	public static double OPEN_DRIVE_P = 0.000185;
 	public static double OPEN_DRIVE_I = 0;
 	public static double OPEN_DRIVE_D = 0;
+	
+	public static int TALON_LEFT_SHOOTER = 7;
+	public static int TALON_RIGHT_SHOOTER = 4;
+	public static int TALON_ACTUATOR = 5;
 
+	public static double WHEEL_DIAMETER = 5 + 7.0/8.0 + 3.0/25.4;//inches
+	
 	//Physical attributes
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
 
 	//Rabbot Drive specifications
-	public static final double WHEEL_BASE = 22.0 + 5.0/16;//inches	
 	public static final double GEAR_RATIO = 1;
-//	public static final double WHEEL_DIAMETER = 6;//inches
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 
     //Rhino Drive Specifications
 //	public static final double WHEEL_BASE = 25;//inches or 24.75 inches
 //	public static final double GEAR_RATIO = 1; //10.71 on motor gives 1 rotation of the wheel 
-	public static final double WHEEL_DIAMETER = 2.8;//inches
 //	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	public static final double ROBOT_MIDDLE_TO_BACK = 12; //inches
 
@@ -126,9 +131,6 @@ public class StrongholdConstants {
 	public static final double[] FALLBACK_LEFT = {70, 260};
 	public static final double[] FALLBACK_CENTER = {175, 200};
 
-	public static final int TALON_LEFT_SHOOTER = 1;
-	public static final int TALON_RIGHT_SHOOTER = 8;
-	public static final int	TALON_ACTUATOR = 0;
 	public static final int SOLENOID_SHOOTER = 0;
 	
 	public static final double FULL_THROTTLE = 1;
