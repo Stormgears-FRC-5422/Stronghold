@@ -23,10 +23,17 @@ public class GlobalMapping implements Runnable{
 	 * returns an equivalent theta between 0 and 2*Math.PI 
 	 */
 	public static double reduceRadiansUtil(double theta){
-		theta = (theta + 2*Math.PI) % (2*Math.PI); 
+		theta = (theta + 2*Math.PI) % (2*Math.PI); 	
 		return theta;
-		
 	}
+	
+	private static GlobalMapping instance;
+	
+	public static GlobalMapping getInstance(){
+		
+		return instance==null? new GlobalMapping() : instance;
+	}
+	
 	
 	public static void resetValues(double xField, double yField, double thetaField){
 		x=xField;
@@ -36,16 +43,15 @@ public class GlobalMapping implements Runnable{
 		System.out.format("[GP] Robot reset values to (%.3g, %.3g) @ %.3g\n", x, y, theta);
 	}
 	
-	public static void addTotalDistance(double dSigmaD) {
+	private static void addTotalDistance(double dSigmaD) {
 		sigmaD += dSigmaD;
-		
 	}
 
-	public static void addTotalRotation(double dTheta) {
+	private static void addTotalRotation(double dTheta) {
 		theta = reduceRadiansUtil(theta + dTheta);
 	}
 
-	public static void addCurrentPosition(double dX, double dY) {
+	private static void addCurrentPosition(double dX, double dY) {
 		x+=dX;
 		y+=dY;
 		
@@ -89,29 +95,25 @@ public class GlobalMapping implements Runnable{
 	@Override
 	public void run() {
 		
-		updateGP(0,0);
-		
-		while((Driver.talon[0]!=null) && (Driver.talon[1]!=null)){
-		
-			updateGP(Driver.talon[1].getEncPosition(), Driver.talon[0].getEncPosition());
-		
+		if((Driver.talon[0]!=null) && (Driver.talon[1]!=null)){
+			updateGP(Driver.talon[1].getEncPosition(), -Driver.talon[0].getEncPosition());
 		}
 		
 	}
 	
-	public static double getX(){
+	public double getX(){
 		return x;
 	}
 	
-	public static double getY(){
+	public double getY(){
 		return y;
 	}
 	
-	public static double getTheta(){
+	public double getTheta(){
 		return reduceRadiansUtil(theta);
 	}
 	
-	public static double getSigmaD(){
+	public double getSigmaD(){
 		return sigmaD;
 	}
 	

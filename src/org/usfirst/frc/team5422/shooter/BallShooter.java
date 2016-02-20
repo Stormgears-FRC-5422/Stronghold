@@ -121,23 +121,23 @@ public class BallShooter extends Subsystem implements Runnable {
 		double distanceFromGoal;
 		
 		if (bestGoal == shootOptions.HIGH_CENTER) {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
 					StrongholdConstants.POSITION_HCENTER_GOAL[0], StrongholdConstants.POSITION_HCENTER_GOAL[1]);
 		}
 		else if (bestGoal == shootOptions.HIGH_LEFT) {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
 					StrongholdConstants.POSITION_HLEFT_GOAL[0], StrongholdConstants.POSITION_HLEFT_GOAL[1]);
 		}
 		else if (bestGoal == shootOptions.HIGH_RIGHT){
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
 					StrongholdConstants.POSITION_HRIGHT_GOAL[0], StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
 		}
 		else if (bestGoal == shootOptions.LOW_LEFT) {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
 					StrongholdConstants.POSITION_LLEFT_GOAL[0], StrongholdConstants.POSITION_LLEFT_GOAL[1]);
 		}
 		else {
-			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), 
 					StrongholdConstants.POSITION_LRIGHT_GOAL[0], StrongholdConstants.POSITION_LRIGHT_GOAL[1]);
 		}
 		

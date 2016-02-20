@@ -13,7 +13,7 @@ public class ShooterHelper {
      */
     public static StrongholdConstants.shootOptions findBestGoal(StrongholdConstants.shootHeightOptions highOrLow) {
         StrongholdConstants.shootOptions bestGoal = StrongholdConstants.shootOptions.HIGH_CENTER;
-        double x = GlobalMapping.getX(), y = GlobalMapping.getY();
+        double x = GlobalMapping.getInstance().getX(), y = GlobalMapping.getInstance().getY();
 
 
         //Bounds for high left goal and low left goal
@@ -62,8 +62,8 @@ public class ShooterHelper {
      * This function finds the horizontal angle to the goal based on the robot's current position
      */
     public static double findHorizontalAngleToGoal(StrongholdConstants.shootOptions shootOption) {
-        double currentX = GlobalMapping.getX();
-        double currentY = GlobalMapping.getY();
+        double currentX = GlobalMapping.getInstance().getX();
+        double currentY = GlobalMapping.getInstance().getY();
 
         //3 High goals
         double deltaXHL = StrongholdConstants.POSITION_HLEFT_GOAL[0] - currentX;
@@ -98,7 +98,7 @@ public class ShooterHelper {
                 angleToGoal = Math.atan2(deltaYLR, deltaXLR);
                 break;
             case NONE:
-                angleToGoal = GlobalMapping.getTheta();
+                angleToGoal = GlobalMapping.getInstance().getTheta();
                 break;
         }
         return angleToGoal;
@@ -111,13 +111,13 @@ public class ShooterHelper {
         double x = 0;
         if (!isInBounds()) {
             double distToLeft, distToCenter;
-            distToLeft = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_LEFT[0], StrongholdConstants.FALLBACK_LEFT[1]);
-            distToCenter = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_CENTER[0], StrongholdConstants.FALLBACK_CENTER[1]);
+            distToLeft = getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), StrongholdConstants.FALLBACK_LEFT[0], StrongholdConstants.FALLBACK_LEFT[1]);
+            distToCenter = getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), StrongholdConstants.FALLBACK_CENTER[0], StrongholdConstants.FALLBACK_CENTER[1]);
             if (distToLeft < distToCenter) x = StrongholdConstants.FALLBACK_LEFT[0];
             else x = StrongholdConstants.FALLBACK_CENTER[0];
         }
         else {
-            x = GlobalMapping.getX();
+            x = GlobalMapping.getInstance().getX();
         }
 
         return x;
@@ -127,13 +127,13 @@ public class ShooterHelper {
         double y = 0;
         if (!isInBounds()) {
             double distToLeft, distToCenter;
-            distToLeft = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_LEFT[0], StrongholdConstants.FALLBACK_LEFT[1]);
-            distToCenter = getDistance(GlobalMapping.getX(), GlobalMapping.getY(), StrongholdConstants.FALLBACK_CENTER[0], StrongholdConstants.FALLBACK_CENTER[1]);
+            distToLeft = getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), StrongholdConstants.FALLBACK_LEFT[0], StrongholdConstants.FALLBACK_LEFT[1]);
+            distToCenter = getDistance(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), StrongholdConstants.FALLBACK_CENTER[0], StrongholdConstants.FALLBACK_CENTER[1]);
             if (distToLeft < distToCenter) y = StrongholdConstants.FALLBACK_LEFT[1];
             else y = StrongholdConstants.FALLBACK_CENTER[1];
         }
         else {
-            y = GlobalMapping.getX();
+            y = GlobalMapping.getInstance().getX();
         }
 
         return y;
