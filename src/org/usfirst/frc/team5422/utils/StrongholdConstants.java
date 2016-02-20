@@ -3,15 +3,29 @@ package org.usfirst.frc.team5422.utils;
 /*
  *@author Suren Karavettil
  *@author Mayank
+ *
+ *Stormgears 2016 Robot Drive Specifications
+ *
  */
 
 
 public class StrongholdConstants {
-	public static final int TALON_DRIVE_LEFT_MASTER = 2;
-	public static final int TALON_DRIVE_RIGHT_MASTER  = 1;
-	public static final int TALON_DRIVE_LEFT_SLAVE = 0;
-	public static final int TALON_DRIVE_RIGHT_SLAVE  = 3;
+	public static int TALON_DRIVE_LEFT_MASTER = 2;
+	public static int TALON_DRIVE_RIGHT_MASTER  = 1;
+	public static int TALON_DRIVE_LEFT_SLAVE = 0;
+	public static int TALON_DRIVE_RIGHT_SLAVE  = 3;
 	
+	//PIDs
+	public static double TRAP_F = 0;
+	public static double TRAP_P = 1;
+	public static double TRAP_I = 0;
+	public static double TRAP_D = 0;
+
+	public static double OPEN_DRIVE_F = 1.705;
+	public static double OPEN_DRIVE_P = 0.000185;
+	public static double OPEN_DRIVE_I = 0;
+	public static double OPEN_DRIVE_D = 0;
+
 	//Physical attributes
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
@@ -29,19 +43,6 @@ public class StrongholdConstants {
 //	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	public static final double ROBOT_MIDDLE_TO_BACK = 12; //inches
 
-	//Stormgears 2016 Robot Drive Specifications
-
-
-	//PIDs
-	public static final double TRAP_F = 0;
-	public static final double TRAP_P = 1;
-	public static final double TRAP_I = 0;
-	public static final double TRAP_D = 0;
-
-	public static final double OPEN_DRIVE_F = 1.705;
-	public static final double OPEN_DRIVE_P = 0.000185;
-	public static final double OPEN_DRIVE_I = 0;
-	public static final double OPEN_DRIVE_D = 0;
 
 	public static final double SHOOTER_F = 0;
 	public static final double SHOOTER_P = 0;
