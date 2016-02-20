@@ -70,6 +70,24 @@ public class StrongholdConstants {
 	
 	public static final int ANALOG_GYRO_INPUT_CHANNEL = 1;
 
+	// Network Tables Constants
+	public static final String f = "Front Distance";
+	public static final String r = "Right Distance";
+	public static final String b = "Back Distance";
+	public static final String l = "Left Distance";
+	
+	public static final String gAngle = "Gyro Angle";
+	public static final String gRotation = "Gyro Rotation Rate";
+	
+	public static final String aX = "X-Accel";
+	public static final String aY = "Y-Accel";
+	public static final String aZ = "Z-Accel";
+	
+	public static final String uVal = "Ultrasonic Values";
+	public static final String gVal = "Gyro Values";
+	public static final String aVal = "Acceleration Values";
+
+	
 	//Positions
 	public static final int[] POSITION_DEFENSE_0_REACH = {25, 90};
 	public static final int[] POSITION_DEFENSE_1_REACH = {25 + 1 * 50, 90};
