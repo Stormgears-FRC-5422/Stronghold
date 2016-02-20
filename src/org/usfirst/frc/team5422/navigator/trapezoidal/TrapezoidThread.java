@@ -70,15 +70,15 @@ public class TrapezoidThread implements Runnable{
 					rightExample.stopMotionProfile();
 					resetTrapezoid();
 					
-					status = "success!";
+					status = "finished";
 			}
 			
 			else {
-				status = "still running";
+				status = "running";
 			}
 			
-			trapTable.putString("Trap Status: ", status);
-			trapTable.putValue("Trap ID: ", id);
+			trapTable.putString("Trap Status", status);
+			trapTable.putNumber("Trap ID", id);
 		}
 	}
 	

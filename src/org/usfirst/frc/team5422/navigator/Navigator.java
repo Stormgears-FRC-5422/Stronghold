@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj.Notifier;
  */
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
 
@@ -19,6 +21,10 @@ public class Navigator extends Subsystem{
 	private boolean isRunning;
 	
 	Notifier thread; 
+	
+	private int currentProfileID = 0;
+	
+	private NetworkTable netTable = NetworkTable.getTable("Trapezoid");
 	
 	public Navigator(){
 
@@ -104,16 +110,15 @@ public class Navigator extends Subsystem{
 		
 		
 		
-		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL);
+		trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
 		
-		
-		double start = System.currentTimeMillis(); 
 		
 		isRunning = true;
 		
 		while(Running()){
 			
-			if(System.currentTimeMillis() - start > 6000){
+			if(netTable.getString("Trap Status", "running").equals("finished")){
+				currentProfileID+=1;
 				StrongholdRobot.driver.stopTrapezoid();
 				StopRunning();
 			}
@@ -129,23 +134,19 @@ public class Navigator extends Subsystem{
 		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK;
 		
 		
-		trapWheelTicks(tickDist, tickDist, rps, rps);
-		
-		
-		double start = System.currentTimeMillis(); 
+		trapWheelTicks(tickDist, tickDist, rps, rps, currentProfileID);
+		 
 		
 		isRunning = true;
 		
 		while(Running()){
 			
-			if(System.currentTimeMillis() - start > 6000){
+			if(netTable.getString("Trap Status", "running").equals("finished")){
+				currentProfileID+=1;
 				StrongholdRobot.driver.stopTrapezoid();
 				StopRunning();
-				
 			}
 			
-			
-		
 		}
 	}
 	
