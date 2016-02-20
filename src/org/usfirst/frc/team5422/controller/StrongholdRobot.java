@@ -12,14 +12,12 @@ import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
-import org.usfirst.frc.team5422.navigator.Driver;
-import org.usfirst.frc.team5422.navigator.GlobalMapping;
-import org.usfirst.frc.team5422.navigator.Navigator;
+import org.usfirst.frc.team5422.navigator.*;
 import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.ShooterHelper;
-import org.usfirst.frc.team5422.utils.PIDTuner;
+import org.usfirst.frc.team5422.utils.*;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -29,11 +27,16 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Properties;
+
 /**
  * This is a demo program showing the use of the RobotDrive class.
  * The SampleRobot class is the base of a robot application that will automatically call your
  * Autonomous and OperatorControl methods at the right time as controlled by the switches on
- * the driver station or the field controls.
+ * the rhinoDriver station or the field controls.
  * <p>
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the SampleRobot
@@ -52,18 +55,21 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
  */
 
 public class StrongholdRobot extends IterativeRobot {
+
+    //Set this boolean to false if using official robot
+    public static boolean rhinoInUse = true;
+
+
+
     public static Navigator navigatorSubsystem;
     public static BallShooter shooterSubsystem;
     public static Opener openerSubsystem;
     public static Grappler grapplerSubsystem;
     public static Lifter lifterSubsystem;
+    public static RobotConfigurationFileReader robotPropertiesGetter;
 
     public static DSIO dsio;
     public static Driver driver;
-    public static PIDTuner pidTuner;
-    public static Gyro gyro;
-    public static Ultrasonic usonic;
-
 
     public static defenseTypeOptions defenseTypeSelected;
     public static int defensePositionSelected;
@@ -76,21 +82,24 @@ public class StrongholdRobot extends IterativeRobot {
 
     public Command autonomousCommand;
     public Command liftingCommandGroup;
-   
-    static int leftTicks = 0;
-    static int rightTicks = 0;
-     
-    static double leftVelocity = 0;
-    static double rightVelocity = 0;
     
     public StrongholdRobot() {
         NetworkTable.globalDeleteAll(); //Removes unused garbage from SmartDashboard
+
+        robotPropertiesGetter = new RobotConfigurationFileReader();
+        if (robotPropertiesGetter.getRobotInUse().equals(StrongholdConstants.RHINO)) {
+            driver = new RhinoDriver();
+        }
+        else {
+            driver = new StrongholdDriver();
+        }
 
         navigatorSubsystem = new Navigator();
         shooterSubsystem = new BallShooter();
         openerSubsystem = new SallyPortOpener();
         grapplerSubsystem = new Grappler();
         lifterSubsystem = new Lifter();
+
 
         teleopNotRunning = true;
     }
@@ -102,7 +111,6 @@ public class StrongholdRobot extends IterativeRobot {
     public void robotInit() {
         System.out.println("robot init started.");
         dsio = new DSIO(0, 1);
-        driver = new Driver();
         
         DSIO.createUI();
 
@@ -165,7 +173,7 @@ public class StrongholdRobot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleopNotRunning = false;
 
-//        Driver.initializeTrapezoid();
+//        RhinoDriver.initializeTrapezoid();
         System.out.println("teleop init ended.");
     }
 
@@ -176,7 +184,7 @@ public class StrongholdRobot extends IterativeRobot {
         //Run actions based on input from button board
         RobotController.doActionsOnButtonPress(DSIO.getButtons());
 
-        //Tell the driver what goal is best for them, and whether they are within range
+        //Tell the rhinoDriver what goal is best for them, and whether they are within range
         if (ShooterHelper.isInBounds()) {
             System.out.println("within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
             SmartDashboard.putString("You are", " within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
@@ -187,7 +195,7 @@ public class StrongholdRobot extends IterativeRobot {
         }
 
         //Run the openDrive() method
-        Driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
+        driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
 
         //Run WPILib commands
         Scheduler.getInstance().run();

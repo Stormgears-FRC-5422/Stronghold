@@ -29,11 +29,11 @@ public class Navigator extends Subsystem{
 	
 	public Navigator(){
 
-		//right is Driver.talon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder); [0]
-		//left is Driver.talon[1].setFeedbackDevice(FeedbackDevice.QuadEncoder); [1]
+		//right is RhinoDriver.talon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder); [0]
+		//left is RhinoDriver.talon[1].setFeedbackDevice(FeedbackDevice.QuadEncoder); [1]
 		
-		//Driver.talons[0] is right
-		//Driver.talon[1] is left
+		//RhinoDriver.talons[0] is right
+		//RhinoDriver.talon[1] is left
 		
 		
 		thread = new Notifier(new GlobalMapping());
@@ -74,8 +74,8 @@ public class Navigator extends Subsystem{
 	
 	private void speedWheelTicks(double rTicks, double lTicks){
 		
-		Driver.talon[0].set(Math.signum(rTicks)*0.4);
-		Driver.talon[1].set(-Math.signum(lTicks)*0.4);
+		RhinoDriver.talon[0].set(Math.signum(rTicks)*0.4);
+		RhinoDriver.talon[1].set(-Math.signum(lTicks)*0.4);
 		
 	}
 	

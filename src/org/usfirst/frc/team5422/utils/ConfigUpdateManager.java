@@ -42,6 +42,8 @@ public class ConfigUpdateManager {
 		StrongholdConstants.OPEN_DRIVE_I = 0;
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 
+
+
 	}
 	
 }

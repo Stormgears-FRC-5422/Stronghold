@@ -2,6 +2,7 @@ package org.usfirst.frc.team5422.navigator;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
+import org.usfirst.frc.team5422.utils.ConfigUpdateManager;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -12,13 +13,15 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
  * @author Michael
  */
 
-public class StrongholdDriver {
+public class StrongholdDriver implements Driver {
     public static CANTalon talon[] = new CANTalon[4];
 
     private TrapezoidThread trapThread;
     
     //Constructor
     public StrongholdDriver() {
+        ConfigUpdateManager updateManager = new ConfigUpdateManager();
+        updateManager.configureStrongholdRobot();
 
         //Declare talons
         talon[0] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_MASTER);
@@ -53,7 +56,8 @@ public class StrongholdDriver {
     /**
      * This function drives the robot around the carpet. It is not precise.
      */
-    public static void openDrive(double yJoystick, double xJoystick, CANTalon.TalonControlMode controlMode) {
+    @Override
+    public void openDrive(double yJoystick, double xJoystick, CANTalon.TalonControlMode controlMode) {
         //Declare variables
         double velocityLeft = 0, velocityRight = 0;
 
@@ -103,10 +107,12 @@ public class StrongholdDriver {
         DSIO.outputToSFX("Talon ID 0 Velocity (Right)", talon[1].getSpeed());
     }
 
+    @Override
     public void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity, int tableID) {	
 		trapThread.activateTrap(-1 * leftTicks, rightTicks, leftVelocity, rightVelocity, tableID);
 	}
 
+    @Override
     public void stopTrapezoid() {
     	trapThread.resetTrapezoid();
     }

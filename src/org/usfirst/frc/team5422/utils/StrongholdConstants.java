@@ -10,6 +10,9 @@ package org.usfirst.frc.team5422.utils;
 
 
 public class StrongholdConstants {
+	public static final String RHINO = "rhino";
+	public static final String STRONGHOLD = "stronghold";
+
 	public static int TALON_DRIVE_LEFT_MASTER = 2;
 	public static int TALON_DRIVE_RIGHT_MASTER  = 1;
 	public static int TALON_DRIVE_LEFT_SLAVE = 0;

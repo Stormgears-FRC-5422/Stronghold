@@ -95,8 +95,8 @@ public class GlobalMapping implements Runnable{
 	@Override
 	public void run() {
 		
-		if((Driver.talon[0]!=null) && (Driver.talon[1]!=null)){
-			updateGP(Driver.talon[1].getEncPosition(), -Driver.talon[0].getEncPosition());
+		if((RhinoDriver.talon[0]!=null) && (RhinoDriver.talon[1]!=null)){
+			updateGP(RhinoDriver.talon[1].getEncPosition(), -RhinoDriver.talon[0].getEncPosition());
 		}
 		
 	}
