@@ -5,6 +5,7 @@ import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -118,23 +119,27 @@ public class BallShooter extends Subsystem implements Runnable {
 	public double getDistancetoGoal(StrongholdConstants.shootOptions option) {
 		shootOptions bestGoal = option;
 		double distanceFromGoal;
-		double thetaX;
-		double thetaY;
 		
 		if (bestGoal == shootOptions.HIGH_CENTER) {
-			thetaX = Math.abs(GlobalMapping.getX() - StrongholdConstants.POSITION_HCENTER_GOAL[0]);
-			thetaY = Math.abs(GlobalMapping.getY() - StrongholdConstants.POSITION_HCENTER_GOAL[1]);
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+					StrongholdConstants.POSITION_HCENTER_GOAL[0], StrongholdConstants.POSITION_HCENTER_GOAL[1]);
 		}
-		else if (bestGoal == shootOptions.HIGH_LEFT || bestGoal == shootOptions.LOW_LEFT) {
-			thetaX = Math.abs(GlobalMapping.getX() - StrongholdConstants.POSITION_HLEFT_GOAL[0]);
-			thetaY = Math.abs(GlobalMapping.getY() - StrongholdConstants.POSITION_HLEFT_GOAL[1]);
+		else if (bestGoal == shootOptions.HIGH_LEFT) {
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+					StrongholdConstants.POSITION_HLEFT_GOAL[0], StrongholdConstants.POSITION_HLEFT_GOAL[1]);
+		}
+		else if (bestGoal == shootOptions.HIGH_RIGHT){
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+					StrongholdConstants.POSITION_HRIGHT_GOAL[0], StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
+		}
+		else if (bestGoal == shootOptions.LOW_LEFT) {
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+					StrongholdConstants.POSITION_LLEFT_GOAL[0], StrongholdConstants.POSITION_LLEFT_GOAL[1]);
 		}
 		else {
-			thetaX = Math.abs(GlobalMapping.getX() - StrongholdConstants.POSITION_HRIGHT_GOAL[0]);
-			thetaY = Math.abs(GlobalMapping.getY() - StrongholdConstants.POSITION_HRIGHT_GOAL[1]);
+			distanceFromGoal = ShooterHelper.getDistance(GlobalMapping.getX(), GlobalMapping.getY(), 
+					StrongholdConstants.POSITION_LRIGHT_GOAL[0], StrongholdConstants.POSITION_LRIGHT_GOAL[1]);
 		}
-		
-		distanceFromGoal =  Math.pow(Math.pow(thetaX, 2) + Math.pow(thetaY, 2), -2);
 		
 		return distanceFromGoal;
 	}

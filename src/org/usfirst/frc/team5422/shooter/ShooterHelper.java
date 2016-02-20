@@ -139,7 +139,7 @@ public class ShooterHelper {
         return y;
     }
 
-    private static double getDistance(double xSource, double ySource, double xDestination, double yDestination) {
+    public static double getDistance(double xSource, double ySource, double xDestination, double yDestination) {
         //Returns direct distance given source x/y and destination x/y
         double distance = Math.sqrt((xSource - xDestination) * (xSource - xDestination) + (ySource - yDestination) * (ySource - yDestination));
         return distance;
