@@ -98,8 +98,8 @@ public class Driver {
         DSIO.outputToSFX("Talon ID 0 Velocity (Right)", talon[1].getSpeed());
     }
 
-    public void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity) {	
-		trapThread.activateTrap(-1 * leftTicks, rightTicks, leftVelocity, rightVelocity);
+    public void moveTrapezoid(int leftTicks, int rightTicks, double leftVelocity, double rightVelocity, int tableID) {	
+		trapThread.activateTrap(-1 * leftTicks, rightTicks, leftVelocity, rightVelocity, tableID);
 	}
 
     public void stopTrapezoid() {
