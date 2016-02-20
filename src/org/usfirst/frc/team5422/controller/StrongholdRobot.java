@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
-import org.usfirst.frc.team5422.commands.buttonCommands.BigBlueCommand;
-import org.usfirst.frc.team5422.commands.buttonCommands.OrangeSwitchCommand;
-import org.usfirst.frc.team5422.commands.buttonCommands.WhiteCommand;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
 import org.usfirst.frc.team5422.navigator.Driver;
@@ -20,8 +17,8 @@ import org.usfirst.frc.team5422.navigator.Navigator;
 import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
+import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.utils.PIDTuner;
-import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -30,7 +27,6 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.alliance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 /**
  * This is a demo program showing the use of the RobotDrive class.
@@ -177,12 +173,12 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         //Run actions based on input from button board
-        doActionsOnButtonPress(DSIO.getButtons());
+        RobotController.doActionsOnButtonPress(DSIO.getButtons());
 
         //Tell the driver what goal is best for them, and whether they are within range
-        if (StrongholdUtils.isInBounds()) {
-            System.out.println("within bounds, for goal: " + StrongholdUtils.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
-            SmartDashboard.putString("You are", " within bounds, for goal: " + StrongholdUtils.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
+        if (ShooterHelper.isInBounds()) {
+            System.out.println("within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
+            SmartDashboard.putString("You are", " within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
         }
         else {
 
@@ -283,50 +279,5 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void testPeriodic() {
         
-    }
-
-    private void doActionsOnButtonPress(int buttonID) {
-        switch (buttonID) {
-            case StrongholdConstants.BIG_BLUE_BUTTON_ID:
-                BigBlueCommand bigBlue = new BigBlueCommand();
-                bigBlue.start();
-                break;
-
-            case StrongholdConstants.ORANGE_SWITCH_ID:
-                OrangeSwitchCommand orangeSwitch = new OrangeSwitchCommand();
-                orangeSwitch.start();
-                break;
-
-            case StrongholdConstants.WHITE_BUTTON_ID:
-                //Lock-onto-goal button
-                WhiteCommand white = new WhiteCommand();
-                white.start();
-                break;
-
-            case StrongholdConstants.RED_BUTTON_ID:
-                //Cross defense 1
-
-                break;
-
-            case StrongholdConstants.YELLOW_BUTTON_ID:
-                //Cross defense 2
-
-                break;
-
-            case StrongholdConstants.GREEN_BUTTON_ID:
-                //Cross defense 3
-
-                break;
-
-            case StrongholdConstants.BLUE_BUTTON_ID:
-                //Cross defense 4
-
-                break;
-
-            case StrongholdConstants.BLACK_BUTTON_ID:
-                //Cross defense 0
-
-                break;
-        }
     }
 }
