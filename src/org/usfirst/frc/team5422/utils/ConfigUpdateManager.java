@@ -28,6 +28,11 @@ public class ConfigUpdateManager {
 		StrongholdConstants.OPEN_DRIVE_P = 0.000185;
 		StrongholdConstants.OPEN_DRIVE_I = 0;
 		StrongholdConstants.OPEN_DRIVE_D = 0;
+		
+		StrongholdConstants.SHOOTER_F = 0;
+		StrongholdConstants.SHOOTER_P = 0;
+		StrongholdConstants.SHOOTER_I = 0;
+		StrongholdConstants.SHOOTER_D = 0;
 
 		StrongholdConstants.WHEEL_DIAMETER = 2.8;//inches
 		
@@ -47,15 +52,30 @@ public class ConfigUpdateManager {
 		StrongholdConstants.TALON_DRIVE_RIGHT_SLAVE  = 3;
 		
 		StrongholdConstants.TRAP_F = 0;
-		StrongholdConstants.TRAP_P = 1;
+		StrongholdConstants.TRAP_P = 0.9;
 		StrongholdConstants.TRAP_I = 0;
-		StrongholdConstants.TRAP_D = 0;
+		StrongholdConstants.TRAP_D = 0.575;
 
-		StrongholdConstants.OPEN_DRIVE_F = 1.705;
-		StrongholdConstants.OPEN_DRIVE_P = 0.000185;
+		StrongholdConstants.OPEN_DRIVE_F = 0;
+		StrongholdConstants.OPEN_DRIVE_P = 0.55;
 		StrongholdConstants.OPEN_DRIVE_I = 0;
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 
+		StrongholdConstants.SHOOTER_F = 0;
+		StrongholdConstants.SHOOTER_P = 0.02;
+		StrongholdConstants.SHOOTER_I = 0;
+		StrongholdConstants.SHOOTER_D = 1.65;
+		
+		StrongholdConstants.ANGLE_MOTOR_UP_F = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_P = 40;
+		StrongholdConstants.ANGLE_MOTOR_UP_I = 0.005;
+		StrongholdConstants.ANGLE_MOTOR_UP_D = 0.2;
+		
+		StrongholdConstants.ANGLE_MOTOR_DOWN_F = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_P = 6.3;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_I = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_D = 0.5;
+		
 		StrongholdConstants.WHEEL_DIAMETER = 6.34;//inches
 
 	}

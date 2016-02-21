@@ -49,14 +49,11 @@ public class BallShooter extends Subsystem implements Runnable {
 		talonR.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
 		talonR.setF(StrongholdConstants.SHOOTER_F);
 		
-//		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
-//		actuator.setFeedbackDevice(FeedbackDevice.AnalogPot);
-//		actuator.changeControlMode(TalonControlMode.PercentVbus);
-//		//Reverse output may be needed
-//		actuator.configPotentiometerTurns(POT_TURNS);	
-//		actuator.configNominalOutputVoltage(+0.0f, -0.0f);
-//		actuator.setPID(0, 0, 0);
-//		actuator.setF(0);
+		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
+		actuator.setFeedbackDevice(FeedbackDevice.AnalogPot);
+		actuator.changeControlMode(TalonControlMode.Position);
+		actuator.configNominalOutputVoltage(+0.0f, -0.0f);
+
 	
 		relay = new Relay(StrongholdConstants.SOLENOID_SHOOTER);
 	}
@@ -69,6 +66,16 @@ public class BallShooter extends Subsystem implements Runnable {
 	
 	//Shoots the ball
 	//Inputs: distance, low or high goal
+	public void setActuatorUpPID() {
+		actuator.setPID(StrongholdConstants.ANGLE_MOTOR_UP_P, StrongholdConstants.ANGLE_MOTOR_UP_I, StrongholdConstants.ANGLE_MOTOR_UP_D);
+		actuator.setF(StrongholdConstants.ANGLE_MOTOR_UP_F);
+	}
+	
+	public void setActuatorDownPID() {
+		actuator.setPID(StrongholdConstants.ANGLE_MOTOR_DOWN_P, StrongholdConstants.ANGLE_MOTOR_DOWN_I, StrongholdConstants.ANGLE_MOTOR_DOWN_D);
+		actuator.setF(StrongholdConstants.ANGLE_MOTOR_DOWN_F);
+	}
+	
 	public void shoot(StrongholdConstants.shootOptions goal) {
 		Thread shooterThread = new Thread(StrongholdRobot.shooterSubsystem);
 		shooterThread.start();
@@ -95,14 +102,11 @@ public class BallShooter extends Subsystem implements Runnable {
 	
 	//Changes the angle of the actuator
 	private void changeAngle(double angle) {
-		//As part of PID Tuning effort, P value was 10
-		actuator.set(-0.5);
-		SmartDashboard.putNumber("Pot Pos: ", actuator.getPosition());
-		Timer.delay(1);
-		actuator.set(0);
+		//524 ticks = 0 degrees
+		actuator.set(524 + angle * 414.0 / 95.0);
 	}
-	
 	public void intake() {
+		actuator.set(600);
 		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		talonL.changeControlMode(TalonControlMode.PercentVbus);
 		talonR.set(0.5);

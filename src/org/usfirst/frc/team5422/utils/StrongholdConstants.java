@@ -13,6 +13,11 @@ public class StrongholdConstants {
 	public static final String RHINO = "rhino";
 	public static final String STRONGHOLD = "stronghold";
 
+	public static double SHOOTER_F = 0;
+	public static double SHOOTER_P = 0.02;
+	public static double SHOOTER_I = 0;
+	public static double SHOOTER_D = 1.65;
+	
 	public static double WHEEL_BASE = 23.0;//inches	
 	
 	public static int TALON_DRIVE_LEFT_MASTER = 2;
@@ -22,9 +27,9 @@ public class StrongholdConstants {
 	
 	//PIDs
 	public static double TRAP_F = 0;
-	public static double TRAP_P = 1;
+	public static double TRAP_P = 0.9;
 	public static double TRAP_I = 0;
-	public static double TRAP_D = 0;
+	public static double TRAP_D = 0.575;
 
 	public static double OPEN_DRIVE_F = 1.705;
 	public static double OPEN_DRIVE_P = 0.000185;
@@ -36,6 +41,16 @@ public class StrongholdConstants {
 	public static int TALON_ACTUATOR = 5;
 
 	public static double WHEEL_DIAMETER = 5 + 7.0/8.0 + 3.0/25.4;//inches
+	
+	public static double ANGLE_MOTOR_UP_F = 0;
+	public static double ANGLE_MOTOR_UP_P = 40;
+	public static double ANGLE_MOTOR_UP_I = 0.005;
+	public static double ANGLE_MOTOR_UP_D = 0.2;
+	
+	public static double ANGLE_MOTOR_DOWN_F = 0;
+	public static double ANGLE_MOTOR_DOWN_P = 6.3;
+	public static double ANGLE_MOTOR_DOWN_I = 0;
+	public static double ANGLE_MOTOR_DOWN_D = 0.5;
 	
 	//Physical attributes
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
@@ -50,13 +65,7 @@ public class StrongholdConstants {
 //	public static final double GEAR_RATIO = 1; //10.71 on motor gives 1 rotation of the wheel 
 //	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
 	public static final double ROBOT_MIDDLE_TO_BACK = 12; //inches
-
-
-	public static final double SHOOTER_F = 0;
-	public static final double SHOOTER_P = 0;
-	public static final double SHOOTER_I = 0;
-	public static final double SHOOTER_D = 0;
-
+	
 	public static final double ACTUATOR_F = 1.705;
 	public static final double ACTUATOR_P = 0.000185;
 	public static final double ACTUATOR_I = 0;
