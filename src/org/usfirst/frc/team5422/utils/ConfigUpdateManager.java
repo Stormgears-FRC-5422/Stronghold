@@ -30,6 +30,8 @@ public class ConfigUpdateManager {
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 
 		StrongholdConstants.WHEEL_DIAMETER = 2.8;//inches
+		
+		StrongholdConstants.INCHES_PER_TICK = 0.001225;
 	}
 	
 	public void configureStrongholdRobot() {

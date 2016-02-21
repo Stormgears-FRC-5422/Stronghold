@@ -63,7 +63,7 @@ public class StrongholdConstants {
 	public static final double ACTUATOR_D = 0;
 
 	//Inches per tick
-	public static final double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
+	public static double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
 	public static final int JOYSTICK_CHANNEL = 0;
 	public static final int BUTTONBOARD_CHANNEL = 1;
