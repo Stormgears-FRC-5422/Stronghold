@@ -95,6 +95,7 @@ public class BallShooter extends Subsystem implements Runnable {
 	
 	//Changes the angle of the actuator
 	private void changeAngle(double angle) {
+		//As part of PID Tuning effort, P value was 10
 		actuator.set(-0.5);
 		SmartDashboard.putNumber("Pot Pos: ", actuator.getPosition());
 		Timer.delay(1);
@@ -104,8 +105,8 @@ public class BallShooter extends Subsystem implements Runnable {
 	public void intake() {
 		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		talonL.changeControlMode(TalonControlMode.PercentVbus);
-		talonR.set(-StrongholdConstants.FULL_THROTTLE);
-		talonL.set(StrongholdConstants.FULL_THROTTLE);
+		talonR.set(0.5);
+		talonL.set(-0.5);
 	}
 	
 	public void stop() {
@@ -115,16 +116,20 @@ public class BallShooter extends Subsystem implements Runnable {
 
 	public void run() {
 		
+		//Potentiometer starts at 533
+		//620 = min    -22 degrees
+		//206 = max     73 degrees
 //		changeAngle(calculateAngle(distance, goal)); 
 		
 		double speed = 1; //calculateSpeed();
 
 		//Direction of motor to be found out
-		talonR.set(speed); //* StrongholdConstants.VEL_PER_100MS
-		talonL.set(-1*speed);
-		
-		Timer.delay(StrongholdConstants.SHOOT_DELAY);
+		//P, I, D, F--->  0.02, 0, 1.65, 0
+		talonR.set(-speed); //* StrongholdConstants.VEL_PER_100MS
+		talonL.set(speed);
 
+		Timer.delay(StrongholdConstants.SHOOT_DELAY);
+		
 		relay.set(Relay.Value.kForward);
 		
 		Timer.delay(StrongholdConstants.SHOOT_DELAY);
