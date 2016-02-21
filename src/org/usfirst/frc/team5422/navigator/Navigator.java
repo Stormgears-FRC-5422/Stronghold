@@ -97,18 +97,21 @@ public class Navigator extends Subsystem{
 		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
-		
-		if(moveTrapezoidal){
-			trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
-			waitForTrapezoidalFinish();
-		
-			System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
+		if(rTicksDest > 500){
+			if(moveTrapezoidal){
+				trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
+				waitForTrapezoidalFinish();
+			
+				System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
+			}else{
+				lTicksDest*=-1;
+				rTicksDest*=-1;
+				speedWheelTicks(rTicksDest, lTicksDest);
+				waitForSpeedRotationalFinish(relInitTheta);
+				speedWheelTicks(0, 0);
+			}
 		}else{
-			lTicksDest*=-1;
-			rTicksDest*=-1;
-			speedWheelTicks(rTicksDest, lTicksDest);
-			waitForSpeedRotationalFinish(relInitTheta);
-			speedWheelTicks(0, 0);
+			System.out.println("[Nav] calculated ticks is too small, skipping trap instead");
 		}
 		
 		System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
@@ -157,13 +160,17 @@ public class Navigator extends Subsystem{
 		
 		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK;
 		
-		if(moveTrapezoidal){
-			trapWheelTicks(tickDist, tickDist, rps, rps, currentProfileID);
-			waitForTrapezoidalFinish();
+		if(tickDist > 500){
+			if(moveTrapezoidal){
+				trapWheelTicks(tickDist, tickDist, rps, rps, currentProfileID);
+				waitForTrapezoidalFinish();
+			}else{
+				speedWheelTicks(tickDist, tickDist);
+				waitForSpeedLinearFinish(targDistance);
+				speedWheelTicks(0, 0);
+			}
 		}else{
-			speedWheelTicks(tickDist, tickDist);
-			waitForSpeedLinearFinish(targDistance);
-			speedWheelTicks(0, 0);
+			System.out.println("[Nav] calculated ticks is too small, skipping trap instead");
 		}
 		
 		System.out.println("moveByDistance Done " + Timer.getFPGATimestamp());
