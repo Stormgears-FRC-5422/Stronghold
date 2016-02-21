@@ -75,6 +75,7 @@ public class SmartDashboardChooser {
         SmartDashboard.putData("Start Position Chooser", startPositionChooser);
 
         //Add other defense position text boxes
+        SmartDashboard.putNumber("Defense at Position 0", 0);
         SmartDashboard.putNumber("Defense at Position 1", -1);
         SmartDashboard.putNumber("Defense at Position 2", -1);
         SmartDashboard.putNumber("Defense at Position 3", -1);
@@ -85,6 +86,7 @@ public class SmartDashboardChooser {
 	
 	public void autoInitChoosers() {
         //Add other defense position text boxes
+        SmartDashboard.putNumber("Defense at Position 0", 0);
         SmartDashboard.putNumber("Defense at Position 1", 3);
         SmartDashboard.putNumber("Defense at Position 2", 4);
         SmartDashboard.putNumber("Defense at Position 3", 7);
