@@ -73,7 +73,7 @@ public class GlobalMapping implements Runnable{
 		double dSigmaD = (dTickR+dTickL)*StrongholdConstants.INCHES_PER_TICK/2;
 		
 		//inches
-		double dTheta = ((dTickR - dTickL)*StrongholdConstants.INCHES_PER_TICK)/(StrongholdConstants.WHEEL_BASE);
+		double dTheta = ((dTickR - dTickL)*StrongholdConstants.INCHES_PER_TICK)/(StrongholdConstants.WHEEL_BASE) * 2 * Math.PI/(2 * Math.PI + 0.136);
 		
 		GlobalMapping.addTotalDistance(dSigmaD);
 		

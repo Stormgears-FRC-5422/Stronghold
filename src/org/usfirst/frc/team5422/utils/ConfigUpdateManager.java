@@ -11,7 +11,7 @@ public class ConfigUpdateManager {
 	}
 
 	public void configureRhinoRobot() {
-		StrongholdConstants.WHEEL_BASE = 22.0 + 5.0/16;//inches	
+		StrongholdConstants.WHEEL_BASE = 25.0;//22.0 + 5.0/16;//inches	
 		
 		StrongholdConstants.TALON_LEFT_SHOOTER = 1;
 		StrongholdConstants.TALON_RIGHT_SHOOTER = 8;
@@ -34,7 +34,7 @@ public class ConfigUpdateManager {
 		StrongholdConstants.SHOOTER_I = 0;
 		StrongholdConstants.SHOOTER_D = 0;
 
-		StrongholdConstants.WHEEL_DIAMETER = 2.8;//inches
+		StrongholdConstants.WHEEL_DIAMETER = 3.75;//inches
 		
 		StrongholdConstants.INCHES_PER_TICK = 0.001225;
 	}
