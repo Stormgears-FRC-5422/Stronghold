@@ -18,17 +18,19 @@ public class RobotConfigurationFileReader {
 
         //Load the properties file
         try {
-            fis = new FileInputStream("config.properties");
+            fis = new FileInputStream("/home/lvuser/config.properties");
             properties = new Properties();
             properties.load(fis);
-            robot = properties.getProperty("robotInUse");
+
             fis.close();
+            robot = properties.getProperty("robotInUse");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        System.out.println("[File Reader] Robot in use: " + robot);
         //If you want to ignore the file, comment this back in.
         //robot = "stronghold"; //Default ("rhino" for old rhino drive, "stronghold" for new official 2016 robot)
     }
