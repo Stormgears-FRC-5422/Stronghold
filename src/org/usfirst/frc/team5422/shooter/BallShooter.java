@@ -102,7 +102,7 @@ public class BallShooter extends Subsystem implements Runnable {
 	
 	private double calculateSpeed(double angle, StrongholdConstants.shootOptions goal){
 		double speed;
-		//Theta is assumed to be 45 degrees
+		//Theta is assumed to be 45 degrees.
 		speed = Math.pow(Math.sqrt(2 * Math.pow(ShooterHelper.getDistanceToGoal(goal), 2) - 5536), -4);
 		if (speed > 1) speed = 1;
 		else if (speed < 0.5) speed = 0.5;

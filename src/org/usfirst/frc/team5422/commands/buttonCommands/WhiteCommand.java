@@ -22,7 +22,7 @@ public class WhiteCommand extends Command {
         if (DSIO.ignoreJoystick) {
             //Lock onto nearest goal
             //double x = GlobalMapping.getInstance().getX();
-            //double y = GlobalMapping.getInstance().getY();
+            //double y = GlobalMapping.getInstance().getY();.
 
             StrongholdConstants.shootOptions bestShootOption = ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption);
 

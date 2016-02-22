@@ -31,7 +31,7 @@ public class RobotController {
                 break;
 
             case StrongholdConstants.RED_BUTTON_ID:
-                //Cross defense 1
+                //Cross defense 1.
                 StrongholdRobot.defensePositionSelected = 1;
                 StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(1);
                 StrongholdRobot.shootOptionSelected = StrongholdConstants.shootOptions.NONE;
