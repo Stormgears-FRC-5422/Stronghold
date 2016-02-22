@@ -34,6 +34,24 @@ public class ConfigUpdateManager {
 		StrongholdConstants.SHOOTER_I = 0;
 		StrongholdConstants.SHOOTER_D = 0;
 
+		StrongholdConstants.ANGLE_MOTOR_UP_F = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_P = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_I = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_D = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_IZONE = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_RAMP_RATE = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_PROFILE = 0;
+		
+		StrongholdConstants.ANGLE_MOTOR_DOWN_F = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_P = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_I = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_D = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_IZONE = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_RAMP_RATE = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
+		
+		StrongholdConstants.ANGLE_MOTOR_INTAKE_POS = 0;
+		
 		StrongholdConstants.WHEEL_DIAMETER = 3.75;//inches
 		
 		StrongholdConstants.INCHES_PER_TICK = 0.001225;
@@ -75,6 +93,24 @@ public class ConfigUpdateManager {
 		StrongholdConstants.ANGLE_MOTOR_DOWN_P = 6.3;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_I = 0;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_D = 0.5;
+		
+		StrongholdConstants.ANGLE_MOTOR_UP_F = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_P = 40;
+		StrongholdConstants.ANGLE_MOTOR_UP_I = 0.005;
+		StrongholdConstants.ANGLE_MOTOR_UP_D = 0.2;
+		StrongholdConstants.ANGLE_MOTOR_UP_IZONE = 0;
+		StrongholdConstants.ANGLE_MOTOR_UP_RAMP_RATE = 1;
+		StrongholdConstants.ANGLE_MOTOR_UP_PROFILE = 1;
+		
+		StrongholdConstants.ANGLE_MOTOR_DOWN_F = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_P = 6.3;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_I = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_D = 0.5;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_IZONE = 0;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_RAMP_RATE = 1;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
+		
+		StrongholdConstants.ANGLE_MOTOR_INTAKE_POS = 600;
 		
 		StrongholdConstants.WHEEL_DIAMETER = 6.34;//inches
 
