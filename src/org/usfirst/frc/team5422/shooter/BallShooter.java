@@ -33,27 +33,36 @@ public class BallShooter extends Subsystem implements Runnable {
 	public BallShooter() {
 		talonL = new CANTalon(StrongholdConstants.TALON_LEFT_SHOOTER);
 		talonL.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonL.changeControlMode(TalonControlMode.PercentVbus);
+		talonL.changeControlMode(TalonControlMode.Speed);
 		//Reverse output may be needed
 		talonL.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonL.configNominalOutputVoltage(+0.0f, -0.0f);
 		talonL.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
 		talonL.setF(StrongholdConstants.SHOOTER_F);
+		talonL.setCloseLoopRampRate(0.5);
 		
 		talonR = new CANTalon(StrongholdConstants.TALON_RIGHT_SHOOTER);
 		talonR.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonR.changeControlMode(TalonControlMode.PercentVbus);
+		talonR.changeControlMode(TalonControlMode.Speed);
 		//Reverse output may be needed
 		talonR.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonR.configNominalOutputVoltage(+0.0f, -0.0f);
 		talonR.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
 		talonR.setF(StrongholdConstants.SHOOTER_F);
+		talonR.setCloseLoopRampRate(0.5);
 		
 		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
 		actuator.setFeedbackDevice(FeedbackDevice.AnalogPot);
 		actuator.changeControlMode(TalonControlMode.Position);
 		actuator.configNominalOutputVoltage(+0.0f, -0.0f);
-
+		
+		actuator.setPID(StrongholdConstants.ANGLE_MOTOR_DOWN_P, StrongholdConstants.ANGLE_MOTOR_DOWN_I, StrongholdConstants.ANGLE_MOTOR_DOWN_D
+				, StrongholdConstants.ANGLE_MOTOR_DOWN_F, StrongholdConstants.ANGLE_MOTOR_DOWN_IZONE, StrongholdConstants.ANGLE_MOTOR_DOWN_RAMP_RATE, 
+				StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
+		
+		actuator.setPID(StrongholdConstants.ANGLE_MOTOR_UP_P, StrongholdConstants.ANGLE_MOTOR_UP_I, StrongholdConstants.ANGLE_MOTOR_UP_D
+				, StrongholdConstants.ANGLE_MOTOR_UP_F, StrongholdConstants.ANGLE_MOTOR_UP_IZONE, StrongholdConstants.ANGLE_MOTOR_UP_RAMP_RATE, 
+				StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
 	
 		relay = new Relay(StrongholdConstants.SOLENOID_SHOOTER);
 	}
@@ -66,17 +75,9 @@ public class BallShooter extends Subsystem implements Runnable {
 	
 	//Shoots the ball
 	//Inputs: distance, low or high goal
-	public void setActuatorUpPID() {
-		actuator.setPID(StrongholdConstants.ANGLE_MOTOR_UP_P, StrongholdConstants.ANGLE_MOTOR_UP_I, StrongholdConstants.ANGLE_MOTOR_UP_D);
-		actuator.setF(StrongholdConstants.ANGLE_MOTOR_UP_F);
-	}
-	
-	public void setActuatorDownPID() {
-		actuator.setPID(StrongholdConstants.ANGLE_MOTOR_DOWN_P, StrongholdConstants.ANGLE_MOTOR_DOWN_I, StrongholdConstants.ANGLE_MOTOR_DOWN_D);
-		actuator.setF(StrongholdConstants.ANGLE_MOTOR_DOWN_F);
-	}
 	
 	public void shoot(StrongholdConstants.shootOptions goal) {
+		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
 		Thread shooterThread = new Thread(StrongholdRobot.shooterSubsystem);
 		shooterThread.start();
 	}
@@ -103,9 +104,11 @@ public class BallShooter extends Subsystem implements Runnable {
 	//Changes the angle of the actuator
 	private void changeAngle(double angle) {
 		//524 ticks = 0 degrees
-		actuator.set(524 + angle * 414.0 / 95.0);
+		double angleToTicks = 524 + angle * 414.0 / 95.0;
+
 	}
 	public void intake() {
+		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
 		actuator.set(600);
 		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		talonL.changeControlMode(TalonControlMode.PercentVbus);

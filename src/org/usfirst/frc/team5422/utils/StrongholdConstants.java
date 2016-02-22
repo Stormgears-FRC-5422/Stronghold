@@ -46,11 +46,17 @@ public class StrongholdConstants {
 	public static double ANGLE_MOTOR_UP_P = 40;
 	public static double ANGLE_MOTOR_UP_I = 0.005;
 	public static double ANGLE_MOTOR_UP_D = 0.2;
+	public static int ANGLE_MOTOR_UP_IZONE = 0;
+	public static double ANGLE_MOTOR_UP_RAMP_RATE = 1;
+	public static int ANGLE_MOTOR_UP_PROFILE = 1;
 	
 	public static double ANGLE_MOTOR_DOWN_F = 0;
 	public static double ANGLE_MOTOR_DOWN_P = 6.3;
 	public static double ANGLE_MOTOR_DOWN_I = 0;
 	public static double ANGLE_MOTOR_DOWN_D = 0.5;
+	public static int ANGLE_MOTOR_DOWN_IZONE = 0;
+	public static double ANGLE_MOTOR_DOWN_RAMP_RATE = 1;
+	public static int ANGLE_MOTOR_DOWN_PROFILE = 0;
 	
 	//Physical attributes
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
