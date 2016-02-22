@@ -104,12 +104,14 @@ public class BallShooter extends Subsystem implements Runnable {
 	//Changes the angle of the actuator
 	private void changeAngle(double angle) {
 		//524 ticks = 0 degrees
-		double angleToTicks = 524 + angle * 414.0 / 95.0;
-
+		double angleToTicks = 524 - angle * 414.0 / 95.0;
+		if (angleToTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
+		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
+		actuator.set(angleToTicks);
 	}
 	public void intake() {
 		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
-		actuator.set(600);
+		actuator.set(StrongholdConstants.ANGLE_MOTOR_INTAKE_POS);
 		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		talonL.changeControlMode(TalonControlMode.PercentVbus);
 		talonR.set(0.5);

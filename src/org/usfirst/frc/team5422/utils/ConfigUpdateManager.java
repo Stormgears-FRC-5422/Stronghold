@@ -50,6 +50,8 @@ public class ConfigUpdateManager {
 		StrongholdConstants.ANGLE_MOTOR_DOWN_RAMP_RATE = 0;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
 		
+		StrongholdConstants.ANGLE_MOTOR_INTAKE_POS = 0;
+		
 		StrongholdConstants.WHEEL_DIAMETER = 3.75;//inches
 		
 		StrongholdConstants.INCHES_PER_TICK = 0.001225;
@@ -107,6 +109,8 @@ public class ConfigUpdateManager {
 		StrongholdConstants.ANGLE_MOTOR_DOWN_IZONE = 0;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_RAMP_RATE = 1;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
+		
+		StrongholdConstants.ANGLE_MOTOR_INTAKE_POS = 600;
 		
 		StrongholdConstants.WHEEL_DIAMETER = 6.34;//inches
 

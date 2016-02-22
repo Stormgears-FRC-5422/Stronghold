@@ -58,6 +58,8 @@ public class StrongholdConstants {
 	public static double ANGLE_MOTOR_DOWN_RAMP_RATE = 1;
 	public static int ANGLE_MOTOR_DOWN_PROFILE = 0;
 	
+	public static int ANGLE_MOTOR_INTAKE_POS = 600;
+	
 	//Physical attributes
 	public static final int ENCODER_TICKS_RESOLUTION = 8192;//ticks
 	public static final int ENCODER_TICKS_CPR = ENCODER_TICKS_RESOLUTION / 4;
