@@ -81,6 +81,14 @@ public class BallShooter extends Subsystem implements Runnable {
 		Thread shooterThread = new Thread(StrongholdRobot.shooterSubsystem);
 		shooterThread.start();
 	}
+
+	public void setAngle(double angle) {
+		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
+	}
+
+	public double getAngle(StrongholdConstants.shootOptions goal) {
+		return calculateAngle(goal);
+	}
 	
 	//Distance given in inches
 	private double calculateAngle(StrongholdConstants.shootOptions goal) {

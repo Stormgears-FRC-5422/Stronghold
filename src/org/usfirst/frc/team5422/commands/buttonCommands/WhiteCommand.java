@@ -21,14 +21,18 @@ public class WhiteCommand extends Command {
 
         if (DSIO.ignoreJoystick) {
             //Lock onto nearest goal
-            double x = GlobalMapping.getInstance().getX();
-            double y = GlobalMapping.getInstance().getY();
+            //double x = GlobalMapping.getInstance().getX();
+            //double y = GlobalMapping.getInstance().getY();
 
-            StrongholdConstants.shootOptions bestShootOption =ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption);
+            StrongholdConstants.shootOptions bestShootOption = ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption);
 
             double theta = ShooterHelper.findHorizontalAngleToGoal(bestShootOption);
 
-            StrongholdRobot.navigatorSubsystem.driveTo(x, y, theta);
+            StrongholdRobot.navigatorSubsystem.turnTo(theta);
+
+            double shooterAngle = StrongholdRobot.shooterSubsystem.getAngle(bestShootOption);
+
+            StrongholdRobot.shooterSubsystem.setAngle(shooterAngle);
         }
     }
 
