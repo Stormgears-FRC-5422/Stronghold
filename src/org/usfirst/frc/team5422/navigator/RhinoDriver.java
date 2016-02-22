@@ -108,4 +108,12 @@ public class RhinoDriver implements Driver {
     	trapThread.resetTrapezoid();
     }
    
+    public CANTalon getDriveTalonLeftMaster() {
+    	return talon[0];
+    }
+    
+    public CANTalon getDriveTalonRightMaster() {
+    	return talon[1];
+    }
+    
 }

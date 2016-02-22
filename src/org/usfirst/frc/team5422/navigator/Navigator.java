@@ -17,7 +17,8 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
 
 
 public class Navigator extends Subsystem{
-
+	
+	private double rps =1;
 	
 	Notifier thread; 
 	
@@ -34,11 +35,17 @@ public class Navigator extends Subsystem{
 		
 		//RhinoDriver.talons[0] is right
 		//RhinoDriver.talon[1] is left
+		System.out.println("[Nav] Navigator created");
 		
-		
-		thread = new Notifier(new GlobalMapping());
+		thread = new Notifier(GlobalMapping.getInstance());
 		thread.startPeriodic(0.001);
-
+		
+		if(thread == null){
+			System.out.println("[Nav] Global Mapping Thread is NULL!");
+		}else{
+			System.out.println("[Nav] Global Mapping Thread is defined");
+		}
+		
 		GlobalMapping.resetValues(0,0,Math.PI/2);
 		
 		
@@ -74,8 +81,8 @@ public class Navigator extends Subsystem{
 	
 	private void speedWheelTicks(double rTicks, double lTicks){
 		
-		RhinoDriver.talon[0].set(Math.signum(rTicks)*0.4);
-		RhinoDriver.talon[1].set(-Math.signum(lTicks)*0.4);
+		StrongholdRobot.driver.getDriveTalonLeftMaster().set(Math.signum(rTicks)*0.4);
+		StrongholdRobot.driver.getDriveTalonLeftMaster().set(-Math.signum(lTicks)*0.4);
 		
 	}
 	
@@ -97,7 +104,7 @@ public class Navigator extends Subsystem{
 		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
 		
-		if(rTicksDest > 500){
+		if(Math.abs(rTicksDest) > 10){
 			if(moveTrapezoidal){
 				trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
 				waitForTrapezoidalFinish();
@@ -112,6 +119,7 @@ public class Navigator extends Subsystem{
 			}
 		}else{
 			System.out.println("[Nav] calculated ticks is too small, skipping trap instead");
+			System.out.println("Encoder Ticks: " + "R: " + rTicksDest + "L: " + lTicksDest);
 		}
 		
 		System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
@@ -160,7 +168,7 @@ public class Navigator extends Subsystem{
 		
 		double tickDist = targDistance/StrongholdConstants.INCHES_PER_TICK;
 		
-		if(tickDist > 500){
+		if(Math.abs(tickDist) > 10){
 			if(moveTrapezoidal){
 				trapWheelTicks(tickDist, tickDist, rps, rps, currentProfileID);
 				waitForTrapezoidalFinish();
@@ -171,6 +179,7 @@ public class Navigator extends Subsystem{
 			}
 		}else{
 			System.out.println("[Nav] calculated ticks is too small, skipping trap instead");
+			System.out.println("Encoder Ticks: " + "R: " + tickDist + "L: " + tickDist);
 		}
 		
 		System.out.println("moveByDistance Done " + Timer.getFPGATimestamp());
@@ -189,7 +198,7 @@ public class Navigator extends Subsystem{
 		
 		double targInitTheta = GlobalMapping.reduceRadiansUtil(Math.atan2(yRel, xRel));
 		
-		double rps = 3;
+		
 		
 		rotateToTheta(targInitTheta, rps, rps);
 		
@@ -205,6 +214,8 @@ public class Navigator extends Subsystem{
 	
 	public void driveTo(double xField, double yField){
 		
+		System.out.println("navigator driving to..." + xField + ":" + yField);
+		
 		double xRel = xField - GlobalMapping.getInstance().getX();
 		double yRel = yField - GlobalMapping.getInstance().getY();
 		
@@ -214,7 +225,7 @@ public class Navigator extends Subsystem{
 			targInitTheta+=2*Math.PI;
 		}
 		
-		double rps = 3;
+		
 		
 		rotateToTheta(targInitTheta, rps, rps);
 		
@@ -227,7 +238,7 @@ public class Navigator extends Subsystem{
 	public void turnTo(double thetaField){
 		System.out.println("turnTo Entered " + Timer.getFPGATimestamp());
 		
-		double rps = 3;
+		
 		
 		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
 		
@@ -242,7 +253,7 @@ public class Navigator extends Subsystem{
 		
 		double targInitTheta = GlobalMapping.reduceRadiansUtil(Math.atan2(yRel, xRel));
 		
-		double rps = 3;
+		
 		
 		rotateToTheta(targInitTheta, rps, rps);
 	}

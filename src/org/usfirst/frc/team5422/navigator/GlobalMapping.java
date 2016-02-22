@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5422.navigator;
 
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -95,8 +96,8 @@ public class GlobalMapping implements Runnable{
 	@Override
 	public void run() {
 		
-		if((RhinoDriver.talon[0]!=null) && (RhinoDriver.talon[1]!=null)){
-			updateGP(RhinoDriver.talon[1].getEncPosition(), -RhinoDriver.talon[0].getEncPosition());
+		if((StrongholdRobot.driver.getDriveTalonLeftMaster()!=null) && (StrongholdRobot.driver.getDriveTalonRightMaster()!=null)){
+			updateGP(StrongholdRobot.driver.getDriveTalonRightMaster().getEncPosition(), -StrongholdRobot.driver.getDriveTalonLeftMaster().getEncPosition());
 		}
 		
 	}

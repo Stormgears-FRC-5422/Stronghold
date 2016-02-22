@@ -98,6 +98,8 @@ public class TrapezoidThread implements Runnable{
 		generateProfiles();
 	
 		hasTrapTask = true;
+		
+		System.out.println("trap activated. ID: " + id);
 	}
 
 	private void generateProfiles() {

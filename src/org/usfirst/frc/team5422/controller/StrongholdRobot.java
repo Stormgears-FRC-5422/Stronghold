@@ -80,19 +80,19 @@ public class StrongholdRobot extends IterativeRobot {
 
     public static boolean teleopNotRunning;
 
-    public Command autonomousCommand;
+    public Command autonomousCommand = null;
     public Command liftingCommandGroup;
     
     public StrongholdRobot() {
         NetworkTable.globalDeleteAll(); //Removes unused garbage from SmartDashboard
 
-        robotPropertiesGetter = new RobotConfigurationFileReader();
-        if (robotPropertiesGetter.getRobotInUse().equals(StrongholdConstants.RHINO)) {
-            driver = new RhinoDriver();
-        }
-        else {
+//        robotPropertiesGetter = new RobotConfigurationFileReader();
+//        if (robotPropertiesGetter.getRobotInUse().equals(StrongholdConstants.RHINO)) {
+//            driver = new RhinoDriver();
+//        }
+//        else {
             driver = new StrongholdDriver();
-        }
+//        }
 
         navigatorSubsystem = new Navigator();
         shooterSubsystem = new BallShooter();
@@ -124,11 +124,9 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void autonomousInit() {
         System.out.println("auto init started.");
-
-//        DSIO.choosers.autoInitChoosers();
         
         autonomousCommand = new AutonomousCommandGroup();
-        liftingCommandGroup = new LiftingCommandGroup();
+//        liftingCommandGroup = new LiftingCommandGroup();
 
         if (autonomousCommand != null) {
             defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
@@ -145,10 +143,9 @@ public class StrongholdRobot extends IterativeRobot {
             autonomousCommand.start();
 
             //Only for testing purposes
-            liftingCommandGroup.start();
+//            liftingCommandGroup.start();
         }
         
-
         teleopNotRunning = true;
 
         //Get input from DSIO smart dashboard
@@ -182,7 +179,13 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         //Run actions based on input from button board
-        RobotController.doActionsOnButtonPress(DSIO.getButtons());
+    	
+    	int buttonID = DSIO.getButtons();
+        RobotController.doActionsOnButtonPress(buttonID);
+        
+        if (buttonID == StrongholdConstants.RED_BUTTON_ID) {
+        	
+        }
 
         //Tell the rhinoDriver what goal is best for them, and whether they are within range
         if (ShooterHelper.isInBounds()) {
