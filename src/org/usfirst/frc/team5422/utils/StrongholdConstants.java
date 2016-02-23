@@ -193,6 +193,7 @@ public class StrongholdConstants {
 	public static final double HEIGHT_TO_LOW_GOAL = 18 - SHOOTER_HEIGHT;
 	public static final int POT_TURNS = 100;
 	public static final double ACTUATOR_ANGLE_RANGE = 90;
+	public static final double TUNER_MULTIPLIER = 90.91;
 	
 	public enum shootOptions {
 		HIGH_LEFT,
