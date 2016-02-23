@@ -89,6 +89,10 @@ public class DSIO {
         return button;
     }
 
+    public double getFineTunerValue() {
+        return buttonBoard.getX();
+    }
+
     //Inputs: nothing
     //Outputs: x and y of joystick (raw) respectively
     //Linear joystick position recieving methods
