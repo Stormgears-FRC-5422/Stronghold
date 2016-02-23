@@ -290,7 +290,8 @@ public class DSIO {
     }//End method
 
     public static double getActuatorSliderValue() {
-    	return joystick.getThrottle();
+    	//return joystick.getThrottle();
+    	return buttonBoard.getX();
     }
     
 
