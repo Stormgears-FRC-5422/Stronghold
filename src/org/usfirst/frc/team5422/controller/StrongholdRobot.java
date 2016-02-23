@@ -199,13 +199,13 @@ public class StrongholdRobot extends IterativeRobot {
         }
 
         //Calculate shootOption
-        shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
+//        shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
 
         //Run the openDrive() method
         driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
 
         //Adjust actuator
-        shooterSubsystem.fineTune(dsio.getFineTunerValue());
+//        shooterSubsystem.fineTune(dsio.getFineTunerValue());
 
         //Run WPILib commands
         Scheduler.getInstance().run();
