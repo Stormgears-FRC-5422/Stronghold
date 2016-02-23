@@ -288,4 +288,10 @@ public class DSIO {
         System.out.println("Defense type " + (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected() + " at position " + position);
         return position;
     }//End method
+
+    public static double getActuatorSliderValue() {
+    	return joystick.getThrottle();
+    }
+    
+
 }

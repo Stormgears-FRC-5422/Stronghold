@@ -182,11 +182,12 @@ public class StrongholdRobot extends IterativeRobot {
     	
     	int buttonID = DSIO.getButtons();
         RobotController.doActionsOnButtonPress(buttonID);
-        
-        if (buttonID == StrongholdConstants.RED_BUTTON_ID) {
-        	
-        }
 
+        double actuatorArmSliderValue = DSIO.getActuatorSliderValue();   	
+    	SmartDashboard.putNumber("Slider Value: ", actuatorArmSliderValue);
+//    	StrongholdRobot.shooterSubsystem.changeAngle(StrongholdConstants.ACTUATOR_ARM_DOWN_ANGLE + (actuatorArmSliderValue/StrongholdConstants.ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR));
+    	StrongholdRobot.shooterSubsystem.changeAngle(actuatorArmSliderValue);
+        
         //Tell the rhinoDriver what goal is best for them, and whether they are within range
         if (ShooterHelper.isInBounds()) {
             System.out.println("within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");

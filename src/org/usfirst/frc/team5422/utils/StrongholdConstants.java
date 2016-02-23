@@ -13,10 +13,10 @@ public class StrongholdConstants {
 	public static final String RHINO = "rhino";
 	public static final String STRONGHOLD = "stronghold";
 
-	public static double SHOOTER_F = 0;
-	public static double SHOOTER_P = 0.02;
+	public static double SHOOTER_F = 1.705;
+	public static double SHOOTER_P = 0.000185;
 	public static double SHOOTER_I = 0;
-	public static double SHOOTER_D = 1.65;
+	public static double SHOOTER_D = 0;
 	
 	public static double WHEEL_BASE = 23.0;//inches	
 	
@@ -188,12 +188,33 @@ public class StrongholdConstants {
 	}
 
 	public static final double SHOOT_DELAY = 1;
+	public static final double SHOOT_DELAY1 = 3;
+	public static final double SHOOT_DELAY2 = 1;
 	public static final double SHOOTER_HEIGHT = 10.5;
 	public static final double HEIGHT_TO_HIGH_GOAL = 97 - SHOOTER_HEIGHT;
 	public static final double HEIGHT_TO_LOW_GOAL = 18 - SHOOTER_HEIGHT;
 	public static final int POT_TURNS = 100;
 	public static final double ACTUATOR_ANGLE_RANGE = 90;
 	public static final double TUNER_MULTIPLIER = 90.91;
+	
+	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
+	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
+	public static final double ACTUATOR_ARM_SLIDER_MIN = -1;
+	public static final double ACTUATOR_ARM_SLIDER_MAX = 1;
+
+	public static final double ACTUATOR_ARM_POT_OPT_UP = 280;
+	public static final double ACTUATOR_ARM_POT_OPT_DOWN = 610; //all the way down on the floor
+	public static final double ACTUATOR_ARM_SLIDER_OPT_MIN = -0.625;
+	public static final double ACTUATOR_ARM_SLIDER_OPT_MAX = 1;
+
+	public static final double ACTUATOR_ARM_SLIDER_RANGE = Math.abs(ACTUATOR_ARM_SLIDER_MAX - ACTUATOR_ARM_SLIDER_MIN);	
+	public static final double ACTUATOR_ARM_POT_RANGE = Math.abs(ACTUATOR_ARM_DOWN_POT_FULLRANGE - ACTUATOR_ARM_UP_POT_FULLRANGE);
+	public static final double ACTUATOR_ARM_SLIDER_TO_POT_CONVERSION_FACTOR = ACTUATOR_ARM_POT_RANGE/ACTUATOR_ARM_SLIDER_RANGE;
+
+//	public static final double ACTUATOR_ARM_UP_ANGLE = 73;//degrees
+//	public static final double ACTUATOR_ARM_DOWN_ANGLE = -22;//degrees
+//	public static final double ACTUATOR_ARM_ANGLE_RANGE = Math.abs(ACTUATOR_ARM_DOWN_ANGLE - ACTUATOR_ARM_UP_ANGLE);//degrees
+//	public static final double ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR = ACTUATOR_ARM_SLIDER_RANGE/ACTUATOR_ARM_ANGLE_RANGE;
 	
 	public enum shootOptions {
 		HIGH_LEFT,
