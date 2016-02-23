@@ -197,8 +197,14 @@ public class StrongholdRobot extends IterativeRobot {
             SmartDashboard.putString("You are", " out of bounds.");
         }
 
+        //Calculate shootOption
+        shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
+
         //Run the openDrive() method
         driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
+
+        //Adjust actuator
+        shooterSubsystem.fineTune(dsio.getFineTunerValue());
 
         //Run WPILib commands
         Scheduler.getInstance().run();

@@ -82,12 +82,17 @@ public class BallShooter extends Subsystem implements Runnable {
 		shooterThread.start();
 	}
 
-	public void setAngle(double angle) {
-		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
-	}
-
 	public double getAngle(StrongholdConstants.shootOptions goal) {
 		return calculateAngle(goal);
+	}
+
+	public void fineTune(double sliderValue) {
+		sliderValue -= 0.008;
+
+		double adjustment = sliderValue * StrongholdConstants.TUNER_MULTIPLIER;
+
+		//Adjust actuator
+		changeAngle(calculateAngle(StrongholdRobot.shootOptionSelected));
 	}
 	
 	//Distance given in inches
@@ -110,7 +115,7 @@ public class BallShooter extends Subsystem implements Runnable {
 	}
 	
 	//Changes the angle of the actuator
-	private void changeAngle(double angle) {
+	public void changeAngle(double angle) {
 		//524 ticks = 0 degrees
 		double angleToTicks = 524 - angle * 414.0 / 95.0;
 		if (angleToTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);

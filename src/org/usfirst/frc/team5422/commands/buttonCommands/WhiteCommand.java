@@ -32,7 +32,7 @@ public class WhiteCommand extends Command {
 
             double shooterAngle = StrongholdRobot.shooterSubsystem.getAngle(bestShootOption);
 
-            StrongholdRobot.shooterSubsystem.setAngle(shooterAngle);
+            StrongholdRobot.shooterSubsystem.changeAngle(shooterAngle);
         }
     }
 
