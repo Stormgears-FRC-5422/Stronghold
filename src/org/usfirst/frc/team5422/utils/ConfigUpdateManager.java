@@ -74,8 +74,8 @@ public class ConfigUpdateManager {
 		StrongholdConstants.TRAP_I = 0;
 		StrongholdConstants.TRAP_D = 0.575;
 
-		StrongholdConstants.OPEN_DRIVE_F = 0;
-		StrongholdConstants.OPEN_DRIVE_P = 0.55;
+		StrongholdConstants.OPEN_DRIVE_F = 1.705;
+		StrongholdConstants.OPEN_DRIVE_P = 0.000185;
 		StrongholdConstants.OPEN_DRIVE_I = 0;
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 
