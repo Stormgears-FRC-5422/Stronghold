@@ -13,8 +13,8 @@ public class StrongholdConstants {
 	public static final String RHINO = "rhino";
 	public static final String STRONGHOLD = "stronghold";
 
-	public static double SHOOTER_F = 1.705;
-	public static double SHOOTER_P = 0.000185;
+	public static double SHOOTER_F = 10;
+	public static double SHOOTER_P = 0;
 	public static double SHOOTER_I = 0;
 	public static double SHOOTER_D = 0;
 	
@@ -188,8 +188,8 @@ public class StrongholdConstants {
 	}
 
 	public static final double SHOOT_DELAY = 1;
-	public static final double SHOOT_DELAY1 = 3;
-	public static final double SHOOT_DELAY2 = 1;
+	public static final double SHOOT_DELAY1 = 1;
+	public static final double SHOOT_DELAY2 = 2;
 	public static final double SHOOTER_HEIGHT = 10.5;
 	public static final double HEIGHT_TO_HIGH_GOAL = 97 - SHOOTER_HEIGHT;
 	public static final double HEIGHT_TO_LOW_GOAL = 18 - SHOOTER_HEIGHT;

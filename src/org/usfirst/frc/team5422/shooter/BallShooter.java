@@ -171,14 +171,28 @@ public class BallShooter extends Subsystem implements Runnable {
 //		changeAngle(calculateAngle(distance, goal)); 
 		
 		double speed = 1; //calculateSpeed();
+		boolean full_speed = false;
 
 		//Direction of motor to be found out
 		//P, I, D, F--->  0.02, 0, 1.65, 0
 //		talonR.set(-speed); //* StrongholdConstants.VEL_PER_100MS
 //		talonL.set(speed);
+//		talonR.set(-6248); //* StrongholdConstants.VEL_PER_10MS
+//		talonL.set(6248); //0.762745
 
-		talonR.set(-6248); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(6248); //0.762745
+		talonR.set(-200); //* StrongholdConstants.VEL_PER_10MS
+		talonL.set(200); //8465
+		
+		while (full_speed == false) {
+ //0.762745
+			SmartDashboard.putNumber("Shooter Right Motor Encoder Velocity: ", talonR.getEncVelocity());
+			SmartDashboard.putNumber("Shooter LEft Motor Encoder Velocity: ", talonL.getEncVelocity());
+			
+			if (Math.abs(talonR.getEncVelocity()) >= 50000 && Math.abs(talonL.getEncVelocity()) >= 50000) {
+				full_speed = true;
+			}
+		}
+		
 
 		Timer.delay(StrongholdConstants.SHOOT_DELAY1);
 		
