@@ -79,8 +79,8 @@ public class ConfigUpdateManager {
 		StrongholdConstants.OPEN_DRIVE_I = 0;
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 
-		StrongholdConstants.SHOOTER_F = 1.705;
-		StrongholdConstants.SHOOTER_P = 0.000185;
+		StrongholdConstants.SHOOTER_F = 10;
+		StrongholdConstants.SHOOTER_P = 0;
 		StrongholdConstants.SHOOTER_I = 0;
 		StrongholdConstants.SHOOTER_D = 0;
 		

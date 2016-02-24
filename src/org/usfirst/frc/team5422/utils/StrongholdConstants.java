@@ -188,7 +188,7 @@ public class StrongholdConstants {
 	}
 
 	public static final double SHOOT_DELAY = 1;
-	public static final double SHOOT_DELAY1 = 1;
+	public static final double SHOOT_DELAY1 = 0.5;
 	public static final double SHOOT_DELAY2 = 2;
 	public static final double SHOOTER_HEIGHT = 10.5;
 	public static final double HEIGHT_TO_HIGH_GOAL = 97 - SHOOTER_HEIGHT;
