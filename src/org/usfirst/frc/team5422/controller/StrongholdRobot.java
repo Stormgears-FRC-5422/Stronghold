@@ -62,7 +62,7 @@ public class StrongholdRobot extends IterativeRobot {
     public static RobotConfigurationFileReader robotPropertiesGetter;
 
     public static DSIO dsio;
-    public static Driver driver;
+    public static DriverInterface driver;
 
     public static defenseTypeOptions defenseTypeSelected;
     public static int defensePositionSelected;
