@@ -29,6 +29,7 @@ public class BallShooter extends Subsystem implements Runnable {
 	CANTalon talonR;
 	CANTalon actuator;
 	Relay relay;
+	double speedMultiplier;
 	
 	public BallShooter() {
 		talonL = new CANTalon(StrongholdConstants.TALON_LEFT_SHOOTER);
@@ -97,6 +98,17 @@ public class BallShooter extends Subsystem implements Runnable {
 		changeAngle(calculateAngle(StrongholdRobot.shootOptionSelected));
 	}
 	
+	public void setSpeedMultiplier(double sliderVal) {
+		speedMultiplier = (sliderVal + 1) / 2;
+	}
+	
+	public double fineTuneSpeed(double multiplier) {
+
+		double speed = (multiplier + 1)/2;
+		
+		return speed;
+	}
+	
 	//Distance given in inches
 	private double calculateAngle(StrongholdConstants.shootOptions goal) {
 		double angle;
@@ -135,7 +147,6 @@ public class BallShooter extends Subsystem implements Runnable {
 
 		SmartDashboard.putNumber("pot value: ", actuator.getPosition());
 		
-		
 		//524 ticks = 0 degrees
 //		double angleToTicks = 524 - angle * 414.0 / 95.0;
 //		
@@ -170,9 +181,10 @@ public class BallShooter extends Subsystem implements Runnable {
 		//206 = max     73 degrees
 //		changeAngle(calculateAngle(distance, goal)); 
 		
-		double speed = 1; //calculateSpeed();
 		boolean full_speed = false;
 
+		double speed = speedMultiplier; //* max vel
+		
 		//Direction of motor to be found out
 		//P, I, D, F--->  0.02, 0, 1.65, 0
 //		talonR.set(-speed); //* StrongholdConstants.VEL_PER_100MS
@@ -180,8 +192,8 @@ public class BallShooter extends Subsystem implements Runnable {
 //		talonR.set(-6248); //* StrongholdConstants.VEL_PER_10MS
 //		talonL.set(6248); //0.762745
 
-		talonR.set(-200); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(200); //8465
+		talonR.set(-speed); //* StrongholdConstants.VEL_PER_10MS
+		talonL.set(speed); //8465
 		
 		while (full_speed == false) {
  //0.762745

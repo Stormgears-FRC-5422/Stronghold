@@ -183,6 +183,7 @@ public class StrongholdRobot extends IterativeRobot {
     	int buttonID = DSIO.getButtons();
         RobotController.doActionsOnButtonPress(buttonID);
 
+        double speedSliderVal = DSIO.getSpeedSlider2Value();
         double actuatorArmSliderValue = DSIO.getActuatorSliderValue();   	
     	SmartDashboard.putNumber("Slider Value: ", actuatorArmSliderValue);
 //    	StrongholdRobot.shooterSubsystem.changeAngle(StrongholdConstants.ACTUATOR_ARM_DOWN_ANGLE + (actuatorArmSliderValue/StrongholdConstants.ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR));
