@@ -4,10 +4,9 @@ package org.usfirst.frc.team5422.controller;
  * @author suren
  */
 
+import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.commands.CrossDefenseCommand;
-import org.usfirst.frc.team5422.commands.buttonCommands.BigBlueCommand;
-import org.usfirst.frc.team5422.commands.buttonCommands.OrangeSwitchCommand;
-import org.usfirst.frc.team5422.commands.buttonCommands.WhiteCommand;
+import org.usfirst.frc.team5422.commands.buttonCommands.*;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
@@ -85,5 +84,13 @@ public class RobotController {
                 cross0.start();
                 break;
         }
+    }
+
+    public static void doActionsOnSliderPositions() {
+        AngleSliderCommand angle = new AngleSliderCommand();
+        SpeedSliderCommand speed = new SpeedSliderCommand();
+
+        angle.start();
+        speed.start();
     }
 }

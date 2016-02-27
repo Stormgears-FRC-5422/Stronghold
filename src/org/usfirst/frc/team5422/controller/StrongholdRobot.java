@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
 import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
-import org.usfirst.frc.team5422.commands.LiftingCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
 import org.usfirst.frc.team5422.navigator.*;
@@ -25,12 +24,6 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.alliance;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Properties;
 
 /**
  * This is a demo program showing the use of the RobotDrive class.
@@ -86,13 +79,13 @@ public class StrongholdRobot extends IterativeRobot {
     public StrongholdRobot() {
         NetworkTable.globalDeleteAll(); //Removes unused garbage from SmartDashboard
 
-//        robotPropertiesGetter = new RobotConfigurationFileReader();
-//        if (robotPropertiesGetter.getRobotInUse().equals(StrongholdConstants.RHINO)) {
-//            driver = new RhinoDriver();
-//        }
-//        else {
+        robotPropertiesGetter = new RobotConfigurationFileReader();
+        if (robotPropertiesGetter.getRobotInUse().equals(StrongholdConstants.RHINO)) {
+            driver = new RhinoDriver();
+        }
+        else {
             driver = new StrongholdDriver();
-//        }
+        }
 
         navigatorSubsystem = new Navigator();
         shooterSubsystem = new BallShooter();
@@ -143,7 +136,7 @@ public class StrongholdRobot extends IterativeRobot {
             autonomousCommand.start();
 
             //Only for testing purposes
-//            liftingCommandGroup.start();
+            //liftingCommandGroup.start();
         }
         
         teleopNotRunning = true;
@@ -179,16 +172,13 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         //Run actions based on input from button board
-    	
     	int buttonID = DSIO.getButtons();
         RobotController.doActionsOnButtonPress(buttonID);
+        RobotController.doActionsOnSliderPositions();
 
-        double speedSliderVal = DSIO.getSpeedSlider2Value();
-        double actuatorArmSliderValue = DSIO.getActuatorSliderValue();   	
-    	SmartDashboard.putNumber("Slider Value: ", actuatorArmSliderValue);
-//    	StrongholdRobot.shooterSubsystem.changeAngle(StrongholdConstants.ACTUATOR_ARM_DOWN_ANGLE + (actuatorArmSliderValue/StrongholdConstants.ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR));
-    	StrongholdRobot.shooterSubsystem.changeAngle(actuatorArmSliderValue);
-        
+        //TODO get rid of this comment
+    	//StrongholdRobot.shooterSubsystem.changeAngle(StrongholdConstants.ACTUATOR_ARM_DOWN_ANGLE + (actuatorArmSliderValue/StrongholdConstants.ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR));
+
         //Tell the rhinoDriver what goal is best for them, and whether they are within range
         if (ShooterHelper.isInBounds()) {
             System.out.println("within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
@@ -200,13 +190,13 @@ public class StrongholdRobot extends IterativeRobot {
         }
 
         //Calculate shootOption
-//        shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
+        shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
 
         //Run the openDrive() method
         driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
 
         //Adjust actuator
-//        shooterSubsystem.fineTune(dsio.getFineTunerValue());
+        shooterSubsystem.fineTune(dsio.getAngleSliderValue());
 
         //Run WPILib commands
         Scheduler.getInstance().run();

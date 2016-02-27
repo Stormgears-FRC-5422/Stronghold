@@ -19,7 +19,7 @@ public class BigBlueCommand extends Command {
     protected void execute() {
         StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.shootOptions.HIGH_CENTER);
         DSIO.shooterRunning = true;
-        DSIO.ignoreJoystick = false;
+        DSIO.assistShoot = false;
     }
 
     @Override

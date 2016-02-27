@@ -23,7 +23,7 @@ public class DSIO {
     static Joystick joystick;
     public static StrongholdConstants.shootHeightOptions teleopShootHeightOption;
     public static Joystick buttonBoard;
-    public static boolean shooterRunning = false, ignoreJoystick = false;
+    public static boolean shooterRunning = false, assistShoot = true;
 
     public static int pos[] = new int[5];
 
@@ -60,12 +60,12 @@ public class DSIO {
 
         //Red switch (enables/disables joystick depending on positions
         if (buttonBoard.getRawButton(StrongholdConstants.RED_SWITCH_ID)) {
-            ignoreJoystick = true;
-            SmartDashboard.putString("JOYSTICK:", " OFF");
+            assistShoot = true;
+            SmartDashboard.putString("ASSIST SHOOTING:", " ON");
         }
         else {
-            ignoreJoystick = false;
-            SmartDashboard.putString("JOYSTICK: ", " ON");
+            assistShoot = false;
+            SmartDashboard.putString("ASSIST SHOOTING: ", " OFF");
         }
 
         //Lock button
@@ -93,8 +93,14 @@ public class DSIO {
         return button;
     }
 
-    public double getFineTunerValue() {
+    @Deprecated
+    public double getAngleSliderValue() {
         return buttonBoard.getX();
+    }
+
+    @Deprecated
+    public double getSpeedSliderValue () {
+        return buttonBoard.getY();
     }
 
     //Inputs: nothing
@@ -106,7 +112,7 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
 
-        if (!ignoreJoystick) xPos = 0;
+        if (!assistShoot) xPos = 0;
         return xPos;
     }
 
@@ -116,7 +122,7 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
-        if (!ignoreJoystick) yPos = 0;
+        if (!assistShoot) yPos = 0;
         return yPos;
     }
 
@@ -148,7 +154,7 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (xPosAvg >= -0.2 & xPosAvg <= 0.2) xPosAvg = 0;
 
-        if (!ignoreJoystick) xPosAvg = 0;
+        if (!assistShoot) xPosAvg = 0;
         return xPosAvg;
     }
 
@@ -176,7 +182,7 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (yPosAvg >= -0.2 & yPosAvg <= 0.2) yPosAvg = 0;
 
-        if (!ignoreJoystick) yPosAvg = 0;
+        if (!assistShoot) yPosAvg = 0;
         return yPosAvg;
     }
 
@@ -198,7 +204,7 @@ public class DSIO {
         if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
         if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
-        if (!ignoreJoystick) xFinal = 0;
+        if (!assistShoot) xFinal = 0;
         return xFinal;
     }
 
@@ -216,7 +222,7 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
-        if (!ignoreJoystick) yFinal = 0;
+        if (!assistShoot) yFinal = 0;
         return yFinal;
     }
 
