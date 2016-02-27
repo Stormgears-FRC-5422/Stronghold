@@ -9,10 +9,10 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants;
 /**
  * @author Michael
  */
-public class WhiteCommand extends Command {
+public class SmallBlueCommand extends Command {
     @Override
     protected void initialize() {
-        System.out.println("Initializing button command for: White Button");
+        System.out.println("Initializing button command for: Small Blue Button");
     }
 
     @Override
@@ -21,7 +21,7 @@ public class WhiteCommand extends Command {
         if (DSIO.assistShoot) {
             //Lock onto nearest goal
             //double x = GlobalMapping.getInstance().getX();
-            //double y = GlobalMapping.getInstance().getY();.
+            //double y = GlobalMapping.getInstance().getY();
 
             StrongholdConstants.shootOptions bestShootOption = ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption);
 

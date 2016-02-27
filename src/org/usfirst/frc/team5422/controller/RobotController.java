@@ -24,64 +24,38 @@ public class RobotController {
                 break;
 
             case StrongholdConstants.WHITE_BUTTON_ID:
-                //Lock-onto-goal button
-                WhiteCommand white = new WhiteCommand();
-                white.start();
+                //Nothing yet
                 break;
 
             case StrongholdConstants.RED_BUTTON_ID:
-                //Cross defense 1.
-                StrongholdRobot.defensePositionSelected = 1;
-                StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(1);
-                StrongholdRobot.shootOptionSelected = StrongholdConstants.shootOptions.NONE;
-
-                CrossDefenseCommand cross1 = new CrossDefenseCommand();
-
-                cross1.start();
+                //Not used with java code
                 break;
 
             case StrongholdConstants.YELLOW_BUTTON_ID:
-                //Cross defense 2
-                StrongholdRobot.defensePositionSelected = 2;
-                StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(2);
-                StrongholdRobot.shootOptionSelected = StrongholdConstants.shootOptions.NONE;
-
-                CrossDefenseCommand cross2 = new CrossDefenseCommand();
-
-                cross2.start();
+                //Not used with java code
                 break;
 
             case StrongholdConstants.GREEN_BUTTON_ID:
-                //Cross defense 3
-                StrongholdRobot.defensePositionSelected = 3;
-                StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(3);
-                StrongholdRobot.shootOptionSelected = StrongholdConstants.shootOptions.NONE;
+                //Cross defense
+                int position = DSIO.getSelectedDefensePosition();
 
-                CrossDefenseCommand cross3 = new CrossDefenseCommand();
+                StrongholdRobot.defensePositionSelected = position;
+                StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(position);
 
-                cross3.start();
+                CrossDefenseCommand cross = new CrossDefenseCommand();
+
+                cross.start();
                 break;
 
             case StrongholdConstants.BLUE_BUTTON_ID:
-                //Cross defense 4
-                StrongholdRobot.defensePositionSelected = 4;
-                StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(4);
-                StrongholdRobot.shootOptionSelected = StrongholdConstants.shootOptions.NONE;
+                //Lock onto goal
+                SmallBlueCommand blue = new SmallBlueCommand();
 
-                CrossDefenseCommand cross4 = new CrossDefenseCommand();
-
-                cross4.start();
+                blue.start();
                 break;
 
             case StrongholdConstants.BLACK_BUTTON_ID:
-                //Cross defense 0
-                StrongholdRobot.defensePositionSelected = 0;
-                StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(0);
-                StrongholdRobot.shootOptionSelected = StrongholdConstants.shootOptions.NONE;
-
-                CrossDefenseCommand cross0 = new CrossDefenseCommand();
-
-                cross0.start();
+                //Nothing yet
                 break;
         }
     }
