@@ -2,15 +2,17 @@ package org.usfirst.frc.team5422.navigator;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
+import org.usfirst.frc.team5422.utils.ConfigureRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
-public class Driver implements DriverInterface {
+public abstract class Driver implements DriverInterface {
 
     protected static CANTalon masterTalon[] = new CANTalon[2];
     protected TrapezoidThread trapThread;
+	public ConfigureRobot configureRobot;
  
 	public Driver() {
 		// TODO Auto-generated constructor stub
