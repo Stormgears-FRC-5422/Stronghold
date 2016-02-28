@@ -30,7 +30,6 @@ public class DefenseManeuver implements Runnable{
 	
 	private static int stage = 1;
 	private static int nStages = 4;
-	private static boolean exitRight;
 	
 	public static boolean isLastStage(){
 		return stage == nStages;
@@ -40,7 +39,7 @@ public class DefenseManeuver implements Runnable{
 	private static double defensePassableWidth = 4*12;
 	
 	private static double robotWidth = -1;
-	private static double defenseWidth = -1;
+	private static double defenseLength = -1;
 	private static double sensorToRobotMiddleY= -1;
 	
 	private static DefenseManeuver instance;
@@ -103,10 +102,10 @@ public class DefenseManeuver implements Runnable{
 			//everything is okay
 		}else if(rightUltraInRange){
 			//calculate what left space would actually be
-			leftSpace  = defenseWidth/Math.cos(latestLocalTheta) - (rightSpace + robotWidth);
+			leftSpace  = defenseLength/Math.cos(latestLocalTheta) - (rightSpace + robotWidth);
 		}else if(leftUltraInRange){
 			namedPrint("something's wrong");
-			rightSpace  = defenseWidth/Math.cos(latestLocalTheta) - (leftSpace + robotWidth);
+			rightSpace  = defenseLength/Math.cos(latestLocalTheta) - (leftSpace + robotWidth);
 		}
 		
 		if(rightUltraInRange && leftUltraInRange){

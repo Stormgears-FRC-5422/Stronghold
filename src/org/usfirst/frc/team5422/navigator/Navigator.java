@@ -63,8 +63,6 @@ public class Navigator extends Subsystem{
 	
 	private synchronized static void stopDefenseCrossManeuver(){
 		
-		DefenseManeuver instance = DefenseManeuver.getInstance();
-		
 		defenseManeuverThread.stop();
 		
 		System.out.println("[Nav] stopped cross Maneuver");
