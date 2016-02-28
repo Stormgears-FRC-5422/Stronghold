@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5422.utils;
 
-public class ConfigureStrongholdRobot extends ConfigureRobot {
+public class StrongholdRobotConfigurationManager extends RobotConfigurationManager {
 
-	public ConfigureStrongholdRobot() {
+	public StrongholdRobotConfigurationManager() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -2,7 +2,7 @@ package org.usfirst.frc.team5422.navigator;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
-import org.usfirst.frc.team5422.utils.ConfigureRobot;
+import org.usfirst.frc.team5422.utils.RobotConfigurationManager;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -12,7 +12,7 @@ public abstract class Driver implements DriverInterface {
 
     protected static CANTalon masterTalon[] = new CANTalon[2];
     protected TrapezoidThread trapThread;
-	public ConfigureRobot configureRobot;
+	public RobotConfigurationManager configureRobot;
  
 	public Driver() {
 		// TODO Auto-generated constructor stub
@@ -65,12 +65,12 @@ public abstract class Driver implements DriverInterface {
         DSIO.outputToSFX("velocityRight", velocityRight);
 
         //Current being put through the talons
-        DSIO.outputToSFX("Talon ID 3 Current (Right)", masterTalon[0].getOutputCurrent());
-        DSIO.outputToSFX("Talon ID 0 Current (Right)", masterTalon[1].getOutputCurrent());
+        DSIO.outputToSFX("Left Master Talon Output Current: ", masterTalon[0].getOutputCurrent());
+        DSIO.outputToSFX("Right Master Talon Output Current: ", masterTalon[1].getOutputCurrent());
 
         //Talon speeds
-        DSIO.outputToSFX("Talon ID 3 Velocity (Right)", masterTalon[0].getSpeed());
-        DSIO.outputToSFX("Talon ID 0 Velocity (Right)", masterTalon[1].getSpeed());
+        DSIO.outputToSFX("Left Master Talon Speed: ", masterTalon[0].getSpeed());
+        DSIO.outputToSFX("Right Master Talon Speed: ", masterTalon[1].getSpeed());
     }
 
     @Override

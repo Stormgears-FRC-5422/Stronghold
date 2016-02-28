@@ -2,9 +2,9 @@ package org.usfirst.frc.team5422.navigator;
 
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
-import org.usfirst.frc.team5422.utils.ConfigureRhinoRobot;
-import org.usfirst.frc.team5422.utils.ConfigureRobot;
-import org.usfirst.frc.team5422.utils.ConfigureStrongholdRobot;
+import org.usfirst.frc.team5422.utils.RhinoRobotConfigurationManager;
+import org.usfirst.frc.team5422.utils.RobotConfigurationManager;
+import org.usfirst.frc.team5422.utils.StrongholdRobotConfigurationManager;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -20,7 +20,7 @@ public class StrongholdDriver extends Driver {
 
     //Constructor
     public StrongholdDriver() {
-        configureRobot = new ConfigureStrongholdRobot();
+        configureRobot = new StrongholdRobotConfigurationManager();
         configureRobot.configure();
 
         //Declare talons

@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5422.utils;
 
-public class ConfigureRhinoRobot extends ConfigureRobot {
+public class RhinoRobotConfigurationManager extends RobotConfigurationManager {
 
-	public ConfigureRhinoRobot() {
+	public RhinoRobotConfigurationManager() {
 		// TODO Auto-generated constructor stub
 	}
 	
