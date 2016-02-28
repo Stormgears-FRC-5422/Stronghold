@@ -52,6 +52,7 @@ public class DSIO {
             teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
         }
 
+        //Intake switch
         if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID)) {
             button = StrongholdConstants.ORANGE_SWITCH_ID;
         } else if (!shooterRunning) {
@@ -69,25 +70,14 @@ public class DSIO {
         }
 
         //Lock button
-        if (buttonBoard.getRawButton(StrongholdConstants.WHITE_BUTTON_ID)) {
+        if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
            button = StrongholdConstants.WHITE_BUTTON_ID;
         }
 
-        //5 defense buttons
-        else if (buttonBoard.getRawButton(StrongholdConstants.RED_BUTTON_ID)) {
-            button = StrongholdConstants.RED_BUTTON_ID;
-        }
-        else if (buttonBoard.getRawButton(StrongholdConstants.YELLOW_BUTTON_ID)) {
-            button = StrongholdConstants.YELLOW_BUTTON_ID;
-        }
+        //Defense button
         else if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID)) {
             button = StrongholdConstants.GREEN_BUTTON_ID;
-        }
-        else if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
-            button = StrongholdConstants.BLUE_BUTTON_ID;
-        }
-        else if (buttonBoard.getRawButton(StrongholdConstants.BLACK_BUTTON_ID)) {
-            button = StrongholdConstants.BLACK_BUTTON_ID;
+
         }
 
         return button;
