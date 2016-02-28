@@ -6,7 +6,6 @@ import org.usfirst.frc.team5422.utils.RobotConfigurationManager;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 public abstract class Driver implements DriverInterface {
 

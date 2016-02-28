@@ -1,9 +1,7 @@
 package org.usfirst.frc.team5422.navigator;
 
-import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
 import org.usfirst.frc.team5422.utils.RhinoRobotConfigurationManager;
-import org.usfirst.frc.team5422.utils.RobotConfigurationManager;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;

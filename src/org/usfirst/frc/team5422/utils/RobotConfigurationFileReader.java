@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5422.utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
