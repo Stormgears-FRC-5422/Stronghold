@@ -35,7 +35,7 @@ public class Navigator extends Subsystem{
 	
 	public Navigator(){
 		
-		DefenseManeuver.updateDefenseManeuver();
+		DefenseManeuver.getInstance().updateDefenseManeuver();
 		
 		//right is RhinoDriver.talon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder); [0]
 		//left is RhinoDriver.talon[1].setFeedbackDevice(FeedbackDevice.QuadEncoder); [1]
@@ -61,7 +61,7 @@ public class Navigator extends Subsystem{
 		System.out.println("[Nav] started cross Maneuver");
 	}
 	
-	private synchronized static void stopDefenseCrossManeuver(){
+	public synchronized static void stopDefenseCrossManeuver(){
 		
 		defenseManeuverThread.stop();
 		

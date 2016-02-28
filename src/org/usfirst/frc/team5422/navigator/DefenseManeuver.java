@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5422.navigator;
 
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
+
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
@@ -36,11 +38,12 @@ public class DefenseManeuver implements Runnable{
 	}
 	
 	/**Is the passable width of any defense (between shields) in inches*/
-	private static double defensePassableWidth = 4*12;
+	private static double defensePassableLength = StrongholdConstants.DEFENSE_PASSABLE_LENGTH;
+	private static double defenseWidth = StrongholdConstants.DEFENSE_WIDTH;
+	private static double defenseMiddlePosY = (double)StrongholdConstants.POSITION_DEFENSE_0_REACH[1];
 	
-	private static double robotWidth = -1;
-	private static double defenseLength = -1;
-	private static double sensorToRobotMiddleY= -1;
+	private static double robotWidth = StrongholdConstants.ROBOT_WIDTH;
+	private static double sensorToRobotMiddleY= StrongholdConstants.SIDE_ULTRA_SENSOR_TO_ROBOT_MIDDLE_Y;
 	
 	private static DefenseManeuver instance;
 	
@@ -54,12 +57,28 @@ public class DefenseManeuver implements Runnable{
 	
 	public void repositionAtEndDefense(){
 		
-		//choose discrete y position for end of defense
+		//discrete y position for end of defense
+		
+		GlobalMapping.getInstance().setY(defenseMiddlePosY + defenseWidth/2);
 		
 		//find x position based on latest ultrasound value
 		
+		double fieldX = GlobalMapping.getInstance().getX();//find current defense by position
 		
-		double fieldX = -1;//find defenseX
+		int vals[] = {
+				StrongholdConstants.POSITION_DEFENSE_0_REACH[0],
+				StrongholdConstants.POSITION_DEFENSE_1_REACH[0],
+				StrongholdConstants.POSITION_DEFENSE_2_REACH[0],
+				StrongholdConstants.POSITION_DEFENSE_3_REACH[0],
+				StrongholdConstants.POSITION_DEFENSE_4_REACH[0]
+		};
+		
+		for(int i=0, n=vals.length;i<n;i+=1){
+			if(fieldX - vals[i] < 0){
+				fieldX = vals[i-1];
+				break;
+			}
+		}
 		
 		if(0 <= latestTheta && latestTheta < Math.PI ){//if going to enemy castle
 			fieldX += latestLocalX;
@@ -76,7 +95,7 @@ public class DefenseManeuver implements Runnable{
 	 * this is called through a notifier (by <code>Navigator</code>) when going through a defense is anticipated.
 	 */
 	
-	public synchronized static void updateDefenseManeuver(){
+	public synchronized void updateDefenseManeuver(){
 		
 		double leftSpace  =(double)ultraTable.getNumber("Left", 0);//gives ints
 		
@@ -102,15 +121,16 @@ public class DefenseManeuver implements Runnable{
 			//everything is okay
 		}else if(rightUltraInRange){
 			//calculate what left space would actually be
-			leftSpace  = defenseLength/Math.cos(latestLocalTheta) - (rightSpace + robotWidth);
+			leftSpace  = defensePassableLength/Math.cos(latestLocalTheta) - (rightSpace + robotWidth);
 		}else if(leftUltraInRange){
-			namedPrint("something's wrong");
-			rightSpace  = defenseLength/Math.cos(latestLocalTheta) - (leftSpace + robotWidth);
+			rightSpace  = defensePassableLength/Math.cos(latestLocalTheta) - (leftSpace + robotWidth);
+		}else{
+			namedPrint("something's wrong with Ultrasound ranges");
 		}
 		
 		if(rightUltraInRange && leftUltraInRange){
 			
-			double partError = Math.abs(leftSpace + rightSpace + robotWidth - defensePassableWidth)/(defensePassableWidth);
+			double partError = Math.abs(leftSpace + rightSpace + robotWidth - defensePassableLength)/(defensePassableLength);
 			
 			if(partError < 0.1){//is completely on ramp
 				

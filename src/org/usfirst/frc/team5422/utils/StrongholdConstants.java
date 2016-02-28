@@ -67,6 +67,11 @@ public class StrongholdConstants {
 	//Rabbot Drive specifications
 	public static final double GEAR_RATIO = 1;
 	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
+	public static double ROBOT_WIDTH = 24;
+	public static double SIDE_ULTRA_SENSOR_TO_ROBOT_MIDDLE_Y = 16;
+	
+	public static final double DEFENSE_WIDTH = 24 + 3/(Math.tan(13.5*Math.PI/180));
+	public static final double DEFENSE_PASSABLE_LENGTH = 4*12 + 2;
 
     //Rhino Drive Specifications
 //	public static final double WHEEL_BASE = 25;//inches or 24.75 inches

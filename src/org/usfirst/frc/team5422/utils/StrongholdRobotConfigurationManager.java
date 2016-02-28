@@ -8,6 +8,9 @@ public class StrongholdRobotConfigurationManager extends RobotConfigurationManag
 
 	public void configure() {
 		StrongholdConstants.WHEEL_BASE = 23.0;
+		StrongholdConstants.WHEEL_DIAMETER = 6.34;
+		StrongholdConstants.SIDE_ULTRA_SENSOR_TO_ROBOT_MIDDLE_Y = 11.5;
+		StrongholdConstants.ROBOT_WIDTH = 25;
 		
 		StrongholdConstants.TALON_ACTUATOR = 5;
 		StrongholdConstants.TALON_LEFT_SHOOTER = 7;
@@ -60,8 +63,6 @@ public class StrongholdRobotConfigurationManager extends RobotConfigurationManag
 		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
 		
 		StrongholdConstants.ANGLE_MOTOR_INTAKE_POS = 600;
-		
-		StrongholdConstants.WHEEL_DIAMETER = 6.34;//inches
 
 	}
 
