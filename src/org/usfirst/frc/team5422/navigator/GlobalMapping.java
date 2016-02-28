@@ -43,6 +43,18 @@ public class GlobalMapping implements Runnable{
 		
 		System.out.format("[GP] Robot reset values to (%.3g, %.3g) @ %.3g\n", x, y, theta);
 	}
+	public void setX(double fieldX){
+		x = fieldX;
+	}
+	
+	public void setY(double fieldY){
+		y = fieldY;
+	}
+	
+	public void setTheta(double fieldTheta){
+		theta = reduceRadiansUtil(fieldTheta);
+	}
+	
 	
 	private static void addTotalDistance(double dSigmaD) {
 		sigmaD += dSigmaD;
