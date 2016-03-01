@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 
 
-public class BallShooter extends Subsystem implements Runnable {
+public class BallShooter extends Subsystem {
 	/**
 	 * This function helps shoot the ball/boulder into the low goal
 	 */
@@ -29,28 +29,27 @@ public class BallShooter extends Subsystem implements Runnable {
 	CANTalon talonR;
 	CANTalon actuator;
 	Relay relay;
-	double speedMultiplier;
 	
 	public BallShooter() {
 		talonL = new CANTalon(StrongholdConstants.TALON_LEFT_SHOOTER);
 		talonL.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonL.changeControlMode(TalonControlMode.Speed);
+		talonL.changeControlMode(TalonControlMode.PercentVbus);
 		//Reverse output may be needed
 //		talonL.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonL.configNominalOutputVoltage(+0.0f, -0.0f);
 		talonL.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
 		talonL.setF(StrongholdConstants.SHOOTER_F);
-		talonL.setCloseLoopRampRate(1.0);
+//		talonL.setCloseLoopRampRate(1.0);
 		
 		talonR = new CANTalon(StrongholdConstants.TALON_RIGHT_SHOOTER);
 		talonR.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonR.changeControlMode(TalonControlMode.Speed);
+		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		//Reverse output may be needed
 //		talonR.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonR.configNominalOutputVoltage(+0.0f, -0.0f);
 		talonR.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
 		talonR.setF(StrongholdConstants.SHOOTER_F);
-		talonR.setCloseLoopRampRate(1.0);
+//		talonR.setCloseLoopRampRate(1.0);
 		
 		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
 		actuator.setFeedbackDevice(FeedbackDevice.AnalogPot);
@@ -67,12 +66,6 @@ public class BallShooter extends Subsystem implements Runnable {
 	
 		relay = new Relay(StrongholdConstants.SOLENOID_SHOOTER);
 	}
-
-	@Override
-	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	//Shoots the ball
 	//Inputs: distance, low or high goal
@@ -81,52 +74,36 @@ public class BallShooter extends Subsystem implements Runnable {
 		talonR.changeControlMode(TalonControlMode.Speed);
 		talonL.changeControlMode(TalonControlMode.Speed);
 		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
-		Thread shooterThread = new Thread(StrongholdRobot.shooterSubsystem);
-		shooterThread.start();
 	}
 
-	public double getAngle(StrongholdConstants.shootOptions goal) {
-		return calculateAngle(goal);
-	}
+//	public double getAngle(StrongholdConstants.shootOptions goal) {
+//		return ShooterHelper.calculateAngle(goal);
+//	}
 
-	public void fineTune(double sliderValue) {
-		sliderValue -= 0.008;
-
-		double adjustment = sliderValue * StrongholdConstants.TUNER_MULTIPLIER;
-
-		//Adjust actuator
-		changeAngle(calculateAngle(StrongholdRobot.shootOptionSelected));
-	}
+//	public void fineTune(double sliderValue) {
+//		sliderValue -= 0.008;
+//
+//		double adjustment = sliderValue * StrongholdConstants.TUNER_MULTIPLIER;
+//
+//		//Adjust actuator
+//		changeAngle(ShooterHelper.calculateAngle(StrongholdRobot.shootOptionSelected));
+//	}
 	
-	public void setSpeedMultiplier(double sliderVal) {
-		speedMultiplier = (sliderVal + 1) / 2;
-	}
+//	public double fineTuneSpeed(double multiplier) {
+//
+//		double speed = (multiplier + 1)/2;
+//		
+//		return speed;
+//	}
 	
-	public double fineTuneSpeed(double multiplier) {
-
-		double speed = (multiplier + 1)/2;
-		
-		return speed;
-	}
-	
-	//Distance given in inches
-	private double calculateAngle(StrongholdConstants.shootOptions goal) {
-		double angle;
-		if (goal == StrongholdConstants.shootOptions.HIGH_CENTER ||
-				goal == StrongholdConstants.shootOptions.HIGH_RIGHT ||
-				goal == StrongholdConstants.shootOptions.HIGH_LEFT) angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / ShooterHelper.getDistanceToGoal(goal)));
-		else angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/ShooterHelper.getDistanceToGoal(goal));
-		return angle;
-	}
-	
-	private double calculateSpeed(double angle, StrongholdConstants.shootOptions goal){
-		double speed;
-		//Theta is assumed to be 45 degrees.
-		speed = Math.pow(Math.sqrt(2 * Math.pow(ShooterHelper.getDistanceToGoal(goal), 2) - 5536), -4);
-		if (speed > 1) speed = 1;
-		else if (speed < 0.5) speed = 0.5;
-		return speed;
-	}
+//	private double calculateSpeed(double angle, StrongholdConstants.shootOptions goal){
+//		double speed;
+//		//Theta is assumed to be 45 degrees.
+//		speed = Math.pow(Math.sqrt(2 * Math.pow(ShooterHelper.getDistanceToGoal(goal), 2) - 5536), -4);
+//		if (speed > 1) speed = 1;
+//		else if (speed < 0.5) speed = 0.5;
+//		return speed;
+//	}
 	
 	//Changes the angle of the actuator
 	public void changeAngle(double sliderVal) {
@@ -146,20 +123,21 @@ public class BallShooter extends Subsystem implements Runnable {
 		actuator.set(encoderTicks);
 
 		SmartDashboard.putNumber("pot value: ", actuator.getPosition());
-		
-		//524 ticks = 0 degrees
-//		double angleToTicks = 524 - angle * 414.0 / 95.0;
-//		
-//		if (angleToTicks > StrongholdConstants.ACTUATOR_ARM_DOWN_PID) angleToTicks = StrongholdConstants.ACTUATOR_ARM_DOWN_PID;
-//		else if (angleToTicks < StrongholdConstants.ACTUATOR_ARM_UP_PID) angleToTicks = StrongholdConstants.ACTUATOR_ARM_UP_PID;
-//		
-//		if (angleToTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
-//		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
-//		actuator.set(angleToTicks);
-//		SmartDashboard.putNumber("pot value: ", actuator.getPosition());
-//		SmartDashboard.putNumber("actuator arm in degrees: ", angle);
 
 	}
+	
+	private void changeAngleAssisted(double angle) {
+		//524 ticks = 0 degrees
+		double angleToTicks = 524 - angle * 414.0 / 95.0;
+		
+		if (angleToTicks > 620) angleToTicks = 620;
+		else if (angleToTicks < 206) angleToTicks = 206;
+		
+		if (angleToTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
+		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
+		actuator.set(angleToTicks);
+	}
+	
 	public void intake() {
 		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
 		actuator.set(StrongholdConstants.ANGLE_MOTOR_INTAKE_POS);
@@ -174,7 +152,18 @@ public class BallShooter extends Subsystem implements Runnable {
 		talonL.set(StrongholdConstants.NO_THROTTLE);
 	}
 
-	public void run() {
+	//Used by autonomous/assisted mode
+	public void shoot(double speedMultiplier) {
+		_shoot(speedMultiplier);
+	}
+	
+	public void shoot(double degrees, double speedMultiplier) {
+		changeAngleAssisted(degrees);
+		_shoot(speedMultiplier);
+	}
+	
+	//Used by manual mode
+	private void _shoot(double speedMultiplier) {
 		
 		//Potentiometer starts at 533
 		//620 = min    -22 degrees
@@ -182,8 +171,6 @@ public class BallShooter extends Subsystem implements Runnable {
 //		changeAngle(calculateAngle(distance, goal)); 
 		
 		boolean full_speed = false;
-
-		double speed = speedMultiplier; //* max vel
 		
 		//Direction of motor to be found out
 		//P, I, D, F--->  0.02, 0, 1.65, 0
@@ -192,18 +179,15 @@ public class BallShooter extends Subsystem implements Runnable {
 //		talonR.set(-6248); //* StrongholdConstants.VEL_PER_10MS
 //		talonL.set(6248); //0.762745
 
-		talonR.set(-speed); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(speed); //8465
+		talonR.set(-1 * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
+		talonL.set(1 * speedMultiplier); //8465
 		
-		while (full_speed == false) {
- //0.762745
-			SmartDashboard.putNumber("Shooter Right Motor Encoder Velocity: ", talonR.getEncVelocity());
-			SmartDashboard.putNumber("Shooter LEft Motor Encoder Velocity: ", talonL.getEncVelocity());
-			
-			if (Math.abs(talonR.getEncVelocity()) >= 50000 && Math.abs(talonL.getEncVelocity()) >= 50000) {
-				full_speed = true;
-			}
-		}
+//		while (full_speed == false) {
+//			
+//			if (Math.abs(talonR.getEncVelocity()) >= 50000 && Math.abs(talonL.getEncVelocity()) >= 50000) {
+//				full_speed = true;
+//			}
+//		}
 		
 
 		Timer.delay(StrongholdConstants.SHOOT_DELAY1);
@@ -214,6 +198,11 @@ public class BallShooter extends Subsystem implements Runnable {
 		stop();
 		relay.set(Relay.Value.kOff);
 		DSIO.shooterRunning = false;
+		
+	}
+
+	@Override
+	protected void initDefaultCommand() {
 		
 	}
 	

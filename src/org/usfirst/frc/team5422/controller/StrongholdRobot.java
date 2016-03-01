@@ -195,9 +195,6 @@ public class StrongholdRobot extends IterativeRobot {
         //Run the openDrive() method
         driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
 
-        //Adjust actuator
-        shooterSubsystem.fineTune(dsio.getAngleSliderValue());
-
         //Run WPILib commands
         Scheduler.getInstance().run();
     }

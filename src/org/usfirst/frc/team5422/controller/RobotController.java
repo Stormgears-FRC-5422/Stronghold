@@ -62,9 +62,7 @@ public class RobotController {
 
     public static void doActionsOnSliderPositions() {
         AngleSliderCommand angle = new AngleSliderCommand();
-        SpeedSliderCommand speed = new SpeedSliderCommand();
 
         angle.start();
-        speed.start();
     }
 }

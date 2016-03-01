@@ -169,4 +169,19 @@ public class ShooterHelper extends StrongholdUtils {
 
         return y;
     }
+    
+	public static double calculateAngle(StrongholdConstants.shootOptions goal) {
+		double angle;
+		if (goal == StrongholdConstants.shootOptions.HIGH_CENTER ||
+				goal == StrongholdConstants.shootOptions.HIGH_RIGHT ||
+				goal == StrongholdConstants.shootOptions.HIGH_LEFT) angle = Math.atan((StrongholdConstants.HEIGHT_TO_HIGH_GOAL / ShooterHelper.getDistanceToGoal(goal)));
+		else angle = Math.atan(StrongholdConstants.HEIGHT_TO_LOW_GOAL/ShooterHelper.getDistanceToGoal(goal));
+		return angle;
+	}
+	
+	public static double getSpeedMultiplier(double sliderVal) {
+		double multiplier;
+		multiplier = (sliderVal + 1) / 2;
+		return multiplier;
+	}
 }
