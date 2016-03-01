@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
  * The <code>Navigator</code> subsystem integrates 
  * sensory information and maneuvers of the <code>Stronghold Robot</code> 
  * 
- * @author Mayank
+ * @author Mayank Mali
  */
 
 import edu.wpi.first.wpilibj.command.Subsystem;

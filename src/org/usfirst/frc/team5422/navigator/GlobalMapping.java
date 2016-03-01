@@ -5,8 +5,8 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/*
- * @author Mayank
+/**
+ * @author Mayank Mali
  */
 
 public class GlobalMapping implements Runnable{
@@ -129,7 +129,4 @@ public class GlobalMapping implements Runnable{
 	public double getSigmaD(){
 		return sigmaD;
 	}
-	
-	
-
 }
