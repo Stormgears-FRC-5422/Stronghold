@@ -1,8 +1,7 @@
 package org.usfirst.frc.team5422.navigator;
 
-import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.navigator.trapezoidal.TrapezoidThread;
-import org.usfirst.frc.team5422.utils.ConfigUpdateManager;
+import org.usfirst.frc.team5422.utils.RhinoRobotConfigurationManager;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -16,8 +15,8 @@ public class RhinoDriver extends Driver {
     
     //Constructor
     public RhinoDriver() {
-        ConfigUpdateManager updateManager = new ConfigUpdateManager();
-        updateManager.configureRhinoRobot();
+        configureRobot = new RhinoRobotConfigurationManager();
+        configureRobot.configure();
 
         //Declare masterTalons
         masterTalon[0] = new CANTalon(StrongholdConstants.TALON_DRIVE_LEFT_MASTER);

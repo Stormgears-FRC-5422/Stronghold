@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.navigator.DefenseManeuver;
+import org.usfirst.frc.team5422.navigator.Navigator;
 
 /**
  *@author Suren
@@ -22,7 +24,16 @@ public class CrossDefenseCommand extends DefenseCommand {
     protected void execute() {
     	System.out.println("[AutoComm] Robot crossing defense...");
     	if (defense != null) {
+    		Navigator.startDefenseCrossManeuver();
     		defense.cross(defenseTypeSelected, defensePositionSelected);
+    		
+    		while(true){
+    			DefenseManeuver.getInstance();
+				if(DefenseManeuver.isLastStage()){
+    				Navigator.stopDefenseCrossManeuver();
+    				DefenseManeuver.getInstance().repositionAtEndDefense();
+    			}
+    		}
     	}
     }
 

@@ -4,7 +4,10 @@ package org.usfirst.frc.team5422.navigator;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 
-/*
+/**
+ * The <code>Navigator</code> subsystem integrates 
+ * sensory information and maneuvers of the <code>Stronghold Robot</code> 
+ * 
  * @author Mayank
  */
 
@@ -15,21 +18,25 @@ import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
 
-
 public class Navigator extends Subsystem{
 	
 	private double rps = 2;
 	
-	Notifier thread; 
+	/**Always updates <code>GlobalMapping</code> position through encoder ticks.*/
+	static Notifier gpThread; 
+	/**Updates <code>GlobalMapping</code> position as the robot passes through a defense.*/
+	static Notifier defenseManeuverThread;
 	
 	private int currentProfileID = 0;
 	
 	public boolean moveTrapezoidal = true;
 	
-	private NetworkTable netTable = NetworkTable.getTable("Trapezoid");
+	private NetworkTable trapTable = NetworkTable.getTable("Trapezoid");
 	
 	public Navigator(){
-
+		
+		DefenseManeuver.getInstance().updateDefenseManeuver();
+		
 		//right is RhinoDriver.talon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder); [0]
 		//left is RhinoDriver.talon[1].setFeedbackDevice(FeedbackDevice.QuadEncoder); [1]
 		
@@ -37,18 +44,28 @@ public class Navigator extends Subsystem{
 		//RhinoDriver.talon[1] is left
 		System.out.println("[Nav] Navigator created");
 		
-		thread = new Notifier(GlobalMapping.getInstance());
-		thread.startPeriodic(0.001);
+		gpThread = new Notifier(GlobalMapping.getInstance());
+		gpThread.startPeriodic(0.001);
 		
-		if(thread == null){
-			System.out.println("[Nav] Global Mapping Thread is NULL!");
-		}else{
-			System.out.println("[Nav] Global Mapping Thread is defined");
-		}
+		defenseManeuverThread = new Notifier(DefenseManeuver.getInstance());
 		
 		GlobalMapping.resetValues(0,0,Math.PI/2);
 		
 		
+	}
+	
+	public synchronized static void startDefenseCrossManeuver(){
+		
+		defenseManeuverThread.startPeriodic(0.001);
+		
+		System.out.println("[Nav] started cross Maneuver");
+	}
+	
+	public synchronized static void stopDefenseCrossManeuver(){
+		
+		defenseManeuverThread.stop();
+		
+		System.out.println("[Nav] stopped cross Maneuver");
 	}
 	
 	public double powerFromSpeed(Speed speed){
@@ -127,7 +144,7 @@ public class Navigator extends Subsystem{
 	
 	private void waitForTrapezoidalFinish() {
 		while(true){
-			if(netTable.getString("Trap Status", "running").equals("finished") && (netTable.getNumber("Trap ID", -1) == currentProfileID)){
+			if(trapTable.getString("Trap Status", "running").equals("finished") && (trapTable.getNumber("Trap ID", -1) == currentProfileID)){
 				currentProfileID++;
 				break;
 			}
@@ -262,6 +279,8 @@ public class Navigator extends Subsystem{
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 	}
+	
+	
 	
 	
 }//end of class

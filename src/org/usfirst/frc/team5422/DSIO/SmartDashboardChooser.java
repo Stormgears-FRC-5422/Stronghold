@@ -66,31 +66,31 @@ public class SmartDashboardChooser {
         allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
         SmartDashboard.putData("Alliance Chooser", allianceChooser);
 
-        startPositionChooser.addDefault("Position 1 (Left Most, Near Low Bar)", StrongholdConstants.START_POSITION_1);
-        startPositionChooser.addObject("Position 2", StrongholdConstants.START_POSITION_2);
-        startPositionChooser.addObject("Position 3", StrongholdConstants.START_POSITION_3);
-        startPositionChooser.addObject("Position 4", StrongholdConstants.START_POSITION_4);
-        startPositionChooser.addObject("Position 5", StrongholdConstants.START_POSITION_5);
-        startPositionChooser.addObject("Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
+        startPositionChooser.addDefault("Start Position 1 (Left Most, Near Low Bar)", StrongholdConstants.START_POSITION_1);
+        startPositionChooser.addObject("Start Position 2", StrongholdConstants.START_POSITION_2);
+        startPositionChooser.addObject("Start Position 3", StrongholdConstants.START_POSITION_3);
+        startPositionChooser.addObject("Start Position 4", StrongholdConstants.START_POSITION_4);
+        startPositionChooser.addObject("Start Position 5", StrongholdConstants.START_POSITION_5);
+        startPositionChooser.addObject("Start Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
         SmartDashboard.putData("Start Position Chooser", startPositionChooser);
 
         //Add other defense position text boxes
-        SmartDashboard.putNumber("Defense at Position 0", 0);
-        SmartDashboard.putNumber("Defense at Position 1", -1);
+        SmartDashboard.putNumber("Defense at Position 1", 0);
         SmartDashboard.putNumber("Defense at Position 2", -1);
         SmartDashboard.putNumber("Defense at Position 3", -1);
         SmartDashboard.putNumber("Defense at Position 4", -1);
+        SmartDashboard.putNumber("Defense at Position 5", -1);
 
 //        testInitChoosers();
 	}
 	
 	public void autoInitChoosers() {
         //Add other defense position text boxes
-        SmartDashboard.putNumber("Defense at Position 0", 0);
-        SmartDashboard.putNumber("Defense at Position 1", 3);
-        SmartDashboard.putNumber("Defense at Position 2", 4);
-        SmartDashboard.putNumber("Defense at Position 3", 7);
-        SmartDashboard.putNumber("Defense at Position 4", 8);
+        SmartDashboard.putNumber("Defense at Position 1", 0);
+        SmartDashboard.putNumber("Defense at Position 2", 3);
+        SmartDashboard.putNumber("Defense at Position 3", 4);
+        SmartDashboard.putNumber("Defense at Position 4", 7);
+        SmartDashboard.putNumber("Defense at Position 5", 8);
 	}	
 
 	public void teleopInitChoosers() {
