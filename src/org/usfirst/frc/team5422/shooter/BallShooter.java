@@ -108,8 +108,9 @@ public class BallShooter extends Subsystem {
 	//Changes the angle of the actuator
 	public void changeAngle(double sliderVal) {
 
-		double encoderTicks = StrongholdConstants.ACTUATOR_ARM_SLIDER_TO_POT_CONVERSION_FACTOR * 
-								(sliderVal - StrongholdConstants.ACTUATOR_ARM_SLIDER_MIN) + StrongholdConstants.ACTUATOR_ARM_UP_POT_FULLRANGE; 
+		double potTicks = StrongholdConstants.ACTUATOR_ARM_SLIDER_TO_POT_CONVERSION_FACTOR * 
+								(sliderVal - StrongholdConstants.ACTUATOR_ARM_SLIDER_MIN) + 
+								StrongholdConstants.ACTUATOR_ARM_UP_POT_FULLRANGE; 
 
 //		if (encoderTicks < StrongholdConstants.ACTUATOR_ARM_POT_OPT_UP) {
 //			encoderTicks = StrongholdConstants.ACTUATOR_ARM_POT_OPT_UP;
@@ -117,21 +118,31 @@ public class BallShooter extends Subsystem {
 //			encoderTicks = StrongholdConstants.ACTUATOR_ARM_POT_OPT_DOWN;
 //		}		
 		
-		if (encoderTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
+		if (potTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
 		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
 		
-		actuator.set(encoderTicks);
+		actuator.set(potTicks);
 
 		SmartDashboard.putNumber("pot value: ", actuator.getPosition());
 
 	}
 	
 	private void changeAngleAssisted(double angle) {
-		//524 ticks = 0 degrees
-		double angleToTicks = 524 - angle * 414.0 / 95.0;
+		//524 ticks = 0 degrees (real robot)
+//		double angleToTicks = 524 - angle * 414.0 / 95.0;
 		
-		if (angleToTicks > 620) angleToTicks = 620;
-		else if (angleToTicks < 206) angleToTicks = 206;
+//		819 ticks = 0 degrees (real robot)
+		double angleToTicks = 819 - angle * 337.0 / 77.0;
+		
+		//Used for real robot
+//		if (angleToTicks > 620) angleToTicks = 620;
+//		else if (angleToTicks < 206) angleToTicks = 206;
+		
+		//Used in replica robot
+		if (angleToTicks > StrongholdConstants.ACTUATOR_ARM_DOWN_POT_FULLRANGE) angleToTicks = StrongholdConstants.ACTUATOR_ARM_DOWN_POT_FULLRANGE;
+		else if (angleToTicks < StrongholdConstants.ACTUATOR_ARM_UP_POT_FULLRANGE) angleToTicks = StrongholdConstants.ACTUATOR_ARM_UP_POT_FULLRANGE;
+		//907 = -20degrees
+		//570 = 57degrees
 		
 		if (angleToTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
 		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
