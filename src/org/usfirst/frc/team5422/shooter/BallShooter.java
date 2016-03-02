@@ -132,7 +132,7 @@ public class BallShooter extends Subsystem {
 //		double angleToTicks = 524 - angle * 414.0 / 95.0;
 		
 //		819 ticks = 0 degrees (real robot)
-		double angleToTicks = 819 - angle * 337.0 / 77.0;
+		double angleToTicks = ShooterHelper.getAngleToTicks(angle);
 		
 		//Used for real robot
 //		if (angleToTicks > 620) angleToTicks = 620;
