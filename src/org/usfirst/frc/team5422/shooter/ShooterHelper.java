@@ -184,4 +184,20 @@ public class ShooterHelper extends StrongholdUtils {
 		multiplier = (sliderVal + 1) / 2;
 		return multiplier;
 	}
+	
+	public static double getAngleToTicks(double angle) {
+		double angleToTicks;
+		double anglePerTick;
+		double ticksAtZero;
+	
+		anglePerTick = (StrongholdConstants.ACTUATOR_ARM_DOWN_POT_FULLRANGE - StrongholdConstants.ACTUATOR_ARM_UP_POT_FULLRANGE) / 
+				(StrongholdConstants.ACTUATOR_ANGLE_MAX - StrongholdConstants.ACTUATOR_ANGLE_MIN);
+		
+		ticksAtZero = StrongholdConstants.ACTUATOR_ARM_DOWN_POT_FULLRANGE - 
+				Math.abs(StrongholdConstants.ACTUATOR_ANGLE_MIN) * anglePerTick;
+		
+		angleToTicks = ticksAtZero - anglePerTick * angle;
+		
+		return angleToTicks;
+	}
 }

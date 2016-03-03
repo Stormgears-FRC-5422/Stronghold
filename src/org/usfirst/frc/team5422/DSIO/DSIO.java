@@ -363,7 +363,7 @@ public class DSIO {
     public static double getSpeedSlider2Value()
     {
     	//return joystick.getThrottle();
-    	return buttonBoard.getRawAxis(6);
+    	return buttonBoard.getY();
     }
 
 }
