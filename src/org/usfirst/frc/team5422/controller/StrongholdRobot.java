@@ -3,6 +3,7 @@ package org.usfirst.frc.team5422.controller;
 
 import edu.wpi.first.wpilibj.*;
 
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -50,7 +51,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class StrongholdRobot extends IterativeRobot {
 
     //Set this boolean to false if using official robot
-    public static boolean rhinoInUse = true;
+    public static boolean rhinoInUse = true, bbInUse = true;
 
 
 
@@ -60,6 +61,7 @@ public class StrongholdRobot extends IterativeRobot {
     public static Grappler grapplerSubsystem;
     public static Lifter lifterSubsystem;
     public static RobotConfigurationFileReader robotPropertiesGetter;
+    public static LiveWindow lw;
 
     public static DSIO dsio;
     public static DriverInterface driver;
@@ -86,6 +88,8 @@ public class StrongholdRobot extends IterativeRobot {
         else {
             driver = new StrongholdDriver();
         }
+
+        lw = new LiveWindow();
 
         navigatorSubsystem = new Navigator();
         shooterSubsystem = new BallShooter();
@@ -189,6 +193,8 @@ public class StrongholdRobot extends IterativeRobot {
             SmartDashboard.putString("You are", " out of bounds.");
         }
 
+        SmartDashboard.putNumber("Actuator position:", shooterSubsystem.actuator.getEncPosition());
+
         //Calculate shootOption
         shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
 
@@ -285,6 +291,6 @@ public class StrongholdRobot extends IterativeRobot {
      * Runs during test mode
      */
     public void testPeriodic() {
-        
+        lw.addActuator("Ball Shooter", "Arm", shooterSubsystem.actuator);
     }
 }

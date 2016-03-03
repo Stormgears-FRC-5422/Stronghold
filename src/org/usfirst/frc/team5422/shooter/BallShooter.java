@@ -27,7 +27,7 @@ public class BallShooter extends Subsystem {
 	
 	CANTalon talonL;
 	CANTalon talonR;
-	CANTalon actuator;
+	public CANTalon actuator;
 	Relay relay;
 	
 	public BallShooter() {

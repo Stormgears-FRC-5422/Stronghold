@@ -57,19 +57,6 @@ public abstract class Driver implements DriverInterface {
         } else {
             System.out.println("Invalid Talon Control Mode, set the master talons in Speed mode or PercentVbus mode");
         }
-       
-        //Output to SmartDashboard for diagnostics
-
-        DSIO.outputToSFX("velocityLeft", velocityLeft);
-        DSIO.outputToSFX("velocityRight", velocityRight);
-
-        //Current being put through the talons
-        DSIO.outputToSFX("Left Master Talon Output Current: ", masterTalon[0].getOutputCurrent());
-        DSIO.outputToSFX("Right Master Talon Output Current: ", masterTalon[1].getOutputCurrent());
-
-        //Talon speeds
-        DSIO.outputToSFX("Left Master Talon Speed: ", masterTalon[0].getSpeed());
-        DSIO.outputToSFX("Right Master Talon Speed: ", masterTalon[1].getSpeed());
     }
 
     @Override
