@@ -2,7 +2,9 @@ package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.DefenseManeuver;
+import org.usfirst.frc.team5422.navigator.GlobalMapping;
 import org.usfirst.frc.team5422.navigator.Navigator;
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 /**
  *@author Suren
@@ -24,9 +26,16 @@ public class CrossDefenseCommand extends DefenseCommand {
     protected void execute() {
     	System.out.println("[AutoComm] Robot crossing defense...");
     	if (defense != null) {
-    		Navigator.startDefenseCrossManeuver();
+    		//Navigator.startDefenseCrossManeuver();
     		defense.cross(defenseTypeSelected, defensePositionSelected);
     		
+    		double currY = GlobalMapping.getInstance().getY();
+    		System.out.format("[CrossDefComm] before subtracting Y: y = %3.4g", currY);
+    		
+    		GlobalMapping.getInstance().setY(currY - (StrongholdConstants.DEFENSE_TOP_WIDTH - StrongholdConstants.DEFENSE_WIDTH ));
+    		
+    		System.out.format("[CrossDefComm] after subtracting Y: y = %3.4g", currY);
+    		/*
     		while(true){
     			DefenseManeuver.getInstance();
 				if(DefenseManeuver.isLastStage()){
@@ -34,6 +43,7 @@ public class CrossDefenseCommand extends DefenseCommand {
     				DefenseManeuver.getInstance().repositionAtEndDefense();
     			}
     		}
+    		*/
     	}
     }
 

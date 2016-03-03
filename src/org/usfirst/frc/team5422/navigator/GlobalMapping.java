@@ -20,6 +20,12 @@ public class GlobalMapping implements Runnable{
 	private static double oldTickR;
 	private static double oldTickL;
 	
+	public GlobalMapping() {
+		StrongholdRobot.driver.getDriveTalonRightMaster().setEncPosition(0);
+		StrongholdRobot.driver.getDriveTalonLeftMaster().setEncPosition(0);
+		// TODO Auto-generated constructor stub
+	}
+	
 	/*
 	 * returns an equivalent theta between 0 and 2*Math.PI 
 	 */

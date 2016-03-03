@@ -70,9 +70,12 @@ public class StrongholdConstants {
 	public static double ROBOT_WIDTH = 24;
 	public static double SIDE_ULTRA_SENSOR_TO_ROBOT_MIDDLE_Y = 16;
 	
-	public static final double DEFENSE_WIDTH = 24 + 3/(Math.tan(13.5*Math.PI/180));
+	public static final double DEFENSE_WIDTH = 12*(2 + 2*Math.cos(13.5*Math.PI/180));
 	public static final double DEFENSE_PASSABLE_LENGTH = 4*12 + 2;
-
+	
+	public static final double DEFENSE_TOP_WIDTH = 4*12;//inches
+	
+	
 	//Inches per tick
 	public static double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
@@ -105,12 +108,12 @@ public class StrongholdConstants {
 
 	
 	//Positions
-	public static final int[] POSITION_DEFENSE_0_REACH = {25, 90};
-	public static final int[] POSITION_DEFENSE_1_REACH = {25 + 1 * 50, 90};
-	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 2 * 50, 90};
-	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 3 * 50, 90};
-	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 4 * 50, 90};
-	public static final int CROSS_DEFENSE_LENGTH_Y = 60;
+	public static final int[] POSITION_DEFENSE_0_REACH = {25, 90-20};
+	public static final int[] POSITION_DEFENSE_1_REACH = {25 + 1 * 50, 90-20};
+	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 2 * 50, 90-20};
+	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 3 * 50, 90-20};
+	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 4 * 50, 90-20};
+	public static final int CROSS_DEFENSE_LENGTH_Y = 60+20;
 
 	//H = high; L = low
 	public static final double[] POSITION_HLEFT_GOAL = {151, 312};

@@ -35,7 +35,7 @@ public class Navigator extends Subsystem{
 	
 	public Navigator(){
 		
-		DefenseManeuver.getInstance().updateDefenseManeuver();
+		//DefenseManeuver.getInstance().updateDefenseManeuver();
 		
 		//right is RhinoDriver.talon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder); [0]
 		//left is RhinoDriver.talon[1].setFeedbackDevice(FeedbackDevice.QuadEncoder); [1]
@@ -47,7 +47,7 @@ public class Navigator extends Subsystem{
 		gpThread = new Notifier(GlobalMapping.getInstance());
 		gpThread.startPeriodic(0.001);
 		
-		defenseManeuverThread = new Notifier(DefenseManeuver.getInstance());
+		//defenseManeuverThread = new Notifier(DefenseManeuver.getInstance());
 		
 		GlobalMapping.resetValues(0,0,Math.PI/2);
 		
@@ -67,7 +67,7 @@ public class Navigator extends Subsystem{
 		
 		System.out.println("[Nav] stopped cross Maneuver");
 	}
-	
+	/*
 	public double powerFromSpeed(Speed speed){
 		double power = 0.0;
 		
@@ -88,7 +88,7 @@ public class Navigator extends Subsystem{
 		
 		return power;
 	}
-
+	*/
 	private void trapWheelTicks(double rTicks, double lTicks, double lVelRPM, double rVelRPM, int tableID){
 		//dummy function (actually written elsewhere by aditya)
 		
@@ -98,12 +98,13 @@ public class Navigator extends Subsystem{
 	
 	private void speedWheelTicks(double rTicks, double lTicks){
 		
-		StrongholdRobot.driver.getDriveTalonLeftMaster().set(Math.signum(rTicks)*0.4);
+		StrongholdRobot.driver.getDriveTalonRightMaster().set(Math.signum(rTicks)*0.4);
 		StrongholdRobot.driver.getDriveTalonLeftMaster().set(-Math.signum(lTicks)*0.4);
 		
 	}
 	
 	private void rotateToTheta(double theta, double rpmR, double rpmL){
+		Timer.delay(2);
 		System.out.println("rotateToTheta Entered " + Timer.getFPGATimestamp());
 		theta = GlobalMapping.reduceRadiansUtil(theta);
 		double relInitTheta = theta - GlobalMapping.getInstance().getTheta();
@@ -179,6 +180,7 @@ public class Navigator extends Subsystem{
 	}
 
 	private void moveByDistance(double targDistance, double rps){
+		Timer.delay(2);
 		System.out.println("moveByDistance Entered " + Timer.getFPGATimestamp());
 		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 		System.out.format("[GP][translate by] %.3g (in)\n", targDistance );

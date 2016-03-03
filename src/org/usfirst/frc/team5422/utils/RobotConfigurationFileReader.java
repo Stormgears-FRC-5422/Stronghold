@@ -27,6 +27,10 @@ public class RobotConfigurationFileReader {
             fis.close();
             robot = properties.getProperty("robotInUse");
             inputMethod = properties.getProperty("inputMethodInUse");
+            
+            robot = "stronghold"; //default
+            inputMethod = "official"; //default
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

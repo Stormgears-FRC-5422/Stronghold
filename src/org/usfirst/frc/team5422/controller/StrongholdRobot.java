@@ -166,6 +166,10 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("teleop init started.");
         if (autonomousCommand != null) autonomousCommand.cancel();
         teleopNotRunning = false;
+        
+        //only for testing
+        GlobalMapping.getInstance().resetValues(0, 0, Math.PI/2);
+        
 
 //        RhinoDriver.initializeTrapezoid();
         System.out.println("teleop init ended.");
