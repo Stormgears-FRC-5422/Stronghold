@@ -29,6 +29,8 @@ public class DSIO {
 
     public static SmartDashboardChooser choosers;
 
+    private static int green = 0, orange = 0, red = 0;
+
     //Constructor
     public DSIO(int joyStickChannel, int buttonBoardChannel) {
         joystick = new Joystick(joyStickChannel);
@@ -36,83 +38,125 @@ public class DSIO {
     }
 
     //Check if a button is pressed; if it is, do the respective command
-    public static int getButtons() {
+    public static int getButtons()
+    {
         int button = -1;
         //Shooter operation buttons
-        if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) {
+        if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID))
+        {
             button = StrongholdConstants.BIG_BLUE_BUTTON_ID;
         }
 
-        //Get the position of the green switch; if it's up, set the shoot height to high
-        //This does not require a command
-        if (buttonBoard.getRawButton(StrongholdConstants.GREEN_SWITCH_ID)) {
-            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
-        }
-        else {
-            teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
-        }
+        if (StrongholdRobot.bbInUse)
+        {
+            //Intake switch
+            if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID))
+            {
+                button = StrongholdConstants.ORANGE_SWITCH_ID;
+            }
+            else if (!shooterRunning)
+            {
+                StrongholdRobot.shooterSubsystem.stop();
+            }
 
-        //Intake switch
-        if (buttonBoard.getRawButton(StrongholdConstants.ORANGE_SWITCH_ID)) {
-            button = StrongholdConstants.ORANGE_SWITCH_ID;
-        } else if (!shooterRunning) {
-            StrongholdRobot.shooterSubsystem.stop();
-        }
+            //Red switch (enables/disables joystick depending on positions
+            if (buttonBoard.getRawButton(StrongholdConstants.RED_SWITCH_ID))
+            {
+                assistShoot = true;
+                SmartDashboard.putString("ASSIST SHOOTING:", " ON");
+            }
+            else
+            {
+                assistShoot = false;
+                SmartDashboard.putString("ASSIST SHOOTING: ", " OFF");
+            }
 
-        //Red switch (enables/disables joystick depending on positions
-        if (buttonBoard.getRawButton(StrongholdConstants.RED_SWITCH_ID)) {
-            assistShoot = true;
-            SmartDashboard.putString("ASSIST SHOOTING:", " ON");
+            //Get the position of the green switch; if it's up, set the shoot height to high
+            //This does not require a command
+            if (buttonBoard.getRawButton(StrongholdConstants.GREEN_SWITCH_ID))
+            {
+                teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
+            }
+            else
+            {
+                teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
+            }
         }
-        else {
-            assistShoot = false;
-            SmartDashboard.putString("ASSIST SHOOTING: ", " OFF");
+        else
+        {
+            SmartDashboard.putNumber("Green Switch", green);
+            SmartDashboard.putNumber("Orange Switch", orange);
+            SmartDashboard.putNumber("Red Switch", red);
+
+            green = (int) SmartDashboard.getNumber("Green Switch", green);
+            orange = (int) SmartDashboard.getNumber("Orange Switch", orange);
+            red = (int) SmartDashboard.getNumber("Red Switch", red);
+
+            if (green == 1) teleopShootHeightOption = StrongholdConstants.shootHeightOptions.HIGH;
+            else teleopShootHeightOption = StrongholdConstants.shootHeightOptions.LOW;
+
+            if (orange == 1) button = StrongholdConstants.ORANGE_SWITCH_ID;
+            else if (!shooterRunning) StrongholdRobot.shooterSubsystem.stop();
+
+            if (red == 1)
+            {
+                assistShoot = true;
+                SmartDashboard.putString("ASSIST SHOOTING:", " ON");
+            }
+            else
+            {
+                assistShoot = false;
+                SmartDashboard.putString("ASSIST SHOOTING: ", " OFF");
+            }
         }
 
         //Lock button
-        if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID)) {
+        if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID))
+        {
            button = StrongholdConstants.WHITE_BUTTON_ID;
         }
 
         //Defense button
-        else if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID)) {
+        else if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID))
+        {
             button = StrongholdConstants.GREEN_BUTTON_ID;
-
         }
 
         return button;
     }
 
     @Deprecated
-    public double getAngleSliderValue() {
+    public double getAngleSliderValue()
+    {
         return buttonBoard.getX();
     }
 
     @Deprecated
-    public double getSpeedSliderValue () {
+    public double getSpeedSliderValue ()
+    {
         return buttonBoard.getY();
     }
 
     //Inputs: nothing
     //Outputs: x and y of joystick (raw) respectively
     //Linear joystick position recieving methods
-    public static double getLinearX() {
+    public static double getLinearX()
+    {
         double xPos = joystick.getX();
 
         //Put a nullzone on values that are between -0.2 and 0.2
         if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
 
-        if (!assistShoot) xPos = 0;
         return xPos;
     }
 
-    public static double getLinearY() {
+    public static double getLinearY()
+    {
         double yPos = joystick.getY();
 
         //Put a nullzone on values that are between -0.2 and 0.2
         if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
-        if (!assistShoot) yPos = 0;
         return yPos;
     }
 
@@ -120,20 +164,25 @@ public class DSIO {
     //Inputs: nothing
     //Outputs: averaged x and y of joystick over a period of 15 milliseconds respectively
     //Sample size (length of x and y arrays) may need to be changed depending on how much you want the vals to be dampened
-    public static double dampenWithAvgX() {
+    public static double dampenWithAvgX()
+    {
         double xPos[] = new double[15];
 
         double xPosAvg = 0;
 
-        for (int c = 0; c < xPos.length; c++) {
+        for (int c = 0; c < xPos.length; c++)
+        {
             xPos[c] = joystick.getX();
 
             xPosAvg += xPos[c];
 
             //Wait 1 millisecond
-            try {
+            try
+            {
                 Timer.delay(0.001);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 System.out.println("Couldn't sleep the thread.");
             }
         }
@@ -144,24 +193,28 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (xPosAvg >= -0.2 & xPosAvg <= 0.2) xPosAvg = 0;
 
-        if (!assistShoot) xPosAvg = 0;
         return xPosAvg;
     }
 
-    public static double dampenWithAvgY() {
+    public static double dampenWithAvgY()
+    {
         double yPos[] = new double[15];
 
         double yPosAvg = 0;
 
-        for (int c = 0; c < yPos.length; c++) {
+        for (int c = 0; c < yPos.length; c++)
+        {
             yPos[c] = joystick.getY();
 
             yPosAvg += yPos[c];
 
             //Wait 1 millisecond
-            try {
+            try
+            {
                 Timer.delay(0.001);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 System.out.println("Couldn't sleep the thread.");
             }
         }
@@ -172,13 +225,13 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (yPosAvg >= -0.2 & yPosAvg <= 0.2) yPosAvg = 0;
 
-        if (!assistShoot) yPosAvg = 0;
         return yPosAvg;
     }
 
     //Inputs: nothing
     //Outputs: x and y of joystick after going through a x^2 graph respectively
-    public static double dampenWithCurveX() {
+    public static double dampenWithCurveX()
+    {
         double xPos = joystick.getX();
         double yPos = joystick.getY();
 
@@ -194,11 +247,11 @@ public class DSIO {
         if (xPos >= -0.2 & xPos <= 0.2) xPos = 0;
         if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
-        if (!assistShoot) xFinal = 0;
         return xFinal;
     }
 
-    public static double dampenWithCurveY() {
+    public static double dampenWithCurveY()
+    {
         double yPos = joystick.getY();
 
         double yFinal;
@@ -212,18 +265,19 @@ public class DSIO {
         //Put a nullzone on values that are between -0.2 and 0.2
         if (yPos >= -0.2 & yPos <= 0.2) yPos = 0;
 
-        if (!assistShoot) yFinal = 0;
         return yFinal;
     }
 
     //Inputs: what to print out
     //Outputs: nothing
     //Wrapper method for putNumber()
-    public static void outputToSFX(String label, double value) {
+    public static void outputToSFX(String label, double value)
+    {
         SmartDashboard.putNumber(label, value);
     }
 
-    public static void createUI() {
+    public static void createUI()
+    {
         NetworkTable.initialize();
 
         //Defense at position 0 is always low bar (ID 0)
@@ -234,7 +288,8 @@ public class DSIO {
         //choosers.autoInitChoosers();
     }
 
-    public static int getSelectedDefensePosition() {
+    public static int getSelectedDefensePosition()
+    {
         int position = -1;
 
         pos[1] = (int) SmartDashboard.getNumber("Defense at Position 1", -1);
@@ -244,12 +299,15 @@ public class DSIO {
 
         int[] defensePositions = new int[9];
 
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 9; i++)
+        {
             defensePositions[i] = -1;
         }
 
-        for (int i = 1; i < 9; i++) {
-            for (int c = 1; c < 5; c++) {
+        for (int i = 1; i < 9; i++)
+        {
+            for (int c = 1; c < 5; c++)
+            {
                 if (pos[c] == i) {
                     defensePositions[i] = c;
                 }
@@ -257,8 +315,10 @@ public class DSIO {
         }
 
         //If auto is running, get position from SmartDashboard
-        if (StrongholdRobot.teleopNotRunning) {
-            switch ((defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected()) {
+        if (StrongholdRobot.teleopNotRunning)
+        {
+            switch ((defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected())
+            {
                 case LOW_BAR:
                     position = 0; //Position of low bar is always 0
                     break;
@@ -295,11 +355,13 @@ public class DSIO {
         return position;
     }//End method
 
-    public static double getActuatorSliderValue() {
+    public static double getActuatorSliderValue()
+    {
     	//return joystick.getThrottle();
     	return buttonBoard.getX();
     }
-    public static double getSpeedSlider2Value() {
+    public static double getSpeedSlider2Value()
+    {
     	//return joystick.getThrottle();
     	return buttonBoard.getY();
     }

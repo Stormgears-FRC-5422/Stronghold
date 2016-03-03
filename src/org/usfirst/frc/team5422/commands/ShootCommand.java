@@ -1,8 +1,11 @@
 package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.shooter.ShooterHelper;
+
 import edu.wpi.first.wpilibj.command.Command;
 
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 /**
@@ -27,7 +30,8 @@ public class ShootCommand extends Command {
     	String temp  = "[AutoComm] Robot shooting ball... ";
 		shootOptionSelected = StrongholdRobot.shootOptionSelected;
 		
-		StrongholdRobot.shooterSubsystem.shoot(shootOptionSelected);
+    	StrongholdRobot.shooterSubsystem.shoot(
+        		ShooterHelper.calculateAngle(StrongholdRobot.shootOptionSelected), StrongholdConstants.FULL_THROTTLE);
 
 		temp += ".";
 		System.out.println(temp);

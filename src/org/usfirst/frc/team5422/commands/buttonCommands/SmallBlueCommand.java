@@ -28,10 +28,6 @@ public class SmallBlueCommand extends Command {
             double theta = ShooterHelper.findHorizontalAngleToGoal(bestShootOption);
 
             StrongholdRobot.navigatorSubsystem.turnTo(theta);
-
-            double shooterAngle = StrongholdRobot.shooterSubsystem.getAngle(bestShootOption);
-
-            StrongholdRobot.shooterSubsystem.changeAngle(shooterAngle);
         }
     }
 

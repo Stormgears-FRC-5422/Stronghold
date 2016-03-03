@@ -73,17 +73,6 @@ public class StrongholdConstants {
 	public static final double DEFENSE_WIDTH = 24 + 3/(Math.tan(13.5*Math.PI/180));
 	public static final double DEFENSE_PASSABLE_LENGTH = 4*12 + 2;
 
-    //Rhino Drive Specifications
-//	public static final double WHEEL_BASE = 25;//inches or 24.75 inches
-//	public static final double GEAR_RATIO = 1; //10.71 on motor gives 1 rotation of the wheel 
-//	public static final double ROBOT_MIDDLE_TO_FRONT = 17;//inches
-	public static final double ROBOT_MIDDLE_TO_BACK = 12; //inches
-	
-	public static final double ACTUATOR_F = 1.705;
-	public static final double ACTUATOR_P = 0.000185;
-	public static final double ACTUATOR_I = 0;
-	public static final double ACTUATOR_D = 0;
-
 	//Inches per tick
 	public static double INCHES_PER_TICK = Math.PI * WHEEL_DIAMETER / (GEAR_RATIO * ENCODER_TICKS_RESOLUTION);
 	
@@ -159,16 +148,16 @@ public class StrongholdConstants {
 	public static final double NO_THROTTLE = 0;
 	public static final double VEL_PER_100MS = 81.92;
 
-	public static final int BIG_BLUE_BUTTON_ID = 10;
-	public static final int RED_BUTTON_ID = 15;
-	public static final int YELLOW_BUTTON_ID = 14;
-	public static final int GREEN_BUTTON_ID = 13;
-	public static final int BLUE_BUTTON_ID = 12;
-	public static final int BLACK_BUTTON_ID = 9;
-	public static final int WHITE_BUTTON_ID = 8;
-	public static final int GREEN_SWITCH_ID = 5;
-	public static final int ORANGE_SWITCH_ID = 4;
-	public static final int RED_SWITCH_ID = 3;
+	public static int BIG_BLUE_BUTTON_ID = 10;
+	public static int RED_BUTTON_ID = 15;
+	public static int YELLOW_BUTTON_ID = 14;
+	public static int GREEN_BUTTON_ID = 13;
+	public static int BLUE_BUTTON_ID = 12;
+	public static int BLACK_BUTTON_ID = 9;
+	public static int WHITE_BUTTON_ID = 8;
+	public static int GREEN_SWITCH_ID = 5;
+	public static int ORANGE_SWITCH_ID = 4;
+	public static int RED_SWITCH_ID = 3;
 	
 	public enum diagnosticPOSTOptions {
 		TEST_GYRO, 
@@ -202,8 +191,18 @@ public class StrongholdConstants {
 	public static final double ACTUATOR_ANGLE_RANGE = 90;
 	public static final double TUNER_MULTIPLIER = 90.91;
 	
-	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
-	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
+	//Used in real robot
+//	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
+//	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
+//	public static final double ACTUATOR_ANGLE_MIN = -22;
+//	public static final double ACTUATOR_ANGLE_MAX = 73;
+	
+	//Used in replica robot
+	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 570;
+	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 907;
+	public static final double ACTUATOR_ANGLE_MIN = -20;
+	public static final double ACTUATOR_ANGLE_MAX = 57;
+	
 	public static final double ACTUATOR_ARM_SLIDER_MIN = -1;
 	public static final double ACTUATOR_ARM_SLIDER_MAX = 1;
 
