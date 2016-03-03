@@ -12,6 +12,9 @@ package org.usfirst.frc.team5422.utils;
 public class StrongholdConstants {
 	public static final String RHINO = "rhino";
 	public static final String STRONGHOLD = "stronghold";
+	public static final String PROP_INPUT_METHOD_OFFICIAL = "official";
+	public static final String PROP_INPUT_METHOD_SIMULATOR = "simulator";
+			
 
 	public static double SHOOTER_F = 10;
 	public static double SHOOTER_P = 0;
