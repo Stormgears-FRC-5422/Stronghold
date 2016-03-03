@@ -14,7 +14,7 @@ public class RobotConfigurationFileReader {
     Properties properties = null;
     FileInputStream fis = null;
     String robot = "stronghold"; //default
-    String inputMethod = "buttonBoard"; //default
+    String inputMethod = "official"; //default
 
     public RobotConfigurationFileReader() {
 
@@ -45,7 +45,7 @@ public class RobotConfigurationFileReader {
     }
 
     public void configureButtonIDs(String inputMethod) {
-        if (inputMethod.equals("joysticks")) {
+        if (inputMethod.equals("simulator")) {
             StrongholdConstants.BIG_BLUE_BUTTON_ID = 2;
             StrongholdConstants.RED_BUTTON_ID = 11;
             StrongholdConstants.YELLOW_BUTTON_ID = 12;
