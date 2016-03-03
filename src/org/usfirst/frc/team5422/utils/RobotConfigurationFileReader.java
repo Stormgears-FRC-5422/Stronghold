@@ -13,8 +13,8 @@ import java.util.Properties;
 public class RobotConfigurationFileReader {
     Properties properties = null;
     FileInputStream fis = null;
-    String robot = "stronghold"; //default
-    String inputMethod = "official"; //default
+    String robot = StrongholdConstants.STRONGHOLD; //default
+    String inputMethod = StrongholdConstants.PROP_INPUT_METHOD_OFFICIAL; //default
 
     public RobotConfigurationFileReader() {
 
@@ -27,6 +27,10 @@ public class RobotConfigurationFileReader {
             fis.close();
             robot = properties.getProperty("robotInUse");
             inputMethod = properties.getProperty("inputMethodInUse");
+            
+            if (robot == null) robot = StrongholdConstants.STRONGHOLD;
+            if (inputMethod == null) inputMethod = StrongholdConstants.PROP_INPUT_METHOD_OFFICIAL;
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -45,7 +49,7 @@ public class RobotConfigurationFileReader {
     }
 
     public void configureButtonIDs(String inputMethod) {
-        if (inputMethod.equals("simulator")) {
+        if (inputMethod.equals(StrongholdConstants.PROP_INPUT_METHOD_SIMULATOR)) {
             StrongholdConstants.BIG_BLUE_BUTTON_ID = 2;
             StrongholdConstants.RED_BUTTON_ID = 11;
             StrongholdConstants.YELLOW_BUTTON_ID = 12;
