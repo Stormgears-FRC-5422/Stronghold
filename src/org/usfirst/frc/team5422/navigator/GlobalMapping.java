@@ -21,8 +21,7 @@ public class GlobalMapping implements Runnable{
 	private static double oldTickL;
 	
 	public GlobalMapping() {
-		StrongholdRobot.driver.getDriveTalonRightMaster().setEncPosition(0);
-		StrongholdRobot.driver.getDriveTalonLeftMaster().setEncPosition(0);
+		System.out.println("[GP] GlobalMapping instance initialized");
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -37,8 +36,10 @@ public class GlobalMapping implements Runnable{
 	private static GlobalMapping instance;
 	
 	public static GlobalMapping getInstance(){
-		
-		return instance==null? new GlobalMapping() : instance;
+		if(instance==null){
+			instance = new GlobalMapping();
+		}
+		return instance;
 	}
 	
 	
