@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5422.commands.buttonCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 
 /**
@@ -14,8 +16,9 @@ public class OrangeSwitchCommand extends Command {
     }
 
     @Override
-    protected void execute() {
-        StrongholdRobot.shooterSubsystem.intake();
+    protected void execute() { 
+    	if (DSIO.assistShoot == true) StrongholdRobot.shooterSubsystem.intakeAssisted();
+    	else StrongholdRobot.shooterSubsystem.intakeManual();
     }
 
     @Override

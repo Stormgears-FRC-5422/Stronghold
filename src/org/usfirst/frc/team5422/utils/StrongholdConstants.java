@@ -16,10 +16,11 @@ public class StrongholdConstants {
 	public static final String PROP_INPUT_METHOD_SIMULATOR = "simulator";
 			
 
-	public static double SHOOTER_F = 10;
+	public static double SHOOTER_F = 0.16238095;
 	public static double SHOOTER_P = 0;
 	public static double SHOOTER_I = 0;
 	public static double SHOOTER_D = 0;
+	public static double SHOOTER_MAX_SPEED = 6300; //per 10ms
 	
 	public static double WHEEL_BASE = 23.0;//inches	
 	

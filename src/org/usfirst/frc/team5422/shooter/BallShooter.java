@@ -33,7 +33,7 @@ public class BallShooter extends Subsystem {
 	public BallShooter() {
 		talonL = new CANTalon(StrongholdConstants.TALON_LEFT_SHOOTER);
 		talonL.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonL.changeControlMode(TalonControlMode.PercentVbus);
+		talonL.changeControlMode(TalonControlMode.Speed);
 		//Reverse output may be needed
 //		talonL.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonL.configNominalOutputVoltage(+0.0f, -0.0f);
@@ -43,7 +43,7 @@ public class BallShooter extends Subsystem {
 		
 		talonR = new CANTalon(StrongholdConstants.TALON_RIGHT_SHOOTER);
 		talonR.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		talonR.changeControlMode(TalonControlMode.PercentVbus);
+		talonR.changeControlMode(TalonControlMode.Speed);
 		//Reverse output may be needed
 //		talonR.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonR.configNominalOutputVoltage(+0.0f, -0.0f);
@@ -70,11 +70,7 @@ public class BallShooter extends Subsystem {
 	//Shoots the ball
 	//Inputs: distance, low or high goal
 	
-	public void shoot(StrongholdConstants.shootOptions goal) {
-		talonR.changeControlMode(TalonControlMode.Speed);
-		talonL.changeControlMode(TalonControlMode.Speed);
-		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
-	}
+
 
 //	public double getAngle(StrongholdConstants.shootOptions goal) {
 //		return ShooterHelper.calculateAngle(goal);
@@ -149,9 +145,17 @@ public class BallShooter extends Subsystem {
 		actuator.set(angleToTicks);
 	}
 	
-	public void intake() {
+	public void intakeManual() {
+		intake();
+	}
+	
+	public void intakeAssisted() {
 		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
 		actuator.set(StrongholdConstants.ANGLE_MOTOR_INTAKE_POS);
+		intake();
+	}
+	
+	private void intake() {
 		talonR.changeControlMode(TalonControlMode.PercentVbus);
 		talonL.changeControlMode(TalonControlMode.PercentVbus);
 		talonR.set(0.5);
@@ -176,6 +180,9 @@ public class BallShooter extends Subsystem {
 	//Used by manual mode
 	private void _shoot(double speedMultiplier) {
 		
+		talonR.changeControlMode(TalonControlMode.Speed);
+		talonL.changeControlMode(TalonControlMode.Speed);
+		
 		//Potentiometer starts at 533
 		//620 = min    -22 degrees
 		//206 = max     73 degrees
@@ -190,17 +197,17 @@ public class BallShooter extends Subsystem {
 //		talonR.set(-6248); //* StrongholdConstants.VEL_PER_10MS
 //		talonL.set(6248); //0.762745
 
-		talonR.set(-1 * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(1 * speedMultiplier); //8465
+		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
+		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier); //8465
 		
-//		while (full_speed == false) {
-//			
-//			if (Math.abs(talonR.getEncVelocity()) >= 50000 && Math.abs(talonL.getEncVelocity()) >= 50000) {
-//				full_speed = true;
-//			}
-//		}
+		while (full_speed == false) {
+			
+			if (Math.abs(talonR.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED && 
+					Math.abs(talonL.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED) {
+				full_speed = true;
+			}
+		}
 		
-
 		Timer.delay(StrongholdConstants.SHOOT_DELAY1);
 		
 		relay.set(Relay.Value.kForward);

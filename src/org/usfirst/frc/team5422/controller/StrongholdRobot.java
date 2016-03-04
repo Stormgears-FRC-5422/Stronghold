@@ -259,7 +259,7 @@ public class StrongholdRobot extends IterativeRobot {
 
             case TEST_SHOOTER:
                 System.out.println("Testing the shooter");
-                shooterSubsystem.shoot(shootOptions.HIGH_CENTER);                
+                shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);                
                 break;
 
             case TEST_GRAPPLER:
