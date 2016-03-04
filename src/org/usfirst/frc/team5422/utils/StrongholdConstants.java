@@ -199,16 +199,16 @@ public class StrongholdConstants {
 	public static final double TUNER_MULTIPLIER = 90.91;
 	
 	//Used in real robot
-//	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
-//	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
-//	public static final double ACTUATOR_ANGLE_MIN = -22;
-//	public static final double ACTUATOR_ANGLE_MAX = 73;
+	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
+	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
+	public static final double ACTUATOR_ANGLE_MIN = -22;
+	public static final double ACTUATOR_ANGLE_MAX = 73;
 	
 	//Used in replica robot
-	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 570;
-	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 907;
-	public static final double ACTUATOR_ANGLE_MIN = -20;
-	public static final double ACTUATOR_ANGLE_MAX = 57;
+//	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 570;
+//	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 907;
+//	public static final double ACTUATOR_ANGLE_MIN = -20;
+//	public static final double ACTUATOR_ANGLE_MAX = 57;
 	
 	public static final double ACTUATOR_ARM_SLIDER_MIN = -1;
 	public static final double ACTUATOR_ARM_SLIDER_MAX = 1;
