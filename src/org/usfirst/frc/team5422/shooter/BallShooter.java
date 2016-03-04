@@ -39,7 +39,7 @@ public class BallShooter extends Subsystem {
 		talonL.configNominalOutputVoltage(+0.0f, -0.0f);
 		talonL.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
 		talonL.setF(StrongholdConstants.SHOOTER_F);
-//		talonL.setCloseLoopRampRate(1.0);
+		talonL.setCloseLoopRampRate(1.0);
 		
 		talonR = new CANTalon(StrongholdConstants.TALON_RIGHT_SHOOTER);
 		talonR.setFeedbackDevice(FeedbackDevice.QuadEncoder);
@@ -49,7 +49,7 @@ public class BallShooter extends Subsystem {
 		talonR.configNominalOutputVoltage(+0.0f, -0.0f);
 		talonR.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
 		talonR.setF(StrongholdConstants.SHOOTER_F);
-//		talonR.setCloseLoopRampRate(1.0);
+		talonR.setCloseLoopRampRate(1.0);
 		
 		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
 		actuator.setFeedbackDevice(FeedbackDevice.AnalogPot);
@@ -141,7 +141,7 @@ public class BallShooter extends Subsystem {
 		//570 = 57degrees
 		
 		if (angleToTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
-		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
+		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
 		actuator.set(angleToTicks);
 	}
 	
@@ -202,8 +202,8 @@ public class BallShooter extends Subsystem {
 		
 		while (full_speed == false) {
 			
-			if (Math.abs(talonR.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED && 
-					Math.abs(talonL.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED) {
+			if (Math.abs(talonR.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
+					Math.abs(talonL.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				full_speed = true;
 			}
 		}

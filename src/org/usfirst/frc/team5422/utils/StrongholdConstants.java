@@ -20,7 +20,7 @@ public class StrongholdConstants {
 	public static double SHOOTER_P = 0;
 	public static double SHOOTER_I = 0;
 	public static double SHOOTER_D = 0;
-	public static double SHOOTER_MAX_SPEED = 6300; //per 10ms
+	public static double SHOOTER_MAX_SPEED = 6000; //per 10ms
 	
 	public static double WHEEL_BASE = 23.0;//inches	
 	

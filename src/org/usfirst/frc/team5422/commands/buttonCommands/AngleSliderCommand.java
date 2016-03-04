@@ -17,7 +17,7 @@ public class AngleSliderCommand extends Command {
 
     @Override
     protected void execute() {
-        if (!DSIO.assistShoot) {
+        if (DSIO.assistShoot == false) {
             System.out.println("Adjusting angle of shooter based on slider");
 
             double actuatorArmSliderValue = DSIO.getActuatorSliderValue();
