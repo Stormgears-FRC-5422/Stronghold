@@ -48,6 +48,9 @@ public class StrongholdDriver extends Driver {
         slaveTalon[0].changeControlMode(TalonControlMode.Follower);
         slaveTalon[1].changeControlMode(TalonControlMode.Follower);
         
+        masterTalon[0].setEncPosition(0);
+        masterTalon[1].setEncPosition(0);
+        
         slaveTalon[0].set(StrongholdConstants.TALON_DRIVE_LEFT_MASTER);
         slaveTalon[1].set(StrongholdConstants.TALON_DRIVE_RIGHT_MASTER);
     }
