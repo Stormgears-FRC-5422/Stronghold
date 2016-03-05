@@ -66,12 +66,12 @@ public class SmartDashboardChooser {
         allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
         SmartDashboard.putData("Alliance Chooser", allianceChooser);
 
-        startPositionChooser.addDefault("Start Position 1 (Left Most, Near Low Bar)", StrongholdConstants.START_POSITION_1);
+        startPositionChooser.addDefault("Start Position 1 (Front of Low Bar)", StrongholdConstants.START_POSITION_1);
         startPositionChooser.addObject("Start Position 2", StrongholdConstants.START_POSITION_2);
         startPositionChooser.addObject("Start Position 3", StrongholdConstants.START_POSITION_3);
         startPositionChooser.addObject("Start Position 4", StrongholdConstants.START_POSITION_4);
-        startPositionChooser.addObject("Start Position 5", StrongholdConstants.START_POSITION_5);
-        startPositionChooser.addObject("Start Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
+        startPositionChooser.addObject("Start Position 5 (Front of 5th Defense)", StrongholdConstants.START_POSITION_5);
+//        startPositionChooser.addObject("Start Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
         SmartDashboard.putData("Start Position Chooser", startPositionChooser);
 
         //Add other defense position text boxes

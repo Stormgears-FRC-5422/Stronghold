@@ -104,7 +104,7 @@ public class Navigator extends Subsystem{
 	}
 	
 	private void rotateToTheta(double theta, double rpmR, double rpmL){
-		Timer.delay(2);
+		//Timer.delay(2);
 		System.out.println("rotateToTheta Entered " + Timer.getFPGATimestamp());
 		theta = GlobalMapping.reduceRadiansUtil(theta);
 		double relInitTheta = theta - GlobalMapping.getInstance().getTheta();
@@ -180,7 +180,7 @@ public class Navigator extends Subsystem{
 	}
 
 	private void moveByDistance(double targDistance, double rps){
-		Timer.delay(2);
+		//Timer.delay(2);
 		System.out.println("moveByDistance Entered " + Timer.getFPGATimestamp());
 		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 		System.out.format("[GP][translate by] %.3g (in)\n", targDistance );

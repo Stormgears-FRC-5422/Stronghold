@@ -292,10 +292,12 @@ public class DSIO {
     {
         int position = -1;
 
-        pos[1] = (int) SmartDashboard.getNumber("Defense at Position 1", -1);
-        pos[2] = (int) SmartDashboard.getNumber("Defense at Position 2", -1);
-        pos[3] = (int) SmartDashboard.getNumber("Defense at Position 3", -1);
-        pos[4] = (int) SmartDashboard.getNumber("Defense at Position 4", -1);
+        //Defense at position 0 is always low bar (ID 0)
+        pos[0] = 0;
+        pos[1] = (int) SmartDashboard.getNumber("Defense at Position 2", -1);
+        pos[2] = (int) SmartDashboard.getNumber("Defense at Position 3", -1);
+        pos[3] = (int) SmartDashboard.getNumber("Defense at Position 4", -1);
+        pos[4] = (int) SmartDashboard.getNumber("Defense at Position 5", -1);
 
         int[] defensePositions = new int[9];
 

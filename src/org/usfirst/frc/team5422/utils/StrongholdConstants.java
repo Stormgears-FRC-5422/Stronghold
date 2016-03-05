@@ -152,7 +152,7 @@ public class StrongholdConstants {
 	public static final Double[] START_POSITION_3 = {25.0 + 2 * 50, 12.0};
 	public static final Double[] START_POSITION_4 = {25.0 + 3 * 50, 12.0};
 	public static final Double[] START_POSITION_5 = {25.0 + 4 * 50, 12.0};
-	public static final Double[] START_POSITION_6 = {25.0 + 5 * 50, 24.0};
+//	public static final Double[] START_POSITION_6 = {25.0 + 5 * 50, 24.0};
 	
 	
 	
