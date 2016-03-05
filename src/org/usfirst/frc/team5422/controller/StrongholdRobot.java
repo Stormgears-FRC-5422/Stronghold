@@ -123,7 +123,7 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void autonomousInit() {
         System.out.println("auto init started.");
-        
+        /*
     	getSmartDashboardDataSelections();
 
     	autonomousCommand = new AutonomousCommandGroup();
@@ -166,7 +166,10 @@ public class StrongholdRobot extends IterativeRobot {
         //Get input from DSIO smart dashboard
         //System.out.println("Defense position selected for autonomous is " + DSIO.getSelectedDefensePosition() + " inside auto init.");
 
-
+		*/
+        GlobalMapping.resetValues(0, 0, Math.PI/2);
+        shooterSubsystem.changeAngle(0.0);
+        navigatorSubsystem.driveTo(0, 150-12);
         System.out.println("auto init ended.");
     }
 
