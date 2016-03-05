@@ -180,8 +180,8 @@ public class BallShooter extends Subsystem {
 	//Used by manual mode
 	private void _shoot(double speedMultiplier) {
 		
-		talonR.changeControlMode(TalonControlMode.Speed);
-		talonL.changeControlMode(TalonControlMode.Speed);
+		talonR.changeControlMode(TalonControlMode.PercentVbus);
+		talonL.changeControlMode(TalonControlMode.PercentVbus);
 		
 		//Potentiometer starts at 533
 		//620 = min    -22 degrees
@@ -197,16 +197,16 @@ public class BallShooter extends Subsystem {
 //		talonR.set(-6248); //* StrongholdConstants.VEL_PER_10MS
 //		talonL.set(6248); //0.762745
 
-		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier); //8465
+		talonR.set(-StrongholdConstants.FULL_THROTTLE * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
+		talonL.set(StrongholdConstants.FULL_THROTTLE * speedMultiplier); //8465
 		
-		while (full_speed == false) {
-			
-			if (Math.abs(talonR.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-					Math.abs(talonL.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-				full_speed = true;
-			}
-		}
+//		while (full_speed == false) {
+//			
+//			if (Math.abs(talonR.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
+//					Math.abs(talonL.getEncVelocity()) >= 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
+//				full_speed = true;
+//			}
+//		}
 		
 		Timer.delay(StrongholdConstants.SHOOT_DELAY1);
 		
