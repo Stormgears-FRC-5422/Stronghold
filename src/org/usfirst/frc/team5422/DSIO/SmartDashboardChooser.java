@@ -4,6 +4,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.startPositionOptions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,8 @@ public class SmartDashboardChooser {
     public SmartDashboardChooser() {
 		//create choosers
 
+    	//Create start position chooser
+        startPositionChooser = new SendableChooser();
     	//create defense chooser
     	defenseChooser = new SendableChooser();
         //Create shoot chooser
@@ -29,10 +32,7 @@ public class SmartDashboardChooser {
         //Create alliance selector
         allianceChooser = new SendableChooser();
         //Create subsystem test selector
-        testChooser = new SendableChooser();
-        //Create start position chooser
-        startPositionChooser = new SendableChooser();
-        
+        testChooser = new SendableChooser();        
 	}
 	
 	public void initChoosers() {
@@ -66,31 +66,39 @@ public class SmartDashboardChooser {
         allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
         SmartDashboard.putData("Alliance Chooser", allianceChooser);
 
-        startPositionChooser.addDefault("Start Position 1 (Front of Low Bar)", StrongholdConstants.START_POSITION_1);
-        startPositionChooser.addObject("Start Position 2", StrongholdConstants.START_POSITION_2);
-        startPositionChooser.addObject("Start Position 3", StrongholdConstants.START_POSITION_3);
-        startPositionChooser.addObject("Start Position 4", StrongholdConstants.START_POSITION_4);
-        startPositionChooser.addObject("Start Position 5 (Front of 5th Defense)", StrongholdConstants.START_POSITION_5);
+//        startPositionChooser.addDefault("Start Position 1 (Front of Low Bar)", StrongholdConstants.START_POSITION_1);
+//        startPositionChooser.addObject("Start Position 2", StrongholdConstants.START_POSITION_2);
+//        startPositionChooser.addObject("Start Position 3", StrongholdConstants.START_POSITION_3);
+//        startPositionChooser.addObject("Start Position 4", StrongholdConstants.START_POSITION_4);
+//        startPositionChooser.addObject("Start Position 5 (Front of 5th Defense)", StrongholdConstants.START_POSITION_5);
 //        startPositionChooser.addObject("Start Position 6 (Right Most, Near Secret Passage)", StrongholdConstants.START_POSITION_6);
-        SmartDashboard.putData("Start Position Chooser", startPositionChooser);
+//        SmartDashboard.putData("Start Position Chooser", startPositionChooser);
 
+        startPositionChooser.addDefault("Start Position 1 (Front of Low Bar)", startPositionOptions.FRONT_OF_DEFENSE_1_LOW_BAR);
+        startPositionChooser.addObject("Start Position 2 (Front of 2nd Defense)", startPositionOptions.FRONT_OF_DEFENSE_2 );
+        startPositionChooser.addObject("Start Position 3 (Front of 3rd Defense)", startPositionOptions.FRONT_OF_DEFENSE_3);
+        startPositionChooser.addObject("Start Position 4 (Front of 4th Defense)", startPositionOptions.FRONT_OF_DEFENSE_4);
+        startPositionChooser.addObject("Start Position 5 (Front of 5th Defense)", startPositionOptions.FRONT_OF_DEFENSE_5);
+        SmartDashboard.putData("Start Position Chooser", startPositionChooser);
+        
+        
         //Add other defense position text boxes
-        SmartDashboard.putNumber("Defense at Position 1", 0);
-        SmartDashboard.putNumber("Defense at Position 2", -1);
-        SmartDashboard.putNumber("Defense at Position 3", -1);
-        SmartDashboard.putNumber("Defense at Position 4", -1);
-        SmartDashboard.putNumber("Defense at Position 5", -1);
+//        SmartDashboard.putNumber("Defense at Position 1", 0);
+//        SmartDashboard.putNumber("Defense at Position 2", -1);
+//        SmartDashboard.putNumber("Defense at Position 3", -1);
+//        SmartDashboard.putNumber("Defense at Position 4", -1);
+//        SmartDashboard.putNumber("Defense at Position 5", -1);
 
 //        testInitChoosers();
 	}
 	
 	public void autoInitChoosers() {
         //Add other defense position text boxes
-        SmartDashboard.putNumber("Defense at Position 1", 0);
-        SmartDashboard.putNumber("Defense at Position 2", 3);
-        SmartDashboard.putNumber("Defense at Position 3", 4);
-        SmartDashboard.putNumber("Defense at Position 4", 7);
-        SmartDashboard.putNumber("Defense at Position 5", 8);
+//        SmartDashboard.putNumber("Defense at Position 1", 0);
+//        SmartDashboard.putNumber("Defense at Position 2", 3);
+//        SmartDashboard.putNumber("Defense at Position 3", 4);
+//        SmartDashboard.putNumber("Defense at Position 4", 7);
+//        SmartDashboard.putNumber("Defense at Position 5", 8);
 	}	
 
 	public void teleopInitChoosers() {

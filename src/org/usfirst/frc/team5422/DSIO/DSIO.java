@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.startPositionOptions;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -287,75 +288,75 @@ public class DSIO {
         choosers.initChoosers();
         //choosers.autoInitChoosers();
     }
-
-    public static int getSelectedDefensePosition()
-    {
-        int position = -1;
-
-        //Defense at position 0 is always low bar (ID 0)
-        pos[0] = 0;
-        pos[1] = (int) SmartDashboard.getNumber("Defense at Position 2", -1);
-        pos[2] = (int) SmartDashboard.getNumber("Defense at Position 3", -1);
-        pos[3] = (int) SmartDashboard.getNumber("Defense at Position 4", -1);
-        pos[4] = (int) SmartDashboard.getNumber("Defense at Position 5", -1);
-
-        int[] defensePositions = new int[9];
-
-        for (int i = 1; i < 9; i++)
-        {
-            defensePositions[i] = -1;
-        }
-
-        for (int i = 1; i < 9; i++)
-        {
-            for (int c = 1; c < 5; c++)
-            {
-                if (pos[c] == i) {
-                    defensePositions[i] = c;
-                }
-            }
-        }
-
-        //If auto is running, get position from SmartDashboard
-        if (StrongholdRobot.teleopNotRunning)
-        {
-            switch ((defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected())
-            {
-                case LOW_BAR:
-                    position = 0; //Position of low bar is always 0
-                    break;
-                case PORTCULLIS:
-                    position = defensePositions[1];
-                    break;
-                case CHIVAL_DE_FRISE:
-                    position = defensePositions[2];
-                    break;
-                case MOAT:
-                    position = defensePositions[3];
-                    break;
-                case RAMPARTS:
-                    position = defensePositions[4];
-                    break;
-                case DRAWBRIDGE:
-                    position = defensePositions[5];
-                    break;
-                case SALLYPORT:
-                    position = defensePositions[6];
-                    break;
-                case ROCK_WALL:
-                    position = defensePositions[7];
-                    break;
-                case ROUGH_TERRAIN:
-                    position = defensePositions[8];
-                    break;
-                case NONE:
-                    position = -1;
-                    break;
-            }//End switch
-        }
-        System.out.println("Defense type " + (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected() + " at position " + position);
-        return position;
-    }//End method
+   
+//    public static int getSelectedDefensePosition()
+//    {
+//        int position = -1;
+//
+//        //Defense at position 0 is always low bar (ID 0)
+//        pos[0] = 0;
+//        pos[1] = (int) SmartDashboard.getNumber("Defense at Position 2", -1);
+//        pos[2] = (int) SmartDashboard.getNumber("Defense at Position 3", -1);
+//        pos[3] = (int) SmartDashboard.getNumber("Defense at Position 4", -1);
+//        pos[4] = (int) SmartDashboard.getNumber("Defense at Position 5", -1);
+//
+//        int[] defensePositions = new int[9];
+//
+//        for (int i = 1; i < 9; i++)
+//        {
+//            defensePositions[i] = -1;
+//        }
+//
+//        for (int i = 1; i < 9; i++)
+//        {
+//            for (int c = 1; c < 5; c++)
+//            {
+//                if (pos[c] == i) {
+//                    defensePositions[i] = c;
+//                }
+//            }
+//        }
+//
+//        //If auto is running, get position from SmartDashboard
+//        if (StrongholdRobot.teleopNotRunning)
+//        {
+//            switch ((defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected())
+//            {
+//                case LOW_BAR:
+//                    position = 0; //Position of low bar is always 0
+//                    break;
+//                case PORTCULLIS:
+//                    position = defensePositions[1];
+//                    break;
+//                case CHIVAL_DE_FRISE:
+//                    position = defensePositions[2];
+//                    break;
+//                case MOAT:
+//                    position = defensePositions[3];
+//                    break;
+//                case RAMPARTS:
+//                    position = defensePositions[4];
+//                    break;
+//                case DRAWBRIDGE:
+//                    position = defensePositions[5];
+//                    break;
+//                case SALLYPORT:
+//                    position = defensePositions[6];
+//                    break;
+//                case ROCK_WALL:
+//                    position = defensePositions[7];
+//                    break;
+//                case ROUGH_TERRAIN:
+//                    position = defensePositions[8];
+//                    break;
+//                case NONE:
+//                    position = -1;
+//                    break;
+//            }//End switch
+//        }
+//        System.out.println("Defense type " + (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected() + " at position " + position);
+//        return position;
+//    }//End method
 
     public static double getActuatorSliderValue()
     {

@@ -21,6 +21,7 @@ import org.usfirst.frc.team5422.utils.*;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.startPositionOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.alliance;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -61,11 +62,12 @@ public class StrongholdRobot extends IterativeRobot {
     public static Grappler grapplerSubsystem;
     public static Lifter lifterSubsystem;
     public static RobotConfigurationFileReader robotPropertiesGetter;
-    public static LiveWindow lw;
+//    public static LiveWindow lw;
 
     public static DSIO dsio;
     public static DriverInterface driver;
 
+    public static startPositionOptions startPositionSelected; 
     public static defenseTypeOptions defenseTypeSelected;
     public static int defensePositionSelected;
     public static shootOptions shootOptionSelected;
@@ -89,7 +91,7 @@ public class StrongholdRobot extends IterativeRobot {
             driver = new StrongholdDriver();
         }
 
-        lw = new LiveWindow();
+//        lw = new LiveWindow();
 
         navigatorSubsystem = new Navigator();
         shooterSubsystem = new BallShooter();
@@ -122,16 +124,32 @@ public class StrongholdRobot extends IterativeRobot {
     public void autonomousInit() {
         System.out.println("auto init started.");
         
-        autonomousCommand = new AutonomousCommandGroup();
+    	getSmartDashboardDataSelections();
+
+    	autonomousCommand = new AutonomousCommandGroup();
+    	
 //        liftingCommandGroup = new LiftingCommandGroup();
 
-        if (autonomousCommand != null) {
-            defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
-            defensePositionSelected = DSIO.getSelectedDefensePosition();
-            shootOptionSelected = (shootOptions) SmartDashboardChooser.shootChooser.getSelected();
-            allianceSelected = (alliance) SmartDashboardChooser.allianceChooser.getSelected();
-            initialX = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[0];
-            initialY = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[1];
+//        if (autonomousCommand != null) {
+//            defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
+//            defensePositionSelected = DSIO.getSelectedDefensePosition();
+//            shootOptionSelected = (shootOptions) SmartDashboardChooser.shootChooser.getSelected();
+//            allianceSelected = (alliance) SmartDashboardChooser.allianceChooser.getSelected();
+//            initialX = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[0];
+//            initialY = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[1];
+//
+//            GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
+//
+//            System.out.println("Selecting from Defense Type as " + defenseTypeSelected + " at position " + defensePositionSelected + " and Goal selected as " + shootOptionSelected);
+//
+//            autonomousCommand.start();
+//
+//            //Only for testing purposes
+//            //liftingCommandGroup.start();
+//        }
+
+
+    	if (autonomousCommand != null) {
 
             GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
 
@@ -152,6 +170,49 @@ public class StrongholdRobot extends IterativeRobot {
         System.out.println("auto init ended.");
     }
 
+    private static void getSmartDashboardDataSelections() {
+    	startPositionSelected = (startPositionOptions)SmartDashboardChooser.startPositionChooser.getSelected(); 
+        defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
+        shootOptionSelected = (shootOptions) SmartDashboardChooser.shootChooser.getSelected();
+        allianceSelected = (alliance) SmartDashboardChooser.allianceChooser.getSelected();
+
+//        defensePositionSelected = DSIO.getSelectedDefensePosition();
+
+    	switch (startPositionSelected)
+        {
+            case FRONT_OF_DEFENSE_1_LOW_BAR:
+                defensePositionSelected = 1; 
+            	initialX =  StrongholdConstants.START_POSITION_1[0];
+                initialY = StrongholdConstants.START_POSITION_1[1];
+                break;
+            case FRONT_OF_DEFENSE_2:
+                defensePositionSelected = 2; 
+            	initialX =  StrongholdConstants.START_POSITION_2[0];
+                initialY = StrongholdConstants.START_POSITION_2[1];
+                break;
+            case FRONT_OF_DEFENSE_3:
+                defensePositionSelected = 3; 
+            	initialX =  StrongholdConstants.START_POSITION_3[0];
+                initialY = StrongholdConstants.START_POSITION_3[1];
+                break;
+            case FRONT_OF_DEFENSE_4:
+                defensePositionSelected = 4; 
+            	initialX =  StrongholdConstants.START_POSITION_4[0];
+                initialY = StrongholdConstants.START_POSITION_4[1];
+                break;
+            case FRONT_OF_DEFENSE_5:
+                defensePositionSelected = 5; 
+            	initialX =  StrongholdConstants.START_POSITION_5[0];
+                initialY = StrongholdConstants.START_POSITION_5[1];
+                break;
+            case NONE:
+            	initialX =  0.0;
+                initialY = 0.0;
+                break;
+        }//End switch
+    
+    }
+    
     public void autonomousPeriodic() {
         
         if (autonomousCommand != null) {
@@ -295,6 +356,6 @@ public class StrongholdRobot extends IterativeRobot {
      * Runs during test mode
      */
     public void testPeriodic() {
-        lw.addActuator("Ball Shooter", "Arm", shooterSubsystem.actuator);
+//        lw.addActuator("Ball Shooter", "Arm", shooterSubsystem.actuator);
     }
 }

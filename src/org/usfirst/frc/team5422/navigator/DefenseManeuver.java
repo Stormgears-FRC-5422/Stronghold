@@ -40,7 +40,7 @@ public class DefenseManeuver implements Runnable{
 	/**Is the passable width of any defense (between shields) in inches*/
 	private static double defensePassableLength = StrongholdConstants.DEFENSE_PASSABLE_LENGTH;
 	private static double defenseWidth = StrongholdConstants.DEFENSE_WIDTH;
-	private static double defenseMiddlePosY = (double)StrongholdConstants.POSITION_DEFENSE_0_REACH[1];
+	private static double defenseMiddlePosY = (double)StrongholdConstants.POSITION_DEFENSE_MANEUVER[1];
 	
 	private static double robotWidth = StrongholdConstants.ROBOT_WIDTH;
 	private static double sensorToRobotMiddleY= StrongholdConstants.SIDE_ULTRA_SENSOR_TO_ROBOT_MIDDLE_Y;
@@ -66,7 +66,7 @@ public class DefenseManeuver implements Runnable{
 		double fieldX = GlobalMapping.getInstance().getX();//find current defense by position
 		
 		int vals[] = {
-				StrongholdConstants.POSITION_DEFENSE_0_REACH[0],
+				StrongholdConstants.POSITION_DEFENSE_MANEUVER[0],
 				StrongholdConstants.POSITION_DEFENSE_1_REACH[0],
 				StrongholdConstants.POSITION_DEFENSE_2_REACH[0],
 				StrongholdConstants.POSITION_DEFENSE_3_REACH[0],

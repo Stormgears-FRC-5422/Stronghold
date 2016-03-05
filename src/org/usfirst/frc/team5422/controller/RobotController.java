@@ -11,6 +11,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdUtils;
 
 public class RobotController {
+	
     public static void doActionsOnButtonPress(int buttonID) {
         if (buttonID == StrongholdConstants.BIG_BLUE_BUTTON_ID) {
             BigBlueCommand bigBlue = new BigBlueCommand();
@@ -30,15 +31,17 @@ public class RobotController {
             //Nothing yet
         }
         else if (buttonID == StrongholdConstants.GREEN_BUTTON_ID) {
-            //Cross defense
-            int position = DSIO.getSelectedDefensePosition();
+            //Nothing yet
 
-            StrongholdRobot.defensePositionSelected = position;
-            StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(position);
+        	//Cross defense
+            //int position = DSIO.getSelectedDefensePosition();
 
-            CrossDefenseCommand cross = new CrossDefenseCommand();
+            //StrongholdRobot.defensePositionSelected = position;
+            //StrongholdRobot.defenseTypeSelected = StrongholdUtils.getDefenseFromPosition(StrongholdRobot.defensePositionSelected);
 
-            cross.start();
+            //CrossDefenseCommand cross = new CrossDefenseCommand();
+
+            //cross.start();
         }
         else if (buttonID == StrongholdConstants.BLUE_BUTTON_ID) {
             //Lock onto goal

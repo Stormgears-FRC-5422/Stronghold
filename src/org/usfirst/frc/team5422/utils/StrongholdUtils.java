@@ -13,39 +13,39 @@ public class StrongholdUtils {
         return distance;
     }
 
-    public static defenseTypeOptions getDefenseFromPosition(int defensePosition) {
-        defenseTypeOptions defense = defenseTypeOptions.LOW_BAR;
-        int defenseID = DSIO.pos[defensePosition];
-
-        switch (defenseID) {
-            case 0:
-                defense = defenseTypeOptions.LOW_BAR;
-                break;
-            case 1:
-                defense = defenseTypeOptions.PORTCULLIS;
-                break;
-            case 2:
-                defense = defenseTypeOptions.CHIVAL_DE_FRISE;
-                break;
-            case 3:
-                defense = defenseTypeOptions.MOAT;
-                break;
-            case 4:
-                defense = defenseTypeOptions.RAMPARTS;
-                break;
-            case 5:
-                defense = defenseTypeOptions.DRAWBRIDGE;
-                break;
-            case 6:
-                defense = defenseTypeOptions.SALLYPORT;
-                break;
-            case 7:
-                defense = defenseTypeOptions.ROCK_WALL;
-                break;
-            case 8:
-                defense = defenseTypeOptions.ROUGH_TERRAIN;
-                break;
-        }
-        return defense;
-    }
+//    public static defenseTypeOptions getDefenseFromPosition(int defensePosition) {
+//        defenseTypeOptions defense = defenseTypeOptions.LOW_BAR;
+//        int defenseID = DSIO.pos[defensePosition];
+//
+//        switch (defenseID) {
+//            case 0:
+//                defense = defenseTypeOptions.LOW_BAR;
+//                break;
+//            case 1:
+//                defense = defenseTypeOptions.PORTCULLIS;
+//                break;
+//            case 2:
+//                defense = defenseTypeOptions.CHIVAL_DE_FRISE;
+//                break;
+//            case 3:
+//                defense = defenseTypeOptions.MOAT;
+//                break;
+//            case 4:
+//                defense = defenseTypeOptions.RAMPARTS;
+//                break;
+//            case 5:
+//                defense = defenseTypeOptions.DRAWBRIDGE;
+//                break;
+//            case 6:
+//                defense = defenseTypeOptions.SALLYPORT;
+//                break;
+//            case 7:
+//                defense = defenseTypeOptions.ROCK_WALL;
+//                break;
+//            case 8:
+//                defense = defenseTypeOptions.ROUGH_TERRAIN;
+//                break;
+//        }
+//        return defense;
+//    }
 }
