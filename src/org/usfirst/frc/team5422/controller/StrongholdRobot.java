@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
- * This is a demo program showing the use of the RobotDrive class.
+ * This is a demo program showing the use of the RobotDrive class
  * The SampleRobot class is the base of a robot application that will automatically call your
  * Autonomous and OperatorControl methods at the right time as controlled by the switches on
  * the rhinoDriver station or the field controls.
