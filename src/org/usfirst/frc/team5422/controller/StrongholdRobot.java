@@ -3,13 +3,11 @@ package org.usfirst.frc.team5422.controller;
 
 import edu.wpi.first.wpilibj.*;
 
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
-import org.usfirst.frc.team5422.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
 import org.usfirst.frc.team5422.navigator.*;
@@ -174,7 +172,7 @@ public class StrongholdRobot extends IterativeRobot {
     }
 
     private static void getSmartDashboardDataSelections() {
-    	startPositionSelected = (startPositionOptions)SmartDashboardChooser.startPositionChooser.getSelected(); 
+    	startPositionSelected = (startPositionOptions) SmartDashboardChooser.startPositionChooser.getSelected();
         defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
         shootOptionSelected = (shootOptions) SmartDashboardChooser.shootChooser.getSelected();
         allianceSelected = (alliance) SmartDashboardChooser.allianceChooser.getSelected();
