@@ -207,8 +207,8 @@ public class StrongholdConstants {
 	}
 
 	public static final double SHOOT_DELAY = 1;
-	public static final double SHOOT_DELAY1 = 0.5;
-	public static final double SHOOT_DELAY2 = 2;
+	public static final double SHOOT_DELAY1 = 2;
+	public static final double SHOOT_DELAY2 = 0.5;
 	public static final double SHOOTER_HEIGHT = 10.5;
 	public static final double HEIGHT_TO_HIGH_GOAL = 97 - SHOOTER_HEIGHT;
 	public static final double HEIGHT_TO_LOW_GOAL = 18 - SHOOTER_HEIGHT;
@@ -217,16 +217,16 @@ public class StrongholdConstants {
 	public static final double TUNER_MULTIPLIER = 90.91;
 	
 	//Used in real robot
-	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
-	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
-	public static final double ACTUATOR_ANGLE_MIN = -22;
-	public static final double ACTUATOR_ANGLE_MAX = 73;
+//	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
+//	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
+//	public static final double ACTUATOR_ANGLE_MIN = -22;
+//	public static final double ACTUATOR_ANGLE_MAX = 73;
 	
 	//Used in replica robot
-//	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 570;
-//	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 907;
-//	public static final double ACTUATOR_ANGLE_MIN = -20;
-//	public static final double ACTUATOR_ANGLE_MAX = 57;
+	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 193;
+	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 323;
+	public static final double ACTUATOR_ANGLE_MIN = -21;
+	public static final double ACTUATOR_ANGLE_MAX = 55;
 	
 	public static final double ACTUATOR_ARM_SLIDER_MIN = -1;
 	public static final double ACTUATOR_ARM_SLIDER_MAX = 1;

@@ -26,6 +26,7 @@ public class BigBlueCommand extends Command {
         else 
         	StrongholdRobot.shooterSubsystem.shoot(
         			ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
+        DSIO.shooterRunning = false;
     }
 
     @Override
