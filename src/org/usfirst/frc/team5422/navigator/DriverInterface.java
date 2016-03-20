@@ -11,4 +11,5 @@ public interface DriverInterface {
     public void stopTrapezoid();
     public CANTalon getDriveTalonLeftMaster();
     public CANTalon getDriveTalonRightMaster();
+    public void turnToAlignVision();
 }
