@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5422.sensors;
 
+import org.usfirst.frc.team5422.utils.StrongholdConstants;
+
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,9 +11,9 @@ public class Vision {
 	private DigitalOutput lights;
 	public static NetworkTable visionTable = NetworkTable.getTable("GRIP/myContoursReport");
 	
-	public Vision(int DPIO){
+	public Vision(){
 		System.out.println("Vision system constructed");
-		lights = new DigitalOutput(DPIO);
+		lights = new DigitalOutput(StrongholdConstants.RINGLIGHT_PORT);
 		lights.set(false);
 		System.out.println("lights turned on");
 	}
