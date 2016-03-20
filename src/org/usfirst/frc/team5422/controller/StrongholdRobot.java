@@ -15,6 +15,7 @@ import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.ShooterHelper;
+import org.usfirst.frc.team5422.sensors.Vision;
 import org.usfirst.frc.team5422.utils.*;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
@@ -64,6 +65,7 @@ public class StrongholdRobot extends IterativeRobot {
 
     public static DSIO dsio;
     public static DriverInterface driver;
+    public static Vision vision;
 
     public static startPositionOptions startPositionSelected; 
     public static defenseTypeOptions defenseTypeSelected;
@@ -96,6 +98,7 @@ public class StrongholdRobot extends IterativeRobot {
         openerSubsystem = new SallyPortOpener();
         grapplerSubsystem = new Grappler();
         lifterSubsystem = new Lifter();
+        vision = new Vision();
 
 
         teleopNotRunning = true;
@@ -168,6 +171,9 @@ public class StrongholdRobot extends IterativeRobot {
         GlobalMapping.resetValues(0, 0, Math.PI/2);
         shooterSubsystem.changeAngle(0.0);
         navigatorSubsystem.driveTo(0, 150-12);
+        vision.turnOnLights();
+        driver.turnToAlignVision();
+        
         System.out.println("auto init ended.");
     }
 
