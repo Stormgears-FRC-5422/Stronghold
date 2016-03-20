@@ -15,9 +15,12 @@ public class StrongholdConstants {
 	public static final String PROP_INPUT_METHOD_OFFICIAL = "official";
 	public static final String PROP_INPUT_METHOD_SIMULATOR = "simulator";
 			
-
-	public static double SHOOTER_F = 0.16238095;
-	public static double SHOOTER_P = 0;
+//	public static double SHOOTER_F = 0.16238095;
+//	public static double SHOOTER_P = 0;
+	
+	
+	public static double SHOOTER_F = 1.705;
+	public static double SHOOTER_P = 0.000185;
 	public static double SHOOTER_I = 0;
 	public static double SHOOTER_D = 0;
 	public static double SHOOTER_MAX_SPEED = 6000; //per 10ms
@@ -240,10 +243,15 @@ public class StrongholdConstants {
 	public static final double ACTUATOR_ARM_POT_RANGE = Math.abs(ACTUATOR_ARM_DOWN_POT_FULLRANGE - ACTUATOR_ARM_UP_POT_FULLRANGE);
 	public static final double ACTUATOR_ARM_SLIDER_TO_POT_CONVERSION_FACTOR = ACTUATOR_ARM_POT_RANGE/ACTUATOR_ARM_SLIDER_RANGE;
 
+	// Vision constants
+	public static final int RINGLIGHT_PORT = 13;
+
 //	public static final double ACTUATOR_ARM_UP_ANGLE = 73;//degrees
 //	public static final double ACTUATOR_ARM_DOWN_ANGLE = -22;//degrees
 //	public static final double ACTUATOR_ARM_ANGLE_RANGE = Math.abs(ACTUATOR_ARM_DOWN_ANGLE - ACTUATOR_ARM_UP_ANGLE);//degrees
 //	public static final double ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR = ACTUATOR_ARM_SLIDER_RANGE/ACTUATOR_ARM_ANGLE_RANGE;
+	
+	
 	
 	public enum shootOptions {
 		HIGH_LEFT,
