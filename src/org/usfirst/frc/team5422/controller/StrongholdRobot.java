@@ -173,6 +173,7 @@ public class StrongholdRobot extends IterativeRobot {
         navigatorSubsystem.driveTo(0, 150-12);
         vision.turnOnLights();
         driver.turnToAlignVision();
+        shooterSubsystem.changeAngle(Vision.getShooterAngle());
         
         System.out.println("auto init ended.");
     }

@@ -66,4 +66,17 @@ public class Vision {
 		return radialDistance;
 		
 	}
+	
+	public static double getShooterAngle() {
+		
+		// Make these values below constants (robot specific)
+		
+		double h = 77.5;								// Height to goal is 77.5in above shooter
+		double d = getRadialDistanceVision();			// Distance of camera from goal
+		double shooterDistFromCamera = 13;				// Shooter is 13in from Camera
+		
+		double angle = Math.atan(h/(d-shooterDistFromCamera));
+		
+		return angle;
+	}
 }
