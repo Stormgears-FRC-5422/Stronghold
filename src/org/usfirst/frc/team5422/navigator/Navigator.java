@@ -143,6 +143,51 @@ public class Navigator extends Subsystem{
 		System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
 	}
 	
+	
+	
+	
+	private void rotateToThetaRelative(double theta, double rpmR, double rpmL){
+		//Timer.delay(2);
+		System.out.println("rotateToTheta Entered " + Timer.getFPGATimestamp());
+		theta = GlobalMapping.reduceRadiansUtil(theta);
+		double relInitTheta = theta;
+		
+		if(relInitTheta > Math.PI){
+			relInitTheta -= 2*Math.PI;
+		}else if(relInitTheta < -Math.PI){
+			relInitTheta += 2*Math.PI;
+		}
+		
+		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
+		System.out.format("[GP][rotate to] %4.3g [rotate by] %4.3g (rad)\n", theta, relInitTheta );
+		
+		
+		double lTicksDest = -StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		double rTicksDest = StrongholdConstants.WHEEL_BASE/2*relInitTheta/StrongholdConstants.INCHES_PER_TICK;
+		
+		if(Math.abs(rTicksDest) > 10){
+			if(moveTrapezoidal){
+				trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
+				waitForTrapezoidalFinish();
+			
+				System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
+			}else{
+				lTicksDest*=-1;
+				rTicksDest*=-1;
+				speedWheelTicks(rTicksDest, lTicksDest);
+				waitForSpeedRotationalFinish(relInitTheta);
+				speedWheelTicks(0, 0);
+			}
+		}else{
+			System.out.println("[Nav] calculated ticks is too small, skipping trap instead");
+			System.out.println("Encoder Ticks: " + "R: " + rTicksDest + "L: " + lTicksDest);
+		}
+		
+		System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
+	}
+	
+	
+	
 	private void waitForTrapezoidalFinish() {
 		while(true){
 			if(trapTable.getString("Trap Status", "running").equals("finished") && (trapTable.getNumber("Trap ID", -1) == currentProfileID)){
@@ -282,6 +327,19 @@ public class Navigator extends Subsystem{
 		// TODO Auto-generated method stub
 	}
 	
+	
+	
+	public void turnToRelative(double thetaField){
+		System.out.println("turnTo Entered " + Timer.getFPGATimestamp());
+		
+		
+		
+		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
+		
+		rotateToThetaRelative(thetaField, rps, rps);
+		System.out.println("turnTo Done " + Timer.getFPGATimestamp());
+		
+	}
 	
 	
 	
