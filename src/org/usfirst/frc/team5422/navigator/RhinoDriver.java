@@ -39,4 +39,11 @@ public class RhinoDriver extends Driver {
         masterTalon[1].setEncPosition(0);
     }
 
+	@Override
+	public void turnToAlignVision() {
+		// TODO Auto-generated method stub
+		
+	}
+
+    
 }
