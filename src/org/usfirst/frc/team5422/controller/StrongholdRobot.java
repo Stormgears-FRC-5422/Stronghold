@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
+import org.usfirst.frc.team5422.commands.auto.AutoReachNCrossCommandGroup;
+import org.usfirst.frc.team5422.commands.auto.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
 import org.usfirst.frc.team5422.navigator.*;
@@ -17,6 +19,7 @@ import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.sensors.Vision;
 import org.usfirst.frc.team5422.utils.*;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.autonomousModeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
@@ -71,6 +74,7 @@ public class StrongholdRobot extends IterativeRobot {
     public static defenseTypeOptions defenseTypeSelected;
     public static int defensePositionSelected;
     public static shootOptions shootOptionSelected;
+    public static autonomousModeOptions autoModeOptionSelected = autonomousModeOptions.REACH_N_CROSS;
     public static alliance allianceSelected;
     public static diagnosticPOSTOptions diagnosticTestSelected;
     public static Double initialX = 0.0, initialY = 0.0;
@@ -124,31 +128,11 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void autonomousInit() {
         System.out.println("auto init started.");
-        /*
-    	getSmartDashboardDataSelections();
 
-    	autonomousCommand = new AutonomousCommandGroup();
-    	
-//        liftingCommandGroup = new LiftingCommandGroup();
+        getSmartDashboardDataSelections();
 
-//        if (autonomousCommand != null) {
-//            defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
-//            defensePositionSelected = DSIO.getSelectedDefensePosition();
-//            shootOptionSelected = (shootOptions) SmartDashboardChooser.shootChooser.getSelected();
-//            allianceSelected = (alliance) SmartDashboardChooser.allianceChooser.getSelected();
-//            initialX = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[0];
-//            initialY = ((Double[]) SmartDashboardChooser.startPositionChooser.getSelected())[1];
-//
-//            GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
-//
-//            System.out.println("Selecting from Defense Type as " + defenseTypeSelected + " at position " + defensePositionSelected + " and Goal selected as " + shootOptionSelected);
-//
-//            autonomousCommand.start();
-//
-//            //Only for testing purposes
-//            //liftingCommandGroup.start();
-//        }
-
+        //selects and sets the autonomous command
+        selectAutonomousCommand();
 
     	if (autonomousCommand != null) {
 
@@ -156,32 +140,60 @@ public class StrongholdRobot extends IterativeRobot {
 
             System.out.println("Selecting from Defense Type as " + defenseTypeSelected + " at position " + defensePositionSelected + " and Goal selected as " + shootOptionSelected);
 
+            //initialize the shooter is in horizontal to the ground position
+            shooterSubsystem.changeAngle(0.0);
+
             autonomousCommand.start();
+
+	        vision.turnOnLights();
+	        driver.turnToAlignVision();
+	        shooterSubsystem.changeAngle(Vision.getShooterAngle());
 
             //Only for testing purposes
             //liftingCommandGroup.start();
-        }
-        
+    	}
+
         teleopNotRunning = true;
 
-        //Get input from DSIO smart dashboard
-        //System.out.println("Defense position selected for autonomous is " + DSIO.getSelectedDefensePosition() + " inside auto init.");
-
-		*/
-        GlobalMapping.resetValues(0, 0, Math.PI/2);
-        shooterSubsystem.changeAngle(0.0);
-        navigatorSubsystem.driveTo(0, 150-12);
-        vision.turnOnLights();
-        driver.turnToAlignVision();
-        shooterSubsystem.changeAngle(Vision.getShooterAngle());
+//        GlobalMapping.resetValues(0, 0, Math.PI/2);
+//        shooterSubsystem.changeAngle(0.0);
+//        navigatorSubsystem.driveTo(0, 150-12);
+//        vision.turnOnLights();
+//        driver.turnToAlignVision();
+//        shooterSubsystem.changeAngle(Vision.getShooterAngle());
         
         System.out.println("auto init ended.");
     }
 
+    private void selectAutonomousCommand() {
+
+    	switch (autoModeOptionSelected)
+        {
+            case REACH_N_CROSS:
+            	//autonomous reach AND cross with NO shoot using SINGLE trapezoidal motion profile
+                System.out.println("selecting reach 'n cross command.");
+            	autonomousCommand = new AutoReachNCrossCommandGroup();
+            	break;
+            case REACH_N_CROSS_N_SHOOT:
+            	//for autonomous reach, cross and shoot independently using separate trapezoidal motion profile
+                System.out.println("selecting reach 'n cross 'n shoot command.");
+            	autonomousCommand = new AutonomousCommandGroup();
+            	break;
+            case REACH:
+            case NONE:
+            default:
+            	//autonomous reach AND cross with NO shoot using SINGLE trapezoidal motion profile
+            	autonomousCommand = new AutoReachNCrossCommandGroup();
+            	break;
+        }
+    	
+    }
+    
     private static void getSmartDashboardDataSelections() {
     	startPositionSelected = (startPositionOptions) SmartDashboardChooser.startPositionChooser.getSelected();
         defenseTypeSelected = (defenseTypeOptions) SmartDashboardChooser.defenseChooser.getSelected();
         shootOptionSelected = (shootOptions) SmartDashboardChooser.shootChooser.getSelected();
+        autoModeOptionSelected = (autonomousModeOptions)SmartDashboardChooser.autonomousModeChooser.getSelected();
         allianceSelected = (alliance) SmartDashboardChooser.allianceChooser.getSelected();
 
 //        defensePositionSelected = DSIO.getSelectedDefensePosition();
@@ -280,6 +292,12 @@ public class StrongholdRobot extends IterativeRobot {
 
 	/**  function is called periodically during disable */
 	public void disabledInit() {
+        //Stop all autonomous WPILib commands
+		if (autonomousCommand != null) {
+			autonomousCommand.cancel();
+	        Scheduler.getInstance().removeAll();
+			autonomousCommand = null;
+		}
 		
 	}
 	

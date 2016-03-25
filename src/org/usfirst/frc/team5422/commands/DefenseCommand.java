@@ -2,7 +2,7 @@ package org.usfirst.frc.team5422.commands;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.defense.ChivalDeFrise;
-import org.usfirst.frc.team5422.defense.Defense;
+import org.usfirst.frc.team5422.defense.DefenseTypeInterface;
 import org.usfirst.frc.team5422.defense.DrawBridge;
 import org.usfirst.frc.team5422.defense.LowBar;
 import org.usfirst.frc.team5422.defense.Moat;
@@ -23,7 +23,7 @@ public class DefenseCommand extends Command {
 	protected defenseTypeOptions defenseTypeSelected = defenseTypeOptions.LOW_BAR;
 	protected int defensePositionSelected = -1;
 	protected shootOptions shootOptionSelected = shootOptions.HIGH_CENTER;
-	Defense defense;
+	DefenseTypeInterface defense;
 
     public DefenseCommand() {
         // Use requires() here to declare subsystem dependencies

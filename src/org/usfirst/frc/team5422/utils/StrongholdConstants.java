@@ -121,7 +121,7 @@ public class StrongholdConstants {
 	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 2 * 50, 90-20};
 	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 3 * 50, 90-20};
 	public static final int[] POSITION_DEFENSE_5_REACH = {25 + 4 * 50, 90-20};
-	public static final int CROSS_DEFENSE_LENGTH_Y = 60+20;
+	public static final int CROSS_DEFENSE_LENGTH_Y = 60+20+20;
 
 	//H = high; L = low
 	public static final double[] POSITION_HLEFT_GOAL = {151, 312};
@@ -287,5 +287,12 @@ public class StrongholdConstants {
 	public enum alliance {
 		RED, BLUE
 	}
-	
+
+	public enum autonomousModeOptions {
+		REACH_N_CROSS,
+		REACH_N_CROSS_N_SHOOT,
+		REACH,
+		NONE
+	}
+
 }

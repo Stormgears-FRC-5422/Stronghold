@@ -1,84 +1,14 @@
 package org.usfirst.frc.team5422.defense;
 
-import org.usfirst.frc.team5422.controller.StrongholdRobot;
-import org.usfirst.frc.team5422.navigator.GlobalMapping;
-import org.usfirst.frc.team5422.shooter.ShooterHelper;
-import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 /*
  * @author Suren Karavettil
  * @author Michael
  */
 
-public class RoughTerrain implements Defense {
+public class RoughTerrain extends DefenseType {
 	public RoughTerrain(defenseTypeOptions defenseType, int defensePosition) {
 		
 	}
-
-	@Override
-	public void align(defenseTypeOptions defenseType, int defensePosition) {
-		System.out.println("Aligning the Robot to the Rough Terrain defense at " + defensePosition);
-		// TODO Auto-generated method stub, defensePositionOptions defensePosition
-
-	}
-
-	@Override
-	public void reach(defenseTypeOptions defenseType, int defensePosition) {
-		System.out.println("Robot needs the source and destination coordinates as parameters to reach RoughTerrain defense..." + defensePosition);
-		System.out.println("Robot Reaching the RoughTerrain defense at " + defensePosition);
-		// TODO Auto-generated method stub
-
-		switch (defensePosition) {
-			case 1:
-				//do nothing	
-				break;
-			case 2:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2_REACH[0], StrongholdConstants.POSITION_DEFENSE_2_REACH[1], Math.PI / 2);
-				break;
-			case 3:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3_REACH[0], StrongholdConstants.POSITION_DEFENSE_3_REACH[1], Math.PI / 2);
-				break;
-			case 4:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1], Math.PI / 2);
-				break;
-			case 5:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_5_REACH[0], StrongholdConstants.POSITION_DEFENSE_5_REACH[1], Math.PI / 2);
-				break;
-		}
-
-	}
-	@Override
-	public void cross(defenseTypeOptions defenseType, int defensePosition) {
-		System.out.println("Robot crossing the RoughTerrain defense at " + defensePosition);
-		// TODO Auto-generated method stub
-
-		switch (defensePosition) {
-			case 1:
-				//do nothing	
-				break;
-			case 2:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2_REACH[0], StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-			case 3:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3_REACH[0], StrongholdConstants.POSITION_DEFENSE_3_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-			case 4:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-			case 5:
-				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_5_REACH[0], StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y, Math.PI / 2);
-				break;
-		}
-	}
-
-	@Override
-	public void positionToShoot(defenseTypeOptions defenseType, int defensePosition, shootOptions shootOption) {
-		System.out.println("Robot positioning to shoot after crossing the RoughTerrain defense at " + defensePosition + " shooting into " + shootOption);
-		// TODO Auto-generated method stub
-
-		//Change angle to match angle to best goals
-		StrongholdRobot.navigatorSubsystem.driveTo(GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), ShooterHelper.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));	}
-
 }

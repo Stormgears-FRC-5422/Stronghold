@@ -10,10 +10,11 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
  * @author Surendran
  *
  */
-public interface Defense {
+public interface DefenseTypeInterface {
 	void align(defenseTypeOptions defenseType, int defensePosition);
 	void reach(defenseTypeOptions defenseType, int defensePosition);	
 	void cross(defenseTypeOptions defenseType, int defensePosition);
 	void positionToShoot(defenseTypeOptions defenseType, int defensePosition, shootOptions shootOption);
+	void reachNCross(defenseTypeOptions defenseType, int defensePosition);
 
 }

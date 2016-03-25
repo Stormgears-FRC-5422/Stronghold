@@ -12,7 +12,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
  * @author Michael
  */
 
-public class LowBar implements Defense {
+public class LowBar extends DefenseType {
 
 	public LowBar(defenseTypeOptions defenseType, int defensePosition) {
 		
@@ -70,4 +70,12 @@ public class LowBar implements Defense {
 		StrongholdRobot.navigatorSubsystem.turnTo(ShooterHelper.findHorizontalAngleToGoal(StrongholdRobot.shootOptionSelected));	
 	}
 
+	@Override
+	public void reachNCross(defenseTypeOptions defenseType, int defensePosition) {
+		System.out.println("Robot reaching AND crossing the defenseType " + defenseType + " defense at position " + defensePosition);
+		// TODO Auto-generated method stub
+
+		StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1_REACH[0], StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
+		System.out.println("Robot reached AND crossed the defenseType " + defenseType + " defense at position " + defensePosition);
+	}	
 }

@@ -1,4 +1,11 @@
-package org.usfirst.frc.team5422.commands;
+package org.usfirst.frc.team5422.commands.auto;
+
+import org.usfirst.frc.team5422.commands.AimShooterArmCommand;
+import org.usfirst.frc.team5422.commands.AlignToDefenseCommand;
+import org.usfirst.frc.team5422.commands.CrossDefenseCommand;
+import org.usfirst.frc.team5422.commands.PositionToShootCommand;
+import org.usfirst.frc.team5422.commands.ReachDefenseCommand;
+import org.usfirst.frc.team5422.commands.ShootCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
