@@ -62,6 +62,7 @@ public class StrongholdDriver extends Driver {
     double error = 0;
     public void turnToAlignVision() {
     	
+    	System.out.println("Turn to Align Vision entered");
     	final double CAMERA_ERROR = 20;
     	final double radiansPerPixelHorizontal = Math.toRadians(84.25/800.0);
     	double setPoint = 400 + 20;
@@ -78,22 +79,31 @@ public class StrongholdDriver extends Driver {
     	masterTalon[0].setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	masterTalon[1].setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	
-    	double error = Vision.getCenterX() - setPoint;
+    	
+    	
     	System.out.println("error: " + error);
     	
     	
     	double accumulatedError = 0;
     	long loopCount = 0;
- 
+    	
+    	double centerX = Vision.getCenterX();
+    	while(centerX == 0) centerX = Vision.getCenterX();
+    	
+    	System.out.println("first centerX: " + centerX);
+    	error = centerX - setPoint;
+    	System.out.println("first error: " + error);
+    	
+    	
+    	StrongholdRobot.navigatorSubsystem.turnToRelative(-1 * error * radiansPerPixelHorizontal);
+    	System.out.println("turn angle original: " + error * radiansPerPixelHorizontal);
+    	
+    	
+    	double startTime = Timer.getFPGATimestamp();
     
-    		StrongholdRobot.navigatorSubsystem.turnToRelative(-1 * error * radiansPerPixelHorizontal);
-    		System.out.println("turn angle original: " + error * radiansPerPixelHorizontal);
-    	
-    	
-    	
     	error = Vision.getCenterX() - setPoint;
     	error /= -200.0;
-    	while(Math.abs(error) > 0.025) {
+    	while(Math.abs(error) > 0.025 && Timer.getFPGATimestamp() - startTime <= 5) {
     		if(error < 0)
     			StrongholdRobot.navigatorSubsystem.turnToRelative(-0.05);
     		else
@@ -101,6 +111,7 @@ public class StrongholdDriver extends Driver {
     		
     		error = Vision.getCenterX() - setPoint;
     		error/= -200.0;
+    
     		System.out.println("error: " + error);
     		
     		
@@ -134,5 +145,4 @@ public class StrongholdDriver extends Driver {
 	    	
 	    	
 	    }
-
 }

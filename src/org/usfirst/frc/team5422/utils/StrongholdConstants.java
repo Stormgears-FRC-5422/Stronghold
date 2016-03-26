@@ -226,10 +226,10 @@ public class StrongholdConstants {
 //	public static final double ACTUATOR_ANGLE_MAX = 73;
 	
 	//Used in replica robot
-	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 193;
-	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 323;
-	public static final double ACTUATOR_ANGLE_MIN = -21;
-	public static final double ACTUATOR_ANGLE_MAX = 55;
+	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 227;
+	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 346;
+	public static final double ACTUATOR_ANGLE_MIN = -20;
+	public static final double ACTUATOR_ANGLE_MAX = 50;
 	
 	public static final double ACTUATOR_ARM_SLIDER_MIN = -1;
 	public static final double ACTUATOR_ARM_SLIDER_MAX = 1;

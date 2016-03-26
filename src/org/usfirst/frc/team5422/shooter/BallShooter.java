@@ -123,7 +123,7 @@ public class BallShooter extends Subsystem {
 
 	}
 	
-	private void changeAngleAssisted(double angle) {
+	public void changeAngleAssisted(double angle) {
 		//524 ticks = 0 degrees (real robot)
 //		double angleToTicks = 524 - angle * 414.0 / 95.0;
 		
@@ -142,6 +142,7 @@ public class BallShooter extends Subsystem {
 		
 		if (angleToTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
 		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
+		actuator.setVoltageRampRate(0.05);
 		actuator.set(angleToTicks);
 	}
 	
@@ -209,25 +210,25 @@ public class BallShooter extends Subsystem {
 			if (Math.abs(talonR.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
 					Math.abs(talonL.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
-				talonR.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
+				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
 				System.out.println("quarter");
 			}
 			else if (Math.abs(talonR.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
 					Math.abs(talonL.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
-				talonR.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
+				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
 				System.out.println("half");
 			}
 			else if (Math.abs(talonR.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
 					Math.abs(talonL.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
-				talonR.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
+				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
 				System.out.println("3/4");
 			}
 			else if (Math.abs(talonR.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
 					Math.abs(talonL.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
-				talonR.set(StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
+				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
 				System.out.println("full");
 			}
 			else full_speed = true;

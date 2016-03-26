@@ -20,7 +20,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.*;
 
 public class Navigator extends Subsystem{
 	
-	private double rps = 3;
+	private double rps = 2;
 	
 	/**Always updates <code>GlobalMapping</code> position through encoder ticks.*/
 	static Notifier gpThread; 
@@ -325,6 +325,10 @@ public class Navigator extends Subsystem{
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
+	}
+	
+	public void setRPS(double rps) {
+		this.rps = rps;
 	}
 	
 	

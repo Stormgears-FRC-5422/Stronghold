@@ -128,7 +128,7 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void autonomousInit() {
         System.out.println("auto init started.");
-
+/*
         getSmartDashboardDataSelections();
 
         //selects and sets the autonomous command
@@ -154,13 +154,15 @@ public class StrongholdRobot extends IterativeRobot {
     	}
 
         teleopNotRunning = true;
-
-//        GlobalMapping.resetValues(0, 0, Math.PI/2);
-//        shooterSubsystem.changeAngle(0.0);
-//        navigatorSubsystem.driveTo(0, 150-12);
-//        vision.turnOnLights();
-//        driver.turnToAlignVision();
-//        shooterSubsystem.changeAngle(Vision.getShooterAngle());
+*/
+        GlobalMapping.resetValues(0, 0, Math.PI/2);
+        shooterSubsystem.changeAngleAssisted(0.0);
+        navigatorSubsystem.driveTo(0, 170-12);
+        navigatorSubsystem.turnTo(Math.PI/3);
+        vision.turnOnLights();
+        driver.turnToAlignVision();
+        shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle());
+        shooterSubsystem.shoot(ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
         
         System.out.println("auto init ended.");
     }

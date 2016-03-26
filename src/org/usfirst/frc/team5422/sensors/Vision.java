@@ -49,7 +49,13 @@ public class Vision {
 	}
 	
 	public static double getRadialDistanceVision() {
+		
+		
 		double centerY = getCenterY();
+		
+		while(centerY == 0) centerY = getCenterY();
+		
+		System.out.println("Center Y: " + centerY);
 		//22.0/48.0
 		double viewAngle = Math.toDegrees(Math.atan(.4848) * 2);//convert to degrees | .4848 --> retake measurements of px height at different distances
 		
@@ -67,6 +73,7 @@ public class Vision {
 		
 	}
 	
+	/**CHECK IF THIS OUTPUT SHOULD BE RADIANS OR DEGREES**/
 	public static double getShooterAngle() {
 		
 		// Make these values below constants (robot specific)
@@ -77,6 +84,8 @@ public class Vision {
 		
 		double angle = Math.atan(h/(d-shooterDistFromCamera));
 		
-		return angle;
+		
+		
+		return Math.toDegrees(angle) + 25;
 	}
 }
