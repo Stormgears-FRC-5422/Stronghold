@@ -156,7 +156,7 @@ public class StrongholdRobot extends IterativeRobot {
         vision.turnOnLights();
         driver.turnToAlignVision();
         shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
-        shooterSubsystem.shoot(ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
+        shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);
        
         System.out.println("auto init ended.");
     }

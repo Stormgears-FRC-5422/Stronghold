@@ -152,7 +152,7 @@ public class BallShooter extends Subsystem {
 	
 	public void intakeAssisted() {
 		actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
-		actuator.set(StrongholdConstants.ANGLE_MOTOR_INTAKE_POS);
+		actuator.set(StrongholdConstants.ACTUATOR_ARM_DOWN_POT_FULLRANGE);
 		intake();
 	}
 	
@@ -183,30 +183,20 @@ public class BallShooter extends Subsystem {
 		
 		talonR.changeControlMode(TalonControlMode.Speed);
 		talonL.changeControlMode(TalonControlMode.Speed);
-		
-		//Potentiometer starts at 533
-		//620 = min    -22 degrees
-		//206 = max     73 degrees
-//		changeAngle(calculateAngle(distance, goal)); 
-		
+				
 		boolean full_speed = false;
 		
 		//Direction of motor to be found out
 		//P, I, D, F--->  0.02, 0, 1.65, 0
-//		talonR.set(-speed); //* StrongholdConstants.VEL_PER_100MS
-//		talonL.set(speed);
-//		talonR.set(-6248); //* StrongholdConstants.VEL_PER_10MS
-//		talonL.set(6248); //0.762745
 		talonR.set(0.1 * StrongholdConstants.SHOOTER_MAX_SPEED); //* StrongholdConstants.VEL_PER_10MS
 		talonL.set(-0.1 * StrongholdConstants.SHOOTER_MAX_SPEED); //8465
 		
 		Timer.delay(0.2);
 		
 		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25); //8465
+		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //8465
 		
-		while (full_speed == false) {
-			
+		while (full_speed == false) {		
 			if (Math.abs(talonR.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
 					Math.abs(talonL.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);

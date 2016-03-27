@@ -62,8 +62,6 @@ public class StrongholdRobotConfigurationManager extends RobotConfigurationManag
 		StrongholdConstants.ANGLE_MOTOR_DOWN_RAMP_RATE = 1;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
 		
-		StrongholdConstants.ANGLE_MOTOR_INTAKE_POS = 600;
-
 	}
 
 }

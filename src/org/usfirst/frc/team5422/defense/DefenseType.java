@@ -179,7 +179,7 @@ public class DefenseType implements DefenseTypeInterface {
 		StrongholdRobot.vision.turnOnLights();
 		StrongholdRobot.driver.turnToAlignVision();
 		StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
-		StrongholdRobot.shooterSubsystem.shoot(ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
+        StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);
 
 		System.out.format("Robot reached, crossed AND shot from the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());		
 	}

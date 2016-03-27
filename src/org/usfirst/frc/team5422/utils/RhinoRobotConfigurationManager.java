@@ -47,8 +47,6 @@ public class RhinoRobotConfigurationManager extends RobotConfigurationManager {
 		StrongholdConstants.ANGLE_MOTOR_DOWN_IZONE = 0;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_RAMP_RATE = 0;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
-		
-		StrongholdConstants.ANGLE_MOTOR_INTAKE_POS = 0;
 	}
 	
 }

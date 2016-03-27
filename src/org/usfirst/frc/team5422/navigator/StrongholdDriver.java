@@ -103,7 +103,7 @@ public class StrongholdDriver extends Driver {
     
     	error = Vision.getCenterX() - setPoint;
     	error /= -200.0;
-    	while(Math.abs(error) > 0.025 && Timer.getFPGATimestamp() - startTime <= 5) {
+    	while(Math.abs(error) > 0.025 && Timer.getFPGATimestamp() - startTime <= 3) {
     		if(error < 0)
     			StrongholdRobot.navigatorSubsystem.turnToRelative(-0.05);
     		else
