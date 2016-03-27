@@ -23,7 +23,7 @@ public class StrongholdConstants {
 	public static double SHOOTER_P = 0.000185;
 	public static double SHOOTER_I = 0;
 	public static double SHOOTER_D = 0;
-	public static double SHOOTER_MAX_SPEED = 6000; //per 10ms
+	public static double SHOOTER_MAX_SPEED = 6300; //per 10ms
 	
 	public static double WHEEL_BASE = 23.0;//inches	
 	
@@ -115,13 +115,22 @@ public class StrongholdConstants {
 
 	public static final int[] POSITION_DEFENSE_MANEUVER = {25, 90-20};
 	
-	//Positions
-	public static final int[] POSITION_DEFENSE_1_REACH = {25, 90-20};
-	public static final int[] POSITION_DEFENSE_2_REACH = {25 + 1 * 50, 90-20};
-	public static final int[] POSITION_DEFENSE_3_REACH = {25 + 2 * 50, 90-20};
-	public static final int[] POSITION_DEFENSE_4_REACH = {25 + 3 * 50, 90-20};
-	public static final int[] POSITION_DEFENSE_5_REACH = {25 + 4 * 50, 90-20};
-	public static final int CROSS_DEFENSE_LENGTH_Y = 60+20+20;
+	//start positions
+	public static final Double[] START_POSITION_1 = {25.0 + 0 * 50, 12.0};
+	public static final Double[] START_POSITION_2 = {25.0 + 1 * 50, 12.0};
+	public static final Double[] START_POSITION_3 = {25.0 + 2 * 50, 12.0};
+	public static final Double[] START_POSITION_4 = {25.0 + 3 * 50, 12.0};
+	public static final Double[] START_POSITION_5 = {25.0 + 4 * 50, 12.0};
+	
+	//Defense Start Positions
+	public static int[] POSITION_DEFENSE_1_REACH = {25, 		 90-20};
+	public static int[] POSITION_DEFENSE_2_REACH = {25 + 1 * 50, 90-20};
+	public static int[] POSITION_DEFENSE_3_REACH = {25 + 2 * 50, 90-20};
+	public static int[] POSITION_DEFENSE_4_REACH = {25 + 3 * 50, 90-20};
+	public static int[] POSITION_DEFENSE_5_REACH = {25 + 4 * 50, 90-20};
+	
+	//Distance to Cross from the start of Defense for the Robot in Autonomous Mode
+	public static int CROSS_DEFENSE_LENGTH_Y = 110;
 
 	//H = high; L = low
 	public static final double[] POSITION_HLEFT_GOAL = {151, 312};
@@ -130,33 +139,12 @@ public class StrongholdConstants {
 	public static final double[] POSITION_LLEFT_GOAL = {151, 312};
 	public static final double[] POSITION_LRIGHT_GOAL = {193.5, 312};
 
-//	public static final int DEFENSE_POSITION_LOW_BAR = 0;
-//	public static final int DEFENSE_POSITION_1 = 1;
-//	public static final int DEFENSE_POSITION_2 = 2;
-//	public static final int DEFENSE_POSITION_3 = 3;
-//	public static final int DEFENSE_POSITION_4 = 4;
-
 	public static final double[] POSITION_BALL_1 = {45.5, 0};
 	public static final double[] POSITION_BALL_2 = {91, 0};
 	public static final double[] POSITION_BALL_3 = {136.5, 0};
 	public static final double[] POSITION_BALL_4 = {182, 0};
 	public static final double[] POSITION_BALL_5 = {227.5, 0};
 	public static final double[] POSITION_BALL_6 = {273, 0};
-	/*
-	public static final Double[] START_POSITION_1 = {45.5, 24.0};
-	public static final Double[] START_POSITION_2 = {91.0, 24.0};
-	public static final Double[] START_POSITION_3 = {136.5, 24.0};
-	public static final Double[] START_POSITION_4 = {182.0, 24.0};
-	public static final Double[] START_POSITION_5 = {227.5, 24.0};
-	public static final Double[] START_POSITION_6 = {273.0, 24.0};
-	*/
-	
-	public static final Double[] START_POSITION_1 = {25.0 + 0 * 50, 12.0};
-	public static final Double[] START_POSITION_2 = {25.0 + 1 * 50, 12.0};
-	public static final Double[] START_POSITION_3 = {25.0 + 2 * 50, 12.0};
-	public static final Double[] START_POSITION_4 = {25.0 + 3 * 50, 12.0};
-	public static final Double[] START_POSITION_5 = {25.0 + 4 * 50, 12.0};
-//	public static final Double[] START_POSITION_6 = {25.0 + 6 * 50, 24.0};
 	
 	public enum startPositionOptions {
 		FRONT_OF_DEFENSE_1_LOW_BAR,

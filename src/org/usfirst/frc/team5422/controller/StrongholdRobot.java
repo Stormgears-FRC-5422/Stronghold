@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
+import org.usfirst.frc.team5422.commands.auto.AutoReachCommandGroup;
 import org.usfirst.frc.team5422.commands.auto.AutoReachNCrossCommandGroup;
+import org.usfirst.frc.team5422.commands.auto.AutoReachNCrossNShootCommandGroup;
 import org.usfirst.frc.team5422.commands.auto.AutonomousCommandGroup;
 import org.usfirst.frc.team5422.lifter.Grappler;
 import org.usfirst.frc.team5422.lifter.Lifter;
@@ -140,15 +142,7 @@ public class StrongholdRobot extends IterativeRobot {
 
             System.out.println("Selecting from Defense Type as " + defenseTypeSelected + " at position " + defensePositionSelected + " and Goal selected as " + shootOptionSelected);
 
-            //initialize the shooter is in horizontal to the ground position
-            shooterSubsystem.changeAngle(0.0);
-
             autonomousCommand.start();
-
-	        vision.turnOnLights();
-	        driver.turnToAlignVision();
-	        shooterSubsystem.changeAngle(Vision.getShooterAngle());
-
             //Only for testing purposes
             //liftingCommandGroup.start();
     	}
@@ -157,13 +151,13 @@ public class StrongholdRobot extends IterativeRobot {
 */
         GlobalMapping.resetValues(0, 0, Math.PI/2);
         shooterSubsystem.changeAngleAssisted(0.0);
-        navigatorSubsystem.driveTo(0, 170-12);
+        navigatorSubsystem.driveTo(0, 220-12);
         navigatorSubsystem.turnTo(Math.PI/3);
         vision.turnOnLights();
         driver.turnToAlignVision();
-        shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle());
+        shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
         shooterSubsystem.shoot(ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
-        
+       
         System.out.println("auto init ended.");
     }
 
@@ -179,9 +173,12 @@ public class StrongholdRobot extends IterativeRobot {
             case REACH_N_CROSS_N_SHOOT:
             	//for autonomous reach, cross and shoot independently using separate trapezoidal motion profile
                 System.out.println("selecting reach 'n cross 'n shoot command.");
-            	autonomousCommand = new AutonomousCommandGroup();
+            	autonomousCommand = new AutoReachNCrossNShootCommandGroup();
             	break;
             case REACH:
+            	//autonomous reach using SINGLE trapezoidal motion profile
+                System.out.println("selecting reach command.");
+            	autonomousCommand = new AutoReachCommandGroup();
             case NONE:
             default:
             	//autonomous reach AND cross with NO shoot using SINGLE trapezoidal motion profile
@@ -240,9 +237,6 @@ public class StrongholdRobot extends IterativeRobot {
         if (autonomousCommand != null) {
             Scheduler.getInstance().run();
         }
-
-
-        
     }
 
     public void teleopInit() {

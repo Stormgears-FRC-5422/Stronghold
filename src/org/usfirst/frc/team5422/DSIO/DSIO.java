@@ -24,7 +24,7 @@ public class DSIO {
     static Joystick joystick;
     public static StrongholdConstants.shootHeightOptions teleopShootHeightOption;
     public static Joystick buttonBoard;
-    public static boolean shooterRunning = false, assistShoot = true;
+    public static boolean shooterRunning = false, assistShoot = false;
 
     public static int pos[] = new int[5];
 

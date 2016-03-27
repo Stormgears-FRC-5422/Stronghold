@@ -3,8 +3,10 @@
  */
 package org.usfirst.frc.team5422.defense;
 
+import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.navigator.GlobalMapping;
+import org.usfirst.frc.team5422.sensors.Vision;
 import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
@@ -129,9 +131,56 @@ public class DefenseType implements DefenseTypeInterface {
 				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_5_REACH[0], StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
 				break;
 		}
-		System.out.format("Robot reached AND crossed the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());
-
-		
+		System.out.format("Robot reached AND crossed the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());		
 	}
 
+	@Override
+	public void reachNCrossNShoot(defenseTypeOptions defenseType, int defensePosition) {
+		System.out.println("Robot reaching, crossing AND shooting from the defenseType " + defenseType + " defense at position " + defensePosition);
+		//Global Mapping VALUES has been RESET in AUTONOMOUS INIT MODE
+//		GlobalMapping.resetValues(0, 0, Math.PI/2);
+
+		//Change Angle to NEUTRAL position
+		StrongholdRobot.shooterSubsystem.changeAngleAssisted(0.0);
+
+		//DRIVE TO appropriate distance based on Defense Position
+		switch (defensePosition) {
+			case 1:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1_REACH[0], StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
+				//Turn 30 degrees to align to vision
+				StrongholdRobot.navigatorSubsystem.turnTo(Math.PI/3);
+				break;
+			case 2:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_2_REACH[0], StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
+				//Turn 30 degrees to align to vision
+				StrongholdRobot.navigatorSubsystem.turnTo(Math.PI/3);
+				break;
+			case 3:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_3_REACH[0], StrongholdConstants.POSITION_DEFENSE_3_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
+				//Turn 30 degrees to align to vision
+				StrongholdRobot.navigatorSubsystem.turnTo(Math.PI/3);
+				break;
+			case 4:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_4_REACH[0], StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
+				//Turn 30 degrees to align to vision (not sure if this is good on the right side of goal)
+				StrongholdRobot.navigatorSubsystem.turnTo(Math.PI/3);
+				break;
+			case 5:
+				StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_5_REACH[0], StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
+				//Turn 30 degrees to align to vision (not sure if this is good on the right side of goal)
+				StrongholdRobot.navigatorSubsystem.turnTo(Math.PI/3);
+				break;
+		}
+
+		//Turn 30 degrees to align to vision (not sure if this is good on the right goal)
+		//StrongholdRobot.navigatorSubsystem.turnTo(Math.PI/3);
+
+		//Vision systems in progress
+		StrongholdRobot.vision.turnOnLights();
+		StrongholdRobot.driver.turnToAlignVision();
+		StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
+		StrongholdRobot.shooterSubsystem.shoot(ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
+
+		System.out.format("Robot reached, crossed AND shot from the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());		
+	}
 }

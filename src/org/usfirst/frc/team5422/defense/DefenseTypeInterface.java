@@ -16,5 +16,5 @@ public interface DefenseTypeInterface {
 	void cross(defenseTypeOptions defenseType, int defensePosition);
 	void positionToShoot(defenseTypeOptions defenseType, int defensePosition, shootOptions shootOption);
 	void reachNCross(defenseTypeOptions defenseType, int defensePosition);
-
+	void reachNCrossNShoot(defenseTypeOptions defenseType, int defensePosition);		
 }

@@ -17,8 +17,16 @@ public class OrangeSwitchCommand extends Command {
 
     @Override
     protected void execute() { 
-    	if (DSIO.assistShoot == true) StrongholdRobot.shooterSubsystem.intakeAssisted();
-    	else StrongholdRobot.shooterSubsystem.intakeManual();
+    	if (DSIO.assistShoot == true) {
+    		StrongholdRobot.shooterSubsystem.intakeAssisted();    		
+    	}
+    	else {
+    		StrongholdRobot.shooterSubsystem.intakeManual();
+    	}
+
+    	//after the ball is picked up, bring the shooter back to neutral
+    	StrongholdRobot.shooterSubsystem.changeAngleAssisted(0.0);
+    	
     }
 
     @Override
