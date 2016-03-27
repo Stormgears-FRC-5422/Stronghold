@@ -19,6 +19,7 @@ import org.usfirst.frc.team5422.opener.Opener;
 import org.usfirst.frc.team5422.opener.SallyPortOpener;
 import org.usfirst.frc.team5422.shooter.BallShooter;
 import org.usfirst.frc.team5422.shooter.ShooterHelper;
+import org.usfirst.frc.team5422.sensors.GyroAccel;
 import org.usfirst.frc.team5422.sensors.Vision;
 import org.usfirst.frc.team5422.utils.*;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.autonomousModeOptions;
@@ -71,7 +72,8 @@ public class StrongholdRobot extends IterativeRobot {
     public static DSIO dsio;
     public static DriverInterface driver;
     public static Vision vision;
-
+    public static GyroAccel gyro;
+    
     public static startPositionOptions startPositionSelected; 
     public static defenseTypeOptions defenseTypeSelected;
     public static int defensePositionSelected;
@@ -105,7 +107,7 @@ public class StrongholdRobot extends IterativeRobot {
         grapplerSubsystem = new Grappler();
         lifterSubsystem = new Lifter();
         vision = new Vision();
-
+        gyro = new GyroAccel();
 
         teleopNotRunning = true;
     }
@@ -151,7 +153,10 @@ public class StrongholdRobot extends IterativeRobot {
 */
         GlobalMapping.resetValues(0, 0, Math.PI/2);
         shooterSubsystem.changeAngleAssisted(0.0);
+        gyro.reset();
         navigatorSubsystem.driveTo(0, 220-12);
+        System.out.println("Gyro: " + gyro.getAngle());
+        navigatorSubsystem.turnToRelative(gyro.getAngle()); //GP and gyro have opposite directions 
         navigatorSubsystem.turnTo(Math.PI/3);
         vision.turnOnLights();
         driver.turnToAlignVision();

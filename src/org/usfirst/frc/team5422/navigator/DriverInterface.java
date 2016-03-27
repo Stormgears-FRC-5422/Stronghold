@@ -12,4 +12,6 @@ public interface DriverInterface {
     public CANTalon getDriveTalonLeftMaster();
     public CANTalon getDriveTalonRightMaster();
     public void turnToAlignVision();
+    public String getTrapStatus();
+    public int getTrapID();
 }

@@ -82,7 +82,7 @@ public class TrapezoidThread implements Runnable{
 		}
 	}
 	
-	public void activateTrap(int leftTicks, int rightTicks, double leftVel, double rightVel, int id) {
+	public synchronized void activateTrap(int leftTicks, int rightTicks, double leftVel, double rightVel, int id) {
 		this.leftTicks = leftTicks;
 		this.rightTicks = rightTicks;
 		this.leftVel = leftVel;
@@ -90,6 +90,10 @@ public class TrapezoidThread implements Runnable{
 		
 		//use this for trap network table
 		this.id = id;
+		
+		status = "initialized";
+		trapTable.putString("Trap Status", status);
+		trapTable.putNumber("Trap ID", id);
 		
 		resetTrapezoid();
 		initializeTalons();
@@ -133,5 +137,15 @@ public class TrapezoidThread implements Runnable{
 		leftExample.reset();
 		rightExample.reset();
 	}
+	
+	public String getStatus(){
+		return status;
+	}
+	
+	public int getID(){
+		return id;
+	}
+	
+	
 
 }

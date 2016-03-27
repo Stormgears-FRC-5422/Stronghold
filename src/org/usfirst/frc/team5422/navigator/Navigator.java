@@ -167,6 +167,7 @@ public class Navigator extends Subsystem{
 		
 		if(Math.abs(rTicksDest) > 10){
 			if(moveTrapezoidal){
+				currentProfileID++;
 				trapWheelTicks(rTicksDest, lTicksDest, rpmR, rpmL, currentProfileID);
 				waitForTrapezoidalFinish();
 			
@@ -186,12 +187,13 @@ public class Navigator extends Subsystem{
 		System.out.println("rotateToTheta Done " + Timer.getFPGATimestamp());
 	}
 	
-	
-	
 	private void waitForTrapezoidalFinish() {
 		while(true){
-			if(trapTable.getString("Trap Status", "running").equals("finished") && (trapTable.getNumber("Trap ID", -1) == currentProfileID)){
-				currentProfileID++;
+			String tempString = StrongholdRobot.driver.getTrapStatus();
+			int id = StrongholdRobot.driver.getTrapID();
+		//	System.out.println("[Nav} navID "+ currentProfileID +":" + tempString+ " netID:" + id);
+			if(tempString.equals("finished") && (id == currentProfileID)){
+				//currentProfileID++;
 				break;
 			}
 		}
@@ -234,6 +236,7 @@ public class Navigator extends Subsystem{
 		
 		if(Math.abs(tickDist) > 10){
 			if(moveTrapezoidal){
+				currentProfileID++;
 				trapWheelTicks(tickDist, tickDist, rps, rps, currentProfileID);
 				waitForTrapezoidalFinish();
 			}else{
