@@ -21,10 +21,7 @@ public class BigBlueCommand extends Command {
     @Override
     protected void execute() {
         DSIO.shooterRunning = true;
-        if (DSIO.assistShoot) { 
-//        	StrongholdRobot.shooterSubsystem.shoot(
-//        		ShooterHelper.calculateAngle(StrongholdRobot.shootOptionSelected), StrongholdConstants.FULL_THROTTLE);
-            StrongholdRobot.vision.turnOnLights();
+        if (DSIO.assistShoot) {
             StrongholdRobot.driver.turnToAlignVision();
             StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle());
             StrongholdRobot.shooterSubsystem.shoot(ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
