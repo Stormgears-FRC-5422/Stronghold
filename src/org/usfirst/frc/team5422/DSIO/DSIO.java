@@ -60,7 +60,7 @@ public class DSIO {
                 StrongholdRobot.shooterSubsystem.stop();
             }
 
-            //Red switch (enables/disables joystick depending on positions
+            //Red switch (assisted shooting or manual shooting)
             if (buttonBoard.getRawButton(StrongholdConstants.RED_SWITCH_ID))
             {
                 assistShoot = true;
@@ -114,10 +114,10 @@ public class DSIO {
         //Lock button
         if (buttonBoard.getRawButton(StrongholdConstants.BLUE_BUTTON_ID))
         {
-           button = StrongholdConstants.WHITE_BUTTON_ID;
+           button = StrongholdConstants.BLUE_BUTTON_ID;
         }
 
-        //Defense button
+        //Cross defense button
         else if (buttonBoard.getRawButton(StrongholdConstants.GREEN_BUTTON_ID))
         {
             button = StrongholdConstants.GREEN_BUTTON_ID;
