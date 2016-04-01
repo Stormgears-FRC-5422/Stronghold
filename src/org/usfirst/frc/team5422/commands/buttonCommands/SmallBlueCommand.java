@@ -3,8 +3,10 @@ package org.usfirst.frc.team5422.commands.buttonCommands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
+import org.usfirst.frc.team5422.sensors.Vision;
 import org.usfirst.frc.team5422.shooter.ShooterHelper;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 
 /**
  * @author Michael
@@ -25,9 +27,14 @@ public class SmallBlueCommand extends Command {
 
             StrongholdConstants.shootOptions bestShootOption = ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption);
 
-            double theta = ShooterHelper.findHorizontalAngleToGoal(bestShootOption);
-
-            StrongholdRobot.navigatorSubsystem.turnTo(theta);
+            //If the option is set to high, calculate angles automatically
+            if (bestShootOption == shootOptions.HIGH_LEFT ||
+                    bestShootOption == shootOptions.HIGH_CENTER ||
+                    bestShootOption == shootOptions.HIGH_RIGHT)
+            {
+                StrongholdRobot.driver.turnToAlignVision();
+                StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle());
+            }
         }
     }
 
