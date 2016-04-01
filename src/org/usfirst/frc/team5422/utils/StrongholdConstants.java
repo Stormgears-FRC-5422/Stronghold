@@ -19,10 +19,16 @@ public class StrongholdConstants {
 //	public static double SHOOTER_P = 0;
 	
 	
-	public static double SHOOTER_F = 1.705;
-	public static double SHOOTER_P = 0.000185;
-	public static double SHOOTER_I = 0;
-	public static double SHOOTER_D = 0;
+	public static double SHOOTER_LEFT_F = 1.705;
+	public static double SHOOTER_LEFT_P = 0.000185;
+	public static double SHOOTER_LEFT_I = 0;
+	public static double SHOOTER_LEFT_D = 0;
+
+	public static double SHOOTER_RIGHT_F = 1.705;
+	public static double SHOOTER_RIGHT_P = 0.000185;
+	public static double SHOOTER_RIGHT_I = 0;
+	public static double SHOOTER_RIGHT_D = 0;
+
 	public static double SHOOTER_MAX_SPEED = 6300; //per 10ms
 	
 	public static double WHEEL_BASE = 23.0;//inches	
@@ -58,7 +64,7 @@ public class StrongholdConstants {
 	public static int ANGLE_MOTOR_UP_PROFILE = 1;
 	
 	public static double ANGLE_MOTOR_DOWN_F = 0;
-	public static double ANGLE_MOTOR_DOWN_P = 6.3;
+	public static double ANGLE_MOTOR_DOWN_P = 23;
 	public static double ANGLE_MOTOR_DOWN_I = 0;
 	public static double ANGLE_MOTOR_DOWN_D = 0.5;
 	public static int ANGLE_MOTOR_DOWN_IZONE = 0;
@@ -195,9 +201,9 @@ public class StrongholdConstants {
 		NONE
 	}
 
-	public static final double SHOOT_DELAY = 1;
-	public static final double SHOOT_DELAY1 = 2;
-	public static final double SHOOT_DELAY2 = 0.5;
+	public static final double SHOOT_DELAY_HALF = 0.5;
+	public static final double SHOOT_DELAY1 = 1;
+	public static final double SHOOT_DELAY2 = 2;
 	public static final double SHOOTER_HEIGHT = 10.5;
 	public static final double HEIGHT_TO_HIGH_GOAL = 97 - SHOOTER_HEIGHT;
 	public static final double HEIGHT_TO_LOW_GOAL = 18 - SHOOTER_HEIGHT;
@@ -212,10 +218,10 @@ public class StrongholdConstants {
 //	public static final double ACTUATOR_ANGLE_MAX = 73;
 	
 	//Used in replica robot
-	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 227;
+	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 215;
 	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 346;
 	public static final double ACTUATOR_ANGLE_MIN = -20;
-	public static final double ACTUATOR_ANGLE_MAX = 50;
+	public static final double ACTUATOR_ANGLE_MAX = 55;
 	
 	public static final double ACTUATOR_ARM_SLIDER_MIN = -1;
 	public static final double ACTUATOR_ARM_SLIDER_MAX = 1;

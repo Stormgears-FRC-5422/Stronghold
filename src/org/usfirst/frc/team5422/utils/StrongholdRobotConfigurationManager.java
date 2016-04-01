@@ -31,20 +31,15 @@ public class StrongholdRobotConfigurationManager extends RobotConfigurationManag
 		StrongholdConstants.OPEN_DRIVE_I = 0;
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 
-		StrongholdConstants.SHOOTER_F = 10;
-		StrongholdConstants.SHOOTER_P = 0;
-		StrongholdConstants.SHOOTER_I = 0;
-		StrongholdConstants.SHOOTER_D = 0;
+		StrongholdConstants.SHOOTER_LEFT_F = 10;
+		StrongholdConstants.SHOOTER_LEFT_P = 0;
+		StrongholdConstants.SHOOTER_LEFT_I = 0;
+		StrongholdConstants.SHOOTER_LEFT_D = 0;
 		
-		StrongholdConstants.ANGLE_MOTOR_UP_F = 0;
-		StrongholdConstants.ANGLE_MOTOR_UP_P = 40;
-		StrongholdConstants.ANGLE_MOTOR_UP_I = 0.005;
-		StrongholdConstants.ANGLE_MOTOR_UP_D = 0.2;
-		
-		StrongholdConstants.ANGLE_MOTOR_DOWN_F = 0;
-		StrongholdConstants.ANGLE_MOTOR_DOWN_P = 6.3;
-		StrongholdConstants.ANGLE_MOTOR_DOWN_I = 0;
-		StrongholdConstants.ANGLE_MOTOR_DOWN_D = 0.5;
+		StrongholdConstants.SHOOTER_RIGHT_F = 10;
+		StrongholdConstants.SHOOTER_RIGHT_P = 0;
+		StrongholdConstants.SHOOTER_RIGHT_I = 0;
+		StrongholdConstants.SHOOTER_RIGHT_D = 0;
 		
 		StrongholdConstants.ANGLE_MOTOR_UP_F = 0;
 		StrongholdConstants.ANGLE_MOTOR_UP_P = 40;
@@ -55,7 +50,7 @@ public class StrongholdRobotConfigurationManager extends RobotConfigurationManag
 		StrongholdConstants.ANGLE_MOTOR_UP_PROFILE = 1;
 		
 		StrongholdConstants.ANGLE_MOTOR_DOWN_F = 0;
-		StrongholdConstants.ANGLE_MOTOR_DOWN_P = 6.3;
+		StrongholdConstants.ANGLE_MOTOR_DOWN_P = 23;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_I = 0;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_D = 0.5;
 		StrongholdConstants.ANGLE_MOTOR_DOWN_IZONE = 0;

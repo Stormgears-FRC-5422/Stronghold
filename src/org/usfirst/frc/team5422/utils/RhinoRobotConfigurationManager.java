@@ -27,10 +27,10 @@ public class RhinoRobotConfigurationManager extends RobotConfigurationManager {
 		StrongholdConstants.OPEN_DRIVE_I = 0;
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 		
-		StrongholdConstants.SHOOTER_F = 10;
-		StrongholdConstants.SHOOTER_P = 0;
-		StrongholdConstants.SHOOTER_I = 0;
-		StrongholdConstants.SHOOTER_D = 0;
+//		StrongholdConstants.SHOOTER_F = 10;
+//		StrongholdConstants.SHOOTER_P = 0;
+//		StrongholdConstants.SHOOTER_I = 0;
+//		StrongholdConstants.SHOOTER_D = 0;
 
 		StrongholdConstants.ANGLE_MOTOR_UP_F = 0;
 		StrongholdConstants.ANGLE_MOTOR_UP_P = 0;

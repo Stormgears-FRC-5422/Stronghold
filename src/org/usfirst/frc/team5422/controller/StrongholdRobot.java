@@ -124,6 +124,9 @@ public class StrongholdRobot extends IterativeRobot {
 
         DSIO.choosers.autoInitChoosers();
 
+        // Vision lights always on during competition
+        vision.turnOnLights();
+
         System.out.println("robot init ended.");
     }
 

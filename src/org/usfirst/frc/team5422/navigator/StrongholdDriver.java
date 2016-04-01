@@ -95,7 +95,7 @@ public class StrongholdDriver extends Driver {
     	System.out.println("first error: " + error);
     	
     	
-    	StrongholdRobot.navigatorSubsystem.turnToRelative(-1 * error * radiansPerPixelHorizontal);
+    	StrongholdRobot.navigatorSubsystem.turnToRelative(-1 * error * radiansPerPixelHorizontal*1.15);
     	System.out.println("turn angle original: " + error * radiansPerPixelHorizontal);
     	
     	

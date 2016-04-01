@@ -37,8 +37,8 @@ public class BallShooter extends Subsystem {
 		//Reverse output may be needed
 //		talonL.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonL.configNominalOutputVoltage(+0.0f, -0.0f);
-		talonL.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
-		talonL.setF(StrongholdConstants.SHOOTER_F);
+		talonL.setPID(StrongholdConstants.SHOOTER_LEFT_P, StrongholdConstants.SHOOTER_LEFT_I, StrongholdConstants.SHOOTER_LEFT_D);
+		talonL.setF(StrongholdConstants.SHOOTER_LEFT_F);
 		talonL.setCloseLoopRampRate(0.95);
 		
 		talonR = new CANTalon(StrongholdConstants.TALON_RIGHT_SHOOTER);
@@ -47,8 +47,8 @@ public class BallShooter extends Subsystem {
 		//Reverse output may be needed
 //		talonR.configEncoderCodesPerRev(StrongholdConstants.ENCODER_TICKS_CPR);	
 		talonR.configNominalOutputVoltage(+0.0f, -0.0f);
-		talonR.setPID(StrongholdConstants.SHOOTER_P, StrongholdConstants.SHOOTER_I, StrongholdConstants.SHOOTER_D);
-		talonR.setF(StrongholdConstants.SHOOTER_F);
+		talonR.setPID(StrongholdConstants.SHOOTER_RIGHT_P, StrongholdConstants.SHOOTER_RIGHT_I, StrongholdConstants.SHOOTER_RIGHT_D);
+		talonR.setF(StrongholdConstants.SHOOTER_RIGHT_F);
 		talonR.setCloseLoopRampRate(0.95);
 		
 		actuator = new CANTalon(StrongholdConstants.TALON_ACTUATOR);
@@ -196,7 +196,9 @@ public class BallShooter extends Subsystem {
 		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
 		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //8465
 		
-		while (full_speed == false) {		
+		double timer = Timer.getFPGATimestamp();
+
+		while (full_speed == false && (Timer.getFPGATimestamp() - timer) <= 3) {		
 			if (Math.abs(talonR.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
 					Math.abs(talonL.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
