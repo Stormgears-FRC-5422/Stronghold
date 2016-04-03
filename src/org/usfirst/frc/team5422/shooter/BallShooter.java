@@ -3,6 +3,8 @@ package org.usfirst.frc.team5422.shooter;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
+import org.usfirst.frc.team5422.utils.StrongholdUtils;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
@@ -117,6 +119,8 @@ public class BallShooter extends Subsystem {
 		if (potTicks > actuator.getPosition()) actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE);
 		else actuator.setProfile(StrongholdConstants.ANGLE_MOTOR_UP_PROFILE);
 		
+		SmartDashboard.putNumber("potTicks", potTicks);
+		
 		actuator.set(potTicks);
 
 		SmartDashboard.putNumber("pot value: ", actuator.getPosition());
@@ -193,6 +197,10 @@ public class BallShooter extends Subsystem {
 		
 		Timer.delay(0.2);
 		
+		stop();
+		
+		Timer.delay(0.5);
+		
 		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
 		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //8465
 		
@@ -231,8 +239,7 @@ public class BallShooter extends Subsystem {
 		Timer.delay(StrongholdConstants.SHOOT_DELAY2);
 		stop();
 		relay.set(Relay.Value.kOff);
-		DSIO.shooterRunning = false;
-		
+		DSIO.shooterRunning = false;		
 	}
 
 	@Override

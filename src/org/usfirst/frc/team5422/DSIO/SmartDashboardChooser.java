@@ -63,8 +63,8 @@ public class SmartDashboardChooser {
         allianceChooser.addObject("Blue", StrongholdConstants.alliance.BLUE);
         SmartDashboard.putData("Alliance Chooser", allianceChooser);
 
-        autonomousModeChooser.addDefault("Reach AND Cross Only", autonomousModeOptions.REACH_N_CROSS);
-        autonomousModeChooser.addObject("Reach, Cross AND Shoot", autonomousModeOptions.REACH_N_CROSS_N_SHOOT);
+        autonomousModeChooser.addObject("Reach AND Cross Only", autonomousModeOptions.REACH_N_CROSS);
+        autonomousModeChooser.addDefault("Reach, Cross AND Shoot", autonomousModeOptions.REACH_N_CROSS_N_SHOOT);
         autonomousModeChooser.addObject("Reach Only", autonomousModeOptions.REACH);
         autonomousModeChooser.addObject("Not Moving in Autonomous", autonomousModeOptions.NONE);
         SmartDashboard.putData("Autonomous Mode Chooser", autonomousModeChooser);

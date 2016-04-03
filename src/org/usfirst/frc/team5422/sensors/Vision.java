@@ -1,8 +1,10 @@
 package org.usfirst.frc.team5422.sensors;
 
+import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -49,11 +51,17 @@ public class Vision {
 	}
 	
 	public static double getRadialDistanceVision() {
-		
+		StrongholdRobot.gripNotWorking = false;
 		
 		double centerY = getCenterY();
-		
-		while(centerY == 0) centerY = getCenterY();
+		double start = Timer.getFPGATimestamp();
+		while(centerY == 0){
+			centerY = getCenterY();
+			if((Timer.getFPGATimestamp() - 3) > 3) {
+				StrongholdRobot.gripNotWorking = true;
+				break;
+			}
+		}
 		
 		System.out.println("Center Y: " + centerY);
 		//22.0/48.0
@@ -86,6 +94,6 @@ public class Vision {
 		
 		
 		
-		return Math.toDegrees(angle) + 25;
+		return Math.toDegrees(angle) + 16;
 	}
 }

@@ -57,9 +57,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class StrongholdRobot extends IterativeRobot {
 
     //Set this boolean to false if using official robot
-    public static boolean rhinoInUse = true, bbInUse = true;
+    public static boolean rhinoInUse = false, bbInUse = true, gripNotWorking = false;
 
-
+   
 
     public static Navigator navigatorSubsystem;
     public static BallShooter shooterSubsystem;
@@ -135,7 +135,23 @@ public class StrongholdRobot extends IterativeRobot {
      */
     public void autonomousInit() {
         System.out.println("auto init started.");
-/*
+
+        getSmartDashboardDataSelections();
+
+        //selects and sets the autonomous command
+        //selectAutonomousCommand();
+        GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
+        gyro.reset();
+        
+    	if (autoModeOptionSelected == autonomousModeOptions.REACH_N_CROSS_N_SHOOT) {
+           	//autonomous reach AND cross with NO shoot using SINGLE trapezoidal motion profile
+    		reachNCrossNShoot(defenseTypeSelected, defensePositionSelected);
+    	} else  {
+    		reachNCross(defenseTypeSelected, defensePositionSelected);        		
+    	}
+        teleopNotRunning = true;
+        
+        /*
         getSmartDashboardDataSelections();
 
         //selects and sets the autonomous command
@@ -154,17 +170,17 @@ public class StrongholdRobot extends IterativeRobot {
 
         teleopNotRunning = true;
 */
-        GlobalMapping.resetValues(0, 0, Math.PI/2);
-        shooterSubsystem.changeAngleAssisted(0.0);
-        gyro.reset();
-        navigatorSubsystem.driveTo(0, 220-12);
-        System.out.println("Gyro: " + gyro.getAngle());
-        navigatorSubsystem.turnToRelative(gyro.getAngle()); //GP and gyro have opposite directions 
-        navigatorSubsystem.turnTo(Math.PI/3);
-        vision.turnOnLights();
-        driver.turnToAlignVision();
-        shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
-        shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);
+//        GlobalMapping.resetValues(0, 0, Math.PI/2);
+//        shooterSubsystem.changeAngleAssisted(0.0);
+//        gyro.reset();
+//        navigatorSubsystem.driveTo(0, 220-12);
+//        System.out.println("Gyro: " + gyro.getAngle());
+//        navigatorSubsystem.turnToRelative(gyro.getAngle()); //GP and gyro have opposite directions 
+//        navigatorSubsystem.turnTo(Math.PI/3);
+//        //vision.turnOnLights();
+//        driver.turnToAlignVision();
+//        shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
+//        shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);
        
         System.out.println("auto init ended.");
     }
@@ -175,17 +191,17 @@ public class StrongholdRobot extends IterativeRobot {
         {
             case REACH_N_CROSS:
             	//autonomous reach AND cross with NO shoot using SINGLE trapezoidal motion profile
-                System.out.println("selecting reach 'n cross command.");
+                //System.out.println("selecting reach 'n cross command.");
             	autonomousCommand = new AutoReachNCrossCommandGroup();
             	break;
             case REACH_N_CROSS_N_SHOOT:
             	//for autonomous reach, cross and shoot independently using separate trapezoidal motion profile
-                System.out.println("selecting reach 'n cross 'n shoot command.");
+                //System.out.println("selecting reach 'n cross 'n shoot command.");
             	autonomousCommand = new AutoReachNCrossNShootCommandGroup();
             	break;
             case REACH:
             	//autonomous reach using SINGLE trapezoidal motion profile
-                System.out.println("selecting reach command.");
+                //System.out.println("selecting reach command.");
             	autonomousCommand = new AutoReachCommandGroup();
             case NONE:
             default:
@@ -388,4 +404,128 @@ public class StrongholdRobot extends IterativeRobot {
     public void testPeriodic() {
 //        lw.addActuator("Ball Shooter", "Arm", shooterSubsystem.actuator);
     }
+
+	private void reachNCross(defenseTypeOptions defenseType, int defensePosition) {
+		System.out.println("Robot reaching AND crossing the defenseType " + defenseType + " defense at position " + defensePosition);
+
+		int posX = 0;
+		int posY = 0;
+//		GlobalMapping.resetValues(0, 0, Math.PI/2);
+//      gyro.reset();
+				
+		//Change Angle to NEUTRAL position
+		StrongholdRobot.shooterSubsystem.changeAngleAssisted(0.0);
+
+		//DRIVE TO appropriate distance based on Defense Position
+		switch (defensePosition) {
+			case 1:
+				posX = StrongholdConstants.POSITION_DEFENSE_1_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 10;
+				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
+				break;
+			case 2:
+				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y; 
+				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
+				break;
+			case 3:
+				posX = StrongholdConstants.POSITION_DEFENSE_3_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_3_REACH[1] +
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
+				break;
+			case 4:
+				posX = StrongholdConstants.POSITION_DEFENSE_4_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
+				break;
+			case 5:
+				posX = StrongholdConstants.POSITION_DEFENSE_5_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 15;
+				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
+				break;
+		}
+
+		System.out.format("Robot reached AND crossed the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());		
+	}
+
+	private void reachNCrossNShoot(defenseTypeOptions defenseType, int defensePosition) {
+		System.out.println("Robot reaching, crossing AND shooting from the defenseType " + defenseType + " defense at position " + defensePosition);
+		
+		int posX = 0;
+		int posY = 0;
+				
+		//Global Mapping VALUES has been RESET in AUTONOMOUS INIT MODE
+//		GlobalMapping.resetValues(0, 0, Math.PI/2);
+//        gyro.reset();
+
+		//Change Angle to NEUTRAL position
+		StrongholdRobot.shooterSubsystem.changeAngleAssisted(0.0);
+		//DRIVE TO appropriate distance based on Defense Position
+		switch (defensePosition) {
+			case 1:
+				posX = StrongholdConstants.POSITION_DEFENSE_1_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 10;
+				StrongholdRobot.navigatorSubsystem.setRPS(3.25);
+				navigatorAlignmentToShoot(posX, posY, -60);
+				break;
+			case 2:
+				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y-10;
+				navigatorAlignmentToShoot(posX, posY, -45);
+				break;
+			case 3:
+				posX = StrongholdConstants.POSITION_DEFENSE_3_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_3_REACH[1] +
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+				navigatorAlignmentToShoot(posX, posY, 0);
+				break;
+			case 4:
+				posX = StrongholdConstants.POSITION_DEFENSE_4_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+						
+				navigatorAlignmentToShoot(posX, posY, (30));
+				break;
+			case 5:
+				posX = StrongholdConstants.POSITION_DEFENSE_5_REACH[0];
+				posY = StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y - 20;
+				navigatorAlignmentToShoot(posX, posY, (60));
+				break;
+		}
+
+		
+		StrongholdRobot.navigatorSubsystem.setRPS(2);
+		//Turn 30 degrees to align to vision (not sure if this is good on the right goal)
+		//StrongholdRobot.navigatorSubsystem.turnTo(Math.PI/3);
+			//Vision systems in progress
+		StrongholdRobot.driver.turnToAlignVision();
+		
+		if(!gripNotWorking) {
+			StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
+			Timer.delay(0.5);
+			StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);
+			
+		}
+		
+		System.out.format("Robot reached, crossed AND shot from the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());		
+	}
+	
+	private void navigatorAlignmentToShoot(int posX, int posY, double turnToAngle) {
+		
+		StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
+       	StrongholdRobot.navigatorSubsystem.turnToRelative(StrongholdRobot.gyro.getAngle()); //GP and gyro have opposite directions 
+        //Turn 30 degrees to align to vision (not sure if this is good on the right side of goal)
+		StrongholdRobot.navigatorSubsystem.turnToRelative(Math.toRadians(turnToAngle));
+
+	}	
+    
+
 }

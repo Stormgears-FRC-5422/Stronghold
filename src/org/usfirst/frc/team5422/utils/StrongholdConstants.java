@@ -134,7 +134,7 @@ public class StrongholdConstants {
 	public static int[] POSITION_DEFENSE_5_REACH = {25 + 4 * 50, 90-20};
 	
 	//Distance to Cross from the start of Defense for the Robot in Autonomous Mode
-	public static int CROSS_DEFENSE_LENGTH_Y = 110;
+	public static int CROSS_DEFENSE_LENGTH_Y = 128;
 
 	//H = high; L = low
 	public static final double[] POSITION_HLEFT_GOAL = {151, 312};
@@ -212,16 +212,16 @@ public class StrongholdConstants {
 	public static final double TUNER_MULTIPLIER = 90.91;
 	
 	//Used in real robot
-//	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 210;
-//	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 610;
-//	public static final double ACTUATOR_ANGLE_MIN = -22;
-//	public static final double ACTUATOR_ANGLE_MAX = 73;
+	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 172;
+	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 383;
+	public static final double ACTUATOR_ANGLE_MIN = -22;
+	public static final double ACTUATOR_ANGLE_MAX = 54;
 	
 	//Used in replica robot
-	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 215;
-	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 346;
-	public static final double ACTUATOR_ANGLE_MIN = -20;
-	public static final double ACTUATOR_ANGLE_MAX = 55;
+//	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 215;
+//	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 346;
+//	public static final double ACTUATOR_ANGLE_MIN = -20;
+//	public static final double ACTUATOR_ANGLE_MAX = 55;
 	
 	public static final double ACTUATOR_ARM_SLIDER_MIN = -1;
 	public static final double ACTUATOR_ARM_SLIDER_MAX = 1;

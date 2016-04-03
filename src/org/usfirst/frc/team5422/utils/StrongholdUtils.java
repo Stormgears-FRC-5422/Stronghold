@@ -3,6 +3,8 @@ package org.usfirst.frc.team5422.utils;
 import org.usfirst.frc.team5422.DSIO.DSIO;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 
+import edu.wpi.first.wpilibj.command.Scheduler;
+
 /**
  * @author Michael
  */
@@ -49,3 +51,4 @@ public class StrongholdUtils {
 //        return defense;
 //    }
 }
+

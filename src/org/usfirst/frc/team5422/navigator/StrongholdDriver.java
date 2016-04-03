@@ -61,11 +61,11 @@ public class StrongholdDriver extends Driver {
     
     double error = 0;
     public void turnToAlignVision() {
-    	
+    	StrongholdRobot.gripNotWorking = false;
     	System.out.println("Turn to Align Vision entered");
     	final double CAMERA_ERROR = 20;
     	final double radiansPerPixelHorizontal = Math.toRadians(84.25/800.0);
-    	double setPoint = 400 + 20;
+    	double setPoint = 400 - 15;
     	
     	//0-319, 160
     	//error = current pixel position - 160
@@ -88,22 +88,31 @@ public class StrongholdDriver extends Driver {
     	long loopCount = 0;
     	
     	double centerX = Vision.getCenterX();
-    	while(centerX == 0) centerX = Vision.getCenterX();
+    	double start = Timer.getFPGATimestamp();
+    	while(centerX == 0) {
+    		centerX = Vision.getCenterX();
+    		if((Timer.getFPGATimestamp() - start) > 3) {
+    			StrongholdRobot.gripNotWorking = true;
+    			break;
+    		}
+    	}
     	
     	System.out.println("first centerX: " + centerX);
     	error = centerX - setPoint;
     	System.out.println("first error: " + error);
     	
-    	
-    	StrongholdRobot.navigatorSubsystem.turnToRelative(-1 * error * radiansPerPixelHorizontal*1.15);
-    	System.out.println("turn angle original: " + error * radiansPerPixelHorizontal);
-    	
+   		if(!StrongholdRobot.gripNotWorking) {
+	    	StrongholdRobot.navigatorSubsystem.turnToRelative(-1 * error * radiansPerPixelHorizontal*1.15);
+	    	System.out.println("turn angle original: " + error * radiansPerPixelHorizontal);
+   		}    	
     	
     	double startTime = Timer.getFPGATimestamp();
     
     	error = Vision.getCenterX() - setPoint;
     	error /= -200.0;
-    	while(Math.abs(error) > 0.025 && Timer.getFPGATimestamp() - startTime <= 3) {
+    	while((Math.abs(error) > 0.025) && ((Timer.getFPGATimestamp() - startTime) <= 3)) {
+    	
+    		if(Vision.getCenterX() == 0) break;
     		if(error < 0)
     			StrongholdRobot.navigatorSubsystem.turnToRelative(-0.05);
     		else
@@ -133,6 +142,8 @@ public class StrongholdDriver extends Driver {
 	    			masterTalon[1].set(0);
 	    			break;
 	    		}
+	    		
+	    		if((Timer.getFPGATimestamp() - startTime) > 3) break;
     		
     		}
     	
