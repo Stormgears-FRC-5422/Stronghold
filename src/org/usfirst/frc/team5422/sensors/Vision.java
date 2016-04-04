@@ -72,7 +72,7 @@ public class Vision {
 		
 		double radialDistance = 77.5/Math.tan(Math.toRadians(theta));	// 65.5 --> 90" - camera height
 		double power = .3/14 * radialDistance - 3.4;
-		System.out.println("original radial distance: " + radialDistance);
+		SmartDashboard.putNumber("original radial distance: ", radialDistance);
 		radialDistance = 0.97 * radialDistance + 11;
 		//there may be some other modifications that must be made here --> such as changing units of centerY.
 	//	double radialDistance = Math.atan(centerY);
@@ -93,7 +93,8 @@ public class Vision {
 		double angle = Math.atan(h/(d-shooterDistFromCamera));
 		
 		
-		
-		return Math.toDegrees(angle) + 16;
+		SmartDashboard.putNumber("Vision Angle: ", Math.toDegrees(angle) + 16);
+	//	return Math.toDegrees(angle) + 16;
+		return 49;
 	}
 }

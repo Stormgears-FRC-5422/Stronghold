@@ -43,11 +43,24 @@ public class DSIO {
     {
         int button = -1;
         //Shooter operation buttons
-        if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID))
+//        if (buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID))
+//        {
+//            button = StrongholdConstants.BIG_BLUE_BUTTON_ID;
+//        }
+        if ((buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) &&
+        		(!StrongholdRobot.blueButtonPressed))
         {
-            button = StrongholdConstants.BIG_BLUE_BUTTON_ID;
+            //button = StrongholdConstants.BIG_BLUE_BUTTON_ID;
+            StrongholdRobot.blueButtonPressed = true;
         }
 
+        if ((!buttonBoard.getRawButton(StrongholdConstants.BIG_BLUE_BUTTON_ID)) &&
+        		(StrongholdRobot.blueButtonPressed))
+        {
+            //button = -1;
+            StrongholdRobot.blueButtonPressed = false;
+            StrongholdRobot.shotTaken = false;
+        }
         if (StrongholdRobot.bbInUse)
         {
             //Intake switch

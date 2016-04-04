@@ -58,9 +58,8 @@ public class StrongholdRobot extends IterativeRobot {
 
     //Set this boolean to false if using official robot
     public static boolean rhinoInUse = false, bbInUse = true, gripNotWorking = false;
-
+    public static boolean blueButtonPressed = false, shotTaken = false;
    
-
     public static Navigator navigatorSubsystem;
     public static BallShooter shooterSubsystem;
     public static Opener openerSubsystem;
@@ -428,27 +427,36 @@ public class StrongholdRobot extends IterativeRobot {
 				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y; 
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 3:
 				posX = StrongholdConstants.POSITION_DEFENSE_3_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_3_REACH[1] +
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 4:
 				posX = StrongholdConstants.POSITION_DEFENSE_4_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + 
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 5:
 				posX = StrongholdConstants.POSITION_DEFENSE_5_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + 
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 15;
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 		}
+		StrongholdRobot.navigatorSubsystem.setRPS(2);
 
 		System.out.format("Robot reached AND crossed the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());		
 	}
@@ -478,18 +486,25 @@ public class StrongholdRobot extends IterativeRobot {
 				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y-10;
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
+					
 				navigatorAlignmentToShoot(posX, posY, -45);
 				break;
 			case 3:
 				posX = StrongholdConstants.POSITION_DEFENSE_3_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_3_REACH[1] +
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
 				navigatorAlignmentToShoot(posX, posY, 0);
 				break;
 			case 4:
 				posX = StrongholdConstants.POSITION_DEFENSE_4_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + 
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
 						
 				navigatorAlignmentToShoot(posX, posY, (30));
 				break;
@@ -497,6 +512,8 @@ public class StrongholdRobot extends IterativeRobot {
 				posX = StrongholdConstants.POSITION_DEFENSE_5_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + 
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y - 20;
+				if (defenseTypeSelected == defenseTypeOptions.ROCK_WALL)
+					StrongholdRobot.navigatorSubsystem.setRPS(3.0);
 				navigatorAlignmentToShoot(posX, posY, (60));
 				break;
 		}
@@ -509,7 +526,7 @@ public class StrongholdRobot extends IterativeRobot {
 		StrongholdRobot.driver.turnToAlignVision();
 		
 		if(!gripNotWorking) {
-			StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
+			StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 1.0);
 			Timer.delay(0.5);
 			StrongholdRobot.shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);
 			

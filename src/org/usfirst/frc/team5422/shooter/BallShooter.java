@@ -234,6 +234,9 @@ public class BallShooter extends Subsystem {
 			else full_speed = true;
 		}
 		
+		SmartDashboard.putNumber("Enc1 vel:  ", talonR.getEncVelocity());
+		SmartDashboard.putNumber("Enc2 vel:  ", talonL.getEncVelocity());
+		
 		relay.set(Relay.Value.kForward);
 		
 		Timer.delay(StrongholdConstants.SHOOT_DELAY2);
