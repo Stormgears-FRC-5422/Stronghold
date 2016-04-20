@@ -16,7 +16,7 @@ public class Vision {
 	public Vision(){
 		System.out.println("Vision system constructed");
 		lights = new DigitalOutput(StrongholdConstants.RINGLIGHT_PORT);
-		lights.set(true);
+		lights.set(false);
 		System.out.println("lights turned on");
 	}
 	
@@ -70,7 +70,7 @@ public class Vision {
 		double difAngle = centerY * viewAngle/600.0;			// 240 --> 600 (vertical px)
 		double theta = viewAngle/2.0 + 30.0 - difAngle;			// 21.5 --> new camera angle
 		
-		double radialDistance = 77.5/Math.tan(Math.toRadians(theta));	// 65.5 --> 90" - camera height
+		double radialDistance = 84.5/Math.tan(Math.toRadians(theta));	// 65.5 --> 90" - camera height
 		double power = .3/14 * radialDistance - 3.4;
 		SmartDashboard.putNumber("original radial distance: ", radialDistance);
 		radialDistance = 0.97 * radialDistance + 11;
@@ -86,7 +86,7 @@ public class Vision {
 		
 		// Make these values below constants (robot specific)
 		
-		double h = 77.5;								// Height to goal is 77.5in above shooter
+		double h = 84.5;								// Height to goal is 77.5in above shooter
 		double d = getRadialDistanceVision();			// Distance of camera from goal
 		double shooterDistFromCamera = 13;				// Shooter is 13in from Camera
 		
@@ -94,7 +94,7 @@ public class Vision {
 		
 		
 		SmartDashboard.putNumber("Vision Angle: ", Math.toDegrees(angle) + 16);
-	//	return Math.toDegrees(angle) + 16;
-		return 49;
+		return Math.toDegrees(angle) + 16;
+//		return 49;
 	}
 }

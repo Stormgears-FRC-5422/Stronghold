@@ -378,8 +378,12 @@ public class DSIO {
     }
     public static double getSpeedSlider2Value()
     {
-    	//return joystick.getThrottle();
+//    	return joystick.getThrottle();
+//    	double zValue = buttonBoard.getZ(); 
+//    	System.out.println("Speed Slider Value: " + zValue);
+//    	return zValue;
     	return buttonBoard.getY();
+
     }
 
 }
