@@ -307,6 +307,9 @@ public class StrongholdRobot extends IterativeRobot {
 
         //Run WPILib commands
         Scheduler.getInstance().run();
+
+        //Test motors (get rid of this for competition use)
+        //MotorDiagnostics.testMotors();
     }
 
 	/**  function is called periodically during disable */

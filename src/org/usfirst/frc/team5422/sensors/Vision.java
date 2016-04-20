@@ -16,7 +16,7 @@ public class Vision {
 	public Vision(){
 		System.out.println("Vision system constructed");
 		lights = new DigitalOutput(StrongholdConstants.RINGLIGHT_PORT);
-		lights.set(false);
+		lights.set(true);
 		System.out.println("lights turned on");
 	}
 	

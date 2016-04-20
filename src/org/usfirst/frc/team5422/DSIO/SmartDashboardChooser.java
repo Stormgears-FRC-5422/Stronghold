@@ -8,6 +8,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.startPositionOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.autonomousModeOptions;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team5422.utils.StrongholdRobotConfigurationManager;
 /*
  * @author Michael
  * @author Suren Karavettil
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SmartDashboardChooser {
     public static SendableChooser defenseChooser, shootChooser, allianceChooser, autonomousModeChooser, startPositionChooser;
-    public static SendableChooser testChooser;
+    public static SendableChooser testChooser, testMotorChooser;
 
     public SmartDashboardChooser() {
 		//create choosers
@@ -32,8 +33,10 @@ public class SmartDashboardChooser {
         allianceChooser = new SendableChooser();
         //Create subsystem test selector
         testChooser = new SendableChooser();        
-        //create autonomous mode choosers
-        autonomousModeChooser = new SendableChooser();        
+        //create autonomous mode chooser
+        autonomousModeChooser = new SendableChooser();
+        //create test motor chooser
+        testMotorChooser = new SendableChooser();
 	}
 	
 	public void initChoosers() {
@@ -104,7 +107,22 @@ public class SmartDashboardChooser {
         testChooser.addObject("(9) Test Lift", StrongholdConstants.diagnosticPOSTOptions.TEST_LIFTER);
         testChooser.addObject("(10) Test Motion Profile", StrongholdConstants.diagnosticPOSTOptions.TEST_MOTION_PROFILE);
         testChooser.addObject("(11) Test Global Positioning", StrongholdConstants.diagnosticPOSTOptions.TEST_GLOBAL_POSITIONING);
-        testChooser.addObject("(-1) Do Nothing", StrongholdConstants.diagnosticPOSTOptions.TEST_NONE);
+        testChooser.addObject("(12) Test With Joystick", StrongholdConstants.diagnosticPOSTOptions.TEST_JOYSTICK);
+        testChooser.addDefault("(-1) Do Nothing", StrongholdConstants.diagnosticPOSTOptions.TEST_NONE);
         SmartDashboard.putData("Test Init Chooser", testChooser);
-	}	
+	}
+
+    public void testMotors() {
+        testInitChoosers();
+
+        testMotorChooser.addObject("(0) Test Actuator", StrongholdRobotConfigurationManager.motorTests.TEST_ACTUATOR);
+        testMotorChooser.addObject("(1) Test Left Shooter", StrongholdRobotConfigurationManager.motorTests.TEST_LEFT_SHOOTER);
+        testMotorChooser.addObject("(2) Test Right Shooter", StrongholdRobotConfigurationManager.motorTests.TEST_RIGHT_SHOOTER);
+        testMotorChooser.addObject("(3) Test Drive Left Master", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_LEFT_MASTER);
+        testMotorChooser.addObject("(4) Test Drive Right Master", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_RIGHT_MASTER);
+        testMotorChooser.addObject("(5) Test Drive Left Slave", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_LEFT_SLAVE);
+        testMotorChooser.addObject("(6) Test Drive Right Slave", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_RIGHT_SLAVE);
+        testChooser.addDefault("(-1) Do Nothing", StrongholdRobotConfigurationManager.motorTests.TEST_NONE);
+        SmartDashboard.putData("Motor Test Chooser", testMotorChooser);
+    }
 }

@@ -192,6 +192,7 @@ public class StrongholdConstants {
 		TEST_LIFTER,
 		TEST_MOTION_PROFILE, 
 		TEST_GLOBAL_POSITIONING,
+		TEST_JOYSTICK,
 		TEST_NONE
 	}
 
