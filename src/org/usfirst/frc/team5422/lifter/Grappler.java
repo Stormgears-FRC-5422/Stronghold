@@ -20,8 +20,6 @@ public class Grappler extends Subsystem {
         //Code that grapples to castle goes here.
         System.out.println("Grappling robot to castle...");
 
+
     }
-
-
-
 }

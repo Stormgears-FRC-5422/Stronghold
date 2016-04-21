@@ -3,8 +3,7 @@ package org.usfirst.frc.team5422.DSIO;
 import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.startPositionOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.teleopModes;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -382,4 +381,14 @@ public class DSIO {
     	return buttonBoard.getY();
     }
 
+    public static boolean createTestChoosers() {
+        teleopModes mode = (teleopModes) choosers.modeChooser.getSelected();
+        if (mode == teleopModes.TEST) {
+            choosers.initTestMotorChooser();
+            choosers.testInitChoosers();
+
+            return true;
+        }
+        else return false;
+    }
 }

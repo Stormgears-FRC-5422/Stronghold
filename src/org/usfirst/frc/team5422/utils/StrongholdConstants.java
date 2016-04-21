@@ -217,6 +217,7 @@ public class StrongholdConstants {
 	public static final double ACTUATOR_ARM_DOWN_POT_FULLRANGE = 473;
 	public static final double ACTUATOR_ANGLE_MIN = -19;
 	public static final double ACTUATOR_ANGLE_MAX = 53;
+	public static final double ACTUATOR_RANGE_DEGREES = 72;
 	
 	//Used in replica robot
 //	public static final double ACTUATOR_ARM_UP_POT_FULLRANGE = 215;
@@ -286,6 +287,22 @@ public class StrongholdConstants {
 		REACH_N_CROSS_N_SHOOT,
 		REACH,
 		NONE
+	}
+
+	public enum teleopModes {
+		TELEOP,
+		TEST;
+	}
+
+	public enum motorTests {
+		TEST_ACTUATOR,
+		TEST_LEFT_SHOOTER,
+		TEST_RIGHT_SHOOTER,
+		TEST_DRIVE_LEFT_MASTER,
+		TEST_DRIVE_RIGHT_MASTER,
+		TEST_DRIVE_LEFT_SLAVE,
+		TEST_DRIVE_RIGHT_SLAVE,
+		TEST_NONE;
 	}
 
 }

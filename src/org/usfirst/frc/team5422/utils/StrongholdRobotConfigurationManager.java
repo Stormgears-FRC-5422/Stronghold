@@ -58,16 +58,4 @@ public class StrongholdRobotConfigurationManager extends RobotConfigurationManag
 		StrongholdConstants.ANGLE_MOTOR_DOWN_PROFILE = 0;
 		
 	}
-
-	public enum motorTests {
-		TEST_ACTUATOR,
-		TEST_LEFT_SHOOTER,
-		TEST_RIGHT_SHOOTER,
-		TEST_DRIVE_LEFT_MASTER,
-		TEST_DRIVE_RIGHT_MASTER,
-		TEST_DRIVE_LEFT_SLAVE,
-		TEST_DRIVE_RIGHT_SLAVE,
-		TEST_NONE;
-	}
-
 }

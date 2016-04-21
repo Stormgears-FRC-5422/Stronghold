@@ -6,9 +6,11 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.endOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.startPositionOptions;
 import org.usfirst.frc.team5422.utils.StrongholdConstants.autonomousModeOptions;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.teleopModes;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5422.utils.StrongholdRobotConfigurationManager;
+import org.usfirst.frc.team5422.utils.StrongholdConstants.motorTests;
 /*
  * @author Michael
  * @author Suren Karavettil
@@ -18,7 +20,7 @@ import org.usfirst.frc.team5422.utils.StrongholdRobotConfigurationManager;
 
 public class SmartDashboardChooser {
     public static SendableChooser defenseChooser, shootChooser, allianceChooser, autonomousModeChooser, startPositionChooser;
-    public static SendableChooser testChooser, testMotorChooser;
+    public static SendableChooser testChooser, testMotorChooser, modeChooser;
 
     public SmartDashboardChooser() {
 		//create choosers
@@ -37,6 +39,8 @@ public class SmartDashboardChooser {
         autonomousModeChooser = new SendableChooser();
         //create test motor chooser
         testMotorChooser = new SendableChooser();
+        //create modeChooser
+        modeChooser = new SendableChooser();
 	}
 	
 	public void initChoosers() {
@@ -78,6 +82,10 @@ public class SmartDashboardChooser {
         startPositionChooser.addObject("Start Position 4 (Front of 4th Defense)", startPositionOptions.FRONT_OF_DEFENSE_4);
         startPositionChooser.addObject("Start Position 5 (Front of 5th Defense)", startPositionOptions.FRONT_OF_DEFENSE_5);
         SmartDashboard.putData("Start Position Chooser", startPositionChooser);
+
+        modeChooser.addDefault("Teleop", teleopModes.TELEOP);
+        modeChooser.addObject("Test Mode", teleopModes.TEST);
+        SmartDashboard.putData("Teleop Mode Chooser", modeChooser);
                
  	}
 	
@@ -112,17 +120,15 @@ public class SmartDashboardChooser {
         SmartDashboard.putData("Test Init Chooser", testChooser);
 	}
 
-    public void testMotors() {
-        testInitChoosers();
-
-        testMotorChooser.addObject("(0) Test Actuator", StrongholdRobotConfigurationManager.motorTests.TEST_ACTUATOR);
-        testMotorChooser.addObject("(1) Test Left Shooter", StrongholdRobotConfigurationManager.motorTests.TEST_LEFT_SHOOTER);
-        testMotorChooser.addObject("(2) Test Right Shooter", StrongholdRobotConfigurationManager.motorTests.TEST_RIGHT_SHOOTER);
-        testMotorChooser.addObject("(3) Test Drive Left Master", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_LEFT_MASTER);
-        testMotorChooser.addObject("(4) Test Drive Right Master", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_RIGHT_MASTER);
-        testMotorChooser.addObject("(5) Test Drive Left Slave", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_LEFT_SLAVE);
-        testMotorChooser.addObject("(6) Test Drive Right Slave", StrongholdRobotConfigurationManager.motorTests.TEST_DRIVE_RIGHT_SLAVE);
-        testChooser.addDefault("(-1) Do Nothing", StrongholdRobotConfigurationManager.motorTests.TEST_NONE);
+    public void initTestMotorChooser() {
+        testMotorChooser.addObject("(0) Test Actuator", motorTests.TEST_ACTUATOR);
+        testMotorChooser.addObject("(1) Test Left Shooter", motorTests.TEST_LEFT_SHOOTER);
+        testMotorChooser.addObject("(2) Test Right Shooter", motorTests.TEST_RIGHT_SHOOTER);
+        testMotorChooser.addObject("(3) Test Drive Left Master", motorTests.TEST_DRIVE_LEFT_MASTER);
+        testMotorChooser.addObject("(4) Test Drive Right Master", motorTests.TEST_DRIVE_RIGHT_MASTER);
+        testMotorChooser.addObject("(5) Test Drive Left Slave", motorTests.TEST_DRIVE_LEFT_SLAVE);
+        testMotorChooser.addObject("(6) Test Drive Right Slave", motorTests.TEST_DRIVE_RIGHT_SLAVE);
+        testChooser.addDefault("(-1) Do Nothing", motorTests.TEST_NONE);
         SmartDashboard.putData("Motor Test Chooser", testMotorChooser);
     }
 }

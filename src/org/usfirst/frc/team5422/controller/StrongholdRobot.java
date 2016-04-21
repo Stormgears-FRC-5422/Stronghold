@@ -57,7 +57,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class StrongholdRobot extends IterativeRobot {
 
     //Set this boolean to false if using official robot
-    public static boolean rhinoInUse = false, bbInUse = true, gripNotWorking = false;
+    public static boolean rhinoInUse = false, bbInUse = true, gripNotWorking = false, testModeInUse = false;
     public static boolean blueButtonPressed = false, shotTaken = false;
    
     public static Navigator navigatorSubsystem;
@@ -273,43 +273,48 @@ public class StrongholdRobot extends IterativeRobot {
 
 //        RhinoDriver.initializeTrapezoid();
         System.out.println("teleop init ended.");
+
+        //Create test choosers if test selected
+        testModeInUse = DSIO.createTestChoosers();
     }
 
     /**
      * Runs the motors with arcade steering.
      */
     public void teleopPeriodic() {
-        //Run actions based on input from button board
-    	int buttonID = DSIO.getButtons();
-        RobotController.doActionsOnButtonPress(buttonID);
-        RobotController.doActionsOnSliderPositions();
+        if (!testModeInUse) {
+            //Run actions based on input from button board
+            int buttonID = DSIO.getButtons();
+            RobotController.doActionsOnButtonPress(buttonID);
+            RobotController.doActionsOnSliderPositions();
 
-        //TODO get rid of this comment
-    	//StrongholdRobot.shooterSubsystem.changeAngle(StrongholdConstants.ACTUATOR_ARM_DOWN_ANGLE + (actuatorArmSliderValue/StrongholdConstants.ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR));
+            //TODO get rid of this comment
+            //StrongholdRobot.shooterSubsystem.changeAngle(StrongholdConstants.ACTUATOR_ARM_DOWN_ANGLE + (actuatorArmSliderValue/StrongholdConstants.ACTUATOR_ARM_ANGLE_CONVERSION_FACTOR));
 
-        //Tell the rhinoDriver what goal is best for them, and whether they are within range
-        if (ShooterHelper.isInBounds()) {
-            System.out.println("within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
-            SmartDashboard.putString("You are", " within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
+            //Tell the rhinoDriver what goal is best for them, and whether they are within range
+            if (ShooterHelper.isInBounds()) {
+                System.out.println("within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
+                SmartDashboard.putString("You are", " within bounds, for goal: " + ShooterHelper.findBestGoal(DSIO.teleopShootHeightOption).toString() + ".");
+            } else {
+
+                SmartDashboard.putString("You are", " out of bounds.");
+            }
+
+            SmartDashboard.putNumber("Actuator position:", shooterSubsystem.actuator.getEncPosition());
+
+            //Calculate shootOption
+            shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
+
+            //Run the openDrive() method
+            driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
+
+            //Run WPILib commands
+            Scheduler.getInstance().run();
         }
         else {
-
-            SmartDashboard.putString("You are", " out of bounds.");
+            //Test motors (get rid of this for competition use)
+            MotorDiagnostics.testMotors();
         }
-
-        SmartDashboard.putNumber("Actuator position:", shooterSubsystem.actuator.getEncPosition());
-
-        //Calculate shootOption
-        shootOptionSelected = ShooterHelper.findBestGoal(dsio.teleopShootHeightOption);
-
-        //Run the openDrive() method
-        driver.openDrive(DSIO.getLinearX(), DSIO.getLinearY(), CANTalon.TalonControlMode.Speed);
-
-        //Run WPILib commands
-        Scheduler.getInstance().run();
-
-        //Test motors (get rid of this for competition use)
-        //MotorDiagnostics.testMotors();
     }
 
 	/**  function is called periodically during disable */

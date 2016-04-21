@@ -4,14 +4,8 @@ package org.usfirst.frc.team5422.controller;
  * @author suren
  */
 
-import edu.wpi.first.wpilibj.CANTalon;
-import org.usfirst.frc.team5422.DSIO.DSIO;
-import org.usfirst.frc.team5422.DSIO.SmartDashboardChooser;
 import org.usfirst.frc.team5422.commands.buttonCommands.*;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
-import org.usfirst.frc.team5422.utils.StrongholdRobotConfigurationManager;
-import org.usfirst.frc.team5422.utils.StrongholdRobotConfigurationManager.motorTests;
-import org.usfirst.frc.team5422.utils.StrongholdConstants.diagnosticPOSTOptions;
 
 public class RobotController {
 	
