@@ -172,6 +172,24 @@ public class BallShooter extends Subsystem {
 		talonL.set(StrongholdConstants.NO_THROTTLE);
 	}
 
+	public void reverseShooter() {
+		talonR.changeControlMode(TalonControlMode.Speed);
+		talonL.changeControlMode(TalonControlMode.Speed);
+		
+		talonR.set(1000);
+		talonL.set(-1000);
+		Timer.delay(0.2);
+		stop();
+	}
+	
+	public void setShooterSpeed(double encoderSpeed) {
+		talonR.changeControlMode(TalonControlMode.Speed);
+		talonL.changeControlMode(TalonControlMode.Speed);
+		
+		talonR.set(-encoderSpeed);
+		talonL.set(encoderSpeed);
+	}
+
 	//Used by autonomous/assisted mode
 	public void shoot(double speedMultiplier) {
 		_shoot(speedMultiplier);
@@ -192,46 +210,58 @@ public class BallShooter extends Subsystem {
 		
 		//Direction of motor to be found out
 		//P, I, D, F--->  0.02, 0, 1.65, 0
-		talonR.set(0.1 * StrongholdConstants.SHOOTER_MAX_SPEED); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(-0.1 * StrongholdConstants.SHOOTER_MAX_SPEED); //8465
+//		talonR.set(0.1 * StrongholdConstants.SHOOTER_MAX_SPEED); //* StrongholdConstants.VEL_PER_10MS
+//		talonL.set(-0.1 * StrongholdConstants.SHOOTER_MAX_SPEED); //8465
+//		
+//		Timer.delay(0.2);
+//		
+//		stop();
+//		
+//		Timer.delay(0.5);
 		
-		Timer.delay(0.2);
+//		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
+//		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //8465
+//		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
+//		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier); //8465
 		
-		stop();
-		
-		Timer.delay(0.5);
-		
-		talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //* StrongholdConstants.VEL_PER_10MS
-		talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier); //8465
-		
+		System.out.println("Shooter TalonR/L Set VElocity : " + 10* StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier);
+
 		double timer = Timer.getFPGATimestamp();
 
 		while (full_speed == false && (Timer.getFPGATimestamp() - timer) <= 3) {		
-			if (Math.abs(talonR.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-					Math.abs(talonL.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
-				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
-				System.out.println("quarter");
+			if (Math.abs(talonR.getEncVelocity()) >= 10 * 0.95 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
+					Math.abs(talonL.getEncVelocity()) >= 10 * 0.95 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
+				full_speed = true;
+				System.out.println("Shooter Current FULL SPEED Velocity " + " R: " + talonR.getEncVelocity() + " L: " + talonL.getEncVelocity());
+			} else {
+				System.out.println("Shooter Current Velocity " + " R: " + talonR.getEncVelocity() + " L: " + talonL.getEncVelocity());				
 			}
-			else if (Math.abs(talonR.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-					Math.abs(talonL.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
-				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
-				System.out.println("half");
-			}
-			else if (Math.abs(talonR.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-					Math.abs(talonL.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
-				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
-				System.out.println("3/4");
-			}
-			else if (Math.abs(talonR.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-					Math.abs(talonL.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
-				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
-				System.out.println("full");
-			}
-			else full_speed = true;
+
+//			if (Math.abs(talonR.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
+//					Math.abs(talonL.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
+//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
+//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
+//				System.out.println("quarter");
+//			}
+//			else if (Math.abs(talonR.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
+//					Math.abs(talonL.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
+//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
+//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
+//				System.out.println("half");
+//			}
+//			else if (Math.abs(talonR.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
+//					Math.abs(talonL.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
+//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
+//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
+//				System.out.println("3/4");
+//			}
+//			else if (Math.abs(talonR.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
+//					Math.abs(talonL.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
+//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
+//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
+//				System.out.println("full");
+//			}
+//			else full_speed = true;
 		}
 		
 		SmartDashboard.putNumber("Enc1 vel:  ", talonR.getEncVelocity());

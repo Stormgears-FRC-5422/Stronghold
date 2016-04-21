@@ -25,6 +25,9 @@ public class BigBlueCommand extends Command {
     protected void execute() {
         DSIO.shooterRunning = true;
         if (DSIO.assistShoot) {
+    		StrongholdRobot.shooterSubsystem.changeAngleAssisted(25.0);
+    		StrongholdRobot.shooterSubsystem.reverseShooter();
+    		StrongholdRobot.shooterSubsystem.setShooterSpeed(StrongholdConstants.SHOOTER_MAX_SPEED);
             StrongholdRobot.driver.turnToAlignVision();            
     		if(!StrongholdRobot.gripNotWorking) {
 	            StrongholdRobot.shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle());
@@ -34,9 +37,11 @@ public class BigBlueCommand extends Command {
 	            SmartDashboard.putNumber("Distance: ", Vision.getRadialDistanceVision());
     		}
         	
-        } else 
+        } else {
+    		StrongholdRobot.shooterSubsystem.setShooterSpeed(StrongholdConstants.SHOOTER_MAX_SPEED);
         	StrongholdRobot.shooterSubsystem.shoot(
         			ShooterHelper.getSpeedMultiplier(DSIO.getSpeedSlider2Value()));
+        }
         DSIO.shooterRunning = false;
     }
 

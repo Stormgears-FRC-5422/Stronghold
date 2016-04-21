@@ -15,7 +15,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.shootOptions;
 public class LowBar extends DefenseType {
 
 	public LowBar(defenseTypeOptions defenseType, int defensePosition) {
-		
+		StrongholdRobot.navigatorSubsystem.setRPS(3.5);
 	}
 	
 	@Override

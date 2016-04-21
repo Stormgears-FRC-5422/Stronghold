@@ -135,22 +135,21 @@ public class StrongholdRobot extends IterativeRobot {
     public void autonomousInit() {
         System.out.println("auto init started.");
 
-        getSmartDashboardDataSelections();
-
-        //selects and sets the autonomous command
-        //selectAutonomousCommand();
-        GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
-        gyro.reset();
+//        getSmartDashboardDataSelections();
+//
+//        //selects and sets the autonomous command
+//        //selectAutonomousCommand();
+//        GlobalMapping.resetValues(initialX, initialY, Math.PI / 2);
+//        gyro.reset();
+//        
+//    	if (autoModeOptionSelected == autonomousModeOptions.REACH_N_CROSS_N_SHOOT) {
+//           	//autonomous reach AND cross with NO shoot using SINGLE trapezoidal motion profile
+//    		reachNCrossNShoot(defenseTypeSelected, defensePositionSelected);
+//    	} else  {
+//    		reachNCross(defenseTypeSelected, defensePositionSelected);        		
+//    	}
+//        teleopNotRunning = true;
         
-    	if (autoModeOptionSelected == autonomousModeOptions.REACH_N_CROSS_N_SHOOT) {
-           	//autonomous reach AND cross with NO shoot using SINGLE trapezoidal motion profile
-    		reachNCrossNShoot(defenseTypeSelected, defensePositionSelected);
-    	} else  {
-    		reachNCross(defenseTypeSelected, defensePositionSelected);        		
-    	}
-        teleopNotRunning = true;
-        
-        /*
         getSmartDashboardDataSelections();
 
         //selects and sets the autonomous command
@@ -168,18 +167,6 @@ public class StrongholdRobot extends IterativeRobot {
     	}
 
         teleopNotRunning = true;
-*/
-//        GlobalMapping.resetValues(0, 0, Math.PI/2);
-//        shooterSubsystem.changeAngleAssisted(0.0);
-//        gyro.reset();
-//        navigatorSubsystem.driveTo(0, 220-12);
-//        System.out.println("Gyro: " + gyro.getAngle());
-//        navigatorSubsystem.turnToRelative(gyro.getAngle()); //GP and gyro have opposite directions 
-//        navigatorSubsystem.turnTo(Math.PI/3);
-//        //vision.turnOnLights();
-//        driver.turnToAlignVision();
-//        shooterSubsystem.changeAngleAssisted(Vision.getShooterAngle() + 4.0);
-//        shooterSubsystem.shoot(StrongholdConstants.FULL_THROTTLE);
        
         System.out.println("auto init ended.");
     }
