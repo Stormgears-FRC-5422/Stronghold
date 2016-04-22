@@ -128,13 +128,13 @@ public class DefenseType implements DefenseTypeInterface {
 			case 1:
 				posX = StrongholdConstants.POSITION_DEFENSE_1_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 28;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 88;
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 2:
 				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y; 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 100; 
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 3:
@@ -179,33 +179,33 @@ public class DefenseType implements DefenseTypeInterface {
 			case 1:
 				posX = StrongholdConstants.POSITION_DEFENSE_1_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 28;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 88;
 				navigatorAlignmentToShoot(posX, posY, -60);
 				break;
 			case 2:
 				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y-10;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 100;
 					
-				navigatorAlignmentToShoot(posX, posY, -45);
+				navigatorAlignmentToShoot(posX, posY, -60);
 				break;
 			case 3:
 				posX = StrongholdConstants.POSITION_DEFENSE_3_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_3_REACH[1] +
 						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
-				navigatorAlignmentToShoot(posX, posY, 0);
+				navigatorAlignmentToShoot(posX, posY, -15); //+20;
 				break;
 			case 4:
 				posX = StrongholdConstants.POSITION_DEFENSE_4_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
-				navigatorAlignmentToShoot(posX, posY, (30));
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y; //+20;
+				navigatorAlignmentToShoot(posX, posY, 6);
 				break;
 			case 5:
 				posX = StrongholdConstants.POSITION_DEFENSE_5_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y - 20;
-				navigatorAlignmentToShoot(posX, posY, (60));
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y; //+20;
+				navigatorAlignmentToShoot(posX, posY, 25);
 				break;
 		}
 
