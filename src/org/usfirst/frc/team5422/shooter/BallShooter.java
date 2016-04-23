@@ -237,31 +237,6 @@ public class BallShooter extends Subsystem {
 				System.out.println("Shooter Current Velocity " + " R: " + talonR.getEncVelocity() + " L: " + talonL.getEncVelocity());				
 			}
 
-//			if (Math.abs(talonR.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-//					Math.abs(talonL.getEncVelocity()) <= 0.25 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
-//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.25 * speedMultiplier);
-//				System.out.println("quarter");
-//			}
-//			else if (Math.abs(talonR.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-//					Math.abs(talonL.getEncVelocity()) <= 0.5 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
-//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.5 * speedMultiplier);
-//				System.out.println("half");
-//			}
-//			else if (Math.abs(talonR.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-//					Math.abs(talonL.getEncVelocity()) <= 0.75 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
-//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 0.75 * speedMultiplier);
-//				System.out.println("3/4");
-//			}
-//			else if (Math.abs(talonR.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
-//					Math.abs(talonL.getEncVelocity()) <= 1 * 10 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
-//				talonL.set(StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
-//				talonR.set(-StrongholdConstants.SHOOTER_MAX_SPEED * 1 * speedMultiplier);
-//				System.out.println("full");
-//			}
-//			else full_speed = true;
 		}
 		
 		SmartDashboard.putNumber("Enc1 vel:  ", talonR.getEncVelocity());
@@ -272,7 +247,9 @@ public class BallShooter extends Subsystem {
 		Timer.delay(StrongholdConstants.SHOOT_DELAY2);
 		stop();
 		relay.set(Relay.Value.kOff);
-		DSIO.shooterRunning = false;		
+		DSIO.shooterRunning = false;
+		StrongholdRobot.shootCount ++;
+
 	}
 
 	@Override
