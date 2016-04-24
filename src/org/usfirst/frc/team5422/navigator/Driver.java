@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 
 public abstract class Driver implements DriverInterface {
 
-	protected static CANTalon masterTalon[] = new CANTalon[2];
+	public static CANTalon masterTalon[] = new CANTalon[2];
 	protected TrapezoidThread trapThread;
 	public RobotConfigurationManager configureRobot;
 

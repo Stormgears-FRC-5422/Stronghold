@@ -27,8 +27,8 @@ public class BallShooter extends Subsystem {
 	 * This function helps shoot the ball/boulder into the low goal
 	 */
 	
-	CANTalon talonL;
-	CANTalon talonR;
+	public CANTalon talonL;
+	public CANTalon talonR;
 	public CANTalon actuator;
 	Relay relay;
 	

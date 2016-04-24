@@ -173,6 +173,12 @@ public class DSIO {
         return yPos;
     }
 
+    public static double getY()
+    {
+        double yPos = joystick.getY();
+        return yPos;
+    }
+
 
     //Inputs: nothing
     //Outputs: averaged x and y of joystick over a period of 15 milliseconds respectively
