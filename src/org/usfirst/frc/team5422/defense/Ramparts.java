@@ -12,8 +12,12 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 public class Ramparts extends DefenseType {
 
 	public Ramparts(defenseTypeOptions defenseType, int defensePosition) {
-		StrongholdRobot.navigatorSubsystem.setRPS(3.0);
+		StrongholdRobot.navigatorSubsystem.setRPS(2.25);
 		
+	}
+
+	protected int calcExtraDistanceByDefenseType() {
+		return 30;
 	}
 
 }

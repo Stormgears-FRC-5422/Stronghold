@@ -67,7 +67,7 @@ public class Vision {
 		//22.0/48.0
 		double viewAngle = Math.toDegrees(Math.atan(.4848) * 2);//convert to degrees | .4848 --> retake measurements of px height at different distances
 		
-		double difAngle = centerY * viewAngle/600.0;			// 240 --> 600 (vertical px)
+		double difAngle = centerY * viewAngle/StrongholdConstants.CAMERA_HEIGHT_PIXELS;			// 240 --> 600 (vertical px)
 		double theta = viewAngle/2.0 + 30.0 - difAngle;			// 21.5 --> new camera angle
 		
 		double radialDistance = 84.5/Math.tan(Math.toRadians(theta));	// 65.5 --> 90" - camera height

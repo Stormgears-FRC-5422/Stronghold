@@ -78,4 +78,5 @@ public class LowBar extends DefenseType {
 		StrongholdRobot.navigatorSubsystem.driveTo(StrongholdConstants.POSITION_DEFENSE_1_REACH[0], StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + StrongholdConstants.CROSS_DEFENSE_LENGTH_Y);
 		System.out.println("Robot reached AND crossed the defenseType " + defenseType + " defense at position " + defensePosition);
 	}	
+
 }

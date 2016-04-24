@@ -35,7 +35,7 @@ public class ArcadeDrive {
 			}
 		}
 
-		System.out.println("Left = " + leftMotorSpeed +  "  Right = " + rightMotorSpeed);
+//		System.out.println("Left = " + leftMotorSpeed +  "  Right = " + rightMotorSpeed);
 	}
 	
 	public static double arcadeDriveLeft() {
