@@ -232,9 +232,9 @@ public class BallShooter extends Subsystem {
 			if (Math.abs(talonR.getEncVelocity()) >= 10 * 0.95 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier && 
 					Math.abs(talonL.getEncVelocity()) >= 10 * 0.95 * StrongholdConstants.SHOOTER_MAX_SPEED * speedMultiplier) {
 				full_speed = true;
-				System.out.println("Shooter Current FULL SPEED Velocity " + " R: " + talonR.getEncVelocity() + " L: " + talonL.getEncVelocity());
+//				System.out.println("Shooter Current FULL SPEED Velocity " + " R: " + talonR.getEncVelocity() + " L: " + talonL.getEncVelocity());
 			} else {
-				System.out.println("Shooter Current Velocity " + " R: " + talonR.getEncVelocity() + " L: " + talonL.getEncVelocity());				
+//				System.out.println("Shooter Current Velocity " + " R: " + talonR.getEncVelocity() + " L: " + talonL.getEncVelocity());				
 			}
 
 		}
