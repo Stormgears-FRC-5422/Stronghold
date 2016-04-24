@@ -18,7 +18,7 @@ public class AngleSliderCommand extends Command {
     @Override
     protected void execute() {
         if (DSIO.assistShoot == false) {
-            System.out.println("Adjusting angle of shooter based on slider");
+//            System.out.println("Adjusting angle of shooter based on slider");
 
             double actuatorArmSliderValue = DSIO.getActuatorSliderValue();
             StrongholdRobot.shooterSubsystem.changeAngle(actuatorArmSliderValue);
