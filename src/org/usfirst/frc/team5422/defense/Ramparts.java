@@ -16,4 +16,8 @@ public class Ramparts extends DefenseType {
 		
 	}
 
+	protected int calcExtraDistanceByDefenseType() {
+		return 30;
+	}
+
 }

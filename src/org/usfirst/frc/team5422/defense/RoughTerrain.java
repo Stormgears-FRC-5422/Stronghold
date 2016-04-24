@@ -10,7 +10,11 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 
 public class RoughTerrain extends DefenseType {
 	public RoughTerrain(defenseTypeOptions defenseType, int defensePosition) {
-		StrongholdRobot.navigatorSubsystem.setRPS(3.0);
-		
+		StrongholdRobot.navigatorSubsystem.setRPS(3.0);		
 	}
+
+	protected int calcExtraDistanceByDefenseType() {
+		return 10;
+	}
+	
 }

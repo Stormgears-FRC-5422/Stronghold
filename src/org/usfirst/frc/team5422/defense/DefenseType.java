@@ -128,31 +128,31 @@ public class DefenseType implements DefenseTypeInterface {
 			case 1:
 				posX = StrongholdConstants.POSITION_DEFENSE_1_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 88;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 88 + calcExtraDistanceByDefenseType();
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 2:
 				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 100; 
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 69 +31 + calcExtraDistanceByDefenseType(); 
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 3:
 				posX = StrongholdConstants.POSITION_DEFENSE_3_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_3_REACH[1] +
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + calcExtraDistanceByDefenseType();
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 4:
 				posX = StrongholdConstants.POSITION_DEFENSE_4_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + calcExtraDistanceByDefenseType();
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 			case 5:
 				posX = StrongholdConstants.POSITION_DEFENSE_5_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 15;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 15 + calcExtraDistanceByDefenseType();
 				StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
 				break;
 		}
@@ -179,32 +179,32 @@ public class DefenseType implements DefenseTypeInterface {
 			case 1:
 				posX = StrongholdConstants.POSITION_DEFENSE_1_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_1_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 88;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 88 + calcExtraDistanceByDefenseType();
 				navigatorAlignmentToShoot(posX, posY, -60);
 				break;
 			case 2:
 				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 100;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 69 + 31 + calcExtraDistanceByDefenseType();
 					
 				navigatorAlignmentToShoot(posX, posY, -60);
 				break;
 			case 3:
 				posX = StrongholdConstants.POSITION_DEFENSE_3_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_3_REACH[1] +
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y;
-				navigatorAlignmentToShoot(posX, posY, -15); //+20;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + calcExtraDistanceByDefenseType();
+				navigatorAlignmentToShoot(posX, posY, -15);
 				break;
 			case 4:
 				posX = StrongholdConstants.POSITION_DEFENSE_4_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_4_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y; //+20;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + calcExtraDistanceByDefenseType();
 				navigatorAlignmentToShoot(posX, posY, 6);
 				break;
 			case 5:
 				posX = StrongholdConstants.POSITION_DEFENSE_5_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_5_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y; //+20;
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y  + 15 + calcExtraDistanceByDefenseType();
 				navigatorAlignmentToShoot(posX, posY, 25);
 				break;
 		}
@@ -228,12 +228,16 @@ public class DefenseType implements DefenseTypeInterface {
 		System.out.format("Robot reached, crossed AND shot from the defenseType " + defenseType + " defense at " + defensePosition + " and GP (%.3g,%.3g): \n",GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY());		
 	}
 	
-	private void navigatorAlignmentToShoot(int posX, int posY, double turnToAngle) {
+	protected void navigatorAlignmentToShoot(int posX, int posY, double turnToAngle) {
 		
 		StrongholdRobot.navigatorSubsystem.driveTo(posX, posY);
-       	StrongholdRobot.navigatorSubsystem.turnToRelative(StrongholdRobot.gyro.getAngle()); //GP and gyro have opposite directions 
+     //  	StrongholdRobot.navigatorSubsystem.turnToRelative(StrongholdRobot.gyro.getAngle()); //GP and gyro have opposite directions 
         //Turn 30 degrees to align to vision (not sure if this is good on the right side of goal)
 		StrongholdRobot.navigatorSubsystem.turnToRelative(Math.toRadians(turnToAngle));
-
-	}	
- }
+	}
+	
+	protected int calcExtraDistanceByDefenseType() {
+		return 0;
+	}
+	
+}
