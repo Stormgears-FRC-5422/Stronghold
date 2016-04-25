@@ -79,4 +79,8 @@ public class LowBar extends DefenseType {
 		System.out.println("Robot reached AND crossed the defenseType " + defenseType + " defense at position " + defensePosition);
 	}	
 
+	protected int calcExtraDistanceByDefenseType() {
+		return 20;
+	}
+
 }
