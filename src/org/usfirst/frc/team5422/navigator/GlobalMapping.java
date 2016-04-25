@@ -116,7 +116,7 @@ public class GlobalMapping implements Runnable{
 	public void run() {
 		
 		if((StrongholdRobot.driver.getDriveTalonLeftMaster()!=null) && (StrongholdRobot.driver.getDriveTalonRightMaster()!=null)){
-			//updateGP(StrongholdRobot.driver.getDriveTalonRightMaster().getEncPosition(), -StrongholdRobot.driver.getDriveTalonLeftMaster().getEncPosition());
+			updateGP(StrongholdRobot.driver.getDriveTalonRightMaster().getEncPosition(), -StrongholdRobot.driver.getDriveTalonLeftMaster().getEncPosition());
 		}
 		
 	}
