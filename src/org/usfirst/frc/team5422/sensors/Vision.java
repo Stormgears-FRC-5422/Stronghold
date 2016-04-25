@@ -81,20 +81,43 @@ public class Vision {
 		
 	}
 	
-	/**CHECK IF THIS OUTPUT SHOULD BE RADIANS OR DEGREES**/
+	/**CHECK IF THIS OUTPUT SHOULD BE RADIANS OR DEGREES**/	
 	public static double getShooterAngle() {
 		
 		// Make these values below constants (robot specific)
 		
-		double h = 84.5;								// Height to goal is 77.5in above shooter
-		double d = getRadialDistanceVision();			// Distance of camera from goal
-		double shooterDistFromCamera = 13;				// Shooter is 13in from Camera
+		//Steve's Formula
+		double v = 27.5; 							//Velocity Constant to be modified
+		double h = 77 /12.0;						// Height to goal is 77.5in above shooter
+		double d = getRadialDistanceVision();		// Distance of camera from goal
+		double g = 32.174;							// Gravity Constant
+		double shooterDistFromCamera = 24;
+		double actualD = (d - shooterDistFromCamera) / 12.0;	//In feet
+		double v_squared = Math.pow(v, 2);
+		double polynomial = g * Math.pow(actualD, 2) + 2 * h * Math.pow(v, 2);
+		double numerator = v_squared - Math.sqrt(Math.pow(v, 4) - g * polynomial);
+		double denominator = g * actualD;
+		double angle = Math.atan( numerator / denominator);
 		
-		double angle = Math.atan(h/(d-shooterDistFromCamera));
+		SmartDashboard.putNumber("Actual Distance (actualD) ", actualD);
+		SmartDashboard.putNumber("Vision Angle", Math.toDegrees(angle));
 		
-		
-		SmartDashboard.putNumber("Vision Angle: ", Math.toDegrees(angle) + 16);
-		return Math.toDegrees(angle) + 16;
-//		return 49;
+		return Math.toDegrees(angle); 
 	}
+	
+	/**CHECK IF THIS OUTPUT SHOULD BE RADIANS OR DEGREES**/
+//	public static double getShooterAngle() {
+//		
+//		// Make these values below constants (robot specific)
+//		
+//		double h = 84.5;								// Height to goal is 77.5in above shooter
+//		double d = getRadialDistanceVision();			// Distance of camera from goal
+//		double shooterDistFromCamera = 13;				// Shooter is 13in from Camera
+//		
+//		double angle = Math.atan(h/(d-shooterDistFromCamera));
+//		
+//		
+//		SmartDashboard.putNumber("Vision Angle: ", Math.toDegrees(angle) + 16);
+//		return Math.toDegrees(angle) + 16;
+//	}
 }
