@@ -149,14 +149,14 @@ public class Navigator extends Subsystem{
 	private void rotateToThetaRelative(double theta, double rpmR, double rpmL){
 		//Timer.delay(2);
 		System.out.println("rotateToTheta Entered " + Timer.getFPGATimestamp());
-		theta = GlobalMapping.reduceRadiansUtil(theta);
+//		theta = GlobalMapping.reduceRadiansUtil(theta);
 		double relInitTheta = theta;
 		
-		if(relInitTheta > Math.PI){
-			relInitTheta -= 2*Math.PI;
-		}else if(relInitTheta < -Math.PI){
-			relInitTheta += 2*Math.PI;
-		}
+//		if(relInitTheta > Math.PI){
+//			relInitTheta -= 2*Math.PI;
+//		}else if(relInitTheta < -Math.PI){
+//			relInitTheta += 2*Math.PI;
+//		}
 		
 		System.out.format("[GP][robot at] (%4.3g, %4.3g) @ %4.3g (in)\n", GlobalMapping.getInstance().getX(), GlobalMapping.getInstance().getY(), GlobalMapping.getInstance().getTheta());
 		System.out.format("[GP][rotate to] %4.3g [rotate by] %4.3g (rad)\n", theta, relInitTheta );
@@ -338,10 +338,7 @@ public class Navigator extends Subsystem{
 	
 	public void turnToRelative(double thetaField){
 		System.out.println("turnTo Entered " + Timer.getFPGATimestamp());
-		
-		
-		
-		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
+//		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
 		
 		rotateToThetaRelative(thetaField, rps, rps);
 		System.out.println("turnTo Done " + Timer.getFPGATimestamp());
