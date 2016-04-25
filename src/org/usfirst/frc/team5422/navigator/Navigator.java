@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5422.controller.StrongholdRobot;
 import org.usfirst.frc.team5422.utils.StrongholdConstants;
@@ -337,10 +338,11 @@ public class Navigator extends Subsystem{
 	
 	
 	public void turnToRelative(double thetaField){
-		System.out.println("turnTo Entered " + Timer.getFPGATimestamp());
+//		System.out.println("turnTo Entered " + Timer.getFPGATimestamp());
 //		thetaField = GlobalMapping.reduceRadiansUtil(thetaField);
 		
-		rotateToThetaRelative(thetaField, rps, rps);
+		SmartDashboard.putNumber("Theta", 1.07 * thetaField);
+		rotateToThetaRelative(1.07 * thetaField, rps, rps);
 		System.out.println("turnTo Done " + Timer.getFPGATimestamp());
 		
 	}
