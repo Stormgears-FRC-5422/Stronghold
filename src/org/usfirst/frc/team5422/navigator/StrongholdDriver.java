@@ -100,8 +100,7 @@ public class StrongholdDriver extends Driver {
     	error = centerX - setPoint;
     	
    		if(!StrongholdRobot.gripNotWorking) {
-   			boolean errorInLoop = false;
-   	    	while((Math.abs(error) > 5) && ((Timer.getFPGATimestamp() - startTime) <= 10) && errorInLoop == false) {
+   	    	while((Math.abs(error) > 5) && ((Timer.getFPGATimestamp() - startTime) <= 3)) {
    	    		
    	    		double turnAngle = error * radiansPerPixelHorizontal;
    	    		if(Math.abs(turnAngle) < 0.05) {
