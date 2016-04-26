@@ -19,18 +19,18 @@ public class StrongholdConstants {
 //	public static double SHOOTER_P = 0;
 	
 	
-	public static double SHOOTER_LEFT_F = 1023.0/6700.0;//1.705;
-	public static double SHOOTER_LEFT_P = 0.000001;
+	public static double SHOOTER_LEFT_F = 0.225; //1023.0/6700.0  //1.705;
+	public static double SHOOTER_LEFT_P = 0.0075;
 	public static double SHOOTER_LEFT_I = 0;
 	public static double SHOOTER_LEFT_D = 0;
 
 	//TODO: CHANGE FOR T1
-	public static double SHOOTER_RIGHT_F = 1023.0/7200.0;//1.705;
-	public static double SHOOTER_RIGHT_P = 0.000001;
+	public static double SHOOTER_RIGHT_F = 0.225; //1023.0/7200.0  //1.705;
+	public static double SHOOTER_RIGHT_P = 0.0075;
 	public static double SHOOTER_RIGHT_I = 0;
 	public static double SHOOTER_RIGHT_D = 0;
 
-	public static double SHOOTER_MAX_SPEED = 6500; //6300;//per 10ms
+	public static double SHOOTER_MAX_SPEED = 2500; //6500 //6300;//per 10ms
 	
 	public static double WHEEL_BASE = 23.0;//inches	
 	

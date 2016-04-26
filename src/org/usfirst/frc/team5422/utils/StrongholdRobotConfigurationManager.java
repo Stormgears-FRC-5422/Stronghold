@@ -32,14 +32,14 @@ public class StrongholdRobotConfigurationManager extends RobotConfigurationManag
 		StrongholdConstants.OPEN_DRIVE_D = 0;
 
 		//TODO: CHANGE FOR T1
-		StrongholdConstants.SHOOTER_LEFT_F = 1023.0/6700.0;//10.0;
-		StrongholdConstants.SHOOTER_LEFT_P = 0;
+		StrongholdConstants.SHOOTER_LEFT_F = 0.225;//10.0;
+		StrongholdConstants.SHOOTER_LEFT_P = 0.0075;
 		StrongholdConstants.SHOOTER_LEFT_I = 0;
 		StrongholdConstants.SHOOTER_LEFT_D = 0;
 		
 		//TODO: CHANGE FOR T1		
-		StrongholdConstants.SHOOTER_RIGHT_F = 1023.0/7200.0;//10;
-		StrongholdConstants.SHOOTER_RIGHT_P = 0;
+		StrongholdConstants.SHOOTER_RIGHT_F = 0.225;//10;
+		StrongholdConstants.SHOOTER_RIGHT_P = 0.0075;
 		StrongholdConstants.SHOOTER_RIGHT_I = 0;
 		StrongholdConstants.SHOOTER_RIGHT_D = 0;
 		

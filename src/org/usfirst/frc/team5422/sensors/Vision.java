@@ -87,7 +87,7 @@ public class Vision {
 		// Make these values below constants (robot specific)
 		
 		//Steve's Formula
-		double v = 27.5; 							//Velocity Constant to be modified
+		double v = 35; //30 //27.5 							//Velocity Constant to be modified
 		double h = 77 /12.0;						// Height to goal is 77.5in above shooter
 		double d = getRadialDistanceVision();		// Distance of camera from goal
 		double g = 32.174;							// Gravity Constant
