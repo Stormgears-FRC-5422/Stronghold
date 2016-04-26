@@ -11,7 +11,7 @@ import org.usfirst.frc.team5422.utils.StrongholdConstants.defenseTypeOptions;
 public class Moat extends DefenseType {
 
 	public Moat(defenseTypeOptions defenseType, int defensePosition) {
-		StrongholdRobot.navigatorSubsystem.setRPS(2.25);		
+		StrongholdRobot.navigatorSubsystem.setRPS(2.5);		
 	}
 	
 	protected int calcExtraDistanceByDefenseType() {

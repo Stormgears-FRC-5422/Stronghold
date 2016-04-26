@@ -185,7 +185,7 @@ public class DefenseType implements DefenseTypeInterface {
 			case 2:
 				posX = StrongholdConstants.POSITION_DEFENSE_2_REACH[0];
 				posY = StrongholdConstants.POSITION_DEFENSE_2_REACH[1] + 
-						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 69 + 31 + calcExtraDistanceByDefenseType();
+						StrongholdConstants.CROSS_DEFENSE_LENGTH_Y + 69 + 31 + 20 + calcExtraDistanceByDefenseType();
 					
 				navigatorAlignmentToShoot(posX, posY, -60);
 				break;
